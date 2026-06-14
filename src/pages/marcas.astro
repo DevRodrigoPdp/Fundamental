@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+
+const brands = [
+  {
+    name: 'T3R',
+    description: 'Componentes profesionales de ciclismo. Minimal, preciso, duradero.',
+    cta: 'Ver catálogo',
+    href: '/catalogo',
+  },
+  {
+    name: 'Whipp-Off',
+    description: 'Ropa de MTB para quienes rompen la línea recta.',
+    cta: 'Descubrir',
+    href: '/whipp-off',
+  },
+  {
+    name: 'Transfer',
+    description: 'Bicicletas y cuadros. Equipamiento esencial.',
+    cta: 'Descubrir',
+    href: '/transfer',
+  },
+];
+---
+
+<Layout title="Marcas — Fundamental">
+
+  <!-- NAV -->
+  <header class="flex items-center justify-between px-16 py-6 bg-white">
+    <a href="/" class="font-display uppercase text-xl tracking-[-0.03em]" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
+    <nav class="flex gap-10">
+      <a href="/marcas" class="text-base text-[#111] font-medium">Marcas</a>
+      <a href="/nosotros" class="text-base text-[#333] hover:text-black transition-colors">Nosotros</a>
+      <a href="/contacto" class="text-base text-[#333] hover:text-black transition-colors">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- HERO TEXTO -->
+  <section class="px-16 pt-20 pb-24">
+    <p data-reveal class="text-sm text-[#6B8CAE] tracking-[0.3em] uppercase mb-6">
+      Distribuidora · Fundamental
+    </p>
+    <h1 data-reveal data-delay="1" class="text-[72px] font-bold leading-tight mb-8 max-w-xl">
+      Nuestras marcas.
+    </h1>
+    <p data-reveal data-delay="2" class="text-lg text-[#6B8CAE] max-w-md leading-relaxed">
+      Tres marcas seleccionadas. Cada una con su propio universo y catálogo bajo solicitud.
+    </p>
+  </section>
+
+  <!-- MARCAS GRID -->
+  <section class="px-16 pb-36">
+    <div class="grid grid-cols-3 border-t border-gray-200">
+      {brands.map((brand, i) => (
+        <div
+          data-reveal
+          data-delay={String(i + 1)}
+          class={`group pt-14 pb-20 flex flex-col gap-7 transition-colors duration-300 hover:bg-[#F8F7F5] ${i < brands.length - 1 ? 'border-r border-gray-200' : ''} px-10`}
+        >
+          <h2 class="text-[48px] font-bold leading-none">{brand.name}</h2>
+          <p class="text-lg text-[#6B8CAE] leading-relaxed max-w-[280px]">
+            {brand.description}
+          </p>
+          <a
+            href={brand.href}
+            class="text-base font-medium mt-auto inline-flex items-center gap-1"
+          >
+            {brand.cta}
+            <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-gray-100 px-16 py-10 flex items-start justify-between">
+    <div>
+      <p class="text-base font-bold mb-2">T3R Fundamental</p>
+      <p class="text-sm text-gray-400 max-w-[240px] leading-relaxed">
+        Distribuidora de componentes profesionales para ciclismo. Madrid, España.
+      </p>
+    </div>
+    <p class="text-sm text-gray-400">© 2026 FUNDAMENTAL</p>
+  </footer>
+
+</Layout>
