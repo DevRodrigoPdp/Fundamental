@@ -1,79 +1,96 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
+import { supabase } from '../lib/supabase';
 
-const products = [
-  {
-    category: 'FRENOS',
-    name: 'Disco GT 160',
-    description: 'Disco de acero galvanizado ventilado, para bujes de 6 tornillos.',
-    ref: 'T3R-DISCO-GT-160',
-  },
-  {
-    category: 'FRENOS',
-    name: 'Pastillas SRAM Guide',
-    description: 'Pastillas de freno de resina para SRAM Guide.',
-    ref: 'T3R-PAST-SRAM-GDE',
-  },
-  {
-    category: 'TRANSMISIÓN',
-    name: 'Plato SRAM Direct Mount 32T',
-    description: 'Plato de aluminio, sistema Direct Mount SRAM, 11-12v.',
-    ref: 'T3R-PLATO-SRAM-32',
-  },
-  {
-    category: 'PEDALES',
-    name: 'Pedal XCO Automático',
-    description: 'Pedal automático de montaña, cuerpo de fibra, cala SPD.',
-    ref: 'T3R-PED-XCO',
-  },
-  {
-    category: 'MANILLAR',
-    name: 'Puño Triángulos',
-    description: 'Puño ergonómico negro, 2 arandelas, máximo confort.',
-    ref: 'T3R-PUNO-TRIA',
-  },
-  {
-    category: 'ILUMINACIÓN',
-    name: 'Luz Delantera 400 Lúmenes',
-    description: 'Luz LED delantera, 400 lúmenes, carga USB-C.',
-    ref: 'T3R-LUZ-DEL-400',
-  },
-];
+const { data: products, error } = await supabase
+  .from('productos_t3r')
+  .select('nombre, categoria, descripcion_corta, sku')
+  .eq('activo', true)
+  .in('sku', [
+    'T3R-DISCO-6T-160',
+    'T3R-PAST-SRAM-GDE',
+    'T3R-PED-XCO',
+    'T3R-PED-EBIKE',
+    'T3R-VLV-ELITE-42',
+    'T3R-EJE-BSA-SH',
+  ]);
+
+if (error) console.error('Supabase productos error:', error.message);
+
+const skus = (products ?? []).map((p: any) => p.sku);
+
+const { data: imagenes, error: imgError } = await supabase
+  .from('imagenes_productos')
+  .select('producto_sku, url, orden')
+  .in('producto_sku', skus)
+  .eq('orden', 1);
+
+if (imgError) console.error('Supabase imagenes error:', imgError.message);
+
+console.log('productos:', products?.length, '| imagenes:', imagenes?.length, '| sample:', imagenes?.[0]);
+
+const imgMap: Record<string, string> = {};
+(imagenes ?? []).forEach((i: any) => { imgMap[i.producto_sku] = i.url; });
+
+const formatted = (products ?? []).map((p: any) => ({
+  category: p.categoria.toUpperCase(),
+  name: p.nombre,
+  description: p.descripcion_corta,
+  ref: p.sku,
+  imagen: imgMap[p.sku] ?? null,
+}));
 ---
 
 <Layout title="Fundamental">
 
   <!-- NAV -->
-  <header class="flex items-center justify-between px-16 py-6 bg-white">
-    <a href="/" class="font-display uppercase text-xl tracking-[-0.03em]" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
+  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-[#1A100C]/80 backdrop-blur-md">
+    <a href="/" class="font-display uppercase text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
     <nav class="flex gap-10">
-      <a href="/marcas" class="text-base text-[#333] hover:text-black transition-colors">Marcas</a>
-      <a href="/nosotros" class="text-base text-[#333] hover:text-black transition-colors">Nosotros</a>
-      <a href="/contacto" class="text-base text-[#333] hover:text-black transition-colors">Contacto</a>
+      <a href="/marcas" class="text-base text-white/70 hover:text-white transition-colors">Marcas</a>
+      <a href="/nosotros" class="text-base text-white/70 hover:text-white transition-colors">Nosotros</a>
+      <a href="/contacto" class="text-base text-white/70 hover:text-white transition-colors">Contacto</a>
     </nav>
   </header>
 
   <!-- HERO -->
-  <section class="relative h-[88vh] bg-[#1A100C] flex items-center overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-r from-[#1A100C] via-[#1A100C]/70 to-[#1A100C]/10 z-10"></div>
-    <div class="absolute right-0 top-0 bottom-0 w-[60%] bg-gradient-to-l from-[#3D2010] to-[#1A100C]"></div>
+  <section class="relative h-screen bg-[#1A100C] flex flex-col justify-end overflow-hidden">
+    <!-- Foto fondo -->
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/catalogo_t3r/combos/combos_9.jpg');"></div>
+    <!-- Gradiente cinematic: oscuro desde abajo, transparente arriba -->
+    <div class="absolute inset-0 z-10" style="background: linear-gradient(to top, #1A100C 0%, rgba(26,16,12,0.75) 40%, rgba(26,16,12,0.2) 100%);"></div>
 
-    <div class="relative z-20 px-16 max-w-2xl">
-      <p class="text-sm text-gray-400 tracking-[0.3em] uppercase mb-6">T3R · The Three Riders</p>
-      <h1 class="text-[82px] font-bold leading-[1.0] mb-6">
-        <span class="text-white">Componentes</span><br />
-        <span class="text-[#C4A072]">fundamentales.</span>
+    <!-- Contenido bottom-left editorial -->
+    <div class="relative z-20 px-16 pb-16 w-full">
+      <div class="flex items-center gap-3 mb-6 hero-tag">
+        <div class="w-8 h-px bg-[#C4A072]"></div>
+        <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase">T3R · The Three Riders</p>
+      </div>
+      <h1 class="text-[96px] font-bold leading-[0.88] mb-10 hero-heading" style="text-shadow: 0 4px 40px rgba(0,0,0,0.6);">
+        <span class="block text-white">Componentes</span>
+        <span class="block text-[#C4A072]">fundamentales.</span>
       </h1>
-      <p class="text-gray-300 text-base leading-relaxed max-w-[320px] mb-10">
-        Una nueva marca de componentes profesionales de ciclismo, diseñada para quienes ruedan en serio. Minimal, preciso, duradero.
-      </p>
-      <a
-        href="#esenciales"
-        class="inline-block border border-white/70 text-white text-base px-7 py-3.5 hover:bg-white hover:text-black transition-colors"
-      >
-        Explorar catálogo
-      </a>
+      <div class="flex items-center gap-8 hero-cta">
+        <a
+          href="#esenciales"
+          class="bg-[#C4A072] text-[#1A100C] text-sm font-semibold px-8 py-4 hover:bg-[#D4B280] transition-colors tracking-[0.08em] uppercase cursor-pointer"
+        >
+          Explorar catálogo
+        </a>
+        <a href="/marcas" class="text-white/60 text-sm tracking-[0.08em] uppercase hover:text-white transition-colors flex items-center gap-2 cursor-pointer">
+          Nuestras marcas
+          <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 right-16 z-20 flex flex-col items-center gap-2">
+      <span class="text-[10px] text-white/30 tracking-[0.25em] uppercase" style="writing-mode: vertical-rl;">Scroll</span>
+      <div class="w-px h-10 bg-white/20 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full bg-white/70 hero-scroll-line"></div>
+      </div>
     </div>
   </section>
 
@@ -81,7 +98,7 @@ const products = [
   <section id="esenciales" class="py-24 px-16">
     <div class="flex items-start justify-between mb-14">
       <div>
-        <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-4">Destacados T3R</p>
+        <img src="/logo_t3r.png" alt="T3R" class="h-7 w-auto mb-4" />
         <h2 class="text-[56px] font-bold leading-tight">Los esenciales.</h2>
         <p class="text-base text-gray-500 mt-4 max-w-[300px] leading-relaxed">
           Selección de referencias T3R disponibles bajo solicitud. Precisión, durabilidad y diseño minimal.
@@ -96,10 +113,19 @@ const products = [
     </div>
 
     <div class="grid grid-cols-3 gap-x-8 gap-y-14">
-      {products.map((p) => (
+      {formatted.map((p) => (
         <div class="group cursor-pointer">
-          <div class="bg-[#E8B49A] aspect-square mb-5 w-full overflow-hidden">
-            <div class="w-full h-full transition-transform duration-300 group-hover:scale-[1.03] bg-[#E8B49A]"></div>
+          <div class="aspect-square mb-5 w-full overflow-hidden bg-[#F0EDE8]">
+            {p.imagen ? (
+              <img
+                src={`/${p.imagen}`}
+                alt={p.name}
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+            ) : (
+              <div class="w-full h-full bg-[#E8B49A]"></div>
+            )}
           </div>
           <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-1.5">{p.category}</p>
           <h3 class="font-semibold text-lg mb-1.5">{p.name}</h3>

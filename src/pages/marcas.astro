@@ -5,18 +5,21 @@ import '../styles/global.css';
 const brands = [
   {
     name: 'T3R',
+    logo: '/logo_t3r.png',
     description: 'Componentes profesionales de ciclismo. Minimal, preciso, duradero.',
     cta: 'Ver catálogo',
     href: '/catalogo',
   },
   {
     name: 'Whipp-Off',
+    logo: '/logo_whipoff.png',
     description: 'Ropa de MTB para quienes rompen la línea recta.',
     cta: 'Descubrir',
     href: '/whipp-off',
   },
   {
     name: 'Transfer',
+    logo: '/logo_transfer.png',
     description: 'Bicicletas y cuadros. Equipamiento esencial.',
     cta: 'Descubrir',
     href: '/transfer',
@@ -27,17 +30,17 @@ const brands = [
 <Layout title="Marcas — Fundamental">
 
   <!-- NAV -->
-  <header class="flex items-center justify-between px-16 py-6 bg-white">
-    <a href="/" class="font-display uppercase text-xl tracking-[-0.03em]" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
+  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-[#1A100C]/80 backdrop-blur-md">
+    <a href="/" class="font-display uppercase text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
     <nav class="flex gap-10">
-      <a href="/marcas" class="text-base text-[#111] font-medium">Marcas</a>
-      <a href="/nosotros" class="text-base text-[#333] hover:text-black transition-colors">Nosotros</a>
-      <a href="/contacto" class="text-base text-[#333] hover:text-black transition-colors">Contacto</a>
+      <a href="/marcas" class="text-base text-white font-medium">Marcas</a>
+      <a href="/nosotros" class="text-base text-white/70 hover:text-white transition-colors">Nosotros</a>
+      <a href="/contacto" class="text-base text-white/70 hover:text-white transition-colors">Contacto</a>
     </nav>
   </header>
 
   <!-- HERO TEXTO -->
-  <section class="px-16 pt-20 pb-24">
+  <section class="px-16 pt-36 pb-24">
     <p data-reveal class="text-sm text-[#6B8CAE] tracking-[0.3em] uppercase mb-6">
       Distribuidora · Fundamental
     </p>
@@ -58,7 +61,11 @@ const brands = [
           data-delay={String(i + 1)}
           class={`group pt-14 pb-20 flex flex-col gap-7 transition-colors duration-300 hover:bg-[#F8F7F5] ${i < brands.length - 1 ? 'border-r border-gray-200' : ''} px-10`}
         >
-          <h2 class="text-[48px] font-bold leading-none">{brand.name}</h2>
+          {brand.logo ? (
+            <img src={brand.logo} alt={brand.name} class="h-60 w-auto object-contain" />
+          ) : (
+            <h2 class="text-[48px] font-bold leading-none">{brand.name}</h2>
+          )}
           <p class="text-lg text-[#6B8CAE] leading-relaxed max-w-[280px]">
             {brand.description}
           </p>
