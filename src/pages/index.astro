@@ -28,7 +28,6 @@ const { data: imagenes, error: imgError } = await supabase
 
 if (imgError) console.error('Supabase imagenes error:', imgError.message);
 
-console.log('productos:', products?.length, '| imagenes:', imagenes?.length, '| sample:', imagenes?.[0]);
 
 const imgMap: Record<string, string> = {};
 (imagenes ?? []).forEach((i: any) => { imgMap[i.producto_sku] = i.url; });

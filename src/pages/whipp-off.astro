@@ -1,0 +1,295 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+---
+
+<Layout title="Whipp-Off — Fundamental">
+
+  <style is:global>
+    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Epilogue:wght@300;400;500;600&display=swap');
+    .font-anton { font-family: 'Anton', sans-serif; }
+    .font-epilogue { font-family: 'Epilogue', sans-serif; }
+  </style>
+
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-[#1A100C]/80 backdrop-blur-md">
+    <a href="/" class="font-display uppercase text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
+    <nav class="flex gap-10">
+      <a href="/marcas" class="text-base text-white/70 hover:text-white transition-colors">Marcas</a>
+      <a href="/nosotros" class="text-base text-white/70 hover:text-white transition-colors">Nosotros</a>
+      <a href="/contacto" class="text-base text-white/70 hover:text-white transition-colors">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative h-screen bg-black flex flex-col justify-end overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/catalogo_whipoff/WHIP_OFF_1.jpg');"></div>
+    <div class="absolute inset-0" style="background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.1) 100%);"></div>
+
+    <!-- Badge web oficial top-right -->
+    <a
+      href="https://www.whip-off.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="absolute top-28 right-16 z-20 flex items-center gap-2 border border-white/30 bg-black/40 backdrop-blur-sm px-4 py-2.5 text-white hover:bg-white hover:text-black transition-all duration-300 group cursor-pointer"
+    >
+      <span class="font-epilogue text-xs tracking-[0.2em] uppercase">whip-off.com</span>
+      <svg class="w-3 h-3 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/>
+      </svg>
+    </a>
+
+    <div class="relative z-20 px-16 pb-16">
+      <img src="/logo_whipoff.png" alt="Whipp-Off" class="h-12 w-auto mb-8 brightness-0 invert" />
+      <p class="font-epilogue text-xs text-white/50 tracking-[0.4em] uppercase mb-4">Ropa MTB · Fundamental</p>
+      <h1 class="font-anton text-[120px] leading-[0.85] text-white uppercase mb-8" style="letter-spacing: -0.02em;">
+        WHIPP<br/>
+        <span class="text-white">OFF.</span>
+      </h1>
+      <div class="flex items-center gap-6">
+        <p class="font-epilogue text-white/70 text-base leading-relaxed">
+          Para quienes rompen la línea recta.
+        </p>
+        <a
+          href="https://www.whip-off.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-epilogue text-xs text-white/70 tracking-[0.2em] uppercase border-b border-white/30 pb-0.5 hover:text-white hover:border-white transition-colors cursor-pointer"
+        >
+          Ver web oficial →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORIA -->
+  <section class="bg-black px-16 py-28">
+    <div class="max-w-6xl mx-auto grid grid-cols-2 gap-24 items-center">
+      <div data-reveal>
+        <p class="font-epilogue text-xs text-white/50 tracking-[0.35em] uppercase mb-6">La marca</p>
+        <h2 class="font-anton text-[64px] leading-[0.9] text-white uppercase mb-8">
+          MTB NO<br/>ES UN<br/>DEPORTE.<br/>
+          <span class="text-white">ES UN ESTILO.</span>
+        </h2>
+      </div>
+      <div data-reveal data-delay="2">
+        <p class="font-epilogue text-white/70 text-lg leading-relaxed mb-6">
+          Whipp-Off nace para los riders que no distinguen entre pista y calle. Ropa técnica de montaña con alma urbana — cortes limpios, materiales que aguantan, y un diseño que no pide disculpas.
+        </p>
+        <p class="font-epilogue text-white/70 text-lg leading-relaxed mb-10">
+          Camisetas de manga corta y larga, pantalones de trail y guantes de enduro. Todo disponible bajo solicitud a través de Fundamental.
+        </p>
+        <a
+          href="https://www.whip-off.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-epilogue inline-flex items-center gap-3 text-sm text-white/70 border border-white/20 px-6 py-3 hover:border-white hover:text-white transition-all duration-300 cursor-pointer group"
+        >
+          <span class="tracking-[0.15em] uppercase">Explorar catálogo completo</span>
+          <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/>
+          </svg>
+        </a>
+        <div class="flex gap-8 mt-12 pt-12 border-t border-white/10">
+          <div>
+            <p class="font-anton text-4xl text-white">3</p>
+            <p class="font-epilogue text-sm text-white/55 uppercase tracking-widest mt-1">Categorías</p>
+          </div>
+          <div class="w-px bg-white/10"></div>
+          <div>
+            <p class="font-anton text-4xl text-white">100%</p>
+            <p class="font-epilogue text-sm text-white/55 uppercase tracking-widest mt-1">Técnico</p>
+          </div>
+          <div class="w-px bg-white/10"></div>
+          <div>
+            <p class="font-anton text-4xl text-white">MTB</p>
+            <p class="font-epilogue text-sm text-white/55 uppercase tracking-widest mt-1">Focused</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER WEB OFICIAL -->
+  <a
+    href="https://www.whip-off.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="block bg-white px-16 py-10 group cursor-pointer overflow-hidden relative"
+  >
+    <div class="absolute inset-0 opacity-[0.06]" style="background-image: repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 0, transparent 50%); background-size: 12px 12px;"></div>
+    <div class="max-w-6xl mx-auto flex items-center justify-between relative z-10">
+      <div class="flex items-baseline gap-6">
+        <p class="font-epilogue text-xs text-black/60 tracking-[0.35em] uppercase">Web oficial</p>
+        <p class="font-anton text-[56px] leading-none text-black uppercase tracking-tight">WWW.WHIP-OFF.COM</p>
+      </div>
+      <div class="flex items-center gap-3 text-black group-hover:gap-5 transition-all duration-300">
+        <span class="font-epilogue text-sm uppercase tracking-[0.2em]">Visitar</span>
+        <svg class="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/>
+        </svg>
+      </div>
+    </div>
+  </a>
+
+  <!-- CATÁLOGO POR CATEGORÍA -->
+  <section class="bg-[#0A0A0A] px-16 py-24">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="flex items-end justify-between mb-16 border-b border-white/10 pb-8">
+        <div>
+          <p data-reveal class="font-epilogue text-xs text-white/50 tracking-[0.35em] uppercase mb-3">Selección disponible</p>
+          <h2 data-reveal data-delay="1" class="font-epilogue text-3xl font-semibold text-white">Una muestra del catálogo</h2>
+          <p data-reveal data-delay="2" class="font-epilogue text-sm text-white/40 mt-2">
+            El catálogo completo está en <a href="https://www.whip-off.com/" target="_blank" rel="noopener noreferrer" class="text-white/70 hover:text-white underline underline-offset-2 transition-colors">whip-off.com</a>
+          </p>
+        </div>
+        <p data-reveal data-delay="3" class="font-epilogue text-sm text-white/40">Solicitar referencias en Fundamental</p>
+      </div>
+
+      <!-- CAMISETAS -->
+      <div class="mb-16" data-reveal>
+        <div class="flex items-center gap-4 mb-6">
+          <span class="font-epilogue text-[10px] text-white/40 tracking-[0.4em] uppercase">01</span>
+          <h3 class="font-epilogue text-sm font-semibold text-white tracking-[0.15em] uppercase">Camisetas</h3>
+          <div class="flex-1 h-px bg-white/10"></div>
+          <span class="font-epilogue text-[10px] text-white/30">4 refs.</span>
+        </div>
+        <div class="grid grid-cols-4 gap-3">
+          {[
+            { src: '/catalogo_whipoff/wo_camiseta_mc_negra.png',  label: 'MC · Negra' },
+            { src: '/catalogo_whipoff/wo_camiseta_ml_blanca.png', label: 'ML · Blanca' },
+            { src: '/catalogo_whipoff/wo_camiseta_ml_negra.png',  label: 'ML · Negra' },
+            { src: '/catalogo_whipoff/wo_camiseta_ml_roja.png',   label: 'ML · Roja' },
+          ].map((item) => (
+            <a href="https://www.whip-off.com/" target="_blank" rel="noopener noreferrer"
+              class="group relative bg-[#111] aspect-[3/4] overflow-hidden cursor-pointer block">
+              <img src={item.src} alt={item.label}
+                class="absolute inset-0 w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black to-transparent">
+                <p class="font-epilogue text-white text-xs font-medium">{item.label}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- PANTALONES -->
+      <div class="mb-16" data-reveal>
+        <div class="flex items-center gap-4 mb-6">
+          <span class="font-epilogue text-[10px] text-white/40 tracking-[0.4em] uppercase">02</span>
+          <h3 class="font-epilogue text-sm font-semibold text-white tracking-[0.15em] uppercase">Pantalones</h3>
+          <div class="flex-1 h-px bg-white/10"></div>
+          <span class="font-epilogue text-[10px] text-white/30">3 refs.</span>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          {[
+            { src: '/catalogo_whipoff/wo_pantalon_corto_negro.png', label: 'Corto · Negro' },
+            { src: '/catalogo_whipoff/wo_pantalon_largo_negro.png', label: 'Largo · Negro' },
+            { src: '/catalogo_whipoff/wo_pantalon_largo_verde.png', label: 'Largo · Verde' },
+          ].map((item) => (
+            <a href="https://www.whip-off.com/" target="_blank" rel="noopener noreferrer"
+              class="group relative bg-[#111] aspect-[3/4] overflow-hidden cursor-pointer block">
+              <img src={item.src} alt={item.label}
+                class="absolute inset-0 w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black to-transparent">
+                <p class="font-epilogue text-white text-xs font-medium">{item.label}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- GUANTES -->
+      <div data-reveal>
+        <div class="flex items-center gap-4 mb-6">
+          <span class="font-epilogue text-[10px] text-white/40 tracking-[0.4em] uppercase">03</span>
+          <h3 class="font-epilogue text-sm font-semibold text-white tracking-[0.15em] uppercase">Guantes</h3>
+          <div class="flex-1 h-px bg-white/10"></div>
+          <span class="font-epilogue text-[10px] text-white/30">3 refs.</span>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          {[
+            { src: '/catalogo_whipoff/wo_guante_negro.png',  label: 'Enduro · Negro' },
+            { src: '/catalogo_whipoff/wo_guante_blanco.png', label: 'Enduro · Blanco' },
+            { src: '/catalogo_whipoff/wo_guante_gris.png',   label: 'Enduro · Gris' },
+          ].map((item) => (
+            <a href="https://www.whip-off.com/" target="_blank" rel="noopener noreferrer"
+              class="group relative bg-[#111] aspect-[3/4] overflow-hidden cursor-pointer block">
+              <img src={item.src} alt={item.label}
+                class="absolute inset-0 w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" />
+              <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black to-transparent">
+                <p class="font-epilogue text-white text-xs font-medium">{item.label}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- NOTA PIE -->
+      <div class="mt-12 pt-8 border-t border-white/10 flex items-center justify-between">
+        <p class="font-epilogue text-xs text-white/35">
+          Mostrando una selección. El catálogo completo incluye más colores, tallas y modelos.
+        </p>
+        <a href="https://www.whip-off.com/" target="_blank" rel="noopener noreferrer"
+          class="font-epilogue text-xs text-white/50 hover:text-white transition-colors tracking-[0.15em] uppercase inline-flex items-center gap-2">
+          Ver catálogo completo
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-black py-32 px-16 text-center">
+    <p data-reveal class="font-epilogue text-xs text-white/50 tracking-[0.4em] uppercase mb-6">Disponibilidad</p>
+    <h2 data-reveal data-delay="1" class="font-anton text-[72px] leading-none text-white uppercase mb-8">
+      PIDE TU<br/>REFERENCIA.
+    </h2>
+    <p data-reveal data-delay="2" class="font-epilogue text-white/70 text-lg max-w-md mx-auto leading-relaxed mb-12">
+      Todo el catálogo Whipp-Off disponible bajo solicitud. Ve a su web para ver todas las referencias y luego escríbenos.
+    </p>
+    <div data-reveal data-delay="3" class="flex items-center justify-center gap-4 flex-wrap">
+      <a
+        href="https://www.whip-off.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="font-epilogue bg-white text-black text-sm font-semibold px-10 py-4 hover:bg-white/90 transition-colors tracking-[0.08em] uppercase cursor-pointer inline-flex items-center gap-2 group"
+      >
+        Ir a whip-off.com
+        <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/>
+        </svg>
+      </a>
+      <a href="/contacto" class="font-epilogue border border-white/30 text-white text-sm font-medium px-10 py-4 hover:border-white transition-colors tracking-[0.08em] uppercase cursor-pointer">
+        Solicitar aquí
+      </a>
+      <a href="/marcas" class="font-epilogue text-white/55 text-sm tracking-[0.08em] uppercase hover:text-white transition-colors cursor-pointer">
+        ← Volver a marcas
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-black border-t border-white/5 px-16 py-10 flex items-center justify-between">
+    <div>
+      <p class="font-epilogue text-sm font-semibold text-white mb-1">Whipp-Off × Fundamental</p>
+      <p class="font-epilogue text-xs text-white/55 leading-relaxed">
+        Distribuido por Fundamental Bike Parts · Madrid, España
+      </p>
+    </div>
+    <a
+      href="https://www.whip-off.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="font-epilogue text-xs text-white/55 hover:text-white transition-colors tracking-[0.2em] uppercase cursor-pointer"
+    >
+      whip-off.com ↗
+    </a>
+    <p class="font-epilogue text-xs text-white/20">© 2026 FUNDAMENTAL</p>
+  </footer>
+
+</Layout>
