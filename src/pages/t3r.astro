@@ -1,0 +1,302 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+---
+
+<Layout title="T3R · The Three Riders — Fundamental">
+
+  <style is:global>
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes scrollLine {
+      0%   { transform: translateY(-100%); }
+      50%  { transform: translateY(150%); }
+      100% { transform: translateY(-100%); }
+    }
+    .marquee-track { animation: marquee 22s linear infinite; }
+    html { scroll-behavior: smooth; }
+  </style>
+
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-[#1A100C]/80 backdrop-blur-md">
+    <a href="/" class="font-display uppercase text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
+    <nav class="flex gap-10">
+      <a href="/marcas" class="text-base text-white/70 hover:text-white transition-colors">Marcas</a>
+      <a href="/nosotros" class="text-base text-white/70 hover:text-white transition-colors">Nosotros</a>
+      <a href="/contacto" class="text-base text-white/70 hover:text-white transition-colors">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- HERO: split screen -->
+  <section class="relative h-screen bg-[#1A100C] flex overflow-hidden">
+
+    <!-- Panel izquierdo: todo el texto agrupado y centrado -->
+    <div class="relative z-10 flex flex-col justify-center w-[54%] px-16 gap-10">
+      <!-- Logo + etiqueta -->
+      <div class="flex items-center gap-4">
+        <img src="/logo_blanco_t3r.png" alt="T3R" class="h-6 w-auto opacity-85" />
+        <div class="w-px h-4 bg-white/20"></div>
+        <p class="text-[10px] text-white/40 tracking-[0.35em] uppercase">The Three Riders</p>
+      </div>
+      <!-- Titular principal -->
+      <h1 class="text-[88px] font-bold leading-[0.88] text-white tracking-tight">
+        Desde el<br/>fabricante<br/>
+        <span class="text-[#C4A072]">hasta la tienda.</span>
+      </h1>
+      <!-- Separador + descripción corta -->
+      <div class="flex items-start gap-6 max-w-sm">
+        <div class="w-6 h-px bg-[#C4A072]/50 mt-3 shrink-0"></div>
+        <p class="text-white/45 text-sm leading-relaxed">
+          Componentes probados por nosotros. Sin intermediarios, al precio que debería tener desde el principio.
+        </p>
+      </div>
+      <!-- Stats -->
+      <div class="flex items-center gap-8 pt-2">
+        <div>
+          <p class="text-xl font-bold text-white">+120</p>
+          <p class="text-[10px] text-white/35 uppercase tracking-widest mt-1">Referencias</p>
+        </div>
+        <div class="w-px h-7 bg-white/10"></div>
+        <div>
+          <p class="text-xl font-bold text-white">8</p>
+          <p class="text-[10px] text-white/35 uppercase tracking-widest mt-1">Categorías</p>
+        </div>
+        <div class="w-px h-7 bg-white/10"></div>
+        <div>
+          <p class="text-xl font-bold text-[#C4A072]">3</p>
+          <p class="text-[10px] text-white/35 uppercase tracking-widest mt-1">Riders</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divisor vertical sutil -->
+    <div class="absolute left-[54%] top-0 bottom-0 w-px bg-[#C4A072]/12 z-20"></div>
+
+    <!-- Panel derecho: imagen con oscurecimiento y degradado de fusión -->
+    <div class="relative w-[46%]">
+      <img src="/catalogo_t3r/combos/combos_3.jpg" alt="T3R productos y packaging"
+        class="absolute inset-0 w-full h-full object-cover" style="object-position: center 40%;" />
+      <!-- Oscurecer la imagen (es muy blanca) -->
+      <div class="absolute inset-0 bg-[#1A100C]/55"></div>
+      <!-- Degradado de fusión desde la izquierda -->
+      <div class="absolute inset-0" style="background: linear-gradient(to right, #1A100C 0%, rgba(26,16,12,0.7) 20%, rgba(26,16,12,0.15) 60%, transparent 100%);"></div>
+    </div>
+
+  </section>
+
+  <!-- TICKER -->
+  <div class="bg-[#C4A072] py-3.5 overflow-hidden">
+    <div class="flex whitespace-nowrap marquee-track">
+      {Array(2).fill(null).map(() => (
+        <span class="flex items-center">
+          {['Directo de fábrica', 'Probado por nosotros', 'Precio competitivo', 'Fabricación de prestigio', 'Para la tienda y el cliente', 'Pensado para durar', 'The Three Riders', 'Sin intermediarios'].map(t => (
+            <span class="font-bold text-[#1A100C] text-xs tracking-[0.25em] uppercase mx-8">{t} <span class="opacity-25 mx-2">·</span></span>
+          ))}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- HISTORIA PRINCIPAL -->
+  <section class="bg-[#111] px-16 pt-28 pb-20">
+    <div class="max-w-6xl mx-auto">
+
+      <!-- Cap 01 -->
+      <div class="flex items-center gap-4 mb-16" data-reveal>
+        <span class="text-[#C4A072]/50 text-sm tracking-[0.2em] font-medium">Cap. 01</span>
+        <div class="flex-1 h-px bg-white/5"></div>
+        <span class="text-xs text-white/20 tracking-[0.3em] uppercase">El problema</span>
+      </div>
+
+      <!-- Titular + primera columna -->
+      <div class="grid grid-cols-12 gap-8 mb-20">
+        <div class="col-span-5" data-reveal>
+          <h2 class="text-[56px] font-bold text-white leading-[0.9] tracking-tight">
+            Una marca<br/>joven. Las<br/>ideas<br/>
+            <span class="text-[#C4A072]">muy claras.</span>
+          </h2>
+        </div>
+        <div class="col-span-7 flex flex-col justify-end" data-reveal data-delay="2">
+          <p class="text-white/60 text-xl leading-relaxed">
+            Actualmente los mercados de todo el mundo sufren por los problemas de competencia de precio impuestos por la globalización. T3R nace para cambiar esa ecuación: una cadena más corta significa precios más honestos para la tienda y para el cliente final.
+          </p>
+        </div>
+      </div>
+
+      <!-- Pull quote -->
+      <div class="border-l-2 border-[#C4A072] pl-10 mb-20" data-reveal>
+        <p class="text-[36px] font-bold text-white leading-snug max-w-3xl">
+          "Servir el mejor producto al mejor precio, para la tienda y el cliente final."
+        </p>
+        <p class="text-[#C4A072] text-xs tracking-[0.3em] uppercase mt-5">The Three Riders</p>
+      </div>
+
+      <!-- Cap 02 -->
+      <div class="flex items-center gap-4 mb-16" data-reveal>
+        <span class="text-[#C4A072]/50 text-sm tracking-[0.2em] font-medium">Cap. 02</span>
+        <div class="flex-1 h-px bg-white/5"></div>
+        <span class="text-xs text-white/20 tracking-[0.3em] uppercase">La propuesta</span>
+      </div>
+
+      <!-- Dos columnas de texto -->
+      <div class="grid grid-cols-2 gap-16" data-reveal>
+        <div class="space-y-5">
+          <p class="text-white/60 text-lg leading-relaxed">
+            Cada referencia en nuestro catálogo ha pasado por nuestras manos antes de llegar aquí. Cada uno de los tres riders ha probado cada producto y dado su aprobación. No ponemos nada que no hayamos aprobado personalmente, dando todas las garantías.
+          </p>
+          <p class="text-white/60 text-lg leading-relaxed">
+            Todos los productos han sido fabricados en las fábricas donde fabrican otras marcas de prestigio, con años de venta en el mercado y más que reconocidas dentro del sector.
+          </p>
+        </div>
+        <div class="space-y-5">
+          <p class="text-white/60 text-lg leading-relaxed">
+            Los productos T3R los puede disfrutar desde el cliente más experimentado hasta el usuario amateur. Productos pensados por y para durar, que durante su vida útil rindan a la altura de las circunstancias.
+          </p>
+          <p class="text-white/60 text-lg leading-relaxed">
+            Hemos focalizado la atención en ciertos detalles para minimizar el coste de producción, sin perder de vista la calidad final. Un ejemplo: el packing. Sencillo, sobrio, cartón sin logotipos a color. Para ajustar costes donde no afecta al rendimiento.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOTO SEPARADOR -->
+  <div class="relative overflow-hidden" style="height: 480px;">
+    <img src="/catalogo_t3r/combos/combos_3.jpg" alt="T3R productos"
+      class="absolute inset-0 w-full h-full object-cover" style="object-position: center 50%;" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(26,16,12,0.85) 0%, rgba(26,16,12,0.3) 60%, transparent 100%);"></div>
+    <div class="absolute inset-0 flex items-center px-16">
+      <div data-reveal class="max-w-lg">
+        <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-4">Probado en pista</p>
+        <p class="text-white text-3xl font-bold leading-snug">
+          Ningún producto entra al catálogo sin pasar por nuestras manos primero.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 PILARES -->
+  <section class="bg-[#0f0e0c] px-16 py-24 border-t border-white/5">
+    <div class="max-w-6xl mx-auto">
+      <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-12" data-reveal>Nuestros compromisos</p>
+      <div class="grid grid-cols-4 gap-px bg-white/5">
+        {[
+          { n: '01', title: 'Directo de fábrica', text: 'Sin eslabones innecesarios. El precio refleja el coste real, no los márgenes acumulados de una cadena larga.' },
+          { n: '02', title: 'Testado por riders', text: 'Cada uno de los tres riders prueba y aprueba cada referencia antes de incluirla en el catálogo. Sin excepciones.' },
+          { n: '03', title: 'Fabricación contrastada', text: 'Mismas plantas que producen marcas internacionales con años de mercado. La calidad no es nueva, el precio sí.' },
+          { n: '04', title: 'Para durar', text: 'Productos pensados por y para durar. Que rindan a la altura durante toda su vida útil, sin concesiones.' },
+        ].map((p, i) => (
+          <div class="bg-[#0f0e0c] p-10" data-reveal data-delay={String(i)}>
+            <p class="text-[#C4A072] text-3xl font-bold mb-6">{p.n}</p>
+            <h3 class="text-white font-semibold text-lg mb-4">{p.title}</h3>
+            <p class="text-white/45 text-sm leading-relaxed">{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGING -->
+  <section class="bg-[#111] px-16 py-24 border-t border-white/5">
+    <div class="max-w-6xl mx-auto">
+      <!-- Cap 03 -->
+      <div class="flex items-center gap-4 mb-16" data-reveal>
+        <span class="text-[#C4A072]/50 text-sm tracking-[0.2em] font-medium">Cap. 03</span>
+        <div class="flex-1 h-px bg-white/5"></div>
+        <span class="text-xs text-white/20 tracking-[0.3em] uppercase">La filosofía</span>
+      </div>
+    </div>
+    <div class="max-w-6xl mx-auto flex gap-20 items-center">
+      <div data-reveal class="flex-1">
+        <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-6">Una decisión consciente</p>
+        <h2 class="text-[44px] font-bold text-white leading-tight mb-8">
+          El packing no es<br/>el producto.
+        </h2>
+        <p class="text-white/60 text-lg leading-relaxed max-w-lg">
+          Cartón. Sin logotipos a color, sin envases llamativos. Cada euro que no gastamos en envoltorio es un euro que va al componente y al precio final. Sencillo, sobrio, y una filosofía de la que no nos avergonzamos — nos enorgullecemos.
+        </p>
+      </div>
+      <div data-reveal data-delay="2" class="shrink-0">
+        <div class="border border-[#C4A072]/30 p-12 max-w-xs">
+          <p class="text-[#C4A072] text-xs tracking-[0.3em] uppercase mb-5">Filosofía T3R</p>
+          <p class="text-white text-2xl font-bold leading-tight">
+            "Minimizar el coste donde no afecta a la calidad."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LO QUE DISTRIBUIMOS (teaser, sin catalogo) -->
+  <section class="bg-[#0d0c0a] px-16 py-20 border-t border-white/5">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-end justify-between mb-12" data-reveal>
+        <div>
+          <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-3">Gama completa</p>
+          <h2 class="text-4xl font-bold text-white">Lo que distribuimos</h2>
+        </div>
+        <p class="text-white/30 text-sm">Catálogo completo próximamente</p>
+      </div>
+      <div class="grid grid-cols-4 gap-px bg-white/5" data-reveal>
+        {[
+          { cat: 'Discos de freno', refs: '+29 refs.' },
+          { cat: 'Pastillas de freno', refs: '+50 refs.' },
+          { cat: 'Pedales plataforma', refs: '9 refs.' },
+          { cat: 'Pedales automáticos', refs: '9 refs.' },
+          { cat: 'Pedales carretera', refs: '6 refs.' },
+          { cat: 'Pedalier / BB', refs: '14 refs.' },
+          { cat: 'Puños', refs: '4 refs.' },
+          { cat: 'Válvulas tubeless', refs: '5 refs.' },
+        ].map((item) => (
+          <div class="bg-[#0d0c0a] px-8 py-6 flex items-center justify-between group">
+            <p class="text-white/70 text-sm font-medium group-hover:text-white transition-colors">{item.cat}</p>
+            <p class="text-white/25 text-xs">{item.refs}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 flex items-center justify-center" data-reveal>
+        <a href="/contacto" class="text-sm text-white/40 hover:text-[#C4A072] transition-colors tracking-[0.15em] uppercase">
+          Solicitar referencia específica →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIERRE -->
+  <section class="bg-[#1A100C] px-16 py-40 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.035]"
+      style="background-image: repeating-linear-gradient(0deg, #C4A072 0, #C4A072 1px, transparent 0, transparent 60px), repeating-linear-gradient(90deg, #C4A072 0, #C4A072 1px, transparent 0, transparent 60px);">
+    </div>
+    <div class="max-w-6xl mx-auto relative z-10">
+      <p data-reveal class="text-xs text-[#C4A072] tracking-[0.4em] uppercase mb-10">The Three Riders</p>
+      <h2 data-reveal data-delay="1" class="text-[96px] font-bold text-white leading-[0.9] mb-16 tracking-tight">
+        Nos vemos<br/>
+        <span class="text-[#C4A072]">encima de</span><br/>
+        una bici.
+      </h2>
+      <div data-reveal data-delay="2" class="flex items-center gap-4">
+        <a href="/contacto"
+          class="bg-[#C4A072] text-[#1A100C] text-sm font-bold px-12 py-4 hover:bg-[#D4B280] transition-colors tracking-[0.1em] uppercase">
+          Solicitar catálogo
+        </a>
+        <a href="/marcas"
+          class="border border-white/20 text-white/50 text-sm px-10 py-4 hover:border-white/40 hover:text-white transition-colors tracking-[0.08em] uppercase">
+          ← Marcas
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#0f0a08] border-t border-white/5 px-16 py-10 flex items-center justify-between">
+    <div>
+      <p class="text-sm font-semibold text-white mb-1">T3R · The Three Riders × Fundamental</p>
+      <p class="text-xs text-white/40">Distribuido por Fundamental Bike Parts · Madrid, España</p>
+    </div>
+    <p class="text-xs text-white/20">© 2026 FUNDAMENTAL</p>
+  </footer>
+
+</Layout>
