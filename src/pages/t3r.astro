@@ -1,17 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
-
-const categories = [
-  { cat: 'Discos de freno',     refs: '+29 refs.', slug: 'discos-de-freno',      img: '/catalogo_t3r/discos_freno/discos_freno_center_lock_1.jpg' },
-  { cat: 'Pastillas de freno',  refs: '+50 refs.', slug: 'pastillas-de-freno',   img: '/catalogo_t3r/pastillas_freno/pastillas_freno_1.jpg' },
-  { cat: 'Pedales plataforma',  refs: '9 refs.',   slug: 'pedales-plataforma',   img: '/catalogo_t3r/pedal_plataforma/pedal_plataforma_1.jpg' },
-  { cat: 'Pedales automáticos', refs: '9 refs.',   slug: 'pedales-automaticos',  img: '/catalogo_t3r/pedal_automatico/pedal_automatico_1.jpg' },
-  { cat: 'Pedales carretera',   refs: '6 refs.',   slug: 'pedales-carretera',    img: '/catalogo_t3r/pedal_carretera/pedal_carretera_1.jpg' },
-  { cat: 'Pedalier / BB',       refs: '14 refs.',  slug: 'pedalier-bb',          img: '/catalogo_t3r/pedalier_1/pedalier_1_1.jpg' },
-  { cat: 'Puños',               refs: '4 refs.',   slug: 'punos',                img: '/catalogo_t3r/punos/puno_arandelas_ergonomicos.jpg' },
-  { cat: 'Válvulas tubeless',   refs: '5 refs.',   slug: 'valvulas-tubeless',    img: '/catalogo_t3r/valvula_tubeless/valvula_tubeless_1.jpg' },
-];
 ---
 
 <Layout title="T3R · The Three Riders — Fundamental">
@@ -27,10 +16,6 @@ const categories = [
       100% { transform: translateY(-100%); }
     }
     .marquee-track { animation: marquee 22s linear infinite; }
-    .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
-    @media (prefers-reduced-motion: reduce) {
-      .marquee-track { animation: none; }
-    }
     html { scroll-behavior: smooth; }
   </style>
 
@@ -102,7 +87,7 @@ const categories = [
   </section>
 
   <!-- TICKER -->
-  <div class="bg-[#C4A072] py-3.5 overflow-hidden marquee-wrap">
+  <div class="bg-[#C4A072] py-3.5 overflow-hidden">
     <div class="flex whitespace-nowrap marquee-track">
       {Array(2).fill(null).map(() => (
         <span class="flex items-center">
@@ -180,12 +165,12 @@ const categories = [
 
   <!-- FOTO SEPARADOR -->
   <div class="relative overflow-hidden" style="height: 480px;">
-    <img src="/catalogo_t3r/discos_freno/discos_freno_center_lock_1.jpg" alt="Disco de freno T3R"
+    <img src="/catalogo_t3r/combos/combos_3.jpg" alt="T3R productos"
       class="absolute inset-0 w-full h-full object-cover" style="object-position: center 50%;" />
-    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(26,16,12,0.9) 0%, rgba(26,16,12,0.5) 55%, rgba(26,16,12,0.1) 100%);"></div>
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(26,16,12,0.85) 0%, rgba(26,16,12,0.3) 60%, transparent 100%);"></div>
     <div class="absolute inset-0 flex items-center px-16">
       <div data-reveal class="max-w-lg">
-        <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-4">Fabricación contrastada</p>
+        <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-4">Probado en pista</p>
         <p class="text-white text-3xl font-bold leading-snug">
           Ningún producto entra al catálogo sin pasar por nuestras manos primero.
         </p>
@@ -245,39 +230,37 @@ const categories = [
     </div>
   </section>
 
-  <!-- CATÁLOGO POR CATEGORÍA -->
+  <!-- LO QUE DISTRIBUIMOS (teaser, sin catalogo) -->
   <section class="bg-[#0d0c0a] px-16 py-20 border-t border-white/5">
     <div class="max-w-6xl mx-auto">
-      <div class="flex items-end justify-between mb-10" data-reveal>
+      <div class="flex items-end justify-between mb-12" data-reveal>
         <div>
           <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-3">Gama completa</p>
           <h2 class="text-4xl font-bold text-white">Lo que distribuimos</h2>
         </div>
-        <p class="text-white/30 text-sm">8 categorías · +126 referencias</p>
+        <p class="text-white/30 text-sm">Catálogo completo próximamente</p>
       </div>
       <div class="grid grid-cols-4 gap-px bg-white/5" data-reveal>
-        {categories.map((item) => (
-          <a
-            href={`/t3r/${item.slug}`}
-            class="group relative overflow-hidden bg-[#0d0c0a] cursor-pointer block"
-            style="height: 230px;"
-          >
-            <img
-              src={item.img}
-              alt={item.cat}
-              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              loading="lazy"
-            />
-            <div class="absolute inset-0 bg-[#0a0a0a]/65 group-hover:bg-[#0a0a0a]/45 transition-colors duration-400"></div>
-            <div class="absolute inset-0 flex flex-col justify-end p-6">
-              <p class="text-white font-semibold text-sm leading-tight mb-1.5">{item.cat}</p>
-              <div class="flex items-center justify-between">
-                <p class="text-white/40 text-xs">{item.refs}</p>
-                <span class="text-[#C4A072] text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 tracking-[0.12em] uppercase">Ver →</span>
-              </div>
-            </div>
-          </a>
+        {[
+          { cat: 'Discos de freno', refs: '+29 refs.' },
+          { cat: 'Pastillas de freno', refs: '+50 refs.' },
+          { cat: 'Pedales plataforma', refs: '9 refs.' },
+          { cat: 'Pedales automáticos', refs: '9 refs.' },
+          { cat: 'Pedales carretera', refs: '6 refs.' },
+          { cat: 'Pedalier / BB', refs: '14 refs.' },
+          { cat: 'Puños', refs: '4 refs.' },
+          { cat: 'Válvulas tubeless', refs: '5 refs.' },
+        ].map((item) => (
+          <div class="bg-[#0d0c0a] px-8 py-6 flex items-center justify-between group">
+            <p class="text-white/70 text-sm font-medium group-hover:text-white transition-colors">{item.cat}</p>
+            <p class="text-white/25 text-xs">{item.refs}</p>
+          </div>
         ))}
+      </div>
+      <div class="mt-8 flex items-center justify-center" data-reveal>
+        <a href="/contacto" class="text-sm text-white/40 hover:text-[#C4A072] transition-colors tracking-[0.15em] uppercase">
+          Solicitar referencia específica →
+        </a>
       </div>
     </div>
   </section>
