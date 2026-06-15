@@ -28,172 +28,375 @@ const { data: imagenes, error: imgError } = await supabase
 
 if (imgError) console.error('Supabase imagenes error:', imgError.message);
 
-
 const imgMap: Record<string, string> = {};
 (imagenes ?? []).forEach((i: any) => { imgMap[i.producto_sku] = i.url; });
 
-const formatted = (products ?? []).map((p: any) => ({
-  category: p.categoria.toUpperCase(),
+const featured = (products ?? []).map((p: any) => ({
+  category: p.categoria,
   name: p.nombre,
   description: p.descripcion_corta,
   ref: p.sku,
-  imagen: imgMap[p.sku] ?? null,
+  imagen: imgMap[p.sku] ? `/${imgMap[p.sku]}` : null,
 }));
+
+const heroStrip = [
+  { name: 'Discos de freno',    img: '/catalogo_t3r/discos_freno/discos_freno_center_lock_1.jpg', href: '/t3r' },
+  { name: 'Pastillas de freno', img: '/catalogo_t3r/pastillas_freno/pastillas_freno_1.jpg',       href: '/t3r' },
+  { name: 'Pedales plataforma', img: '/catalogo_t3r/pedal_plataforma/pedal_plataforma_1.jpg',     href: '/t3r' },
+  { name: 'Pedales automáticos',img: '/catalogo_t3r/pedal_automatico/pedal_automatico_1.jpg',     href: '/t3r' },
+  { name: 'Pedalier / BB',      img: '/catalogo_t3r/pedalier_1/pedalier_1_1.jpg',                href: '/t3r' },
+  { name: 'Válvulas tubeless',  img: '/catalogo_t3r/valvula_tubeless/valvula_tubeless_1.jpg',     href: '/t3r' },
+];
+
+const valores = [
+  {
+    n: '01',
+    title: 'Directo de fábrica',
+    text: 'Sin eslabones innecesarios. El precio que pagas refleja el coste real del producto, no los márgenes acumulados.',
+  },
+  {
+    n: '02',
+    title: 'Testado por riders',
+    text: 'Cada referencia ha pasado por nuestras manos. Los tres riders aprueban cada producto antes de que entre al catálogo.',
+  },
+  {
+    n: '03',
+    title: 'Fabricación contrastada',
+    text: 'Mismas plantas que producen marcas de primer nivel internacional. La calidad no es nueva aquí — el precio sí.',
+  },
+];
 ---
 
-<Layout title="Fundamental">
+<Layout title="Fundamental Bike Parts — Distribuidora T3R">
+
+  <style is:global>
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .marquee-track { animation: marquee 28s linear infinite; }
+    .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+    @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+    html { scroll-behavior: smooth; }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    [data-reveal].visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    [data-delay="1"] { transition-delay: 0.1s; }
+    [data-delay="2"] { transition-delay: 0.2s; }
+    [data-delay="3"] { transition-delay: 0.3s; }
+  </style>
 
   <!-- NAV -->
-  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-[#1A100C]/80 backdrop-blur-md">
+  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-[#090807]/85 backdrop-blur-md border-b border-white/5">
     <a href="/" class="font-display uppercase text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
     <nav class="flex gap-10">
       <!-- <a href="/marcas" class="text-base text-white/70 hover:text-white transition-colors">Marcas</a> -->
+      <a href="/t3r" class="text-base text-white/70 hover:text-white transition-colors">T3R</a>
       <a href="/nosotros" class="text-base text-white/70 hover:text-white transition-colors">Nosotros</a>
       <a href="/contacto" class="text-base text-white/70 hover:text-white transition-colors">Contacto</a>
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section class="relative h-screen bg-[#1A100C] flex flex-col justify-end overflow-hidden">
-    <!-- Foto fondo -->
-    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/catalogo_t3r/combos/combos_9.jpg');"></div>
-    <!-- Gradiente cinematic: oscuro desde abajo, transparente arriba -->
-    <div class="absolute inset-0 z-10" style="background: linear-gradient(to top, #1A100C 0%, rgba(26,16,12,0.75) 40%, rgba(26,16,12,0.2) 100%);"></div>
+  <!-- ═══════════════════════════════════════════════ HERO ═══ -->
+  <section class="min-h-screen flex flex-col bg-[#090807]">
 
-    <!-- Contenido bottom-left editorial -->
-    <div class="relative z-20 px-16 pb-16 w-full">
-      <div class="flex items-center gap-3 mb-6 hero-tag">
-        <div class="w-8 h-px bg-[#C4A072]"></div>
-        <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase">T3R · The Three Riders</p>
+    <!-- Statement central -->
+    <div class="flex-1 flex flex-col items-center justify-center text-center px-8 pt-28 pb-10">
+
+      <!-- Eyebrow -->
+      <div class="flex items-center gap-5 mb-10">
+        <div class="w-14 h-px bg-[#C4A072]/30"></div>
+        <p class="text-[10px] text-[#C4A072]/80 tracking-[0.5em] uppercase">Distribuidora oficial · Madrid</p>
+        <div class="w-14 h-px bg-[#C4A072]/30"></div>
       </div>
-      <h1 class="text-[96px] font-bold leading-[0.88] mb-10 hero-heading" style="text-shadow: 0 4px 40px rgba(0,0,0,0.6);">
-        <span class="block text-white">Componentes</span>
-        <span class="block text-[#C4A072]">fundamentales.</span>
+
+      <!-- FUNDAMENTAL -->
+      <h1
+        class="font-bold text-white uppercase tracking-tight leading-[0.82] mb-4"
+        style="font-size: clamp(72px, 11.8vw, 180px);"
+      >
+        Fundamental
       </h1>
-      <div class="flex items-center gap-8 hero-cta">
+
+      <!-- BIKE PARTS -->
+      <p
+        class="font-bold text-[#C4A072] uppercase tracking-[0.45em] mb-10"
+        style="font-size: clamp(18px, 2.5vw, 38px);"
+      >
+        Bike&nbsp;Parts
+      </p>
+
+      <!-- Descripción -->
+      <p class="text-white/40 text-base max-w-md leading-relaxed mb-12">
+        Componentes T3R para distribuidoras y clientes finales. Más de 126 referencias disponibles bajo pedido.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex items-center gap-4">
         <a
-          href="#esenciales"
-          class="bg-[#C4A072] text-[#1A100C] text-sm font-semibold px-8 py-4 hover:bg-[#D4B280] transition-colors tracking-[0.08em] uppercase cursor-pointer"
+          href="#catalogo"
+          class="bg-[#C4A072] text-[#090807] text-sm font-bold px-12 py-4 hover:bg-[#D4B280] transition-colors tracking-[0.1em] uppercase cursor-pointer"
         >
           Explorar catálogo
         </a>
-        <!-- <a href="/marcas" class="text-white/60 text-sm tracking-[0.08em] uppercase hover:text-white transition-colors flex items-center gap-2 cursor-pointer">
-          Nuestras marcas
-          <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
-        </a> -->
+        <a
+          href="/t3r"
+          class="border border-white/20 text-white/55 text-sm px-10 py-4 hover:border-[#C4A072]/60 hover:text-[#C4A072] transition-colors tracking-[0.08em] uppercase cursor-pointer"
+        >
+          Conocer T3R
+        </a>
       </div>
     </div>
 
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 right-16 z-20 flex flex-col items-center gap-2">
-      <span class="text-[10px] text-white/30 tracking-[0.25em] uppercase" style="writing-mode: vertical-rl;">Scroll</span>
-      <div class="w-px h-10 bg-white/20 relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full bg-white/70 hero-scroll-line"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRODUCTOS DESTACADOS -->
-  <section id="esenciales" class="py-24 px-16">
-    <div class="flex items-start justify-between mb-14">
-      <div>
-        <img src="/logo_t3r.png" alt="T3R" class="h-7 w-auto mb-4" />
-        <h2 class="text-[56px] font-bold leading-tight">Los esenciales.</h2>
-        <p class="text-base text-gray-500 mt-4 max-w-[300px] leading-relaxed">
-          Selección de referencias T3R disponibles bajo solicitud. Precisión, durabilidad y diseño minimal.
-        </p>
-      </div>
-      <a
-        href="/catalogo"
-        class="border border-black text-base px-6 py-2.5 mt-4 hover:bg-black hover:text-white transition-colors"
-      >
-        Ver todo el catálogo
-      </a>
-    </div>
-
-    <div class="grid grid-cols-3 gap-x-8 gap-y-14">
-      {formatted.map((p) => (
-        <div class="group cursor-pointer">
-          <div class="aspect-square mb-5 w-full overflow-hidden bg-[#F0EDE8]">
-            {p.imagen ? (
-              <img
-                src={`/${p.imagen}`}
-                alt={p.name}
-                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                loading="lazy"
-              />
-            ) : (
-              <div class="w-full h-full bg-[#E8B49A]"></div>
-            )}
+    <!-- Strip de categorías: primera mirada al catálogo -->
+    <div class="flex border-t border-white/8" style="height: 220px;">
+      {heroStrip.map((item, i) => (
+        <a
+          href={item.href}
+          class="group relative overflow-hidden cursor-pointer flex-1"
+          style={i > 0 ? 'border-left: 1px solid rgba(255,255,255,0.06);' : ''}
+        >
+          <img
+            src={item.img}
+            alt={item.name}
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-[#090807]/62 group-hover:bg-[#090807]/30 transition-colors duration-400"></div>
+          <div class="absolute inset-0 flex flex-col justify-end p-5">
+            <p class="text-white/90 text-xs font-semibold tracking-[0.08em] uppercase leading-snug">{item.name}</p>
+            <span class="text-[#C4A072] text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 mt-1.5">Ver →</span>
           </div>
-          <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-1.5">{p.category}</p>
-          <h3 class="font-semibold text-lg mb-1.5">{p.name}</h3>
-          <p class="text-sm text-gray-500 leading-relaxed mb-2">{p.description}</p>
-          <p class="text-sm text-gray-400 mb-0">{p.ref}</p>
-          <div class="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-            <p class="text-sm text-gray-400">Consulta disponibilidad</p>
-            <a href="/contacto" class="text-sm font-medium inline-flex items-center gap-1">
-              Solicitar
-              <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
-            </a>
-          </div>
-        </div>
+        </a>
       ))}
     </div>
+
   </section>
 
-  <!-- NEWSLETTER -->
-  <section class="bg-[#F0EDE8] py-20 px-16">
-    <div class="flex items-center justify-between">
+  <!-- ═══════════════════════════════════════════════ TICKER ═══ -->
+  <div class="bg-[#C4A072] py-3 overflow-hidden marquee-wrap">
+    <div class="flex whitespace-nowrap marquee-track">
+      {Array(2).fill(null).map(() => (
+        <span class="flex items-center">
+          {['Discos de freno', 'Pastillas', 'Pedales plataforma', 'Pedales automáticos', 'Pedales carretera', 'Pedalier / BB', 'Puños', 'Válvulas tubeless', 'T3R · The Three Riders', 'Fundamental Bike Parts', 'Directo del fabricante', 'Sin intermediarios'].map(t => (
+            <span class="font-bold text-[#090807] text-[10px] tracking-[0.3em] uppercase mx-7">
+              {t} <span class="opacity-20 mx-2">·</span>
+            </span>
+          ))}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ CATÁLOGO ═══ -->
+  <section id="catalogo" class="bg-[#0d0c0a] px-16 py-24">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="flex items-end justify-between mb-12">
+        <div data-reveal>
+          <p class="text-xs text-[#C4A072] tracking-[0.4em] uppercase mb-3">Gama completa</p>
+          <h2 class="text-[52px] font-bold text-white leading-tight tracking-tight">
+            Lo que<br/>distribuimos.
+          </h2>
+        </div>
+        <div data-reveal data-delay="2" class="text-right">
+          <p class="text-white/25 text-sm mb-1">8 categorías</p>
+          <p class="text-white/25 text-sm">+126 referencias</p>
+        </div>
+      </div>
+
+      <!-- Grid 4x2 -->
+      <div class="grid grid-cols-4 gap-px bg-white/5" data-reveal>
+        {[
+          { cat: 'Discos de freno',     refs: '+29', img: '/catalogo_t3r/discos_freno/discos_freno_center_lock_1.jpg',  href: '/t3r' },
+          { cat: 'Pastillas de freno',  refs: '+50', img: '/catalogo_t3r/pastillas_freno/pastillas_freno_1.jpg',        href: '/t3r' },
+          { cat: 'Pedales plataforma',  refs: '9',   img: '/catalogo_t3r/pedal_plataforma/pedal_plataforma_1.jpg',      href: '/t3r' },
+          { cat: 'Pedales automáticos', refs: '9',   img: '/catalogo_t3r/pedal_automatico/pedal_automatico_1.jpg',      href: '/t3r' },
+          { cat: 'Pedales carretera',   refs: '6',   img: '/catalogo_t3r/pedal_carretera/pedal_carretera_1.jpg',        href: '/t3r' },
+          { cat: 'Pedalier / BB',       refs: '14',  img: '/catalogo_t3r/pedalier_1/pedalier_1_1.jpg',                  href: '/t3r' },
+          { cat: 'Puños',               refs: '4',   img: '/catalogo_t3r/punos/puno_arandelas_ergonomicos.jpg',         href: '/t3r' },
+          { cat: 'Válvulas tubeless',   refs: '5',   img: '/catalogo_t3r/valvula_tubeless/valvula_tubeless_1.jpg',      href: '/t3r' },
+        ].map((item) => (
+          <a
+            href={item.href}
+            class="group relative overflow-hidden bg-[#0d0c0a] cursor-pointer block"
+            style="height: 240px;"
+          >
+            <img
+              src={item.img}
+              alt={item.cat}
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-[#090807]/65 group-hover:bg-[#090807]/40 transition-colors duration-300"></div>
+            <div class="absolute inset-0 flex flex-col justify-end p-7">
+              <div class="flex items-end justify-between">
+                <div>
+                  <p class="text-white font-semibold text-sm leading-tight mb-1">{item.cat}</p>
+                  <p class="text-white/35 text-xs">{item.refs} refs.</p>
+                </div>
+                <span class="text-[#C4A072] text-sm opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:translate-x-0 -translate-x-2">→</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ PRODUCTOS DESTACADOS ═══ -->
+  <section class="bg-[#111] px-16 py-24 border-t border-white/5">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="flex items-end justify-between mb-14">
+        <div data-reveal>
+          <p class="text-xs text-[#C4A072] tracking-[0.4em] uppercase mb-3">Selección T3R</p>
+          <h2 class="text-[48px] font-bold text-white leading-tight tracking-tight">Los más solicitados.</h2>
+        </div>
+        <a href="/t3r" data-reveal data-delay="2"
+          class="text-sm text-white/40 hover:text-[#C4A072] transition-colors tracking-[0.15em] uppercase">
+          Ver toda la gama →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-3 gap-px bg-white/5">
+        {featured.map((p, i) => (
+          <div data-reveal data-delay={String(i % 3 + 1)} class="group bg-[#111] flex flex-col cursor-pointer">
+
+            <!-- Imagen -->
+            <div class="relative overflow-hidden bg-[#1a1818]" style="height: 280px;">
+              {p.imagen ? (
+                <img
+                  src={p.imagen}
+                  alt={p.name}
+                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <img src="/logo_blanco_t3r.png" alt="T3R" class="h-10 opacity-10" />
+                </div>
+              )}
+            </div>
+
+            <!-- Info -->
+            <div class="p-7 flex flex-col flex-1 border-t border-white/5">
+              <p class="text-[10px] text-[#C4A072] tracking-[0.3em] uppercase mb-3">{p.category}</p>
+              <h3 class="text-white font-semibold text-lg leading-snug mb-2 flex-1">{p.name}</h3>
+              {p.description && (
+                <p class="text-white/40 text-sm leading-relaxed mb-5">{p.description}</p>
+              )}
+              <div class="flex items-center justify-between pt-4 border-t border-white/8 mt-auto">
+                <p class="text-white/30 text-xs tracking-[0.1em]">{p.ref}</p>
+                <a
+                  href="/contacto"
+                  class="text-xs text-white/50 group-hover:text-[#C4A072] transition-colors tracking-[0.15em] uppercase flex items-center gap-1.5"
+                >
+                  Solicitar
+                  <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ POR QUÉ FUNDAMENTAL ═══ -->
+  <section class="bg-[#0a0908] px-16 py-24 border-t border-white/5">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="mb-16" data-reveal>
+        <p class="text-xs text-[#C4A072] tracking-[0.4em] uppercase mb-4">Nuestra forma de trabajar</p>
+        <h2 class="text-[48px] font-bold text-white leading-tight tracking-tight">Por qué Fundamental.</h2>
+      </div>
+
+      <div class="grid grid-cols-3 gap-px bg-white/5">
+        {valores.map((v, i) => (
+          <div data-reveal data-delay={String(i + 1)} class="bg-[#0a0908] p-10">
+            <p class="text-[#C4A072] text-3xl font-bold mb-8">{v.n}</p>
+            <h3 class="text-white font-semibold text-xl mb-5 leading-snug">{v.title}</h3>
+            <p class="text-white/45 text-sm leading-relaxed">{v.text}</p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ CTA FINAL ═══ -->
+  <section class="bg-[#1A100C] px-16 py-36 relative overflow-hidden">
+    <!-- Subtle grid texture -->
+    <div class="absolute inset-0 opacity-[0.03]"
+      style="background-image: repeating-linear-gradient(0deg, #C4A072 0, #C4A072 1px, transparent 0, transparent 56px), repeating-linear-gradient(90deg, #C4A072 0, #C4A072 1px, transparent 0, transparent 56px);">
+    </div>
+
+    <div class="max-w-6xl mx-auto relative z-10 flex items-center justify-between gap-20">
       <div>
-        <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-4">Newsletter</p>
-        <h2 class="text-[44px] font-bold leading-tight mb-3">Mantente informado.</h2>
-        <p class="text-base text-gray-500 max-w-[280px] leading-relaxed">
-          Lanzamientos, novedades de catálogo y notas técnicas. Sin ruido.
+        <p data-reveal class="text-xs text-[#C4A072] tracking-[0.4em] uppercase mb-6">Fundamental Bike Parts</p>
+        <h2 data-reveal data-delay="1" class="text-[72px] font-bold text-white leading-[0.88] tracking-tight mb-8">
+          ¿Listo para<br/>
+          <span class="text-[#C4A072]">pedir?</span>
+        </h2>
+        <p data-reveal data-delay="2" class="text-white/45 text-base leading-relaxed max-w-md">
+          Consúltanos cualquier referencia T3R. Gestionamos pedidos para distribuidoras y tiendas con disponibilidad y plazo confirmados.
         </p>
       </div>
-      <form class="flex gap-0">
-        <input
-          type="email"
-          placeholder="tu@email.com"
-          class="border border-gray-300 bg-white px-5 py-3.5 text-base w-72 outline-none focus:border-black transition-colors"
-        />
-        <button
-          type="submit"
-          class="bg-black text-white text-base px-7 py-3.5 hover:bg-[#222] transition-colors"
+      <div data-reveal data-delay="3" class="flex flex-col gap-4 shrink-0">
+        <a
+          href="/contacto"
+          class="bg-[#C4A072] text-[#1A100C] text-sm font-bold px-14 py-5 hover:bg-[#D4B280] transition-colors tracking-[0.1em] uppercase text-center cursor-pointer"
         >
-          Suscribirme
-        </button>
-      </form>
+          Solicitar catálogo
+        </a>
+        <a
+          href="/t3r"
+          class="border border-white/20 text-white/50 text-sm px-14 py-4 hover:border-white/40 hover:text-white transition-colors tracking-[0.08em] uppercase text-center cursor-pointer"
+        >
+          Conocer T3R →
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- CTA CATÁLOGO -->
-  <section class="py-32 px-16 text-center">
-    <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-6">Catálogo completo</p>
-    <h2 class="text-[58px] font-bold max-w-[620px] mx-auto leading-[1.1] mb-6">
-      Más de 60 referencias disponibles bajo solicitud.
-    </h2>
-    <p class="text-base text-gray-500 max-w-[420px] mx-auto leading-relaxed mb-12">
-      Explora la gama completa T3R: frenos, transmisión, ruedas, cockpit, pedales e iluminación. Solicita la referencia que necesites y te respondemos con disponibilidad y plazo.
-    </p>
-    <a
-      href="/catalogo"
-      class="inline-block bg-black text-white text-base px-10 py-4 hover:bg-[#222] transition-colors"
-    >
-      Ver catálogo T3R
-    </a>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="border-t border-gray-100 px-16 py-10 flex items-start justify-between">
+  <!-- ═══════════════════════════════════════════════ FOOTER ═══ -->
+  <footer class="bg-[#080706] border-t border-white/5 px-16 py-10 flex items-center justify-between">
     <div>
-      <p class="text-base font-bold mb-2">T3R Fundamental</p>
-      <p class="text-sm text-gray-400 max-w-[240px] leading-relaxed">
-        Distribuidora de componentes profesionales para ciclismo. Madrid, España.
-      </p>
+      <p class="text-sm font-semibold text-white mb-1">Fundamental Bike Parts</p>
+      <p class="text-xs text-white/35">Distribuidora oficial T3R · Madrid, España</p>
     </div>
-    <p class="text-sm text-gray-400">© 2026 FUNDAMENTAL</p>
+    <div class="flex items-center gap-8">
+      <a href="/t3r" class="text-xs text-white/30 hover:text-white/60 transition-colors tracking-[0.1em] uppercase">T3R</a>
+      <a href="/nosotros" class="text-xs text-white/30 hover:text-white/60 transition-colors tracking-[0.1em] uppercase">Nosotros</a>
+      <a href="/contacto" class="text-xs text-white/30 hover:text-white/60 transition-colors tracking-[0.1em] uppercase">Contacto</a>
+    </div>
+    <p class="text-xs text-white/20">© 2026 FUNDAMENTAL</p>
   </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+      { threshold: 0.12 }
+    );
+    document.addEventListener('astro:page-load', () => {
+      document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+    });
+  </script>
 
 </Layout>
