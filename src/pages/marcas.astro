@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
 import '../styles/global.css';
 
 const brands = [
@@ -29,22 +30,14 @@ const brands = [
 
 <Layout title="Marcas — Fundamental">
 
-  <!-- NAV -->
-  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-[#1A100C]/80 backdrop-blur-md">
-    <a href="/" class="font-display uppercase text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
-    <nav class="flex gap-10">
-      <a href="/marcas" class="text-base text-white font-medium">Marcas</a>
-      <a href="/nosotros" class="text-base text-white/70 hover:text-white transition-colors">Nosotros</a>
-      <a href="/contacto" class="text-base text-white/70 hover:text-white transition-colors">Contacto</a>
-    </nav>
-  </header>
+  <Nav active="marcas" />
 
   <!-- HERO TEXTO -->
-  <section class="px-16 pt-36 pb-24">
+  <section class="px-5 md:px-16 pt-32 md:pt-36 pb-16 md:pb-24">
     <p data-reveal class="text-sm text-[#6B8CAE] tracking-[0.3em] uppercase mb-6">
       Distribuidora · Fundamental
     </p>
-    <h1 data-reveal data-delay="1" class="text-[72px] font-bold leading-tight mb-8 whitespace-nowrap">
+    <h1 data-reveal data-delay="1" class="text-[44px] md:text-[72px] font-bold leading-tight mb-8">
       Nuestras marcas.
     </h1>
     <p data-reveal data-delay="2" class="text-lg text-[#6B8CAE] max-w-md leading-relaxed">
@@ -53,16 +46,16 @@ const brands = [
   </section>
 
   <!-- MARCAS GRID -->
-  <section class="px-16 pb-36">
-    <div class="grid grid-cols-3 border-t border-gray-200">
+  <section class="px-5 md:px-16 pb-20 md:pb-36">
+    <div class="grid grid-cols-1 md:grid-cols-3 border-t border-gray-200">
       {brands.map((brand, i) => (
         <div
           data-reveal
           data-delay={String(i + 1)}
-          class={`group pt-14 pb-20 flex flex-col gap-7 transition-colors duration-300 hover:bg-[#F8F7F5] ${i < brands.length - 1 ? 'border-r border-gray-200' : ''} px-10`}
+          class={`group pt-10 md:pt-14 pb-12 md:pb-20 flex flex-col gap-7 transition-colors duration-300 hover:bg-[#F8F7F5] border-b md:border-b-0 border-gray-200 ${i < brands.length - 1 ? 'md:border-r' : ''} px-2 md:px-10`}
         >
           {brand.logo ? (
-            <img src={brand.logo} alt={brand.name} class="h-60 w-auto object-contain" />
+            <img src={brand.logo} alt={brand.name} class="h-32 md:h-60 w-auto object-contain" />
           ) : (
             <h2 class="text-[48px] font-bold leading-none">{brand.name}</h2>
           )}
@@ -82,7 +75,7 @@ const brands = [
   </section>
 
   <!-- FOOTER -->
-  <footer class="border-t border-gray-100 px-16 py-10 flex items-start justify-between">
+  <footer class="border-t border-gray-100 px-5 md:px-16 py-10 flex flex-col md:flex-row items-center md:items-start justify-between gap-4 text-center md:text-left">
     <div>
       <p class="text-base font-bold mb-2">T3R Fundamental</p>
       <p class="text-sm text-gray-400 max-w-[240px] leading-relaxed">

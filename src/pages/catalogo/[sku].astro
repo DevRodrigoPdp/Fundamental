@@ -2,6 +2,7 @@
 import path from 'path';
 import { existsSync } from 'fs';
 import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
 import '../../styles/global.css';
 import { supabase } from '../../lib/supabase';
 
@@ -89,17 +90,9 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Solici
 
 <Layout title={`${product.nombre} — Catálogo T3R · Fundamental`}>
 
-  <!-- NAV -->
-  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-[#1A100C]/80 backdrop-blur-md">
-    <a href="/" class="font-display uppercase text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
-    <nav class="flex gap-10">
-      <a href="/marcas" class="text-base text-white/70 hover:text-white transition-colors">Marcas</a>
-      <a href="/nosotros" class="text-base text-white/70 hover:text-white transition-colors">Nosotros</a>
-      <a href="/contacto" class="text-base text-white/70 hover:text-white transition-colors">Contacto</a>
-    </nav>
-  </header>
+  <Nav />
 
-  <section class="px-16 pb-24" style="padding-top: 110px;">
+  <section class="px-5 md:px-16 pb-24" style="padding-top: 110px;">
 
     <!-- Breadcrumb -->
     <div class="flex items-center gap-3 mb-12">
@@ -114,7 +107,7 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Solici
       )}
     </div>
 
-    <div class="grid grid-cols-2 gap-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
 
       <!-- GALERÍA -->
       <div>
@@ -150,7 +143,7 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Solici
       <!-- INFO -->
       <div>
         <p class="text-sm text-[#6B8CAE] tracking-[0.25em] uppercase mb-4">{product.subcategoria ?? product.categoria}</p>
-        <h1 class="text-[40px] font-bold leading-tight mb-3">{product.nombre}</h1>
+        <h1 class="text-[28px] md:text-[40px] font-bold leading-tight mb-3">{product.nombre}</h1>
         <p class="text-sm text-gray-400 mb-8">REF. {product.sku}</p>
 
         <div class="flex items-center gap-4 mb-8">
@@ -168,7 +161,7 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Solici
         {Object.keys(especificaciones).length > 0 && (
           <div class="border-t border-gray-200 pt-8 mb-10">
             <p class="text-sm text-gray-400 tracking-[0.2em] uppercase mb-5">Especificaciones</p>
-            <div class="grid grid-cols-2 gap-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {Object.entries(especificaciones).map(([k, v]) => (
                 <div>
                   <p class="text-gray-400 text-[11px] uppercase tracking-widest mb-1">{formatKey(k)}</p>
@@ -192,10 +185,10 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Solici
   </section>
 
   {related.length > 0 && (
-    <section class="bg-[#fafafa] px-16 py-20 border-t border-gray-100">
+    <section class="bg-[#fafafa] px-5 md:px-16 py-20 border-t border-gray-100">
       <p class="text-sm text-[#6B8CAE] tracking-[0.25em] uppercase mb-3">También te puede interesar</p>
       <h2 class="text-2xl font-bold mb-10">{product.subcategoria}</h2>
-      <div class="grid grid-cols-4 gap-px bg-gray-200 border border-gray-200">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-gray-200 border border-gray-200">
         {related.map((r) => (
           <a href={`/catalogo/${r.sku}`} class="group bg-white block cursor-pointer">
             <div class="relative overflow-hidden bg-[#f5f5f5]" style="aspect-ratio: 1;">
@@ -225,7 +218,7 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Solici
   )}
 
   <!-- FOOTER -->
-  <footer class="border-t border-gray-100 px-16 py-10 flex items-start justify-between">
+  <footer class="border-t border-gray-100 px-5 md:px-16 py-10 flex flex-col md:flex-row items-center md:items-start justify-between gap-4 text-center md:text-left">
     <div>
       <p class="text-base font-bold mb-2">T3R Fundamental</p>
       <p class="text-sm text-gray-400 max-w-[240px] leading-relaxed">

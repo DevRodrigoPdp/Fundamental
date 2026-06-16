@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
 import '../styles/global.css';
 import { supabase } from '../lib/supabase';
 
@@ -50,15 +51,7 @@ const novedades = (products ?? []).map((p: any) => ({
     [data-delay="2"] { transition-delay: 0.16s; }
   </style>
 
-  <!-- NAV -->
-  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-[#1A100C]/80 backdrop-blur-md">
-    <a href="/" class="font-display uppercase text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
-    <nav class="flex gap-10">
-      <a href="/marcas" class="text-base text-white/70 hover:text-white transition-colors">Marcas</a>
-      <a href="/nosotros" class="text-base text-white/70 hover:text-white transition-colors">Nosotros</a>
-      <a href="/contacto" class="text-base text-white/70 hover:text-white transition-colors">Contacto</a>
-    </nav>
-  </header>
+  <Nav />
 
   <!-- ═══ HERO — T3R ═══ -->
   <section class="relative h-screen overflow-hidden bg-[#1A100C]">
@@ -72,22 +65,22 @@ const novedades = (products ?? []).map((p: any) => ({
     />
     <div class="absolute inset-0" style="background: linear-gradient(to top, #1A100C 0%, rgba(26,16,12,0.75) 40%, rgba(26,16,12,0.2) 100%);"></div>
 
-    <div class="absolute inset-0 flex flex-col justify-end px-12 pb-16 z-10">
+    <div class="absolute inset-0 flex flex-col justify-end px-5 md:px-12 pb-16 z-10">
       <div class="flex items-center gap-3 mb-5">
         <div class="w-6 h-px bg-[#C4A072]"></div>
         <p class="text-[10px] text-[#C4A072] tracking-[0.4em] uppercase">T3R · The Three Riders</p>
       </div>
-      <h1 class="text-[90px] font-bold leading-[0.88] tracking-tight mb-8">
+      <h1 class="text-[44px] sm:text-[60px] md:text-[90px] font-bold leading-[0.92] md:leading-[0.88] tracking-tight mb-8">
         <span class="block text-white">Componentes</span>
         <span class="block text-[#C4A072]">fundamentales.</span>
       </h1>
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-3 md:gap-4">
         <a href="#productos"
-          class="bg-[#C4A072] text-[#1A100C] text-xs font-bold px-9 py-4 hover:bg-[#D4B280] transition-colors tracking-[0.12em] uppercase cursor-pointer">
+          class="bg-[#C4A072] text-[#1A100C] text-xs font-bold px-6 md:px-9 py-3.5 md:py-4 hover:bg-[#D4B280] transition-colors tracking-[0.12em] uppercase cursor-pointer">
           Ver productos
         </a>
         <a href="/t3r"
-          class="border border-white/25 text-white/70 text-xs px-8 py-4 hover:border-white/50 hover:text-white transition-colors tracking-[0.1em] uppercase cursor-pointer">
+          class="border border-white/25 text-white/70 text-xs px-5 md:px-8 py-3.5 md:py-4 hover:border-white/50 hover:text-white transition-colors tracking-[0.1em] uppercase cursor-pointer">
           Conocer T3R
         </a>
       </div>
@@ -95,7 +88,7 @@ const novedades = (products ?? []).map((p: any) => ({
   </section>
 
   <!-- ═══ NOVEDADES T3R — carousel ═══ -->
-  <section id="productos" class="bg-white px-12 py-16 border-b border-gray-100">
+  <section id="productos" class="bg-white px-5 md:px-12 py-16 border-b border-gray-100">
     <div class="max-w-6xl mx-auto">
       <div class="flex items-baseline justify-between gap-4 mb-10">
         <div class="flex items-baseline gap-4">
@@ -119,7 +112,7 @@ const novedades = (products ?? []).map((p: any) => ({
       {novedades.length > 0 ? (
         <div id="novedades-carousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 mb-6" style="scrollbar-width: none;">
           {novedades.map((p, i) => (
-            <a href="/t3r" data-reveal data-delay={String((i % 3) + 1)} class="group cursor-pointer snap-start shrink-0 block" style="width: 360px;">
+            <a href="/t3r" data-reveal data-delay={String((i % 3) + 1)} class="group cursor-pointer snap-start shrink-0 block" style="width: clamp(240px, 80vw, 360px);">
               <div class="relative overflow-hidden bg-[#f0e4d3] mb-5" style="aspect-ratio: 4/3;">
                 <span class="absolute top-4 left-4 z-10 bg-white text-[#1A100C] text-xs font-bold px-3 py-1.5 tracking-[0.15em] uppercase">New</span>
                 <img src={p.imagen ?? '/logo_t3r.png'} alt={p.name}
@@ -159,7 +152,7 @@ const novedades = (products ?? []).map((p: any) => ({
     />
     <div class="absolute inset-0 bg-[#1A100C]/55"></div>
     <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-8">
-      <img data-reveal src="/logo_blanco_t3r.png" alt="T3R" class="h-36 w-auto mb-6 opacity-95" />
+      <img data-reveal src="/logo_blanco_t3r.png" alt="T3R" class="h-20 md:h-36 w-auto mb-6 opacity-95" />
       <p data-reveal data-delay="1" class="text-xs text-white/75 tracking-[0.35em] uppercase mb-8">The Three Riders · Componentes fundamentales</p>
       <a data-reveal data-delay="2" href="/t3r"
         class="border border-white text-white text-xs font-semibold px-10 py-4 hover:bg-white hover:text-[#1A100C] transition-colors tracking-[0.2em] uppercase cursor-pointer relative z-30">
@@ -180,7 +173,7 @@ const novedades = (products ?? []).map((p: any) => ({
     />
     <div class="absolute inset-0 bg-[#111]/45"></div>
     <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-8">
-      <img data-reveal src="/logo_transfer.png" alt="Transfer Bike" class="h-36 w-auto brightness-0 invert mb-6" />
+      <img data-reveal src="/logo_transfer.png" alt="Transfer Bike" class="h-20 md:h-36 w-auto brightness-0 invert mb-6" />
       <p data-reveal data-delay="1" class="text-xs text-white/75 tracking-[0.35em] uppercase mb-8">Bicicletas · Una bici, cada día</p>
       <a data-reveal data-delay="2" href="/transfer"
         class="border border-white text-white text-xs font-semibold px-10 py-4 hover:bg-white hover:text-[#111] transition-colors tracking-[0.2em] uppercase cursor-pointer relative z-30">
@@ -201,7 +194,7 @@ const novedades = (products ?? []).map((p: any) => ({
     />
     <div class="absolute inset-0 bg-black/40"></div>
     <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-8">
-      <img data-reveal src="/logo_whipoff.png" alt="Whipp-Off" class="h-40 w-auto brightness-0 invert mb-8" />
+      <img data-reveal src="/logo_whipoff.png" alt="Whipp-Off" class="h-24 md:h-40 w-auto brightness-0 invert mb-8" />
       <a data-reveal data-delay="1" href="/whipp-off"
         class="border border-white text-white text-xs font-semibold px-10 py-4 hover:bg-white hover:text-black transition-colors tracking-[0.2em] uppercase cursor-pointer relative z-30">
         Saber más
@@ -210,18 +203,18 @@ const novedades = (products ?? []).map((p: any) => ({
   </section>
 
   <!-- ═══ DISTRIBUIDORA OFICIAL DE ═══ -->
-  <section class="bg-[#0a0808] px-12 py-24 text-center">
+  <section class="bg-[#0a0808] px-5 md:px-12 py-24 text-center">
     <p class="text-[11px] text-white/40 tracking-[0.4em] uppercase mb-8">Fundamental, distribuidora oficial de</p>
     <div class="flex flex-col items-center gap-3">
-      <a href="/t3r" class="text-3xl font-bold text-white hover:text-[#C4A072] transition-colors tracking-tight">T3R · The Three Riders</a>
-      <a href="/whipp-off" class="text-3xl font-bold text-white hover:text-[#C4A072] transition-colors tracking-tight">Whipp-Off</a>
-      <a href="/transfer" class="text-3xl font-bold text-white hover:text-[#C4A072] transition-colors tracking-tight">Transfer Bike</a>
+      <a href="/t3r" class="text-xl md:text-3xl font-bold text-white hover:text-[#C4A072] transition-colors tracking-tight">T3R · The Three Riders</a>
+      <a href="/whipp-off" class="text-xl md:text-3xl font-bold text-white hover:text-[#C4A072] transition-colors tracking-tight">Whipp-Off</a>
+      <a href="/transfer" class="text-xl md:text-3xl font-bold text-white hover:text-[#C4A072] transition-colors tracking-tight">Transfer Bike</a>
     </div>
   </section>
 
   <!-- ═══ INFO ROW ═══ -->
-  <section class="bg-[#F0EDE8] px-12 py-16">
-    <div class="max-w-5xl mx-auto grid grid-cols-3 gap-12 text-center">
+  <section class="bg-[#F0EDE8] px-5 md:px-12 py-16">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 text-center">
       <div>
         <p class="text-[10px] text-gray-400 tracking-[0.3em] uppercase mb-3">Envío</p>
         <h3 class="font-bold text-base mb-2">Entrega a domicilio</h3>
@@ -245,9 +238,9 @@ const novedades = (products ?? []).map((p: any) => ({
   </section>
 
   <!-- ═══ FOOTER ═══ -->
-  <footer class="bg-[#1A100C] px-12 pt-14 pb-10">
+  <footer class="bg-[#1A100C] px-5 md:px-12 pt-14 pb-10">
     <div class="max-w-6xl mx-auto">
-      <div class="grid grid-cols-3 gap-12 mb-12 pb-12 border-b border-white/10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12 pb-12 border-b border-white/10">
         <div>
           <p class="text-base font-bold text-white mb-3">Fundamental</p>
           <p class="text-sm text-white/55 leading-relaxed">
@@ -271,7 +264,7 @@ const novedades = (products ?? []).map((p: any) => ({
           </div>
         </div>
       </div>
-      <div class="flex items-center justify-between">
+      <div class="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-2 text-center sm:text-left">
         <p class="text-xs text-white/25">© 2026 Fundamental — Todos los derechos reservados</p>
         <p class="text-xs text-white/25">Madrid · España</p>
       </div>

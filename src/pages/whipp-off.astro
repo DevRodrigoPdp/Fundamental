@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
 import '../styles/global.css';
 ---
 
@@ -11,15 +12,7 @@ import '../styles/global.css';
     .font-epilogue { font-family: 'Epilogue', sans-serif; }
   </style>
 
-  <!-- NAV -->
-  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-[#1A100C]/80 backdrop-blur-md">
-    <a href="/" class="font-display uppercase text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
-    <nav class="flex gap-10">
-      <a href="/marcas" class="text-base text-white/70 hover:text-white transition-colors">Marcas</a>
-      <a href="/nosotros" class="text-base text-white/70 hover:text-white transition-colors">Nosotros</a>
-      <a href="/contacto" class="text-base text-white/70 hover:text-white transition-colors">Contacto</a>
-    </nav>
-  </header>
+  <Nav />
 
   <!-- HERO -->
   <section class="relative h-screen bg-black flex flex-col justify-end overflow-hidden">
@@ -31,22 +24,22 @@ import '../styles/global.css';
       href="https://www.whip-off.com/"
       target="_blank"
       rel="noopener noreferrer"
-      class="absolute top-28 right-16 z-20 flex items-center gap-2 border border-white/30 bg-black/40 backdrop-blur-sm px-4 py-2.5 text-white hover:bg-white hover:text-black transition-all duration-300 group cursor-pointer"
+      class="absolute top-24 md:top-28 right-5 md:right-16 z-20 flex items-center gap-2 border border-white/30 bg-black/40 backdrop-blur-sm px-3 md:px-4 py-2 md:py-2.5 text-white hover:bg-white hover:text-black transition-all duration-300 group cursor-pointer"
     >
-      <span class="font-epilogue text-xs tracking-[0.2em] uppercase">whip-off.com</span>
+      <span class="font-epilogue text-[10px] md:text-xs tracking-[0.2em] uppercase">whip-off.com</span>
       <svg class="w-3 h-3 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/>
       </svg>
     </a>
 
-    <div class="relative z-20 px-16 pb-16">
-      <img src="/logo_whipoff.png" alt="Whipp-Off" class="h-12 w-auto mb-8 brightness-0 invert" />
+    <div class="relative z-20 px-5 md:px-16 pb-16">
+      <img src="/logo_whipoff.png" alt="Whipp-Off" class="h-9 md:h-12 w-auto mb-8 brightness-0 invert" />
       <p class="font-epilogue text-xs text-white/50 tracking-[0.4em] uppercase mb-4">Ropa MTB · Fundamental</p>
-      <h1 class="font-anton text-[120px] leading-[0.85] text-white uppercase mb-8" style="letter-spacing: -0.02em;">
+      <h1 class="font-anton text-[64px] sm:text-[88px] md:text-[120px] leading-[0.85] text-white uppercase mb-8" style="letter-spacing: -0.02em;">
         WHIPP<br/>
         <span class="text-white">OFF.</span>
       </h1>
-      <div class="flex items-center gap-6">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
         <p class="font-epilogue text-white/70 text-base leading-relaxed">
           Para quienes rompen la línea recta.
         </p>
@@ -63,11 +56,11 @@ import '../styles/global.css';
   </section>
 
   <!-- HISTORIA -->
-  <section class="bg-black px-16 py-28">
-    <div class="max-w-6xl mx-auto grid grid-cols-2 gap-24 items-center">
+  <section class="bg-black px-5 md:px-16 py-28">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
       <div data-reveal>
         <p class="font-epilogue text-xs text-white/50 tracking-[0.35em] uppercase mb-6">La marca</p>
-        <h2 class="font-anton text-[64px] leading-[0.9] text-white uppercase mb-8">
+        <h2 class="font-anton text-[40px] md:text-[64px] leading-[0.9] text-white uppercase mb-8">
           MTB NO<br/>ES UN<br/>DEPORTE.<br/>
           <span class="text-white">ES UN ESTILO.</span>
         </h2>
@@ -90,7 +83,7 @@ import '../styles/global.css';
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/>
           </svg>
         </a>
-        <div class="flex gap-8 mt-12 pt-12 border-t border-white/10">
+        <div class="flex gap-6 md:gap-8 mt-12 pt-12 border-t border-white/10">
           <div>
             <p class="font-anton text-4xl text-white">3</p>
             <p class="font-epilogue text-sm text-white/55 uppercase tracking-widest mt-1">Categorías</p>
@@ -115,13 +108,13 @@ import '../styles/global.css';
     href="https://www.whip-off.com/"
     target="_blank"
     rel="noopener noreferrer"
-    class="block bg-white px-16 py-10 group cursor-pointer overflow-hidden relative"
+    class="block bg-white px-5 md:px-16 py-10 group cursor-pointer overflow-hidden relative"
   >
     <div class="absolute inset-0 opacity-[0.06]" style="background-image: repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 0, transparent 50%); background-size: 12px 12px;"></div>
-    <div class="max-w-6xl mx-auto flex items-center justify-between relative z-10">
-      <div class="flex items-baseline gap-6">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+      <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6">
         <p class="font-epilogue text-xs text-black/60 tracking-[0.35em] uppercase">Web oficial</p>
-        <p class="font-anton text-[56px] leading-none text-black uppercase tracking-tight">WWW.WHIP-OFF.COM</p>
+        <p class="font-anton text-[28px] sm:text-[40px] md:text-[56px] leading-none text-black uppercase tracking-tight break-all">WWW.WHIP-OFF.COM</p>
       </div>
       <div class="flex items-center gap-3 text-black group-hover:gap-5 transition-all duration-300">
         <span class="font-epilogue text-sm uppercase tracking-[0.2em]">Visitar</span>
@@ -133,13 +126,13 @@ import '../styles/global.css';
   </a>
 
   <!-- CATÁLOGO POR CATEGORÍA -->
-  <section class="bg-[#0A0A0A] px-16 py-24">
+  <section class="bg-[#0A0A0A] px-5 md:px-16 py-24">
     <div class="max-w-6xl mx-auto">
 
-      <div class="flex items-end justify-between mb-16 border-b border-white/10 pb-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16 border-b border-white/10 pb-8">
         <div>
           <p data-reveal class="font-epilogue text-xs text-white/50 tracking-[0.35em] uppercase mb-3">Selección disponible</p>
-          <h2 data-reveal data-delay="1" class="font-epilogue text-3xl font-semibold text-white">Una muestra del catálogo</h2>
+          <h2 data-reveal data-delay="1" class="font-epilogue text-2xl md:text-3xl font-semibold text-white">Una muestra del catálogo</h2>
           <p data-reveal data-delay="2" class="font-epilogue text-sm text-white/40 mt-2">
             El catálogo completo está en <a href="https://www.whip-off.com/" target="_blank" rel="noopener noreferrer" class="text-white/70 hover:text-white underline underline-offset-2 transition-colors">whip-off.com</a>
           </p>
@@ -155,7 +148,7 @@ import '../styles/global.css';
           <div class="flex-1 h-px bg-white/10"></div>
           <span class="font-epilogue text-[10px] text-white/30">4 refs.</span>
         </div>
-        <div class="grid grid-cols-4 gap-3">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
             { src: '/catalogo_whipoff/wo_camiseta_mc_negra.png',  label: 'MC · Negra' },
             { src: '/catalogo_whipoff/wo_camiseta_ml_blanca.png', label: 'ML · Blanca' },
@@ -182,7 +175,7 @@ import '../styles/global.css';
           <div class="flex-1 h-px bg-white/10"></div>
           <span class="font-epilogue text-[10px] text-white/30">3 refs.</span>
         </div>
-        <div class="grid grid-cols-3 gap-3">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
           {[
             { src: '/catalogo_whipoff/wo_pantalon_corto_negro.png', label: 'Corto · Negro' },
             { src: '/catalogo_whipoff/wo_pantalon_largo_negro.png', label: 'Largo · Negro' },
@@ -208,7 +201,7 @@ import '../styles/global.css';
           <div class="flex-1 h-px bg-white/10"></div>
           <span class="font-epilogue text-[10px] text-white/30">3 refs.</span>
         </div>
-        <div class="grid grid-cols-3 gap-3">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
           {[
             { src: '/catalogo_whipoff/wo_guante_negro.png',  label: 'Enduro · Negro' },
             { src: '/catalogo_whipoff/wo_guante_blanco.png', label: 'Enduro · Blanco' },
@@ -227,7 +220,7 @@ import '../styles/global.css';
       </div>
 
       <!-- NOTA PIE -->
-      <div class="mt-12 pt-8 border-t border-white/10 flex items-center justify-between">
+      <div class="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <p class="font-epilogue text-xs text-white/35">
           Mostrando una selección. El catálogo completo incluye más colores, tallas y modelos.
         </p>
@@ -244,9 +237,9 @@ import '../styles/global.css';
   </section>
 
   <!-- CTA -->
-  <section class="bg-black py-32 px-16 text-center">
+  <section class="bg-black py-32 px-5 md:px-16 text-center">
     <p data-reveal class="font-epilogue text-xs text-white/50 tracking-[0.4em] uppercase mb-6">Disponibilidad</p>
-    <h2 data-reveal data-delay="1" class="font-anton text-[72px] leading-none text-white uppercase mb-8">
+    <h2 data-reveal data-delay="1" class="font-anton text-[44px] md:text-[72px] leading-none text-white uppercase mb-8">
       PIDE TU<br/>REFERENCIA.
     </h2>
     <p data-reveal data-delay="2" class="font-epilogue text-white/70 text-lg max-w-md mx-auto leading-relaxed mb-12">
@@ -274,7 +267,7 @@ import '../styles/global.css';
   </section>
 
   <!-- FOOTER -->
-  <footer class="bg-black border-t border-white/5 px-16 py-10 flex items-center justify-between">
+  <footer class="bg-black border-t border-white/5 px-5 md:px-16 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
     <div>
       <p class="font-epilogue text-sm font-semibold text-white mb-1">Whipp-Off × Fundamental</p>
       <p class="font-epilogue text-xs text-white/55 leading-relaxed">

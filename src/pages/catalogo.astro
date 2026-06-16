@@ -2,6 +2,7 @@
 import path from 'path';
 import { existsSync } from 'fs';
 import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
 import '../styles/global.css';
 import { supabase } from '../lib/supabase';
 
@@ -45,20 +46,12 @@ const catalogo = (products ?? []).map((p: any) => ({
 
 <Layout title="Catálogo T3R — Fundamental">
 
-  <!-- NAV -->
-  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-[#1A100C]/80 backdrop-blur-md">
-    <a href="/" class="font-display uppercase text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
-    <nav class="flex gap-10">
-      <a href="/marcas" class="text-base text-white/70 hover:text-white transition-colors">Marcas</a>
-      <a href="/nosotros" class="text-base text-white/70 hover:text-white transition-colors">Nosotros</a>
-      <a href="/contacto" class="text-base text-white/70 hover:text-white transition-colors">Contacto</a>
-    </nav>
-  </header>
+  <Nav />
 
   <!-- HERO + BUSCADOR -->
-  <section class="px-16 pt-36 pb-16">
+  <section class="px-5 md:px-16 pt-32 md:pt-36 pb-16">
     <p data-reveal class="text-sm text-[#6B8CAE] tracking-[0.3em] uppercase mb-6">Marca · T3R</p>
-    <h1 data-reveal data-delay="1" class="text-[64px] font-bold leading-tight mb-6">
+    <h1 data-reveal data-delay="1" class="text-[40px] md:text-[64px] font-bold leading-tight mb-6">
       Catálogo T3R.
     </h1>
     <p data-reveal data-delay="2" class="text-lg text-[#6B8CAE] max-w-lg leading-relaxed mb-10">
@@ -80,10 +73,10 @@ const catalogo = (products ?? []).map((p: any) => ({
   </section>
 
   <!-- GRID PRODUCTOS -->
-  <section class="px-16 pb-32">
+  <section class="px-5 md:px-16 pb-32">
     {catalogo.length > 0 ? (
       <>
-        <div id="product-grid" class="grid grid-cols-2 gap-px bg-gray-200 border border-gray-200">
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-gray-200 border border-gray-200">
           {catalogo.map((p, i) => (
             <div
               data-product-card
@@ -146,7 +139,7 @@ const catalogo = (products ?? []).map((p: any) => ({
   </section>
 
   <!-- FOOTER -->
-  <footer class="border-t border-gray-100 px-16 py-10 flex items-start justify-between">
+  <footer class="border-t border-gray-100 px-5 md:px-16 py-10 flex flex-col md:flex-row items-center md:items-start justify-between gap-4 text-center md:text-left">
     <div>
       <p class="text-base font-bold mb-2">T3R Fundamental</p>
       <p class="text-sm text-gray-400 max-w-[240px] leading-relaxed">
