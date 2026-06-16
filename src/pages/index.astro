@@ -119,7 +119,7 @@ const novedades = (products ?? []).map((p: any) => ({
       {novedades.length > 0 ? (
         <div id="novedades-carousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 mb-6" style="scrollbar-width: none;">
           {novedades.map((p, i) => (
-            <div data-reveal data-delay={String((i % 3) + 1)} class="group cursor-pointer snap-start shrink-0" style="width: 360px;">
+            <a href="/t3r" data-reveal data-delay={String((i % 3) + 1)} class="group cursor-pointer snap-start shrink-0 block" style="width: 360px;">
               <div class="relative overflow-hidden bg-[#f0e4d3] mb-5" style="aspect-ratio: 4/3;">
                 <span class="absolute top-4 left-4 z-10 bg-white text-[#1A100C] text-xs font-bold px-3 py-1.5 tracking-[0.15em] uppercase">New</span>
                 <img src={p.imagen ?? '/logo_t3r.png'} alt={p.name}
@@ -130,7 +130,7 @@ const novedades = (products ?? []).map((p: any) => ({
               <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-1.5">{p.category}</p>
               <h3 class="font-semibold text-xl text-gray-900 mb-1.5">{p.name}</h3>
               <p class="text-base text-gray-400">Consulta disponibilidad</p>
-            </div>
+            </a>
           ))}
         </div>
       ) : (
