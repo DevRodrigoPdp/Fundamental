@@ -91,22 +91,34 @@ const catalogo = (products ?? []).map((p: any) => ({
               data-reveal data-delay={String(i % 4)}
               class="group bg-white flex flex-col"
             >
-              <div class="relative overflow-hidden bg-[#f5f5f5]" style="aspect-ratio: 16/10;">
-                <img
-                  src={p.imagen ?? '/logo_t3r.png'}
-                  alt={p.nombre}
-                  class={p.imagen ? "absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" : "absolute inset-0 m-auto h-12 opacity-20"}
-                  loading="lazy"
-                  decoding="async"
-                  onerror="this.onerror=null; this.src='/logo_t3r.png'; this.className='absolute inset-0 m-auto h-12 opacity-20';"
-                />
-              </div>
-              <div class="p-7 flex flex-col flex-1">
-                <p class="text-[10px] text-gray-400 tracking-[0.25em] uppercase mb-2">{p.subcategoria ?? p.categoria}</p>
-                <h3 class="font-bold text-lg mb-2 leading-snug">{p.nombre}</h3>
-                {p.descripcion && (
-                  <p class="text-sm text-gray-500 leading-relaxed mb-5">{p.descripcion}</p>
-                )}
+              <a href={`/catalogo/${p.sku}`} class="block cursor-pointer">
+                <div class="relative overflow-hidden bg-[#f5f5f5]" style="aspect-ratio: 16/10;">
+                  {p.imagen ? (
+                    <img
+                      src={p.imagen}
+                      alt={p.nombre}
+                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-300">
+                      <svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16l5-5a2 2 0 012.83 0L16 16M14 14l1.5-1.5a2 2 0 012.83 0L21 16M3 8a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                <div class="px-7 pt-7">
+                  <p class="text-[10px] text-gray-400 tracking-[0.25em] uppercase mb-2">{p.subcategoria ?? p.categoria}</p>
+                  <h3 class="font-bold text-lg mb-2 leading-snug group-hover:text-[#6B8CAE] transition-colors">{p.nombre}</h3>
+                  {p.descripcion && (
+                    <p class="text-sm text-gray-500 leading-relaxed mb-5">{p.descripcion}</p>
+                  )}
+                </div>
+              </a>
+              <div class="px-7 pb-7 flex flex-col flex-1">
                 <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
                   <div>
                     <p class="text-xs text-gray-400">{p.sku}</p>

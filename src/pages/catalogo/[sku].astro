@@ -1,0 +1,250 @@
+---
+import path from 'path';
+import { existsSync } from 'fs';
+import Layout from '../../layouts/Layout.astro';
+import '../../styles/global.css';
+import { supabase } from '../../lib/supabase';
+
+const CONTACT_EMAIL = 'hola@fundamentalbikeparts.com'; // TODO: confirmar email real
+
+export async function getStaticPaths() {
+  const { data: products } = await supabase
+    .from('productos_t3r')
+    .select('sku')
+    .eq('activo', true);
+
+  return (products ?? []).map((p: any) => ({ params: { sku: p.sku } }));
+}
+
+const { sku } = Astro.params;
+
+const { data: product } = await supabase
+  .from('productos_t3r')
+  .select('*')
+  .eq('sku', sku)
+  .single();
+
+if (!product) {
+  return Astro.redirect('/catalogo');
+}
+
+function existingImage(relUrl: string | null) {
+  if (!relUrl) return null;
+  const rel = relUrl.replace(/^\/+/, '');
+  return existsSync(path.join(process.cwd(), 'public', rel)) ? `/${rel}` : null;
+}
+
+const { data: imagenesRaw } = await supabase
+  .from('imagenes_productos')
+  .select('url, orden')
+  .eq('producto_sku', sku)
+  .order('orden', { ascending: true });
+
+const images: string[] = [];
+(imagenesRaw ?? []).forEach((i: any) => {
+  const img = existingImage(i.url);
+  if (img) images.push(img);
+});
+
+const { data: relatedRaw } = await supabase
+  .from('productos_t3r')
+  .select('nombre, sku, subcategoria, categoria')
+  .eq('subcategoria', product.subcategoria)
+  .eq('activo', true)
+  .neq('sku', sku)
+  .limit(4);
+
+const relatedSkus = (relatedRaw ?? []).map((p: any) => p.sku);
+const { data: relatedImgsRaw } = relatedSkus.length > 0
+  ? await supabase
+      .from('imagenes_productos')
+      .select('producto_sku, url')
+      .in('producto_sku', relatedSkus)
+      .eq('orden', 1)
+  : { data: [] };
+
+const relatedImgMap: Record<string, string | null> = {};
+(relatedImgsRaw ?? []).forEach((i: any) => { relatedImgMap[i.producto_sku] = existingImage(i.url); });
+
+const related = (relatedRaw ?? []).map((p: any) => ({
+  nombre: p.nombre,
+  sku: p.sku,
+  imagen: relatedImgMap[p.sku],
+}));
+
+const especificaciones: Record<string, any> = product.especificaciones ?? {};
+
+function formatValue(v: any) {
+  if (typeof v === 'boolean') return v ? 'Sí' : 'No';
+  return String(v);
+}
+function formatKey(k: string) {
+  return k.charAt(0).toUpperCase() + k.slice(1).replace(/_/g, ' ');
+}
+
+const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Solicitud T3R — ${product.nombre}`)}&body=${encodeURIComponent(
+  `Hola,\n\nMe interesa el siguiente producto T3R:\n\nProducto: ${product.nombre}\nReferencia (SKU): ${product.sku}\nCategoría: ${product.categoria}${product.subcategoria ? ' / ' + product.subcategoria : ''}\n\nPor favor, indícame disponibilidad y precio.\n\nGracias.`
+)}`;
+---
+
+<Layout title={`${product.nombre} — Catálogo T3R · Fundamental`}>
+
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-[#1A100C]/80 backdrop-blur-md">
+    <a href="/" class="font-display uppercase text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
+    <nav class="flex gap-10">
+      <a href="/marcas" class="text-base text-white/70 hover:text-white transition-colors">Marcas</a>
+      <a href="/nosotros" class="text-base text-white/70 hover:text-white transition-colors">Nosotros</a>
+      <a href="/contacto" class="text-base text-white/70 hover:text-white transition-colors">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="px-16 pb-24" style="padding-top: 110px;">
+
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-3 mb-12">
+      <a href="/catalogo" class="text-sm text-gray-400 hover:text-black transition-colors">Catálogo</a>
+      <span class="text-gray-300 text-sm">/</span>
+      <span class="text-sm text-gray-400">{product.categoria}</span>
+      {product.subcategoria && (
+        <span class="flex items-center gap-3">
+          <span class="text-gray-300 text-sm">/</span>
+          <span class="text-sm text-gray-600">{product.subcategoria}</span>
+        </span>
+      )}
+    </div>
+
+    <div class="grid grid-cols-2 gap-20">
+
+      <!-- GALERÍA -->
+      <div>
+        <div class="relative overflow-hidden bg-[#f5f5f5] mb-4" style="aspect-ratio: 1;">
+          {images[0] ? (
+            <img id="main-image" src={images[0]} alt={product.nombre} class="absolute inset-0 w-full h-full object-cover" />
+          ) : (
+            <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-gray-300">
+              <svg class="w-12 h-12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16l5-5a2 2 0 012.83 0L16 16M14 14l1.5-1.5a2 2 0 012.83 0L21 16M3 8a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+              </svg>
+              <p class="text-xs text-gray-300 tracking-wide uppercase">Foto próximamente</p>
+            </div>
+          )}
+        </div>
+        {images.length > 1 && (
+          <div class="flex gap-3">
+            {images.map((img, i) => (
+              <button
+                type="button"
+                data-thumb={img}
+                class="thumb-btn relative overflow-hidden bg-[#f5f5f5] border border-gray-200 hover:border-black transition-colors cursor-pointer"
+                style="width: 76px; height: 76px;"
+              >
+                <img src={img} alt={`${product.nombre} ${i + 1}`} class="absolute inset-0 w-full h-full object-cover" />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <!-- INFO -->
+      <div>
+        <p class="text-sm text-[#6B8CAE] tracking-[0.25em] uppercase mb-4">{product.subcategoria ?? product.categoria}</p>
+        <h1 class="text-[40px] font-bold leading-tight mb-3">{product.nombre}</h1>
+        <p class="text-sm text-gray-400 mb-8">REF. {product.sku}</p>
+
+        <div class="flex items-center gap-4 mb-8">
+          {product.precio ? (
+            <span class="text-xl font-semibold">{Number(product.precio).toFixed(2)} €</span>
+          ) : (
+            <a href={mailtoHref} class="text-gray-500 text-sm underline hover:text-[#6B8CAE] transition-colors cursor-pointer">Consultar precio</a>
+          )}
+        </div>
+
+        {product.descripcion && (
+          <p class="text-gray-600 text-lg leading-relaxed mb-10 max-w-lg">{product.descripcion}</p>
+        )}
+
+        {Object.keys(especificaciones).length > 0 && (
+          <div class="border-t border-gray-200 pt-8 mb-10">
+            <p class="text-sm text-gray-400 tracking-[0.2em] uppercase mb-5">Especificaciones</p>
+            <div class="grid grid-cols-2 gap-5">
+              {Object.entries(especificaciones).map(([k, v]) => (
+                <div>
+                  <p class="text-gray-400 text-[11px] uppercase tracking-widest mb-1">{formatKey(k)}</p>
+                  <p class="text-black text-sm font-medium">{formatValue(v)}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <a
+          href={mailtoHref}
+          class="inline-flex items-center justify-center gap-3 bg-black text-white text-sm font-medium px-10 py-4 hover:bg-[#222] transition-colors w-full cursor-pointer"
+        >
+          Solicitar este producto
+          <span>→</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="bg-[#fafafa] px-16 py-20 border-t border-gray-100">
+      <p class="text-sm text-[#6B8CAE] tracking-[0.25em] uppercase mb-3">También te puede interesar</p>
+      <h2 class="text-2xl font-bold mb-10">{product.subcategoria}</h2>
+      <div class="grid grid-cols-4 gap-px bg-gray-200 border border-gray-200">
+        {related.map((r) => (
+          <a href={`/catalogo/${r.sku}`} class="group bg-white block cursor-pointer">
+            <div class="relative overflow-hidden bg-[#f5f5f5]" style="aspect-ratio: 1;">
+              {r.imagen ? (
+                <img
+                  src={r.imagen}
+                  alt={r.nombre}
+                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="absolute inset-0 flex items-center justify-center text-gray-300">
+                  <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16l5-5a2 2 0 012.83 0L16 16M14 14l1.5-1.5a2 2 0 012.83 0L21 16M3 8a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                  </svg>
+                </div>
+              )}
+            </div>
+            <div class="p-5">
+              <h3 class="text-sm font-medium group-hover:text-[#6B8CAE] transition-colors">{r.nombre}</h3>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- FOOTER -->
+  <footer class="border-t border-gray-100 px-16 py-10 flex items-start justify-between">
+    <div>
+      <p class="text-base font-bold mb-2">T3R Fundamental</p>
+      <p class="text-sm text-gray-400 max-w-[240px] leading-relaxed">
+        Distribuidora de componentes profesionales para ciclismo. Madrid, España.
+      </p>
+    </div>
+    <p class="text-sm text-gray-400">© 2026 FUNDAMENTAL</p>
+  </footer>
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const mainImage = document.getElementById('main-image');
+      document.querySelectorAll('.thumb-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const src = btn.getAttribute('data-thumb');
+          if (mainImage && src) mainImage.setAttribute('src', src);
+        });
+      });
+    });
+  </script>
+
+</Layout>
