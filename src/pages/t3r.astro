@@ -77,7 +77,8 @@ import '../styles/global.css';
     <!-- Panel derecho: imagen con oscurecimiento y degradado de fusión -->
     <div class="relative w-[46%]">
       <img src="/catalogo_t3r/combos/combos_3.jpg" alt="T3R productos y packaging"
-        class="absolute inset-0 w-full h-full object-cover" style="object-position: center 40%;" />
+        class="absolute inset-0 w-full h-full object-cover" style="object-position: center 40%;"
+        loading="eager" fetchpriority="high" decoding="async" />
       <!-- Oscurecer la imagen (es muy blanca) -->
       <div class="absolute inset-0 bg-[#1A100C]/55"></div>
       <!-- Degradado de fusión desde la izquierda -->
@@ -166,7 +167,8 @@ import '../styles/global.css';
   <!-- FOTO SEPARADOR -->
   <div class="relative overflow-hidden" style="height: 480px;">
     <img src="/catalogo_t3r/combos/combos_3.jpg" alt="T3R productos"
-      class="absolute inset-0 w-full h-full object-cover" style="object-position: center 50%;" />
+      class="absolute inset-0 w-full h-full object-cover" style="object-position: center 50%;"
+      loading="lazy" decoding="async" />
     <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(26,16,12,0.85) 0%, rgba(26,16,12,0.3) 60%, transparent 100%);"></div>
     <div class="absolute inset-0 flex items-center px-16">
       <div data-reveal class="max-w-lg">

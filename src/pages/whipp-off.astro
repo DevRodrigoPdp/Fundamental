@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
 ---
 
-<Layout title="Whipp-Off — Fundamental">
+<Layout title="Whipp-Off — Fundamental" heroImage="/catalogo_whipoff/WHIP_OFF_1.jpg">
 
   <style is:global>
     @import url('https://fonts.googleapis.com/css2?family=Anton&family=Epilogue:wght@300;400;500;600&display=swap');
@@ -164,7 +164,7 @@ import '../styles/global.css';
           ].map((item) => (
             <a href="https://www.whip-off.com/" target="_blank" rel="noopener noreferrer"
               class="group relative bg-[#111] aspect-[3/4] overflow-hidden cursor-pointer block">
-              <img src={item.src} alt={item.label}
+              <img src={item.src} alt={item.label} loading="lazy" decoding="async"
                 class="absolute inset-0 w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black to-transparent">
                 <p class="font-epilogue text-white text-xs font-medium">{item.label}</p>
@@ -190,7 +190,7 @@ import '../styles/global.css';
           ].map((item) => (
             <a href="https://www.whip-off.com/" target="_blank" rel="noopener noreferrer"
               class="group relative bg-[#111] aspect-[3/4] overflow-hidden cursor-pointer block">
-              <img src={item.src} alt={item.label}
+              <img src={item.src} alt={item.label} loading="lazy" decoding="async"
                 class="absolute inset-0 w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black to-transparent">
                 <p class="font-epilogue text-white text-xs font-medium">{item.label}</p>
@@ -216,7 +216,7 @@ import '../styles/global.css';
           ].map((item) => (
             <a href="https://www.whip-off.com/" target="_blank" rel="noopener noreferrer"
               class="group relative bg-[#111] aspect-[3/4] overflow-hidden cursor-pointer block">
-              <img src={item.src} alt={item.label}
+              <img src={item.src} alt={item.label} loading="lazy" decoding="async"
                 class="absolute inset-0 w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" />
               <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black to-transparent">
                 <p class="font-epilogue text-white text-xs font-medium">{item.label}</p>

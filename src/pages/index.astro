@@ -26,7 +26,7 @@ const imgMap: Record<string, string> = {};
 
 // Fallback a fotos reales del catálogo si Supabase no tiene la imagen enlazada
 const fotosCatalogo: Record<string, string> = {
-  'T3R-DISCO-6T-160': '/catalogo_t3r/discos_freno/discos_freno_center_lock_1.jpg',
+  'T3R-DISCO-6T-160': '/catalogo_t3r/discos_freno/discos_freno_center_lock_5.jpg',
   'T3R-PAST-SRAM-GDE': '/catalogo_t3r/pastillas_freno/pastillas_freno_sram_guide_2011_code_1.jpg',
 };
 
@@ -69,6 +69,9 @@ const novedades = (products ?? []).map((p: any) => ({
       src="/catalogo_t3r/combos/combos_9.jpg"
       alt="T3R componentes"
       class="absolute inset-0 w-full h-full object-cover object-center"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
     />
     <div class="absolute inset-0" style="background: linear-gradient(to top, #1A100C 0%, rgba(26,16,12,0.75) 40%, rgba(26,16,12,0.2) 100%);"></div>
 
@@ -104,7 +107,7 @@ const novedades = (products ?? []).map((p: any) => ({
 
       <div class="grid grid-cols-2 gap-8 mb-10">
         {(novedades.length > 0 ? novedades : [
-          { category: 'Frenos', name: 'Disco 6T 160', ref: 'T3R-DISCO-6T-160', imagen: '/catalogo_t3r/discos_freno/discos_freno_center_lock_1.jpg' },
+          { category: 'Frenos', name: 'Disco 6T 160', ref: 'T3R-DISCO-6T-160', imagen: '/catalogo_t3r/discos_freno/discos_freno_center_lock_5.jpg' },
           { category: 'Frenos', name: 'Pastillas SRAM Guide', ref: 'T3R-PAST-SRAM-GDE', imagen: '/catalogo_t3r/pastillas_freno/pastillas_freno_sram_guide_2011_code_1.jpg' },
         ]).map((p, i) => (
           <div data-reveal data-delay={String(i + 1)} class="group cursor-pointer">
@@ -142,10 +145,12 @@ const novedades = (products ?? []).map((p: any) => ({
       src="/catalogo_transferbike/bici_transferbike.jpeg"
       alt="Transfer Bike"
       class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+      loading="lazy"
+      decoding="async"
     />
     <div class="absolute inset-0 bg-[#111]/45"></div>
     <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-8">
-      <h2 data-reveal class="text-[72px] font-bold text-white leading-[0.85] tracking-tight mb-4">TRANSFER</h2>
+      <img data-reveal src="/logo_transfer.png" alt="Transfer Bike" class="h-36 w-auto brightness-0 invert mb-6" />
       <p data-reveal data-delay="1" class="text-xs text-white/75 tracking-[0.35em] uppercase mb-8">Bicicletas · Una bici, cada día</p>
       <a data-reveal data-delay="2" href="/transfer"
         class="border border-white text-white text-xs font-semibold px-10 py-4 hover:bg-white hover:text-[#111] transition-colors tracking-[0.2em] uppercase cursor-pointer relative z-30">
@@ -161,10 +166,12 @@ const novedades = (products ?? []).map((p: any) => ({
       src="/catalogo_whipoff/WHIP_OFF_1.jpg"
       alt="Whipp-Off"
       class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+      loading="lazy"
+      decoding="async"
     />
     <div class="absolute inset-0 bg-black/40"></div>
     <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-8">
-      <h2 data-reveal class="text-[72px] font-bold text-white leading-[0.85] tracking-tight mb-8">WHIPP-OFF</h2>
+      <img data-reveal src="/logo_whipoff.png" alt="Whipp-Off" class="h-40 w-auto brightness-0 invert mb-8" />
       <a data-reveal data-delay="1" href="/whipp-off"
         class="border border-white text-white text-xs font-semibold px-10 py-4 hover:bg-white hover:text-black transition-colors tracking-[0.2em] uppercase cursor-pointer relative z-30">
         Saber más
@@ -172,19 +179,22 @@ const novedades = (products ?? []).map((p: any) => ({
     </div>
   </section>
 
-  <!-- ═══ BANNER SOBRE NOSOTROS ═══ -->
+  <!-- ═══ BANNER T3R ═══ -->
   <section class="relative overflow-hidden group" style="height: 460px;">
-    <a href="/nosotros" class="absolute inset-0 z-20"></a>
+    <a href="/t3r" class="absolute inset-0 z-20"></a>
     <img
       src="/catalogo_t3r/combos/combos_1.jpg"
-      alt="Sobre Fundamental"
+      alt="T3R The Three Riders"
       class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       style="object-position: center 30%;"
+      loading="lazy"
+      decoding="async"
     />
     <div class="absolute inset-0 bg-[#1A100C]/55"></div>
     <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-8">
-      <h2 data-reveal class="text-[56px] font-bold text-white leading-[0.85] tracking-tight mb-8">SOBRE NOSOTROS</h2>
-      <a data-reveal data-delay="1" href="/nosotros"
+      <img data-reveal src="/logo_blanco_t3r.png" alt="T3R" class="h-36 w-auto mb-6 opacity-95" />
+      <p data-reveal data-delay="1" class="text-xs text-white/75 tracking-[0.35em] uppercase mb-8">The Three Riders · Componentes fundamentales</p>
+      <a data-reveal data-delay="2" href="/t3r"
         class="border border-white text-white text-xs font-semibold px-10 py-4 hover:bg-white hover:text-[#1A100C] transition-colors tracking-[0.2em] uppercase cursor-pointer relative z-30">
         Saber más
       </a>

@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
 ---
 
-<Layout title="Transfer Bike — Fundamental">
+<Layout title="Transfer Bike — Fundamental" heroImage="/catalogo_transferbike/bici_transferbike.jpeg">
 
   <!-- NAV -->
   <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-black/70 backdrop-blur-md">
@@ -84,6 +84,7 @@ import '../styles/global.css';
           data-reveal class="group flex flex-col bg-[#111] overflow-hidden cursor-pointer">
           <div class="relative overflow-hidden" style="height: 360px;">
             <img src="/catalogo_transferbike/bici_transferbike.jpeg" alt="Bicicleta Kanaya completa"
+          loading="lazy" decoding="async"
               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           </div>
           <div class="p-7 flex flex-col flex-1 border-t border-white/5">
@@ -104,6 +105,7 @@ import '../styles/global.css';
           data-reveal data-delay="1" class="group flex flex-col bg-[#111] overflow-hidden cursor-pointer">
           <div class="relative bg-white overflow-hidden" style="height: 360px;">
             <img src="/catalogo_transferbike/cuadro_kanaya.jpg" alt="Cuadro Kanaya"
+          loading="lazy" decoding="async"
               class="absolute inset-0 w-full h-full object-contain p-10 transition-transform duration-700 group-hover:scale-105" />
           </div>
           <div class="p-7 flex flex-col flex-1 border-t border-white/5">
@@ -125,6 +127,7 @@ import '../styles/global.css';
       <div class="grid grid-cols-3 gap-4">
         <div data-reveal class="relative bg-[#0d0d0d] aspect-video overflow-hidden col-span-2">
           <img src="/catalogo_transferbike/cuadro_kanaya_2.jpg" alt="Detalle vainas traseras"
+          loading="lazy" decoding="async"
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
           <div class="absolute inset-0 bg-black/20"></div>
           <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
@@ -133,6 +136,7 @@ import '../styles/global.css';
         </div>
         <div data-reveal data-delay="1" class="relative bg-[#0d0d0d] aspect-video overflow-hidden">
           <img src="/catalogo_transferbike/cuadro_kanaya_3.jpg" alt="Detalle head tube"
+          loading="lazy" decoding="async"
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
           <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
             <p class="text-white/50 text-xs uppercase tracking-widest">Detalle · Head tube</p>
@@ -155,6 +159,7 @@ import '../styles/global.css';
       <!-- Diagrama -->
       <div data-reveal class="bg-white rounded-sm overflow-hidden mb-10">
         <img src="/catalogo_transferbike/cuadro_bicicleta_kanaya.jpg" alt="Geometría Transfer Kanaya"
+          loading="lazy" decoding="async"
           class="w-full h-auto" />
       </div>
 
