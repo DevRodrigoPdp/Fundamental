@@ -1,6 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
+
+const puntosVenta = [
+  { nombre: 'The Bike Village SL', direccion: 'Cl Corts 5', poblacion: 'Cabrera de Mar', cp: '08349', tel: '936387251', mail: 'compras@thebikevillage.com' },
+  { nombre: 'Terrabike Terrassa, SL', direccion: 'Cl Urquinaona, 78', poblacion: 'Terrassa', cp: '08222', tel: '937838007 / 606829698', mail: 'ventas@terra-bike.com' },
+  { nombre: 'Ravet Bike SL', direccion: 'Cl Joanot Martorell, 272', poblacion: 'Granollers', cp: '08403', tel: '935106108', mail: 'info@ravetbike.com' },
+  { nombre: 'Fernando Torres Probike, SLU', direccion: 'Cl Camino Instituto, 12', poblacion: 'Llerena', cp: '06900', tel: '924871670', mail: 'info@fernandotorresprobikes.com' },
+  { nombre: 'Cicles Vic SL', direccion: 'C/ Eix Onze de Setembre, 48', poblacion: 'Vic', cp: '08500', tel: '938 86 30 49', mail: 'ciclesvic@gmail.com' },
+  { nombre: 'Bici O Con Franquicia, SL', direccion: 'Baixada Pontillón, 40', poblacion: 'Vigo (Pontevedra)', cp: '36210', tel: '', mail: 'biciocon@biciocon.com' },
+  { nombre: 'Moto Bike, SL', direccion: 'Camiño Vello de Castela, 4 Bajo', poblacion: 'Pontevedra', cp: '36002', tel: '', mail: 'info@motobikepontevedra.com' },
+  { nombre: 'Bici Buru Águilas', direccion: 'C/ Alfonso Ortega Carmona, Nº 5 A, Esc. 1, Bajo A', poblacion: 'Águilas (Murcia)', cp: '30880', tel: '968 413 240 / 649 44 33 43', mail: 'info@bicisburu.com' },
+  { nombre: 'Cicles AB Castelló SL', direccion: "Calle Vall d'Uixó 41 - Bj 1", poblacion: 'Castellón de la Plana', cp: '12004', tel: '964220124', mail: 'ciclesab@ciclesab.com' },
+  { nombre: "Cuesto's Bike", direccion: 'C/ Pedro Pidal Arroyo, 2', poblacion: 'Villaviciosa (Asturias)', cp: '33300', tel: '985 89 00 21', mail: 'cuetosbike@yahoo.es' },
+];
 ---
 
 <Layout title="T3R · The Three Riders — Fundamental">
@@ -263,6 +276,34 @@ import '../styles/global.css';
         <a href="/contacto" class="text-sm text-white/40 hover:text-[#C4A072] transition-colors tracking-[0.15em] uppercase">
           Solicitar referencia específica →
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUNTOS DE VENTA -->
+  <section class="bg-[#0d0c0a] px-16 py-24 border-t border-white/5">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-12" data-reveal>
+        <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-3">Tiendas físicas</p>
+        <h2 class="text-4xl font-bold text-white">Encuéntranos cerca de ti</h2>
+        <p class="text-white/45 text-base mt-4 max-w-xl leading-relaxed">
+          T3R está disponible en estas tiendas especializadas repartidas por España. Pregunta por nuestras referencias directamente en el punto de venta más cercano.
+        </p>
+      </div>
+      <div class="grid grid-cols-2 gap-px bg-white/5" data-reveal>
+        {puntosVenta.map((t) => (
+          <div class="bg-[#0d0c0a] p-7">
+            <h3 class="text-white font-semibold text-base mb-2">{t.nombre}</h3>
+            <p class="text-white/50 text-sm leading-relaxed mb-1">{t.direccion}</p>
+            <p class="text-white/50 text-sm leading-relaxed mb-3">{t.poblacion} · {t.cp}</p>
+            <div class="flex flex-wrap items-center gap-x-5 gap-y-1 text-xs">
+              {t.tel && (
+                <a href={`tel:${t.tel.split(' / ')[0].replace(/\s+/g, '')}`} class="text-white/40 hover:text-[#C4A072] transition-colors">{t.tel}</a>
+              )}
+              <a href={`mailto:${t.mail}`} class="text-white/40 hover:text-[#C4A072] transition-colors">{t.mail}</a>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
