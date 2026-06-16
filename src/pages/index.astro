@@ -7,14 +7,7 @@ const { data: products, error } = await supabase
   .from('productos_t3r')
   .select('nombre, categoria, descripcion_corta, sku')
   .eq('activo', true)
-  .in('sku', [
-    'T3R-DISCO-6T-160',
-    'T3R-PAST-SRAM-GDE',
-    'T3R-PED-XCO',
-    'T3R-PED-EBIKE',
-    'T3R-VLV-ELITE-42',
-    'T3R-EJE-BSA-SH',
-  ]);
+  .in('sku', ['T3R-DISCO-6T-160', 'T3R-PAST-SRAM-GDE']);
 
 if (error) console.error('Supabase productos error:', error.message);
 
@@ -28,172 +21,255 @@ const { data: imagenes, error: imgError } = await supabase
 
 if (imgError) console.error('Supabase imagenes error:', imgError.message);
 
-
 const imgMap: Record<string, string> = {};
 (imagenes ?? []).forEach((i: any) => { imgMap[i.producto_sku] = i.url; });
 
-const formatted = (products ?? []).map((p: any) => ({
-  category: p.categoria.toUpperCase(),
+// Fallback a fotos reales del catálogo si Supabase no tiene la imagen enlazada
+const fotosCatalogo: Record<string, string> = {
+  'T3R-DISCO-6T-160': '/catalogo_t3r/discos_freno/discos_freno_center_lock_1.jpg',
+  'T3R-PAST-SRAM-GDE': '/catalogo_t3r/pastillas_freno/pastillas_freno_sram_guide_2011_code_1.jpg',
+};
+
+const novedades = (products ?? []).map((p: any) => ({
+  category: p.categoria,
   name: p.nombre,
-  description: p.descripcion_corta,
   ref: p.sku,
-  imagen: imgMap[p.sku] ?? null,
+  // Priorizamos la foto curada: las rutas de Supabase quedaron desactualizadas tras reorganizar archivos
+  imagen: fotosCatalogo[p.sku] ?? (imgMap[p.sku] ? `/${imgMap[p.sku]}` : null),
 }));
 ---
 
-<Layout title="Fundamental">
+<Layout title="Fundamental Bike Parts — Distribuidora T3R · Whipp-Off · Transfer">
+
+  <style is:global>
+    html { scroll-behavior: smooth; }
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    [data-reveal].visible { opacity: 1; transform: translateY(0); }
+    [data-delay="1"] { transition-delay: 0.08s; }
+    [data-delay="2"] { transition-delay: 0.16s; }
+  </style>
 
   <!-- NAV -->
   <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-[#1A100C]/80 backdrop-blur-md">
     <a href="/" class="font-display uppercase text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
     <nav class="flex gap-10">
-      <!-- <a href="/marcas" class="text-base text-white/70 hover:text-white transition-colors">Marcas</a> -->
+      <a href="/marcas" class="text-base text-white/70 hover:text-white transition-colors">Marcas</a>
       <a href="/nosotros" class="text-base text-white/70 hover:text-white transition-colors">Nosotros</a>
       <a href="/contacto" class="text-base text-white/70 hover:text-white transition-colors">Contacto</a>
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section class="relative h-screen bg-[#1A100C] flex flex-col justify-end overflow-hidden">
-    <!-- Foto fondo -->
-    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/catalogo_t3r/combos/combos_9.jpg');"></div>
-    <!-- Gradiente cinematic: oscuro desde abajo, transparente arriba -->
-    <div class="absolute inset-0 z-10" style="background: linear-gradient(to top, #1A100C 0%, rgba(26,16,12,0.75) 40%, rgba(26,16,12,0.2) 100%);"></div>
+  <!-- ═══ HERO — T3R ═══ -->
+  <section class="relative h-screen overflow-hidden bg-[#1A100C]">
+    <img
+      src="/catalogo_t3r/combos/combos_9.jpg"
+      alt="T3R componentes"
+      class="absolute inset-0 w-full h-full object-cover object-center"
+    />
+    <div class="absolute inset-0" style="background: linear-gradient(to top, #1A100C 0%, rgba(26,16,12,0.75) 40%, rgba(26,16,12,0.2) 100%);"></div>
 
-    <!-- Contenido bottom-left editorial -->
-    <div class="relative z-20 px-16 pb-16 w-full">
-      <div class="flex items-center gap-3 mb-6 hero-tag">
-        <div class="w-8 h-px bg-[#C4A072]"></div>
-        <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase">T3R · The Three Riders</p>
+    <div class="absolute inset-0 flex flex-col justify-end px-12 pb-16 z-10">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-6 h-px bg-[#C4A072]"></div>
+        <p class="text-[10px] text-[#C4A072] tracking-[0.4em] uppercase">T3R · The Three Riders</p>
       </div>
-      <h1 class="text-[96px] font-bold leading-[0.88] mb-10 hero-heading" style="text-shadow: 0 4px 40px rgba(0,0,0,0.6);">
+      <h1 class="text-[90px] font-bold leading-[0.88] tracking-tight mb-8">
         <span class="block text-white">Componentes</span>
         <span class="block text-[#C4A072]">fundamentales.</span>
       </h1>
-      <div class="flex items-center gap-8 hero-cta">
-        <a
-          href="#esenciales"
-          class="bg-[#C4A072] text-[#1A100C] text-sm font-semibold px-8 py-4 hover:bg-[#D4B280] transition-colors tracking-[0.08em] uppercase cursor-pointer"
-        >
-          Explorar catálogo
+      <div class="flex items-center gap-4">
+        <a href="#productos"
+          class="bg-[#C4A072] text-[#1A100C] text-xs font-bold px-9 py-4 hover:bg-[#D4B280] transition-colors tracking-[0.12em] uppercase cursor-pointer">
+          Ver productos
         </a>
-        <!-- <a href="/marcas" class="text-white/60 text-sm tracking-[0.08em] uppercase hover:text-white transition-colors flex items-center gap-2 cursor-pointer">
-          Nuestras marcas
-          <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
-        </a> -->
-      </div>
-    </div>
-
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 right-16 z-20 flex flex-col items-center gap-2">
-      <span class="text-[10px] text-white/30 tracking-[0.25em] uppercase" style="writing-mode: vertical-rl;">Scroll</span>
-      <div class="w-px h-10 bg-white/20 relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full bg-white/70 hero-scroll-line"></div>
+        <a href="/t3r"
+          class="border border-white/25 text-white/70 text-xs px-8 py-4 hover:border-white/50 hover:text-white transition-colors tracking-[0.1em] uppercase cursor-pointer">
+          Conocer T3R
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- PRODUCTOS DESTACADOS -->
-  <section id="esenciales" class="py-24 px-16">
-    <div class="flex items-start justify-between mb-14">
-      <div>
-        <img src="/logo_t3r.png" alt="T3R" class="h-7 w-auto mb-4" />
-        <h2 class="text-[56px] font-bold leading-tight">Los esenciales.</h2>
-        <p class="text-base text-gray-500 mt-4 max-w-[300px] leading-relaxed">
-          Selección de referencias T3R disponibles bajo solicitud. Precisión, durabilidad y diseño minimal.
-        </p>
+  <!-- ═══ NOVEDADES T3R ═══ -->
+  <section id="productos" class="bg-white px-12 py-16 border-b border-gray-100">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-baseline gap-4 mb-10">
+        <span class="bg-[#C4A072] text-[#1A100C] text-[10px] font-bold px-2.5 py-1 tracking-[0.2em] uppercase">New</span>
+        <h2 class="text-xl font-bold tracking-tight uppercase">Novedades T3R · Gama 2026</h2>
       </div>
-      <a
-        href="/catalogo"
-        class="border border-black text-base px-6 py-2.5 mt-4 hover:bg-black hover:text-white transition-colors"
-      >
-        Ver todo el catálogo
+
+      <div class="grid grid-cols-2 gap-8 mb-10">
+        {(novedades.length > 0 ? novedades : [
+          { category: 'Frenos', name: 'Disco 6T 160', ref: 'T3R-DISCO-6T-160', imagen: '/catalogo_t3r/discos_freno/discos_freno_center_lock_1.jpg' },
+          { category: 'Frenos', name: 'Pastillas SRAM Guide', ref: 'T3R-PAST-SRAM-GDE', imagen: '/catalogo_t3r/pastillas_freno/pastillas_freno_sram_guide_2011_code_1.jpg' },
+        ]).map((p, i) => (
+          <div data-reveal data-delay={String(i + 1)} class="group cursor-pointer">
+            <div class="relative overflow-hidden bg-[#f0e4d3] mb-4" style="aspect-ratio: 4/3;">
+              <span class="absolute top-4 left-4 z-10 bg-white text-[#1A100C] text-[10px] font-bold px-2.5 py-1 tracking-[0.15em] uppercase">New</span>
+              {p.imagen ? (
+                <img src={p.imagen} alt={p.name}
+                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" />
+              ) : (
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <img src="/logo_t3r.png" alt="T3R" class="h-10 opacity-20" />
+                </div>
+              )}
+            </div>
+            <p class="text-[10px] text-gray-400 tracking-[0.25em] uppercase mb-1">{p.category}</p>
+            <h3 class="font-semibold text-base text-gray-900 mb-1">{p.name}</h3>
+            <p class="text-sm text-gray-400">Consulta disponibilidad</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="flex justify-center">
+        <a href="/t3r"
+          class="border border-[#1A100C] text-[#1A100C] text-xs font-semibold px-10 py-4 hover:bg-[#1A100C] hover:text-white transition-colors tracking-[0.2em] uppercase cursor-pointer">
+          Ver catálogo completo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BANNER TRANSFER ═══ -->
+  <section class="relative overflow-hidden group" style="height: 520px;">
+    <a href="/transfer" class="absolute inset-0 z-20"></a>
+    <img
+      src="/catalogo_transferbike/bici_transferbike.jpeg"
+      alt="Transfer Bike"
+      class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+    />
+    <div class="absolute inset-0 bg-[#111]/45"></div>
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-8">
+      <h2 data-reveal class="text-[72px] font-bold text-white leading-[0.85] tracking-tight mb-4">TRANSFER</h2>
+      <p data-reveal data-delay="1" class="text-xs text-white/75 tracking-[0.35em] uppercase mb-8">Bicicletas · Una bici, cada día</p>
+      <a data-reveal data-delay="2" href="/transfer"
+        class="border border-white text-white text-xs font-semibold px-10 py-4 hover:bg-white hover:text-[#111] transition-colors tracking-[0.2em] uppercase cursor-pointer relative z-30">
+        Descubre
       </a>
     </div>
+  </section>
 
-    <div class="grid grid-cols-3 gap-x-8 gap-y-14">
-      {formatted.map((p) => (
-        <div class="group cursor-pointer">
-          <div class="aspect-square mb-5 w-full overflow-hidden bg-[#F0EDE8]">
-            {p.imagen ? (
-              <img
-                src={`/${p.imagen}`}
-                alt={p.name}
-                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                loading="lazy"
-              />
-            ) : (
-              <div class="w-full h-full bg-[#E8B49A]"></div>
-            )}
-          </div>
-          <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-1.5">{p.category}</p>
-          <h3 class="font-semibold text-lg mb-1.5">{p.name}</h3>
-          <p class="text-sm text-gray-500 leading-relaxed mb-2">{p.description}</p>
-          <p class="text-sm text-gray-400 mb-0">{p.ref}</p>
-          <div class="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-            <p class="text-sm text-gray-400">Consulta disponibilidad</p>
-            <a href="/contacto" class="text-sm font-medium inline-flex items-center gap-1">
-              Solicitar
-              <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
-            </a>
+  <!-- ═══ BANNER WHIPP-OFF ═══ -->
+  <section class="relative overflow-hidden group" style="height: 520px;">
+    <a href="/whipp-off" class="absolute inset-0 z-20"></a>
+    <img
+      src="/catalogo_whipoff/WHIP_OFF_1.jpg"
+      alt="Whipp-Off"
+      class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+    />
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-8">
+      <h2 data-reveal class="text-[72px] font-bold text-white leading-[0.85] tracking-tight mb-8">WHIPP-OFF</h2>
+      <a data-reveal data-delay="1" href="/whipp-off"
+        class="border border-white text-white text-xs font-semibold px-10 py-4 hover:bg-white hover:text-black transition-colors tracking-[0.2em] uppercase cursor-pointer relative z-30">
+        Saber más
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ BANNER SOBRE NOSOTROS ═══ -->
+  <section class="relative overflow-hidden group" style="height: 460px;">
+    <a href="/nosotros" class="absolute inset-0 z-20"></a>
+    <img
+      src="/catalogo_t3r/combos/combos_1.jpg"
+      alt="Sobre Fundamental"
+      class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+      style="object-position: center 30%;"
+    />
+    <div class="absolute inset-0 bg-[#1A100C]/55"></div>
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-8">
+      <h2 data-reveal class="text-[56px] font-bold text-white leading-[0.85] tracking-tight mb-8">SOBRE NOSOTROS</h2>
+      <a data-reveal data-delay="1" href="/nosotros"
+        class="border border-white text-white text-xs font-semibold px-10 py-4 hover:bg-white hover:text-[#1A100C] transition-colors tracking-[0.2em] uppercase cursor-pointer relative z-30">
+        Saber más
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ DISTRIBUIDORA OFICIAL DE ═══ -->
+  <section class="bg-[#0a0808] px-12 py-24 text-center">
+    <p class="text-[11px] text-white/40 tracking-[0.4em] uppercase mb-8">Fundamental, distribuidora oficial de</p>
+    <div class="flex flex-col items-center gap-3">
+      <a href="/t3r" class="text-3xl font-bold text-white hover:text-[#C4A072] transition-colors tracking-tight">T3R · The Three Riders</a>
+      <a href="/whipp-off" class="text-3xl font-bold text-white hover:text-[#C4A072] transition-colors tracking-tight">Whipp-Off</a>
+      <a href="/transfer" class="text-3xl font-bold text-white hover:text-[#C4A072] transition-colors tracking-tight">Transfer Bike</a>
+    </div>
+  </section>
+
+  <!-- ═══ INFO ROW ═══ -->
+  <section class="bg-[#F0EDE8] px-12 py-16">
+    <div class="max-w-5xl mx-auto grid grid-cols-3 gap-12 text-center">
+      <div>
+        <p class="text-[10px] text-gray-400 tracking-[0.3em] uppercase mb-3">Envío</p>
+        <h3 class="font-bold text-base mb-2">Entrega a domicilio</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Gestionamos el envío de cualquier referencia bajo solicitud, directo a tienda o domicilio.</p>
+      </div>
+      <div>
+        <p class="text-[10px] text-gray-400 tracking-[0.3em] uppercase mb-3">Fundamental Care</p>
+        <h3 class="font-bold text-base mb-2">Soporte técnico</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Resolvemos cualquier consulta sobre piezas, compatibilidad o garantía.</p>
+      </div>
+      <div>
+        <p class="text-[10px] text-gray-400 tracking-[0.3em] uppercase mb-3">Newsletter</p>
+        <h3 class="font-bold text-base mb-3">Mantente informado</h3>
+        <form class="flex">
+          <input type="email" placeholder="tu@email.com"
+            class="border border-gray-300 bg-white px-4 py-3 text-sm flex-1 outline-none focus:border-[#1A100C] transition-colors" />
+          <button type="submit" class="bg-[#1A100C] text-white text-sm px-5 py-3 hover:bg-black transition-colors">Suscribirme</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="bg-[#1A100C] px-12 pt-14 pb-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-3 gap-12 mb-12 pb-12 border-b border-white/10">
+        <div>
+          <p class="text-base font-bold text-white mb-3">Fundamental</p>
+          <p class="text-sm text-white/55 leading-relaxed">
+            Distribuidora de componentes, bicicletas y ropa MTB. Madrid, España.
+          </p>
+        </div>
+        <div>
+          <p class="text-xs text-white/40 tracking-[0.25em] uppercase mb-4">Servicio al cliente</p>
+          <div class="flex flex-col gap-2">
+            <a href="/contacto" class="text-sm text-white/55 hover:text-[#C4A072] transition-colors">Contacto</a>
+            <a href="/contacto" class="text-sm text-white/55 hover:text-[#C4A072] transition-colors">Envíos y devoluciones</a>
+            <a href="/contacto" class="text-sm text-white/55 hover:text-[#C4A072] transition-colors">Garantía</a>
           </div>
         </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- NEWSLETTER -->
-  <section class="bg-[#F0EDE8] py-20 px-16">
-    <div class="flex items-center justify-between">
-      <div>
-        <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-4">Newsletter</p>
-        <h2 class="text-[44px] font-bold leading-tight mb-3">Mantente informado.</h2>
-        <p class="text-base text-gray-500 max-w-[280px] leading-relaxed">
-          Lanzamientos, novedades de catálogo y notas técnicas. Sin ruido.
-        </p>
+        <div>
+          <p class="text-xs text-white/40 tracking-[0.25em] uppercase mb-4">Marcas</p>
+          <div class="flex flex-col gap-2">
+            <a href="/t3r" class="text-sm text-white/55 hover:text-[#C4A072] transition-colors">T3R</a>
+            <a href="/transfer" class="text-sm text-white/55 hover:text-[#C4A072] transition-colors">Transfer</a>
+            <a href="/whipp-off" class="text-sm text-white/55 hover:text-[#C4A072] transition-colors">Whipp-Off</a>
+          </div>
+        </div>
       </div>
-      <form class="flex gap-0">
-        <input
-          type="email"
-          placeholder="tu@email.com"
-          class="border border-gray-300 bg-white px-5 py-3.5 text-base w-72 outline-none focus:border-black transition-colors"
-        />
-        <button
-          type="submit"
-          class="bg-black text-white text-base px-7 py-3.5 hover:bg-[#222] transition-colors"
-        >
-          Suscribirme
-        </button>
-      </form>
+      <div class="flex items-center justify-between">
+        <p class="text-xs text-white/25">© 2026 Fundamental — Todos los derechos reservados</p>
+        <p class="text-xs text-white/25">Madrid · España</p>
+      </div>
     </div>
-  </section>
-
-  <!-- CTA CATÁLOGO -->
-  <section class="py-32 px-16 text-center">
-    <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-6">Catálogo completo</p>
-    <h2 class="text-[58px] font-bold max-w-[620px] mx-auto leading-[1.1] mb-6">
-      Más de 60 referencias disponibles bajo solicitud.
-    </h2>
-    <p class="text-base text-gray-500 max-w-[420px] mx-auto leading-relaxed mb-12">
-      Explora la gama completa T3R: frenos, transmisión, ruedas, cockpit, pedales e iluminación. Solicita la referencia que necesites y te respondemos con disponibilidad y plazo.
-    </p>
-    <a
-      href="/catalogo"
-      class="inline-block bg-black text-white text-base px-10 py-4 hover:bg-[#222] transition-colors"
-    >
-      Ver catálogo T3R
-    </a>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="border-t border-gray-100 px-16 py-10 flex items-start justify-between">
-    <div>
-      <p class="text-base font-bold mb-2">T3R Fundamental</p>
-      <p class="text-sm text-gray-400 max-w-[240px] leading-relaxed">
-        Distribuidora de componentes profesionales para ciclismo. Madrid, España.
-      </p>
-    </div>
-    <p class="text-sm text-gray-400">© 2026 FUNDAMENTAL</p>
   </footer>
+
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      }),
+      { threshold: 0.1 }
+    );
+    document.addEventListener('astro:page-load', () => {
+      document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+    });
+  </script>
 
 </Layout>
