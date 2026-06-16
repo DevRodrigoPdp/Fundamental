@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+
+// TODO: sustituir por el email real de la empresa cuando esté definido
+const CONTACT_EMAIL = 'hola@fundamentalbikeparts.com';
+---
+
+<Layout title="Contacto — Fundamental">
+
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-[#1A100C]/80 backdrop-blur-md">
+    <a href="/" class="font-display uppercase text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
+    <nav class="flex gap-10">
+      <a href="/marcas" class="text-base text-white/70 hover:text-white transition-colors">Marcas</a>
+      <a href="/nosotros" class="text-base text-white/70 hover:text-white transition-colors">Nosotros</a>
+      <a href="/contacto" class="text-base text-white font-medium">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- HERO TEXTO -->
+  <section class="px-16 pt-36 pb-20">
+    <p data-reveal class="text-sm text-[#6B8CAE] tracking-[0.3em] uppercase mb-6">
+      Fundamental · Atención al cliente
+    </p>
+    <h1 data-reveal data-delay="1" class="text-[64px] font-bold leading-tight mb-8">
+      ¿Hablamos?
+    </h1>
+    <p data-reveal data-delay="2" class="text-lg text-[#6B8CAE] max-w-lg leading-relaxed">
+      Para cualquier pregunta sobre nuestras marcas o para hacer un pedido, escríbenos. Te respondemos lo antes posible.
+    </p>
+  </section>
+
+  <!-- FORMULARIO + INFO -->
+  <section class="px-16 pb-32">
+    <div class="grid grid-cols-3 gap-16 pt-4">
+
+      <!-- Formulario -->
+      <form id="contact-form" class="col-span-2 flex flex-col gap-6" data-reveal>
+        <div class="grid grid-cols-2 gap-6">
+          <div class="flex flex-col gap-2">
+            <label for="nombre" class="text-sm font-medium">Nombre</label>
+            <input id="nombre" name="nombre" type="text" required
+              class="border border-gray-300 px-4 py-3.5 text-base outline-none focus:border-black transition-colors" />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="email" class="text-sm font-medium">Tu email</label>
+            <input id="email" name="email" type="email" required
+              class="border border-gray-300 px-4 py-3.5 text-base outline-none focus:border-black transition-colors" />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="motivo" class="text-sm font-medium">Motivo</label>
+          <select id="motivo" name="motivo" required
+            class="border border-gray-300 px-4 py-3 text-base outline-none focus:border-black transition-colors bg-white">
+            <option value="Consulta general">Consulta general</option>
+            <option value="Hacer un pedido">Hacer un pedido</option>
+            <option value="Disponibilidad de producto">Disponibilidad de producto</option>
+            <option value="Ser punto de venta">Ser punto de venta</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="mensaje" class="text-sm font-medium">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="6" required
+            class="border border-gray-300 px-4 py-3 text-base outline-none focus:border-black transition-colors resize-none"
+            placeholder="Cuéntanos qué necesitas, referencias concretas si las tienes, cantidad, etc."></textarea>
+        </div>
+
+        <button type="submit"
+          class="bg-black text-white text-base font-medium px-8 py-4 hover:bg-[#222] transition-colors w-fit cursor-pointer">
+          Enviar mensaje
+        </button>
+
+        <p id="form-note" class="text-sm text-gray-400 -mt-2">
+          Se abrirá tu programa de correo con el mensaje ya redactado, listo para enviar.
+        </p>
+      </form>
+
+      <!-- Info directa -->
+      <div class="flex flex-col gap-10" data-reveal data-delay="2">
+        <div>
+          <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-3">Email directo</p>
+          <a href={`mailto:${CONTACT_EMAIL}`} class="text-lg font-medium hover:text-[#6B8CAE] transition-colors">
+            {CONTACT_EMAIL}
+          </a>
+        </div>
+        <div>
+          <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-3">Para pedidos</p>
+          <p class="text-base text-gray-600 leading-relaxed">
+            Indícanos la referencia (SKU) o categoría que necesitas y te confirmamos disponibilidad y plazo.
+          </p>
+        </div>
+        <div>
+          <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-3">Ubicación</p>
+          <p class="text-base text-gray-600 leading-relaxed">
+            Madrid, España
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-gray-100 px-16 py-10 flex items-start justify-between">
+    <div>
+      <p class="text-base font-bold mb-2">T3R Fundamental</p>
+      <p class="text-sm text-gray-400 max-w-[240px] leading-relaxed">
+        Distribuidora de componentes profesionales para ciclismo. Madrid, España.
+      </p>
+    </div>
+    <p class="text-sm text-gray-400">© 2026 FUNDAMENTAL</p>
+  </footer>
+
+  <script define:vars={{ CONTACT_EMAIL }}>
+    document.addEventListener('astro:page-load', () => {
+      const form = document.getElementById('contact-form');
+      if (!form) return;
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nombre = form.nombre.value;
+        const email = form.email.value;
+        const motivo = form.motivo.value;
+        const mensaje = form.mensaje.value;
+
+        const subject = `${motivo} — ${nombre}`;
+        const body =
+          `Nombre: ${nombre}\n` +
+          `Email de contacto: ${email}\n` +
+          `Motivo: ${motivo}\n\n` +
+          `Mensaje:\n${mensaje}`;
+
+        const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailto;
+      });
+    });
+  </script>
+
+</Layout>
