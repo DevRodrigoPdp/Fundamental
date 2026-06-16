@@ -1,0 +1,178 @@
+---
+import path from 'path';
+import { existsSync } from 'fs';
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+import { supabase } from '../lib/supabase';
+
+const CONTACT_EMAIL = 'hola@fundamentalbikeparts.com'; // TODO: confirmar email real
+
+const { data: products, error } = await supabase
+  .from('productos_t3r')
+  .select('nombre, categoria, subcategoria, descripcion_corta, sku')
+  .eq('activo', true)
+  .order('categoria', { ascending: true });
+
+if (error) console.error('Supabase productos error:', error.message);
+
+const skus = (products ?? []).map((p: any) => p.sku);
+
+const { data: imagenes } = skus.length > 0
+  ? await supabase
+      .from('imagenes_productos')
+      .select('producto_sku, url, orden')
+      .in('producto_sku', skus)
+      .eq('orden', 1)
+  : { data: [] };
+
+const imgMap: Record<string, string> = {};
+(imagenes ?? []).forEach((i: any) => {
+  const rel = i.url.replace(/^\/+/, '');
+  if (existsSync(path.join(process.cwd(), 'public', rel))) {
+    imgMap[i.producto_sku] = `/${rel}`;
+  }
+});
+
+const catalogo = (products ?? []).map((p: any) => ({
+  nombre: p.nombre,
+  categoria: p.categoria,
+  subcategoria: p.subcategoria,
+  descripcion: p.descripcion_corta,
+  sku: p.sku,
+  imagen: imgMap[p.sku] ?? null,
+}));
+---
+
+<Layout title="Catálogo T3R — Fundamental">
+
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 bg-[#1A100C]/80 backdrop-blur-md">
+    <a href="/" class="font-display uppercase text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">Fundamental Bike Parts</a>
+    <nav class="flex gap-10">
+      <a href="/marcas" class="text-base text-white/70 hover:text-white transition-colors">Marcas</a>
+      <a href="/nosotros" class="text-base text-white/70 hover:text-white transition-colors">Nosotros</a>
+      <a href="/contacto" class="text-base text-white/70 hover:text-white transition-colors">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- HERO + BUSCADOR -->
+  <section class="px-16 pt-36 pb-16">
+    <p data-reveal class="text-sm text-[#6B8CAE] tracking-[0.3em] uppercase mb-6">Marca · T3R</p>
+    <h1 data-reveal data-delay="1" class="text-[64px] font-bold leading-tight mb-6">
+      Catálogo T3R.
+    </h1>
+    <p data-reveal data-delay="2" class="text-lg text-[#6B8CAE] max-w-lg leading-relaxed mb-10">
+      Cada referencia se sirve bajo solicitud. Filtra por nombre, categoría o referencia y te enviamos disponibilidad, plazo y precio.
+    </p>
+
+    <div data-reveal data-delay="3" class="relative max-w-xl">
+      <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M19 11a8 8 0 11-16 0 8 8 0 0116 0z" />
+      </svg>
+      <input
+        id="search-input"
+        type="text"
+        placeholder="Buscar por nombre, categoría o referencia..."
+        class="w-full border border-gray-300 pl-12 pr-4 py-3.5 text-base outline-none focus:border-black transition-colors"
+        autocomplete="off"
+      />
+    </div>
+  </section>
+
+  <!-- GRID PRODUCTOS -->
+  <section class="px-16 pb-32">
+    {catalogo.length > 0 ? (
+      <>
+        <div id="product-grid" class="grid grid-cols-2 gap-px bg-gray-200 border border-gray-200">
+          {catalogo.map((p, i) => (
+            <div
+              data-product-card
+              data-search={`${p.nombre} ${p.categoria} ${p.subcategoria ?? ''} ${p.sku}`.toLowerCase()}
+              data-reveal data-delay={String(i % 4)}
+              class="group bg-white flex flex-col"
+            >
+              <div class="relative overflow-hidden bg-[#f5f5f5]" style="aspect-ratio: 16/10;">
+                <img
+                  src={p.imagen ?? '/logo_t3r.png'}
+                  alt={p.nombre}
+                  class={p.imagen ? "absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" : "absolute inset-0 m-auto h-12 opacity-20"}
+                  loading="lazy"
+                  decoding="async"
+                  onerror="this.onerror=null; this.src='/logo_t3r.png'; this.className='absolute inset-0 m-auto h-12 opacity-20';"
+                />
+              </div>
+              <div class="p-7 flex flex-col flex-1">
+                <p class="text-[10px] text-gray-400 tracking-[0.25em] uppercase mb-2">{p.subcategoria ?? p.categoria}</p>
+                <h3 class="font-bold text-lg mb-2 leading-snug">{p.nombre}</h3>
+                {p.descripcion && (
+                  <p class="text-sm text-gray-500 leading-relaxed mb-5">{p.descripcion}</p>
+                )}
+                <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+                  <div>
+                    <p class="text-xs text-gray-400">{p.sku}</p>
+                    <p class="text-xs text-gray-400">Consulta disponibilidad</p>
+                  </div>
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Solicitud T3R — ' + p.nombre)}&body=${encodeURIComponent(`Hola,\n\nMe interesa el siguiente producto T3R:\n\nProducto: ${p.nombre}\nReferencia (SKU): ${p.sku}\nCategoría: ${p.categoria}${p.subcategoria ? ' / ' + p.subcategoria : ''}\n\nPor favor, indícame disponibilidad y precio.\n\nGracias.`)}`}
+                    class="text-sm font-medium inline-flex items-center gap-1 shrink-0 cursor-pointer"
+                  >
+                    Solicitar
+                    <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p id="empty-state" class="hidden text-center text-gray-400 text-base py-20">
+          No hay referencias que coincidan con tu búsqueda.
+        </p>
+      </>
+    ) : (
+      <p class="text-gray-400 text-base">Catálogo en preparación — vuelve pronto.</p>
+    )}
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-gray-100 px-16 py-10 flex items-start justify-between">
+    <div>
+      <p class="text-base font-bold mb-2">T3R Fundamental</p>
+      <p class="text-sm text-gray-400 max-w-[240px] leading-relaxed">
+        Distribuidora de componentes profesionales para ciclismo. Madrid, España.
+      </p>
+    </div>
+    <p class="text-sm text-gray-400">© 2026 FUNDAMENTAL</p>
+  </footer>
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const input = document.getElementById('search-input');
+      const cards = document.querySelectorAll('[data-product-card]');
+      const emptyState = document.getElementById('empty-state');
+      if (!input) return;
+
+      const filter = () => {
+        const q = input.value.trim().toLowerCase();
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const haystack = card.getAttribute('data-search') || '';
+          const match = haystack.includes(q);
+          card.style.display = match ? '' : 'none';
+          if (match) visibleCount++;
+        });
+        if (emptyState) emptyState.classList.toggle('hidden', visibleCount > 0);
+      };
+
+      input.addEventListener('input', filter);
+
+      // Precarga la búsqueda si llega ?q= en la URL (ej. desde los enlaces de categoría en /t3r)
+      const params = new URLSearchParams(window.location.search);
+      const initialQuery = params.get('q');
+      if (initialQuery) {
+        input.value = initialQuery;
+        filter();
+      }
+    });
+  </script>
+
+</Layout>
