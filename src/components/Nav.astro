@@ -13,7 +13,7 @@ function linkClass(key: string) {
 ---
 
 <header class={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-16 py-5 md:py-6 ${bgClass} backdrop-blur-md`}>
-  <a href="/" class="font-display uppercase text-base md:text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">
+  <a href="/" class="order-2 md:order-none font-display uppercase text-base md:text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">
     Fundamental Bike Parts
   </a>
 
@@ -25,7 +25,7 @@ function linkClass(key: string) {
   </nav>
 
   <!-- Mobile hamburger -->
-  <button id="nav-toggle" type="button" class="md:hidden text-white p-2 -mr-2 cursor-pointer" aria-label="Abrir menú" aria-expanded="false">
+  <button id="nav-toggle" type="button" class="order-1 md:order-none md:hidden text-white p-2 -ml-2 cursor-pointer" aria-label="Abrir menú" aria-expanded="false">
     <svg id="nav-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
     </svg>
