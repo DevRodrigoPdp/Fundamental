@@ -1,105 +1,262 @@
 ---
-type NavKey = 'marcas' | 'nosotros' | 'contacto';
+type NavKey = 't3r' | 'catalogo' | 'marcas' | 'nosotros' | 'contacto';
 
 interface Props {
   active?: NavKey;
   bgClass?: string;
 }
 
-const { active, bgClass = 'bg-[#1A100C]/95' } = Astro.props;
+const { active, bgClass = 'bg-[#0b0908]/95' } = Astro.props;
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 
-const links: Array<{ href: string; label: string; key: NavKey }> = [
-  { href: '/marcas', label: 'Marcas', key: 'marcas' },
-  { href: '/nosotros', label: 'Nosotros', key: 'nosotros' },
-  { href: '/contacto', label: 'Contacto', key: 'contacto' },
+const links: Array<{
+  href: string;
+  label: string;
+  key: NavKey;
+  weight: 'flagship' | 'primary' | 'secondary';
+}> = [
+  { href: '/marcas', label: 'Marcas asociadas', key: 'marcas', weight: 'secondary' },
+  { href: '/nosotros', label: 'Nosotros', key: 'nosotros', weight: 'secondary' },
+  { href: '/contacto', label: 'Contacto', key: 'contacto', weight: 'secondary' },
 ];
 
 function isActive(href: string, key: NavKey) {
-  const normalizedHref = href.replace(/\/$/, '') || '/';
-  return active === key || currentPath === normalizedHref || currentPath.startsWith(`${normalizedHref}/`);
+  return active === key || currentPath === href || currentPath.startsWith(href + '/');
 }
 
-function linkClass(href: string, key: NavKey) {
-  return [
-    'group relative py-2 text-[0.78rem] font-medium uppercase tracking-[0.2em] transition-colors duration-300',
-    isActive(href, key) ? 'text-white' : 'text-white/62 hover:text-white',
-  ].join(' ');
-}
+function desktopLinkClass(href: string, key: NavKey, weight: 'flagship' | 'primary' | 'secondary') {
+  const base = 'group relative inline-flex h-8 items-center text-[0.72rem] uppercase tracking-[0.18em] transition-colors duration-300';
 
-function mobileLinkClass(href: string, key: NavKey) {
-  return [
-    'nav-menu-link text-3xl uppercase tracking-[-0.04em] transition-colors duration-300',
-    isActive(href, key) ? 'text-white' : 'text-white/68 hover:text-white',
-  ].join(' ');
+  if (weight === 'flagship') {
+    return `${base} font-semibold text-[#C5A880] hover:text-[#DEC39B]`;
+  }
+
+  if (weight === 'primary') {
+    return `${base} font-medium ${isActive(href, key) ? 'text-white' : 'text-white/88 hover:text-white'}`;
+  }
+
+  return `${base} font-medium ${isActive(href, key) ? 'text-white' : 'text-white/58 hover:text-white/85'}`;
 }
 ---
 
 <header
-  class={`fixed left-0 right-0 top-0 z-50 border-b border-white/10 ${bgClass} px-5 py-4 text-white shadow-[0_18px_60px_rgba(0,0,0,0.18)] backdrop-blur-xl backdrop-saturate-150 md:px-12 lg:px-16`}
+  class={`fixed inset-x-0 top-0 z-50 border-b border-white/8 ${bgClass} px-5 py-5 text-white shadow-[0_18px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl backdrop-saturate-150 md:px-10 lg:px-14`}
 >
-  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4">
+  <div class="mx-auto grid max-w-7xl grid-cols-[44px_1fr] items-center gap-3 lg:flex lg:justify-between">
+    <button
+      id="nav-toggle"
+      type="button"
+      class="relative z-50 inline-flex h-11 w-11 items-center justify-center text-white/80 transition-colors hover:text-white lg:hidden"
+      aria-label="Abrir menú"
+      aria-controls="nav-mobile-menu"
+      aria-expanded="false"
+    >
+      <svg id="nav-icon-open" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.7" aria-hidden="true">
+        <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+      <svg id="nav-icon-close" class="hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.7" aria-hidden="true">
+        <path stroke-linecap="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
+    </button>
+
     <a
       href="/"
-      class="relative z-50 order-2 max-w-[12rem] font-display text-sm font-black uppercase leading-none tracking-[-0.065em] text-white transition-opacity hover:opacity-80 md:order-none md:max-w-none md:text-xl"
+      class="relative z-50 inline-flex h-8 w-fit max-w-full items-center justify-self-end font-display text-[0.78rem] font-semibold uppercase leading-none tracking-[-0.06em] text-white transition-opacity duration-300 hover:opacity-75 sm:text-sm sm:tracking-[-0.07em] lg:order-2 lg:justify-self-auto lg:text-xl lg:font-bold lg:tracking-[-0.08em]"
       aria-label="Fundamental Bike Parts - Inicio"
     >
       Fundamental <span class="hidden sm:inline">Bike Parts</span>
     </a>
 
-    <nav class="hidden items-center gap-10 md:flex" aria-label="Navegación principal">
+    <nav class="hidden items-center gap-7 lg:order-1 lg:flex xl:gap-9" aria-label="Navegación principal">
       {
-        links.map((link) => (
-          <a href={link.href} class={linkClass(link.href, link.key)} aria-current={isActive(link.href, link.key) ? 'page' : undefined}>
-            {link.label}
-            <span class={`absolute -bottom-0.5 left-0 h-px bg-white transition-all duration-300 ${isActive(link.href, link.key) ? 'w-full' : 'w-0 group-hover:w-full'}`} />
-          </a>
-        ))
+        links.map((link) =>
+          link.key === 'marcas' ? (
+            <div class="nav-mega-trigger flex h-8 items-center">
+              <a
+                href={link.href}
+                class={desktopLinkClass(link.href, link.key, link.weight)}
+                aria-current={isActive(link.href, link.key) ? 'page' : undefined}
+                aria-haspopup="true"
+              >
+                {link.label}
+                <svg class="ml-2 h-3 w-3 transition-transform duration-300 nav-mega-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m7 10 5 5 5-5" />
+                </svg>
+                <span
+                  class:list={[
+                    'absolute -bottom-1 left-0 h-px bg-white/70 transition-all duration-300',
+                    isActive(link.href, link.key) ? 'w-full' : 'w-0 group-hover:w-full',
+                  ]}
+                />
+              </a>
+
+              <div class="nav-mega-menu fixed inset-x-0 top-[72px] border-y border-white/8 bg-[#0c0b09]/98 text-white shadow-[0_35px_90px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+                <div class="mx-auto grid max-w-7xl grid-cols-[minmax(0,1.75fr)_minmax(300px,0.75fr)]">
+                  <div class="p-8 xl:p-10">
+                    <div class="mb-8 flex items-end justify-between border-b border-white/10 pb-5">
+                      <div>
+                        <p class="mb-2 text-[10px] uppercase tracking-[0.34em] text-[#C5A880]">Distribución Fundamental</p>
+                        <h2 class="text-2xl font-semibold tracking-tight">Tres marcas. Tres maneras de vivir la bici.</h2>
+                      </div>
+                      <a href="/marcas" class="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/45 transition-colors hover:text-[#C5A880]">
+                        Ver todas ↗
+                      </a>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-px bg-white/8">
+                      <a href="/t3r" class="group/brand flex min-h-[210px] flex-col justify-between bg-[#0c0b09] p-6 transition-colors duration-300 hover:bg-[#C5A880]/[0.055]">
+                        <div>
+                          <p class="mb-7 text-[9px] font-bold uppercase tracking-[0.3em] text-[#C5A880]">Marca principal</p>
+                          <img src="/logo_blanco_t3r.png" alt="T3R" class="h-9 w-auto object-contain object-left" />
+                        </div>
+                        <div>
+                          <p class="mb-4 max-w-[15rem] text-sm leading-6 text-white/42">Componentes probados, fabricación contrastada y precio honesto.</p>
+                          <span class="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60 transition-colors group-hover/brand:text-[#C5A880]">Explorar T3R →</span>
+                        </div>
+                      </a>
+
+                      <a href="/transfer" class="group/brand flex min-h-[210px] flex-col justify-between bg-[#0c0b09] p-6 transition-colors duration-300 hover:bg-white/[0.035]">
+                        <div>
+                          <p class="mb-7 text-[9px] uppercase tracking-[0.3em] text-white/28">Bicicletas</p>
+                          <img src="/logo_transfer.png" alt="Transfer Bike" class="h-9 w-auto object-contain object-left brightness-0 invert" />
+                        </div>
+                        <div>
+                          <p class="mb-4 max-w-[15rem] text-sm leading-6 text-white/42">Bicicletas y cuadros para disfrutar cada día sin complicaciones.</p>
+                          <span class="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50 transition-colors group-hover/brand:text-white">Conocer Transfer →</span>
+                        </div>
+                      </a>
+
+                      <a href="/whipp-off" class="group/brand flex min-h-[210px] flex-col justify-between bg-[#0c0b09] p-6 transition-colors duration-300 hover:bg-white/[0.035]">
+                        <div>
+                          <p class="mb-7 text-[9px] uppercase tracking-[0.3em] text-white/28">Equipamiento MTB</p>
+                          <img src="/logo_whipoff.png" alt="Whipp-Off" class="h-11 w-auto object-contain object-left brightness-0 invert" />
+                        </div>
+                        <div>
+                          <p class="mb-4 max-w-[15rem] text-sm leading-6 text-white/42">Ropa técnica con identidad para quienes rompen la línea recta.</p>
+                          <span class="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50 transition-colors group-hover/brand:text-white">Conocer Whipp-Off →</span>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+                  <a href="/marcas" class="group/promo relative min-h-[360px] overflow-hidden border-l border-white/8">
+                    <img src="/catalogo_whipoff/WHIP_OFF_1.jpg" alt="Marcas distribuidas por Fundamental" class="absolute inset-0 h-full w-full object-cover saturate-[0.7] transition-transform duration-700 group-hover/promo:scale-105" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-black/15"></div>
+                    <div class="absolute inset-x-0 bottom-0 p-8">
+                      <p class="mb-3 text-[10px] uppercase tracking-[0.3em] text-[#C5A880]">Universo Fundamental</p>
+                      <p class="text-3xl font-semibold leading-tight tracking-tight">Producto para moverse con intención.</p>
+                      <span class="mt-6 inline-flex text-[10px] font-semibold uppercase tracking-[0.22em] text-white/65">Descubrir marcas →</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <a
+              href={link.href}
+              class={desktopLinkClass(link.href, link.key, link.weight)}
+              aria-current={isActive(link.href, link.key) ? 'page' : undefined}
+            >
+              {link.label}
+              {link.weight === 'flagship' ? (
+                <span
+                  class:list={[
+                    'absolute -bottom-1 left-0 h-px bg-[#C5A880] transition-all duration-300',
+                    isActive(link.href, link.key) ? 'w-full' : 'w-8 group-hover:w-full',
+                  ]}
+                />
+              ) : (
+                <span
+                  class:list={[
+                    'absolute -bottom-1 left-0 h-px bg-white/70 transition-all duration-300',
+                    isActive(link.href, link.key) ? 'w-full' : 'w-0 group-hover:w-full',
+                  ]}
+                />
+              )}
+            </a>
+          )
+        )
       }
     </nav>
 
-    <button
-      id="nav-toggle"
-      type="button"
-      class="relative z-50 order-1 -ml-2 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-white transition-colors hover:bg-white/10 md:hidden"
-      aria-label="Abrir menú"
-      aria-controls="nav-mobile-menu"
-      aria-expanded="false"
-    >
-      <svg id="nav-icon-open" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
-      </svg>
-      <svg id="nav-icon-close" class="hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-      </svg>
-    </button>
   </div>
 </header>
 
 <div
   id="nav-mobile-menu"
-  class="fixed inset-0 z-40 flex translate-y-[-10px] flex-col justify-center overflow-hidden bg-[#1A100C] px-8 opacity-0 pointer-events-none transition-[opacity,transform] duration-300 ease-out md:hidden"
+  class="pointer-events-none fixed inset-0 z-40 translate-y-[-10px] overflow-y-auto bg-[#0b0908] px-7 pb-10 pt-28 opacity-0 transition-[opacity,transform] duration-300 ease-out lg:hidden"
   aria-hidden="true"
 >
-  <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.16),transparent_35%)]"></div>
-  <nav class="relative flex flex-col gap-7" aria-label="Navegación móvil">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(197,168,128,0.16),transparent_34%)]"></div>
+  <nav class="relative mx-auto flex max-w-md flex-col" aria-label="Navegación móvil">
     {
-      links.map((link) => (
-        <a href={link.href} data-menu-link class={mobileLinkClass(link.href, link.key)} aria-current={isActive(link.href, link.key) ? 'page' : undefined}>
+      links.map((link, index) => (
+        <a
+          href={link.href}
+          data-menu-link
+          class:list={[
+            'nav-menu-link flex items-center justify-between border-b border-white/8 py-6 uppercase transition-colors',
+            link.weight === 'flagship'
+              ? 'text-2xl font-semibold tracking-[-0.025em] text-[#C5A880]'
+              : index === 1
+                ? 'text-2xl font-medium tracking-[-0.025em] text-white'
+                : 'text-xl tracking-[-0.02em] text-white/62 hover:text-white',
+          ]}
+          aria-current={isActive(link.href, link.key) ? 'page' : undefined}
+        >
           {link.label}
+          <span class="text-base font-light opacity-40">↗</span>
         </a>
       ))
     }
   </nav>
-  <p class="nav-menu-link relative mt-12 max-w-xs text-sm leading-relaxed text-white/45">
-    Distribución, marcas y componentes para moverse con más intención.
+  <p class="nav-menu-link relative mx-auto mt-10 max-w-md text-sm leading-relaxed text-white/38">
+    Distribución especializada de componentes, bicicletas y equipamiento.
   </p>
 </div>
 
 <style>
+  .nav-mega-trigger {
+    position: relative;
+  }
+
+  .nav-mega-trigger::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: -18px;
+    right: -18px;
+    height: 24px;
+  }
+
+  .nav-mega-menu {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition:
+      opacity 220ms ease,
+      visibility 220ms ease,
+      transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-mega-trigger:hover .nav-mega-menu,
+  .nav-mega-trigger:focus-within .nav-mega-menu,
+  .nav-mega-menu:hover {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .nav-mega-trigger:hover .nav-mega-chevron,
+  .nav-mega-trigger:focus-within .nav-mega-chevron {
+    transform: rotate(180deg);
+  }
+
   .nav-menu-link {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(10px);
     transition: opacity 0.28s ease-out, transform 0.28s ease-out, color 0.2s;
   }
 
@@ -108,11 +265,11 @@ function mobileLinkClass(href: string, key: NavKey) {
     transform: translateY(0);
   }
 
-  #nav-mobile-menu.is-open .nav-menu-link:nth-child(1) { transition-delay: 0.05s; }
-  #nav-mobile-menu.is-open .nav-menu-link:nth-child(2) { transition-delay: 0.1s; }
-  #nav-mobile-menu.is-open .nav-menu-link:nth-child(3) { transition-delay: 0.15s; }
-  #nav-mobile-menu.is-open .nav-menu-link:nth-child(4) { transition-delay: 0.2s; }
-  #nav-mobile-menu.is-open .nav-menu-link:nth-child(5) { transition-delay: 0.25s; }
+  #nav-mobile-menu.is-open .nav-menu-link:nth-child(1) { transition-delay: 0.04s; }
+  #nav-mobile-menu.is-open .nav-menu-link:nth-child(2) { transition-delay: 0.08s; }
+  #nav-mobile-menu.is-open .nav-menu-link:nth-child(3) { transition-delay: 0.12s; }
+  #nav-mobile-menu.is-open .nav-menu-link:nth-child(4) { transition-delay: 0.16s; }
+  #nav-mobile-menu.is-open .nav-menu-link:nth-child(5) { transition-delay: 0.2s; }
 
   @media (prefers-reduced-motion: reduce) {
     #nav-mobile-menu,
@@ -130,20 +287,9 @@ function mobileLinkClass(href: string, key: NavKey) {
     const iconClose = document.getElementById('nav-icon-close');
     if (!toggle || !menu) return;
 
-    const openMenu = () => {
-      menu.classList.remove('opacity-0', 'translate-y-[-10px]', 'pointer-events-none');
-      menu.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto', 'is-open');
-      menu.setAttribute('aria-hidden', 'false');
-      iconOpen?.classList.add('hidden');
-      iconClose?.classList.remove('hidden');
-      toggle.setAttribute('aria-expanded', 'true');
-      toggle.setAttribute('aria-label', 'Cerrar menú');
-      document.body.classList.add('overflow-hidden');
-    };
-
     const closeMenu = () => {
-      menu.classList.add('opacity-0', 'translate-y-[-10px]', 'pointer-events-none');
-      menu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto', 'is-open');
+      menu.classList.add('pointer-events-none', 'translate-y-[-10px]', 'opacity-0');
+      menu.classList.remove('pointer-events-auto', 'translate-y-0', 'opacity-100', 'is-open');
       menu.setAttribute('aria-hidden', 'true');
       iconOpen?.classList.remove('hidden');
       iconClose?.classList.add('hidden');
@@ -152,9 +298,19 @@ function mobileLinkClass(href: string, key: NavKey) {
       document.body.classList.remove('overflow-hidden');
     };
 
+    const openMenu = () => {
+      menu.classList.remove('pointer-events-none', 'translate-y-[-10px]', 'opacity-0');
+      menu.classList.add('pointer-events-auto', 'translate-y-0', 'opacity-100', 'is-open');
+      menu.setAttribute('aria-hidden', 'false');
+      iconOpen?.classList.add('hidden');
+      iconClose?.classList.remove('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Cerrar menú');
+      document.body.classList.add('overflow-hidden');
+    };
+
     toggle.addEventListener('click', () => {
-      const isOpen = menu.classList.contains('is-open');
-      if (isOpen) closeMenu();
+      if (menu.classList.contains('is-open')) closeMenu();
       else openMenu();
     });
 

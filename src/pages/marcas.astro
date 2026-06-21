@@ -54,11 +54,21 @@ const brands = [
           data-delay={String(i + 1)}
           class={`group pt-10 md:pt-14 pb-12 md:pb-20 flex flex-col gap-7 transition-colors duration-300 hover:bg-[#F8F7F5] border-b md:border-b-0 border-gray-200 ${i < brands.length - 1 ? 'md:border-r' : ''} px-2 md:px-10`}
         >
-          {brand.logo ? (
-            <img src={brand.logo} alt={brand.name} class="h-32 md:h-60 w-auto object-contain" />
-          ) : (
-            <h2 class="text-[48px] font-bold leading-none">{brand.name}</h2>
-          )}
+          <a
+            href={brand.href}
+            aria-label={'Ir a la página de ' + brand.name}
+            class="block w-fit focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6B8CAE]"
+          >
+            {brand.logo ? (
+              <img
+                src={brand.logo}
+                alt={brand.name}
+                class="h-32 w-auto object-contain transition-transform duration-500 group-hover:scale-[1.03] md:h-60"
+              />
+            ) : (
+              <h2 class="text-[48px] font-bold leading-none">{brand.name}</h2>
+            )}
+          </a>
           <p class="text-lg text-[#6B8CAE] leading-relaxed max-w-[280px]">
             {brand.description}
           </p>
