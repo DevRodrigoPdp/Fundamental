@@ -1,65 +1,124 @@
 ---
+type NavKey = 'marcas' | 'nosotros' | 'contacto';
+
 interface Props {
-  active?: 'marcas' | 'nosotros' | 'contacto';
+  active?: NavKey;
   bgClass?: string;
 }
-const { active, bgClass = 'bg-[#1A100C]/80' } = Astro.props;
 
-function linkClass(key: string) {
-  return active === key
-    ? 'text-base text-white font-medium'
-    : 'text-base text-white/70 hover:text-white transition-colors';
+const { active, bgClass = 'bg-[#1A100C]/95' } = Astro.props;
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const links: Array<{ href: string; label: string; key: NavKey }> = [
+  { href: '/marcas', label: 'Marcas', key: 'marcas' },
+  { href: '/nosotros', label: 'Nosotros', key: 'nosotros' },
+  { href: '/contacto', label: 'Contacto', key: 'contacto' },
+];
+
+function isActive(href: string, key: NavKey) {
+  const normalizedHref = href.replace(/\/$/, '') || '/';
+  return active === key || currentPath === normalizedHref || currentPath.startsWith(`${normalizedHref}/`);
+}
+
+function linkClass(href: string, key: NavKey) {
+  return [
+    'group relative py-2 text-[0.78rem] font-medium uppercase tracking-[0.2em] transition-colors duration-300',
+    isActive(href, key) ? 'text-white' : 'text-white/62 hover:text-white',
+  ].join(' ');
+}
+
+function mobileLinkClass(href: string, key: NavKey) {
+  return [
+    'nav-menu-link text-3xl uppercase tracking-[-0.04em] transition-colors duration-300',
+    isActive(href, key) ? 'text-white' : 'text-white/68 hover:text-white',
+  ].join(' ');
 }
 ---
 
-<header class={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-16 py-5 md:py-6 ${bgClass} backdrop-blur-md`}>
-  <a href="/" class="order-2 md:order-none font-display uppercase text-base md:text-xl tracking-[-0.03em] text-white" style="font-weight: 600;" transition:name="nav-logo">
-    Fundamental Bike Parts
-  </a>
+<header
+  class={`fixed left-0 right-0 top-0 z-50 border-b border-white/10 ${bgClass} px-5 py-4 text-white shadow-[0_18px_60px_rgba(0,0,0,0.18)] backdrop-blur-xl backdrop-saturate-150 md:px-12 lg:px-16`}
+>
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4">
+    <a
+      href="/"
+      class="relative z-50 order-2 max-w-[12rem] font-display text-sm font-black uppercase leading-none tracking-[-0.065em] text-white transition-opacity hover:opacity-80 md:order-none md:max-w-none md:text-xl"
+      aria-label="Fundamental Bike Parts - Inicio"
+    >
+      Fundamental <span class="hidden sm:inline">Bike Parts</span>
+    </a>
 
-  <!-- Desktop -->
-  <nav class="hidden md:flex gap-10">
-    <a href="/marcas" class={linkClass('marcas')}>Marcas</a>
-    <a href="/nosotros" class={linkClass('nosotros')}>Nosotros</a>
-    <a href="/contacto" class={linkClass('contacto')}>Contacto</a>
-  </nav>
+    <nav class="hidden items-center gap-10 md:flex" aria-label="Navegación principal">
+      {
+        links.map((link) => (
+          <a href={link.href} class={linkClass(link.href, link.key)} aria-current={isActive(link.href, link.key) ? 'page' : undefined}>
+            {link.label}
+            <span class={`absolute -bottom-0.5 left-0 h-px bg-white transition-all duration-300 ${isActive(link.href, link.key) ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+          </a>
+        ))
+      }
+    </nav>
 
-  <!-- Mobile hamburger -->
-  <button id="nav-toggle" type="button" class="order-1 md:order-none md:hidden text-white p-2 -ml-2 cursor-pointer" aria-label="Abrir menú" aria-expanded="false">
-    <svg id="nav-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-    <svg id="nav-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  </button>
+    <button
+      id="nav-toggle"
+      type="button"
+      class="relative z-50 order-1 -ml-2 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-white transition-colors hover:bg-white/10 md:hidden"
+      aria-label="Abrir menú"
+      aria-controls="nav-mobile-menu"
+      aria-expanded="false"
+    >
+      <svg id="nav-icon-open" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+      <svg id="nav-icon-close" class="hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
 </header>
 
-<!-- Mobile menu panel -->
 <div
   id="nav-mobile-menu"
-  class="fixed inset-0 z-40 bg-[#1A100C] md:hidden flex flex-col items-center justify-center gap-8 opacity-0 scale-95 pointer-events-none transition-[opacity,transform] duration-300 ease-out"
+  class="fixed inset-0 z-40 flex translate-y-[-10px] flex-col justify-center overflow-hidden bg-[#1A100C] px-8 opacity-0 pointer-events-none transition-[opacity,transform] duration-300 ease-out md:hidden"
+  aria-hidden="true"
 >
-  <a href="/marcas" data-menu-link class="nav-menu-link text-2xl text-white/80 hover:text-white transition-colors">Marcas</a>
-  <a href="/nosotros" data-menu-link class="nav-menu-link text-2xl text-white/80 hover:text-white transition-colors">Nosotros</a>
-  <a href="/contacto" data-menu-link class="nav-menu-link text-2xl text-white/80 hover:text-white transition-colors">Contacto</a>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.16),transparent_35%)]"></div>
+  <nav class="relative flex flex-col gap-7" aria-label="Navegación móvil">
+    {
+      links.map((link) => (
+        <a href={link.href} data-menu-link class={mobileLinkClass(link.href, link.key)} aria-current={isActive(link.href, link.key) ? 'page' : undefined}>
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+  <p class="nav-menu-link relative mt-12 max-w-xs text-sm leading-relaxed text-white/45">
+    Distribución, marcas y componentes para moverse con más intención.
+  </p>
 </div>
 
 <style>
   .nav-menu-link {
     opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.25s ease-out, transform 0.25s ease-out, color 0.2s;
+    transform: translateY(12px);
+    transition: opacity 0.28s ease-out, transform 0.28s ease-out, color 0.2s;
   }
+
   #nav-mobile-menu.is-open .nav-menu-link {
     opacity: 1;
     transform: translateY(0);
   }
+
   #nav-mobile-menu.is-open .nav-menu-link:nth-child(1) { transition-delay: 0.05s; }
   #nav-mobile-menu.is-open .nav-menu-link:nth-child(2) { transition-delay: 0.1s; }
   #nav-mobile-menu.is-open .nav-menu-link:nth-child(3) { transition-delay: 0.15s; }
+  #nav-mobile-menu.is-open .nav-menu-link:nth-child(4) { transition-delay: 0.2s; }
+  #nav-mobile-menu.is-open .nav-menu-link:nth-child(5) { transition-delay: 0.25s; }
+
   @media (prefers-reduced-motion: reduce) {
-    #nav-mobile-menu, .nav-menu-link { transition: none !important; }
+    #nav-mobile-menu,
+    .nav-menu-link {
+      transition: none !important;
+    }
   }
 </style>
 
@@ -72,28 +131,40 @@ function linkClass(key: string) {
     if (!toggle || !menu) return;
 
     const openMenu = () => {
-      menu.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
-      menu.classList.add('opacity-100', 'scale-100', 'pointer-events-auto', 'is-open');
+      menu.classList.remove('opacity-0', 'translate-y-[-10px]', 'pointer-events-none');
+      menu.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto', 'is-open');
+      menu.setAttribute('aria-hidden', 'false');
       iconOpen?.classList.add('hidden');
       iconClose?.classList.remove('hidden');
       toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Cerrar menú');
       document.body.classList.add('overflow-hidden');
     };
 
     const closeMenu = () => {
-      menu.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
-      menu.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto', 'is-open');
+      menu.classList.add('opacity-0', 'translate-y-[-10px]', 'pointer-events-none');
+      menu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto', 'is-open');
+      menu.setAttribute('aria-hidden', 'true');
       iconOpen?.classList.remove('hidden');
       iconClose?.classList.add('hidden');
       toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Abrir menú');
       document.body.classList.remove('overflow-hidden');
     };
 
     toggle.addEventListener('click', () => {
       const isOpen = menu.classList.contains('is-open');
-      if (isOpen) closeMenu(); else openMenu();
+      if (isOpen) closeMenu();
+      else openMenu();
     });
 
     menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menu.classList.contains('is-open')) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
   });
 </script>

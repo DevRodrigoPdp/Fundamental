@@ -49,6 +49,67 @@ const novedades = (products ?? []).map((p: any) => ({
     [data-reveal].visible { opacity: 1; transform: translateY(0); }
     [data-delay="1"] { transition-delay: 0.08s; }
     [data-delay="2"] { transition-delay: 0.16s; }
+
+    .paint-fill-button {
+      --paint-fill: white;
+      --paint-text: #1A100C;
+      --paint-border: white;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      transition: border-color 0.35s ease, color 0.35s ease;
+    }
+
+    .paint-fill-button--dark {
+      --paint-fill: #1A100C;
+      --paint-text: white;
+      --paint-border: #1A100C;
+    }
+
+    .paint-fill-button::before {
+      content: '';
+      position: absolute;
+      left: -18%;
+      top: 0;
+      z-index: 0;
+      width: 136%;
+      height: 135%;
+      background: var(--paint-fill);
+      border-radius: 0 0 48% 52%;
+      transform: translateY(-112%) rotate(-3deg);
+      transition: transform 0.58s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .paint-fill-button::after {
+      content: '';
+      position: absolute;
+      left: 12%;
+      top: 0;
+      z-index: 0;
+      width: 38%;
+      height: 60%;
+      background: var(--paint-fill);
+      border-radius: 999px;
+      opacity: 0.9;
+      transform: translateY(-140%) scale(0.92);
+      transition: transform 0.64s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .paint-fill-button:hover,
+    .paint-fill-button:focus-visible {
+      color: var(--paint-text);
+      border-color: var(--paint-border);
+    }
+
+    .paint-fill-button:hover::before,
+    .paint-fill-button:focus-visible::before {
+      transform: translateY(-5%) rotate(0deg);
+    }
+
+    .paint-fill-button:hover::after,
+    .paint-fill-button:focus-visible::after {
+      transform: translateY(35%) scale(1.1);
+    }
   </style>
 
   <Nav />
@@ -80,8 +141,8 @@ const novedades = (products ?? []).map((p: any) => ({
           Ver productos
         </a>
         <a href="/t3r"
-          class="border border-white/25 text-white/70 text-xs px-5 md:px-8 py-3.5 md:py-4 hover:border-white/50 hover:text-white transition-colors tracking-[0.1em] uppercase cursor-pointer">
-          Conocer T3R
+          class="paint-fill-button border border-white/25 text-white/70 text-xs px-5 md:px-8 py-3.5 md:py-4 tracking-[0.1em] uppercase cursor-pointer">
+          <span class="relative z-10">Conocer T3R</span>
         </a>
       </div>
     </div>
@@ -131,9 +192,9 @@ const novedades = (products ?? []).map((p: any) => ({
       )}
 
       <div class="flex justify-center">
-        <a href="/t3r"
-          class="border border-[#1A100C] text-[#1A100C] text-xs font-semibold px-10 py-4 hover:bg-[#1A100C] hover:text-white transition-colors tracking-[0.2em] uppercase cursor-pointer">
-          Ver catálogo completo
+        <a href="/catalogo"
+          class="paint-fill-button paint-fill-button--dark border border-[#1A100C] text-[#1A100C] text-xs font-semibold px-10 py-4 tracking-[0.2em] uppercase cursor-pointer">
+          <span class="relative z-10">Ver catálogo completo</span>
         </a>
       </div>
     </div>
@@ -151,12 +212,12 @@ const novedades = (products ?? []).map((p: any) => ({
       decoding="async"
     />
     <div class="absolute inset-0 bg-[#1A100C]/55"></div>
-    <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-8">
+    <div class="pointer-events-none absolute inset-0 z-30 flex flex-col items-center justify-center px-8 text-center">
       <img data-reveal src="/logo_blanco_t3r.png" alt="T3R" class="h-20 md:h-36 w-auto mb-6 opacity-95" />
       <p data-reveal data-delay="1" class="text-xs text-white/75 tracking-[0.35em] uppercase mb-8">The Three Riders · Componentes fundamentales</p>
       <a data-reveal data-delay="2" href="/t3r"
-        class="border border-white text-white text-xs font-semibold px-10 py-4 hover:bg-white hover:text-[#1A100C] transition-colors tracking-[0.2em] uppercase cursor-pointer relative z-30">
-        Saber más
+        class="paint-fill-button pointer-events-auto border border-white text-white text-xs font-semibold px-10 py-4 tracking-[0.2em] uppercase cursor-pointer relative z-30">
+        <span class="relative z-10">Saber más</span>
       </a>
     </div>
   </section>
@@ -172,12 +233,12 @@ const novedades = (products ?? []).map((p: any) => ({
       decoding="async"
     />
     <div class="absolute inset-0 bg-[#111]/45"></div>
-    <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-8">
+    <div class="pointer-events-none absolute inset-0 z-30 flex flex-col items-center justify-center px-8 text-center">
       <img data-reveal src="/logo_transfer.png" alt="Transfer Bike" class="h-20 md:h-36 w-auto brightness-0 invert mb-6" />
       <p data-reveal data-delay="1" class="text-xs text-white/75 tracking-[0.35em] uppercase mb-8">Bicicletas · Una bici, cada día</p>
       <a data-reveal data-delay="2" href="/transfer"
-        class="border border-white text-white text-xs font-semibold px-10 py-4 hover:bg-white hover:text-[#111] transition-colors tracking-[0.2em] uppercase cursor-pointer relative z-30">
-        Descubre
+        class="paint-fill-button pointer-events-auto border border-white text-white text-xs font-semibold px-10 py-4 tracking-[0.2em] uppercase cursor-pointer relative z-30">
+        <span class="relative z-10">Descubre</span>
       </a>
     </div>
   </section>
@@ -193,11 +254,11 @@ const novedades = (products ?? []).map((p: any) => ({
       decoding="async"
     />
     <div class="absolute inset-0 bg-black/40"></div>
-    <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-8">
+    <div class="pointer-events-none absolute inset-0 z-30 flex flex-col items-center justify-center px-8 text-center">
       <img data-reveal src="/logo_whipoff.png" alt="Whipp-Off" class="h-24 md:h-40 w-auto brightness-0 invert mb-8" />
       <a data-reveal data-delay="1" href="/whipp-off"
-        class="border border-white text-white text-xs font-semibold px-10 py-4 hover:bg-white hover:text-black transition-colors tracking-[0.2em] uppercase cursor-pointer relative z-30">
-        Saber más
+        class="paint-fill-button pointer-events-auto border border-white text-white text-xs font-semibold px-10 py-4 tracking-[0.2em] uppercase cursor-pointer relative z-30">
+        <span class="relative z-10">Saber más</span>
       </a>
     </div>
   </section>

@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import { Factory, Bike, ShieldCheck, Timer, MapPin, ExternalLink, Search } from 'lucide-astro';
 import '../styles/global.css';
 
 const puntosVenta = [
@@ -24,15 +25,59 @@ const pilares = [
 ];
 
 const categorias = [
-  { cat: 'Discos de freno', img: '/catalogo_t3r/cutouts/disco_freno.png' },
-  { cat: 'Pastillas de freno', img: '/catalogo_t3r/cutouts/pastillas_freno.png' },
-  { cat: 'Pedales plataforma', img: '/catalogo_t3r/cutouts/pedal_plataforma.png' },
-  { cat: 'Pedales automáticos', img: '/catalogo_t3r/cutouts/pedal_automatico.png' },
-  { cat: 'Pedales carretera', img: '/catalogo_t3r/cutouts/pedal_carretera.png' },
-  { cat: 'Pedalier / BB', img: '/catalogo_t3r/cutouts/pedalier.png' },
-  { cat: 'Puños', img: '/catalogo_t3r/cutouts/puno.png' },
-  { cat: 'Válvulas tubeless', img: '/catalogo_t3r/cutouts/valvula.png' },
+  {
+    cat: 'Discos de freno',
+    tag: 'Frenada',
+    text: 'Control, mordida y medidas clave para montar una gama honesta sin inflar el precio.',
+    img: '/catalogo_t3r/cutouts/disco_freno.png',
+  },
+  {
+    cat: 'Pastillas de freno',
+    tag: 'Frenada',
+    text: 'Referencias compatibles para taller: claras, directas y pensadas para rotar bien.',
+    img: '/catalogo_t3r/cutouts/pastillas_freno.png',
+  },
+  {
+    cat: 'Pedales plataforma',
+    tag: 'Contacto',
+    text: 'Agarre y resistencia para uso diario, e-bike y montaña sin pagar por ruido de marca.',
+    img: '/catalogo_t3r/cutouts/pedal_plataforma.png',
+  },
+  {
+    cat: 'Pedales automáticos',
+    tag: 'Contacto',
+    text: 'Entrada, ajuste y fiabilidad para quien quiere rendimiento sin complicarse.',
+    img: '/catalogo_t3r/cutouts/pedal_automatico.png',
+  },
+  {
+    cat: 'Pedales carretera',
+    tag: 'Road',
+    text: 'Ligereza y apoyo para carretera, con el foco puesto en lo que realmente se nota.',
+    img: '/catalogo_t3r/cutouts/pedal_carretera.png',
+  },
+  {
+    cat: 'Pedalier / BB',
+    tag: 'Transmisión',
+    text: 'Ejes y pedalieres para resolver compatibilidades de taller sin convertirlo en ciencia oscura.',
+    img: '/catalogo_t3r/cutouts/pedalier.png',
+  },
+  {
+    cat: 'Puños',
+    tag: 'Control',
+    text: 'Tacto, comodidad y durabilidad para los puntos donde la bici se siente de verdad.',
+    img: '/catalogo_t3r/cutouts/puno.png',
+  },
+  {
+    cat: 'Válvulas tubeless',
+    tag: 'Tubeless',
+    text: 'Pequeñas piezas que tienen que funcionar siempre. Simple, preciso, sin teatro.',
+    img: '/catalogo_t3r/cutouts/valvula.png',
+  },
 ];
+
+function categoriaCardLayout(index: number, total: number) {
+  return 'min-h-[360px] lg:col-span-6 min-[2560px]:col-span-4';
+}
 ---
 
 <Layout title="T3R · The Three Riders — Fundamental">
@@ -44,6 +89,22 @@ const categorias = [
     }
     .marquee-track { animation: marquee 22s linear infinite; }
     .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+    .t3r-family-card::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      background: #C4A072;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .t3r-family-card:hover::after,
+    .t3r-family-card:focus-visible::after {
+      transform: scaleX(1);
+    }
     @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
     html { scroll-behavior: smooth; }
   </style>
@@ -80,28 +141,74 @@ const categorias = [
     </div>
   </section>
 
-  <!-- GRID DE CATEGORÍAS -->
-  <section id="categorias" class="bg-white px-5 md:px-16 py-24">
-    <div class="max-w-6xl mx-auto">
-      <div class="mb-14" data-reveal>
-        <p class="text-sm text-[#6B8CAE] tracking-[0.3em] uppercase mb-6">Lo que distribuimos</p>
-        <h2 class="text-[32px] md:text-[56px] font-bold leading-tight">Explora por categoría.</h2>
+  <!-- FAMILIAS DE PRODUCTO -->
+  <section id="categorias" class="relative overflow-hidden bg-white px-5 py-24 text-[#111111] md:px-16 md:py-28">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_75%_0%,rgba(196,160,114,0.16),transparent_34%)]"></div>
+    <div class="absolute inset-x-0 top-0 h-px bg-black/10"></div>
+    <div class="relative mx-auto max-w-6xl min-[2560px]:max-w-[1800px]">
+      <div class="mb-14 grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-end" data-reveal>
+        <div>
+          <p class="mb-6 text-xs uppercase tracking-[0.35em] text-[#C4A072]">Gama T3R</p>
+          <h2 class="text-[36px] font-bold leading-[0.95] tracking-tight md:text-[64px]">
+            Componentes esenciales.<br />
+            <span class="text-black/36">Sin rodeos.</span>
+          </h2>
+        </div>
+        <p class="max-w-xl text-base leading-relaxed text-black/52 md:justify-self-end">
+          Una selección pensada para tienda y taller: referencias claras, producto probado y precio donde tiene que estar. Menos escaparate, más pieza.
+        </p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-gray-200">
+
+      <div class="grid gap-4 lg:grid-cols-12">
         {categorias.map((item, i) => (
-          <div data-reveal data-delay={String(i % 4)} class="group relative bg-white overflow-hidden flex flex-col md:block md:h-[260px]">
-            <div class="order-2 md:order-none relative z-10 flex flex-col gap-4 md:h-full md:justify-between p-6 md:p-8 md:w-[55%]">
-              <div class="w-7 h-px bg-[#6B8CAE]"></div>
-              <h3 class="font-bold text-xl md:text-2xl leading-tight">{item.cat}</h3>
-              <a href={`/catalogo?q=${encodeURIComponent(item.cat)}`} class="text-base font-medium inline-flex items-center gap-1 w-fit">
-                Ver más
-                <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
-              </a>
+          <a
+            href={'/catalogo?q=' + encodeURIComponent(item.cat)}
+            data-reveal
+            data-delay={String(i % 4)}
+            class:list={[
+              't3r-family-card group relative overflow-hidden border border-black/10 bg-white transition-[border-color,box-shadow,background-color] duration-500 hover:border-[#C4A072]/55 hover:shadow-[0_24px_70px_rgba(17,17,17,0.10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C4A072]/60',
+              categoriaCardLayout(i, categorias.length),
+            ]}
+          >
+            <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(196,160,114,0.14),transparent_42%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+
+            <div class="relative z-10 flex min-h-[inherit] flex-col justify-between p-7 md:p-9">
+              <div>
+                <div class="mb-5 flex items-center gap-3">
+                  <span class="h-px w-7 bg-[#C4A072]"></span>
+                  <p class="text-[10px] uppercase tracking-[0.32em] text-[#C4A072]">{item.tag}</p>
+                </div>
+                <h3
+                  class:list={[
+                    'max-w-sm font-bold leading-[0.95] tracking-tight',
+                    'text-3xl md:text-4xl',
+                  ]}
+                >
+                  {item.cat}
+                </h3>
+                <p class="mt-5 max-w-sm text-sm leading-relaxed text-black/52">
+                  {item.text}
+                </p>
+              </div>
+
+              <div class="mt-10 flex items-end justify-between gap-6">
+                <span class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-black/56 transition-colors group-hover:text-[#C4A072]">
+                  Ver referencias
+                  <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </span>
+                <img
+                  src={item.img}
+                  alt={item.cat}
+                  class:list={[
+                    'object-contain drop-shadow-[0_24px_34px_rgba(0,0,0,0.16)] transition-transform duration-700 group-hover:scale-105 group-hover:-rotate-2',
+                    'h-52 w-52 md:h-64 md:w-64 min-[2560px]:h-72 min-[2560px]:w-72',
+                  ]}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             </div>
-            <div class="order-1 md:order-none relative md:absolute md:right-0 md:top-0 md:bottom-0 flex items-center justify-center p-6 md:p-8 md:w-[48%]" style="height: 160px;">
-              <img src={item.img} alt={item.cat} class="w-full h-full object-contain" loading="lazy" decoding="async" />
-            </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>
@@ -190,42 +297,48 @@ const categorias = [
   </div>
 
   <!-- PILARES -->
-  <section class="bg-[#0f0e0c] px-5 md:px-16 py-24 border-t border-white/5">
-    <div class="max-w-6xl mx-auto">
-      <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-12 text-center" data-reveal>Nuestros compromisos</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-px bg-white/5">
+  <section class="relative overflow-hidden border-t border-white/5 bg-[#0f0e0c] px-5 py-24 md:px-16 md:py-28">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,rgba(196,160,114,0.10),transparent_30%)]"></div>
+    <div class="relative mx-auto max-w-7xl">
+      <div class="mb-14 grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-end" data-reveal>
+        <div>
+          <p class="mb-5 text-xs uppercase tracking-[0.35em] text-[#C4A072]">Nuestros compromisos</p>
+          <h2 class="text-4xl font-bold leading-[0.95] tracking-tight text-white md:text-6xl">
+            Cuatro principios.<br />
+            <span class="text-white/35">Cero atajos.</span>
+          </h2>
+        </div>
+        <p class="max-w-xl text-base leading-relaxed text-white/48 md:justify-self-end">
+          Lo que entra en una caja T3R tiene que cumplir una regla sencilla: aportar valor real a la tienda y funcionar cuando toca.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {pilares.map((p, i) => (
-          <div class="bg-[#0f0e0c] p-8 md:p-10 flex flex-col items-center text-center" data-reveal data-delay={String(i)}>
-            <div class="w-14 h-14 flex items-center justify-center mb-6 text-[#C4A072]">
-              {p.icon === 'factory' && (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-8 h-8">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V10l5 4v-4l5 4v-4l4 3v8M5 10l4-4 M9 21v-4h3v4" />
-                </svg>
-              )}
-              {p.icon === 'rider' && (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-8 h-8">
-                  <circle cx="6" cy="17" r="3" stroke-linecap="round" stroke-linejoin="round" />
-                  <circle cx="18" cy="17" r="3" stroke-linecap="round" stroke-linejoin="round" />
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 17l3-7h6l3 7M9 10l2-3h3" />
-                  <circle cx="14" cy="5" r="1.5" />
-                </svg>
-              )}
-              {p.icon === 'shield' && (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-8 h-8">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
-                </svg>
-              )}
-              {p.icon === 'durability' && (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-8 h-8">
-                  <circle cx="12" cy="12" r="9" stroke-linecap="round" stroke-linejoin="round" />
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 3" />
-                </svg>
-              )}
+          <article
+            class="group relative min-h-[340px] overflow-hidden border border-white/8 bg-white/[0.025] p-7 transition-[border-color,background-color,box-shadow] duration-500 hover:border-[#C4A072]/45 hover:bg-[#C4A072]/[0.055] hover:shadow-[0_26px_70px_rgba(0,0,0,0.24)] md:p-8"
+            data-reveal
+            data-delay={String(i)}
+          >
+            <div class="absolute inset-x-0 bottom-0 h-[3px] origin-left scale-x-0 bg-[#C4A072] transition-transform duration-500 group-hover:scale-x-100"></div>
+
+            <div class="mb-12 flex items-start">
+              <div class="flex h-14 w-14 items-center justify-start text-[#C4A072] transition-colors duration-500 group-hover:text-[#D8B98D]">
+                {p.icon === 'factory' && <Factory size={27} stroke-width={1.5} />}
+                {p.icon === 'rider' && <Bike size={27} stroke-width={1.5} />}
+                {p.icon === 'shield' && <ShieldCheck size={27} stroke-width={1.5} />}
+                {p.icon === 'durability' && <Timer size={27} stroke-width={1.5} />}
+              </div>
             </div>
-            <h3 class="text-white font-semibold text-lg mb-4">{p.title}</h3>
-            <p class="text-white/45 text-sm leading-relaxed">{p.text}</p>
-          </div>
+
+            <div class="mb-6 h-px w-10 bg-[#C4A072]/55 transition-[width,background-color] duration-500 group-hover:w-20 group-hover:bg-[#C4A072]"></div>
+            <h3 class="mb-4 max-w-[13rem] text-2xl font-semibold leading-tight tracking-tight text-white">
+              {p.title}
+            </h3>
+            <p class="max-w-[17rem] text-sm leading-7 text-white/45 transition-colors duration-500 group-hover:text-white/62">
+              {p.text}
+            </p>
+          </article>
         ))}
       </div>
     </div>
@@ -264,24 +377,194 @@ const categorias = [
         <p class="text-white/45 text-base mt-4 max-w-xl leading-relaxed">
           T3R está disponible en estas tiendas especializadas repartidas por España. Pregunta por nuestras referencias directamente en el punto de venta más cercano.
         </p>
+        <label class="mt-8 flex max-w-md items-center gap-3 border-b border-white/15 pb-3 text-white transition-colors focus-within:border-[#C4A072]">
+          <Search size={18} stroke-width={1.6} class="shrink-0 text-[#C4A072]" aria-hidden="true" />
+          <span class="sr-only">Buscar tienda por código postal</span>
+          <input
+            id="store-postcode-search"
+            type="search"
+            inputmode="numeric"
+            maxlength="5"
+            autocomplete="postal-code"
+            placeholder="Buscar por código postal"
+            class="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/30"
+          />
+        </label>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5" data-reveal>
-        {puntosVenta.map((t) => (
-          <div class="bg-[#0d0c0a] p-7">
-            <h3 class="text-white font-semibold text-base mb-2">{t.nombre}</h3>
-            <p class="text-white/50 text-sm leading-relaxed mb-1">{t.direccion}</p>
-            <p class="text-white/50 text-sm leading-relaxed mb-3">{t.poblacion} · {t.cp}</p>
-            <div class="flex flex-wrap items-center gap-x-5 gap-y-1 text-xs">
-              {t.tel && (
-                <a href={`tel:${t.tel.split(' / ')[0].replace(/\s+/g, '')}`} class="text-white/40 hover:text-[#C4A072] transition-colors">{t.tel}</a>
-              )}
-              <a href={`mailto:${t.mail}`} class="text-white/40 hover:text-[#C4A072] transition-colors">{t.mail}</a>
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(480px,1.1fr)] lg:items-start" data-reveal>
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
+          {puntosVenta.map((t, i) => {
+            const mapQuery = [t.nombre, t.direccion, t.cp, t.poblacion, 'España'].join(', ');
+            const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(mapQuery);
+            return (
+              <article
+                data-store-card
+                data-store-postcode={t.cp}
+                class:list={[
+                  'border bg-[#0d0c0a] p-6 transition-[border-color,background-color] duration-300',
+                  i === 0 ? 'is-active border-[#C4A072]/45 bg-[#C4A072]/[0.045]' : 'border-white/7',
+                ]}
+              >
+                <h3 class="mb-3 text-base font-semibold text-white">{t.nombre}</h3>
+                <a
+                  href={mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-map-query={mapQuery}
+                  data-map-name={t.nombre}
+                  class="group/address mb-4 flex items-start gap-3 text-sm leading-relaxed text-white/50 transition-colors hover:text-[#C4A072] focus-visible:outline-none focus-visible:text-[#C4A072]"
+                  aria-label={'Mostrar ' + t.nombre + ' en Google Maps'}
+                >
+                  <MapPin size={17} stroke-width={1.6} class="mt-0.5 shrink-0 text-[#C4A072]" aria-hidden="true" />
+                  <span>
+                    <span class="block">{t.direccion}</span>
+                    <span class="block">{t.poblacion} · {t.cp}</span>
+                  </span>
+                  <ExternalLink size={13} stroke-width={1.6} class="mt-1 ml-auto shrink-0 opacity-0 transition-opacity group-hover/address:opacity-100" aria-hidden="true" />
+                </a>
+                <div class="flex flex-wrap items-center gap-x-5 gap-y-1 text-xs">
+                  {t.tel && (
+                    <a href={`tel:${t.tel.split(' / ')[0].replace(/\s+/g, '')}`} class="text-white/40 transition-colors hover:text-[#C4A072]">{t.tel}</a>
+                  )}
+                  <a href={`mailto:${t.mail}`} class="text-white/40 transition-colors hover:text-[#C4A072]">{t.mail}</a>
+                </div>
+              </article>
+            );
+          })}
+          <p id="store-search-message" class="hidden border border-white/8 p-6 text-sm leading-relaxed text-white/45">
+            No encontramos una tienda con ese código postal. Prueba con los primeros dígitos o consulta el mapa.
+          </p>
+        </div>
+
+        <aside class="sticky top-28 hidden overflow-hidden border border-white/8 bg-[#111] lg:block">
+          <div class="flex items-center justify-between border-b border-white/8 px-5 py-4">
+            <div>
+              <p class="mb-1 text-[10px] uppercase tracking-[0.28em] text-[#C4A072]">Ubicación seleccionada</p>
+              <p id="store-map-name" class="text-sm font-semibold text-white">{puntosVenta[0].nombre}</p>
             </div>
+            <a
+              id="store-map-external"
+              href={'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent([puntosVenta[0].nombre, puntosVenta[0].direccion, puntosVenta[0].cp, puntosVenta[0].poblacion, 'España'].join(', '))}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 text-xs text-white/45 transition-colors hover:text-[#C4A072]"
+            >
+              Abrir Maps
+              <ExternalLink size={14} stroke-width={1.6} aria-hidden="true" />
+            </a>
           </div>
-        ))}
+          <iframe
+            id="store-map-frame"
+            title={'Mapa de ' + puntosVenta[0].nombre}
+            src={'https://www.google.com/maps?q=' + encodeURIComponent([puntosVenta[0].nombre, puntosVenta[0].direccion, puntosVenta[0].cp, puntosVenta[0].poblacion, 'España'].join(', ')) + '&output=embed'}
+            class="h-[600px] w-full border-0 grayscale-[0.2]"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </aside>
       </div>
     </div>
   </section>
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const frame = document.getElementById('store-map-frame') as HTMLIFrameElement | null;
+      const name = document.getElementById('store-map-name');
+      const external = document.getElementById('store-map-external') as HTMLAnchorElement | null;
+      const postcodeSearch = document.getElementById('store-postcode-search') as HTMLInputElement | null;
+      const searchMessage = document.getElementById('store-search-message');
+      const addressLinks = document.querySelectorAll<HTMLAnchorElement>('[data-map-query]');
+      if (!frame || !name || !external) return;
+
+      const selectStore = (link: HTMLAnchorElement) => {
+        const query = link.dataset.mapQuery;
+        const storeName = link.dataset.mapName;
+        if (!query || !storeName) return;
+
+        frame.src = 'https://www.google.com/maps?q=' + encodeURIComponent(query) + '&output=embed';
+        frame.title = 'Mapa de ' + storeName;
+        name.textContent = storeName;
+        external.href = link.href;
+
+        document.querySelectorAll('[data-store-card]').forEach((card) => {
+          card.classList.remove('is-active', 'border-[#C4A072]/45', 'bg-[#C4A072]/[0.045]');
+          card.classList.add('border-white/7');
+        });
+
+        const card = link.closest('[data-store-card]');
+        card?.classList.remove('border-white/7');
+        card?.classList.add('is-active', 'border-[#C4A072]/45', 'bg-[#C4A072]/[0.045]');
+      };
+
+      addressLinks.forEach((link) => {
+        link.addEventListener('click', (event) => {
+          if (!window.matchMedia('(min-width: 1024px)').matches) return;
+
+          event.preventDefault();
+          selectStore(link);
+        });
+      });
+
+      postcodeSearch?.addEventListener('input', () => {
+        const value = postcodeSearch.value.replace(/\D/g, '').slice(0, 5);
+        postcodeSearch.value = value;
+
+        const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-store-card]'));
+        searchMessage?.classList.add('hidden');
+
+        if (value.length < 5) {
+          const matches = cards.filter((card) => {
+            const postcode = card.dataset.storePostcode ?? '';
+            const isMatch = value === '' || postcode.startsWith(value);
+            card.classList.toggle('hidden', !isMatch);
+            return isMatch;
+          });
+
+          if (matches.length === 0 && value !== '' && searchMessage) {
+            searchMessage.textContent = 'No encontramos una tienda en esa zona postal. Prueba con otro código o consulta el mapa.';
+            searchMessage.classList.remove('hidden');
+          }
+          return;
+        }
+
+        const exactMatches = cards.filter((card) => card.dataset.storePostcode === value);
+        if (exactMatches.length > 0) {
+          cards.forEach((card) => card.classList.toggle('hidden', !exactMatches.includes(card)));
+          const firstLink = exactMatches[0].querySelector<HTMLAnchorElement>('[data-map-query]');
+          if (firstLink && window.matchMedia('(min-width: 1024px)').matches) selectStore(firstLink);
+          return;
+        }
+
+        const provincePrefix = value.slice(0, 2);
+        const sameProvince = cards
+          .filter((card) => (card.dataset.storePostcode ?? '').startsWith(provincePrefix))
+          .sort((a, b) => {
+            const distanceA = Math.abs(Number(a.dataset.storePostcode) - Number(value));
+            const distanceB = Math.abs(Number(b.dataset.storePostcode) - Number(value));
+            return distanceA - distanceB;
+          });
+
+        if (sameProvince.length > 0) {
+          const nearest = sameProvince[0];
+          cards.forEach((card) => card.classList.toggle('hidden', card !== nearest));
+          if (searchMessage) {
+            searchMessage.textContent = 'No tenemos tienda exactamente en el código postal ' + value + '. Te mostramos la más cercana dentro de la misma zona postal.';
+            searchMessage.classList.remove('hidden');
+          }
+          const nearestLink = nearest.querySelector<HTMLAnchorElement>('[data-map-query]');
+          if (nearestLink && window.matchMedia('(min-width: 1024px)').matches) selectStore(nearestLink);
+          return;
+        }
+
+        cards.forEach((card) => card.classList.add('hidden'));
+        if (searchMessage) {
+          searchMessage.textContent = 'No encontramos una tienda en esa provincia o zona postal. Prueba con otro código o consulta el mapa.';
+          searchMessage.classList.remove('hidden');
+        }
+      });
+    });
+  </script>
 
   <!-- FOOTER -->
   <footer class="bg-[#0f0a08] border-t border-white/5 px-5 md:px-16 py-10 flex flex-col md:flex-row items-center md:items-center justify-between gap-4 text-center md:text-left">
