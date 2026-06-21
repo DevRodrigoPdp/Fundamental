@@ -12,37 +12,27 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 const links: Array<{
   href: string;
   label: string;
+  eyebrow: string;
   key: NavKey;
-  weight: 'flagship' | 'primary' | 'secondary';
+  flagship?: boolean;
 }> = [
-  { href: '/marcas', label: 'Marcas asociadas', key: 'marcas', weight: 'secondary' },
-  { href: '/nosotros', label: 'Nosotros', key: 'nosotros', weight: 'secondary' },
-  { href: '/contacto', label: 'Contacto', key: 'contacto', weight: 'secondary' },
+  { href: '/t3r', label: 'T3R Components', eyebrow: 'Marca principal', key: 't3r', flagship: true },
+  { href: '/catalogo', label: 'Catálogo', eyebrow: 'Gama completa', key: 'catalogo' },
+  { href: '/marcas', label: 'Marcas asociadas', eyebrow: 'T3R · Transfer · Whipp-Off', key: 'marcas' },
+  { href: '/nosotros', label: 'Nosotros', eyebrow: 'Fundamental Bike Parts', key: 'nosotros' },
+  { href: '/contacto', label: 'Contacto', eyebrow: 'Consultas y pedidos', key: 'contacto' },
 ];
 
 function isActive(href: string, key: NavKey) {
   return active === key || currentPath === href || currentPath.startsWith(href + '/');
-}
-
-function desktopLinkClass(href: string, key: NavKey, weight: 'flagship' | 'primary' | 'secondary') {
-  const base = 'group relative inline-flex h-8 items-center text-[0.72rem] uppercase tracking-[0.18em] transition-colors duration-300';
-
-  if (weight === 'flagship') {
-    return `${base} font-semibold text-[#C5A880] hover:text-[#DEC39B]`;
-  }
-
-  if (weight === 'primary') {
-    return `${base} font-medium ${isActive(href, key) ? 'text-white' : 'text-white/88 hover:text-white'}`;
-  }
-
-  return `${base} font-medium ${isActive(href, key) ? 'text-white' : 'text-white/58 hover:text-white/85'}`;
 }
 ---
 
 <header
   class={`fixed inset-x-0 top-0 z-50 border-b border-white/8 ${bgClass} px-5 py-5 text-white shadow-[0_18px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl backdrop-saturate-150 md:px-10 lg:px-14`}
 >
-  <div class="mx-auto grid max-w-7xl grid-cols-[44px_1fr] items-center gap-3 lg:flex lg:justify-between">
+  <div class="mx-auto grid max-w-7xl grid-cols-[auto_1fr] items-center gap-5 lg:flex lg:justify-between">
+    <!-- Mobile trigger -->
     <button
       id="nav-toggle"
       type="button"
@@ -59,129 +49,95 @@ function desktopLinkClass(href: string, key: NavKey, weight: 'flagship' | 'prima
       </svg>
     </button>
 
+    <!-- Desktop master menu -->
+    <div class="nav-master-trigger relative hidden h-8 items-center lg:flex">
+      <button
+        id="nav-desktop-toggle"
+        type="button"
+        class="group inline-flex h-8 items-center gap-3 text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-white/72 transition-colors duration-300 hover:text-white"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <span class="flex w-5 flex-col gap-[4px]" aria-hidden="true">
+          <span class="h-px w-5 bg-current transition-transform duration-300 group-hover:translate-x-1"></span>
+          <span class="h-px w-3 bg-[#C5A880] transition-[width] duration-300 group-hover:w-5"></span>
+        </span>
+        Menú
+        <svg class="nav-master-chevron h-3 w-3 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m7 10 5 5 5-5" />
+        </svg>
+      </button>
+
+      <div class="nav-master-menu fixed inset-x-0 top-[72px] border-y border-white/8 bg-[#0c0b09]/98 text-white shadow-[0_35px_90px_rgba(0,0,0,0.52)] backdrop-blur-xl">
+        <div class="mx-auto grid min-h-[540px] max-w-7xl grid-cols-[minmax(0,1.15fr)_minmax(420px,0.85fr)]">
+          <nav class="p-10 xl:p-12" aria-label="Menú principal">
+            <div class="mb-8 flex items-center justify-between border-b border-white/10 pb-5">
+              <p class="text-[10px] uppercase tracking-[0.34em] text-[#C5A880]">Navegación Fundamental</p>
+              <span class="text-[10px] uppercase tracking-[0.24em] text-white/25">Madrid · España</span>
+            </div>
+
+            <div>
+              {
+                links.map((link, index) => (
+                  <a
+                    href={link.href}
+                    class:list={[
+                      'group/menu-link grid grid-cols-[42px_1fr_auto] items-center border-b border-white/8 py-4 transition-colors duration-300 hover:border-[#C5A880]/35',
+                      isActive(link.href, link.key) ? 'text-white' : 'text-white/62 hover:text-white',
+                    ]}
+                    aria-current={isActive(link.href, link.key) ? 'page' : undefined}
+                  >
+                    <span class="font-display text-[10px] font-bold tracking-[0.2em] text-white/22">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span>
+                      <span class:list={['block text-2xl font-semibold tracking-[-0.035em] xl:text-3xl', link.flagship && 'text-[#C5A880]']}>
+                        {link.label}
+                      </span>
+                      <span class="mt-1 block text-[9px] uppercase tracking-[0.24em] text-white/27">{link.eyebrow}</span>
+                    </span>
+                    <span class="-translate-x-2 text-xl font-light opacity-0 transition-all duration-300 group-hover/menu-link:translate-x-0 group-hover/menu-link:opacity-60">→</span>
+                  </a>
+                ))
+              }
+            </div>
+          </nav>
+
+          <a href="/t3r" class="group/feature relative overflow-hidden border-l border-white/8">
+            <img
+              src="/catalogo_t3r/combos/combos_3.jpg"
+              alt="T3R Bike Components"
+              class="absolute inset-0 h-full w-full object-cover saturate-[0.75] transition-transform duration-1000 group-hover/feature:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-black/15"></div>
+            <div class="absolute inset-x-0 top-0 flex items-center justify-between p-8">
+              <span class="text-[9px] font-bold uppercase tracking-[0.3em] text-[#C5A880]">Flagship</span>
+              <span class="text-[9px] uppercase tracking-[0.26em] text-white/38">T3R / 2026</span>
+            </div>
+            <div class="absolute inset-x-0 bottom-0 p-9">
+              <img src="/logo_blanco_t3r.png" alt="T3R" class="mb-7 h-10 w-auto" />
+              <p class="max-w-md text-3xl font-semibold leading-tight tracking-tight">Componentes fundamentales para cuando el terreno exige más.</p>
+              <span class="mt-7 inline-flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#C5A880]">
+                Conocer la marca <span>→</span>
+              </span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brand / home -->
     <a
       href="/"
-      class="relative z-50 inline-flex h-8 w-fit max-w-full items-center justify-self-end font-display text-[0.78rem] font-semibold uppercase leading-none tracking-[-0.06em] text-white transition-opacity duration-300 hover:opacity-75 sm:text-sm sm:tracking-[-0.07em] lg:order-2 lg:justify-self-auto lg:text-xl lg:font-bold lg:tracking-[-0.08em]"
+      class="relative z-50 inline-flex h-8 w-fit max-w-full items-center gap-1.5 justify-self-end font-display text-[0.78rem] font-semibold uppercase leading-none tracking-[-0.045em] text-white transition-opacity duration-300 hover:opacity-75 sm:gap-2 sm:text-sm lg:text-xl lg:font-bold"
       aria-label="Fundamental Bike Parts - Inicio"
     >
-      Fundamental <span class="hidden sm:inline">Bike Parts</span>
+      <span>Fundamental</span><span class="hidden sm:inline">Bike Parts</span>
     </a>
-
-    <nav class="hidden items-center gap-7 lg:order-1 lg:flex xl:gap-9" aria-label="Navegación principal">
-      {
-        links.map((link) =>
-          link.key === 'marcas' ? (
-            <div class="nav-mega-trigger flex h-8 items-center">
-              <a
-                href={link.href}
-                class={desktopLinkClass(link.href, link.key, link.weight)}
-                aria-current={isActive(link.href, link.key) ? 'page' : undefined}
-                aria-haspopup="true"
-              >
-                {link.label}
-                <svg class="ml-2 h-3 w-3 transition-transform duration-300 nav-mega-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m7 10 5 5 5-5" />
-                </svg>
-                <span
-                  class:list={[
-                    'absolute -bottom-1 left-0 h-px bg-white/70 transition-all duration-300',
-                    isActive(link.href, link.key) ? 'w-full' : 'w-0 group-hover:w-full',
-                  ]}
-                />
-              </a>
-
-              <div class="nav-mega-menu fixed inset-x-0 top-[72px] border-y border-white/8 bg-[#0c0b09]/98 text-white shadow-[0_35px_90px_rgba(0,0,0,0.5)] backdrop-blur-xl">
-                <div class="mx-auto grid max-w-7xl grid-cols-[minmax(0,1.75fr)_minmax(300px,0.75fr)]">
-                  <div class="p-8 xl:p-10">
-                    <div class="mb-8 flex items-end justify-between border-b border-white/10 pb-5">
-                      <div>
-                        <p class="mb-2 text-[10px] uppercase tracking-[0.34em] text-[#C5A880]">Distribución Fundamental</p>
-                        <h2 class="text-2xl font-semibold tracking-tight">Tres marcas. Tres maneras de vivir la bici.</h2>
-                      </div>
-                      <a href="/marcas" class="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/45 transition-colors hover:text-[#C5A880]">
-                        Ver todas ↗
-                      </a>
-                    </div>
-
-                    <div class="grid grid-cols-3 gap-px bg-white/8">
-                      <a href="/t3r" class="group/brand flex min-h-[210px] flex-col justify-between bg-[#0c0b09] p-6 transition-colors duration-300 hover:bg-[#C5A880]/[0.055]">
-                        <div>
-                          <p class="mb-7 text-[9px] font-bold uppercase tracking-[0.3em] text-[#C5A880]">Marca principal</p>
-                          <img src="/logo_blanco_t3r.png" alt="T3R" class="h-9 w-auto object-contain object-left" />
-                        </div>
-                        <div>
-                          <p class="mb-4 max-w-[15rem] text-sm leading-6 text-white/42">Componentes probados, fabricación contrastada y precio honesto.</p>
-                          <span class="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60 transition-colors group-hover/brand:text-[#C5A880]">Explorar T3R →</span>
-                        </div>
-                      </a>
-
-                      <a href="/transfer" class="group/brand flex min-h-[210px] flex-col justify-between bg-[#0c0b09] p-6 transition-colors duration-300 hover:bg-white/[0.035]">
-                        <div>
-                          <p class="mb-7 text-[9px] uppercase tracking-[0.3em] text-white/28">Bicicletas</p>
-                          <img src="/logo_transfer.png" alt="Transfer Bike" class="h-9 w-auto object-contain object-left brightness-0 invert" />
-                        </div>
-                        <div>
-                          <p class="mb-4 max-w-[15rem] text-sm leading-6 text-white/42">Bicicletas y cuadros para disfrutar cada día sin complicaciones.</p>
-                          <span class="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50 transition-colors group-hover/brand:text-white">Conocer Transfer →</span>
-                        </div>
-                      </a>
-
-                      <a href="/whipp-off" class="group/brand flex min-h-[210px] flex-col justify-between bg-[#0c0b09] p-6 transition-colors duration-300 hover:bg-white/[0.035]">
-                        <div>
-                          <p class="mb-7 text-[9px] uppercase tracking-[0.3em] text-white/28">Equipamiento MTB</p>
-                          <img src="/logo_whipoff.png" alt="Whipp-Off" class="h-11 w-auto object-contain object-left brightness-0 invert" />
-                        </div>
-                        <div>
-                          <p class="mb-4 max-w-[15rem] text-sm leading-6 text-white/42">Ropa técnica con identidad para quienes rompen la línea recta.</p>
-                          <span class="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50 transition-colors group-hover/brand:text-white">Conocer Whipp-Off →</span>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-
-                  <a href="/marcas" class="group/promo relative min-h-[360px] overflow-hidden border-l border-white/8">
-                    <img src="/catalogo_whipoff/WHIP_OFF_1.jpg" alt="Marcas distribuidas por Fundamental" class="absolute inset-0 h-full w-full object-cover saturate-[0.7] transition-transform duration-700 group-hover/promo:scale-105" />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-black/15"></div>
-                    <div class="absolute inset-x-0 bottom-0 p-8">
-                      <p class="mb-3 text-[10px] uppercase tracking-[0.3em] text-[#C5A880]">Universo Fundamental</p>
-                      <p class="text-3xl font-semibold leading-tight tracking-tight">Producto para moverse con intención.</p>
-                      <span class="mt-6 inline-flex text-[10px] font-semibold uppercase tracking-[0.22em] text-white/65">Descubrir marcas →</span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <a
-              href={link.href}
-              class={desktopLinkClass(link.href, link.key, link.weight)}
-              aria-current={isActive(link.href, link.key) ? 'page' : undefined}
-            >
-              {link.label}
-              {link.weight === 'flagship' ? (
-                <span
-                  class:list={[
-                    'absolute -bottom-1 left-0 h-px bg-[#C5A880] transition-all duration-300',
-                    isActive(link.href, link.key) ? 'w-full' : 'w-8 group-hover:w-full',
-                  ]}
-                />
-              ) : (
-                <span
-                  class:list={[
-                    'absolute -bottom-1 left-0 h-px bg-white/70 transition-all duration-300',
-                    isActive(link.href, link.key) ? 'w-full' : 'w-0 group-hover:w-full',
-                  ]}
-                />
-              )}
-            </a>
-          )
-        )
-      }
-    </nav>
-
   </div>
 </header>
 
+<!-- Mobile overlay -->
 <div
   id="nav-mobile-menu"
   class="pointer-events-none fixed inset-0 z-40 translate-y-[-10px] overflow-y-auto bg-[#0b0908] px-7 pb-10 pt-28 opacity-0 transition-[opacity,transform] duration-300 ease-out lg:hidden"
@@ -195,17 +151,14 @@ function desktopLinkClass(href: string, key: NavKey, weight: 'flagship' | 'prima
           href={link.href}
           data-menu-link
           class:list={[
-            'nav-menu-link flex items-center justify-between border-b border-white/8 py-6 uppercase transition-colors',
-            link.weight === 'flagship'
-              ? 'text-2xl font-semibold tracking-[-0.025em] text-[#C5A880]'
-              : index === 1
-                ? 'text-2xl font-medium tracking-[-0.025em] text-white'
-                : 'text-xl tracking-[-0.02em] text-white/62 hover:text-white',
+            'nav-menu-link grid grid-cols-[34px_1fr_auto] items-center border-b border-white/8 py-5 uppercase transition-colors',
+            link.flagship ? 'text-[#C5A880]' : 'text-white/68 hover:text-white',
           ]}
           aria-current={isActive(link.href, link.key) ? 'page' : undefined}
         >
-          {link.label}
-          <span class="text-base font-light opacity-40">↗</span>
+          <span class="font-display text-[9px] tracking-[0.18em] text-white/22">{String(index + 1).padStart(2, '0')}</span>
+          <span class="text-xl font-medium tracking-[-0.025em]">{link.label}</span>
+          <span class="text-base font-light opacity-35">↗</span>
         </a>
       ))
     }
@@ -216,20 +169,16 @@ function desktopLinkClass(href: string, key: NavKey, weight: 'flagship' | 'prima
 </div>
 
 <style>
-  .nav-mega-trigger {
-    position: relative;
-  }
-
-  .nav-mega-trigger::after {
+  .nav-master-trigger::after {
     content: '';
     position: absolute;
     top: 100%;
-    left: -18px;
-    right: -18px;
+    left: -22px;
+    right: -22px;
     height: 24px;
   }
 
-  .nav-mega-menu {
+  .nav-master-menu {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -237,20 +186,22 @@ function desktopLinkClass(href: string, key: NavKey, weight: 'flagship' | 'prima
     transition:
       opacity 220ms ease,
       visibility 220ms ease,
-      transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+      transform 340ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .nav-mega-trigger:hover .nav-mega-menu,
-  .nav-mega-trigger:focus-within .nav-mega-menu,
-  .nav-mega-menu:hover {
+  .nav-master-trigger:hover .nav-master-menu,
+  .nav-master-trigger:focus-within .nav-master-menu,
+  .nav-master-trigger.is-open .nav-master-menu,
+  .nav-master-menu:hover {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
     transform: translateY(0);
   }
 
-  .nav-mega-trigger:hover .nav-mega-chevron,
-  .nav-mega-trigger:focus-within .nav-mega-chevron {
+  .nav-master-trigger:hover .nav-master-chevron,
+  .nav-master-trigger:focus-within .nav-master-chevron,
+  .nav-master-trigger.is-open .nav-master-chevron {
     transform: rotate(180deg);
   }
 
@@ -272,6 +223,7 @@ function desktopLinkClass(href: string, key: NavKey, weight: 'flagship' | 'prima
   #nav-mobile-menu.is-open .nav-menu-link:nth-child(5) { transition-delay: 0.2s; }
 
   @media (prefers-reduced-motion: reduce) {
+    .nav-master-menu,
     #nav-mobile-menu,
     .nav-menu-link {
       transition: none !important;
@@ -282,15 +234,34 @@ function desktopLinkClass(href: string, key: NavKey, weight: 'flagship' | 'prima
 <script>
   document.addEventListener('astro:page-load', () => {
     const toggle = document.getElementById('nav-toggle');
-    const menu = document.getElementById('nav-mobile-menu');
+    const mobileMenu = document.getElementById('nav-mobile-menu');
     const iconOpen = document.getElementById('nav-icon-open');
     const iconClose = document.getElementById('nav-icon-close');
-    if (!toggle || !menu) return;
+    const desktopTrigger = document.querySelector('.nav-master-trigger');
+    const desktopToggle = document.getElementById('nav-desktop-toggle');
 
-    const closeMenu = () => {
-      menu.classList.add('pointer-events-none', 'translate-y-[-10px]', 'opacity-0');
-      menu.classList.remove('pointer-events-auto', 'translate-y-0', 'opacity-100', 'is-open');
-      menu.setAttribute('aria-hidden', 'true');
+    const closeDesktopMenu = () => {
+      desktopTrigger?.classList.remove('is-open');
+      desktopToggle?.setAttribute('aria-expanded', 'false');
+    };
+
+    desktopToggle?.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const willOpen = !desktopTrigger?.classList.contains('is-open');
+      desktopTrigger?.classList.toggle('is-open', willOpen);
+      desktopToggle.setAttribute('aria-expanded', String(willOpen));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (desktopTrigger && !desktopTrigger.contains(event.target as Node)) closeDesktopMenu();
+    });
+
+    if (!toggle || !mobileMenu) return;
+
+    const closeMobileMenu = () => {
+      mobileMenu.classList.add('pointer-events-none', 'translate-y-[-10px]', 'opacity-0');
+      mobileMenu.classList.remove('pointer-events-auto', 'translate-y-0', 'opacity-100', 'is-open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
       iconOpen?.classList.remove('hidden');
       iconClose?.classList.add('hidden');
       toggle.setAttribute('aria-expanded', 'false');
@@ -298,10 +269,10 @@ function desktopLinkClass(href: string, key: NavKey, weight: 'flagship' | 'prima
       document.body.classList.remove('overflow-hidden');
     };
 
-    const openMenu = () => {
-      menu.classList.remove('pointer-events-none', 'translate-y-[-10px]', 'opacity-0');
-      menu.classList.add('pointer-events-auto', 'translate-y-0', 'opacity-100', 'is-open');
-      menu.setAttribute('aria-hidden', 'false');
+    const openMobileMenu = () => {
+      mobileMenu.classList.remove('pointer-events-none', 'translate-y-[-10px]', 'opacity-0');
+      mobileMenu.classList.add('pointer-events-auto', 'translate-y-0', 'opacity-100', 'is-open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
       iconOpen?.classList.add('hidden');
       iconClose?.classList.remove('hidden');
       toggle.setAttribute('aria-expanded', 'true');
@@ -310,15 +281,17 @@ function desktopLinkClass(href: string, key: NavKey, weight: 'flagship' | 'prima
     };
 
     toggle.addEventListener('click', () => {
-      if (menu.classList.contains('is-open')) closeMenu();
-      else openMenu();
+      if (mobileMenu.classList.contains('is-open')) closeMobileMenu();
+      else openMobileMenu();
     });
 
-    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+    mobileMenu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMobileMenu));
 
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && menu.classList.contains('is-open')) {
-        closeMenu();
+      if (event.key !== 'Escape') return;
+      closeDesktopMenu();
+      if (mobileMenu.classList.contains('is-open')) {
+        closeMobileMenu();
         toggle.focus();
       }
     });
