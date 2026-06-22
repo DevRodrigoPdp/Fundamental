@@ -64,12 +64,18 @@ const catalogo = (products ?? []).map((p: any) => ({
       </svg>
       <input
         id="search-input"
-        type="text"
+        type="search"
         placeholder="Buscar por nombre, categoría o referencia..."
-        class="w-full border border-gray-300 pl-12 pr-4 py-3.5 text-base outline-none focus:border-black transition-colors"
+        class="w-full border border-gray-300 pl-12 pr-12 py-3.5 text-base outline-none focus:border-black transition-colors [&::-webkit-search-cancel-button]:hidden"
         autocomplete="off"
+        aria-label="Buscar en el catálogo"
+        aria-controls="product-grid"
       />
+      <button id="search-clear" type="button" class="hidden absolute right-3 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-black transition-colors" aria-label="Limpiar búsqueda">
+        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
     </div>
+    <p id="search-status" class="mt-3 text-xs text-gray-400" role="status" aria-live="polite"></p>
   </section>
 
   <!-- GRID PRODUCTOS -->
@@ -81,16 +87,20 @@ const catalogo = (products ?? []).map((p: any) => ({
             <div
               data-product-card
               data-search={`${p.nombre} ${p.categoria} ${p.subcategoria ?? ''} ${p.sku}`.toLowerCase()}
+              data-name={p.nombre}
+              data-category={p.categoria}
+              data-subcategory={p.subcategoria ?? ''}
+              data-sku={p.sku}
               data-reveal data-delay={String(i % 4)}
               class="group bg-white flex flex-col"
             >
               <a href={`/catalogo/${p.sku}`} class="block cursor-pointer">
-                <div class="relative overflow-hidden bg-[#f5f5f5]" style="aspect-ratio: 16/10;">
+                <div class="relative overflow-hidden bg-white" style="aspect-ratio: 16/10;">
                   {p.imagen ? (
                     <img
                       src={p.imagen}
                       alt={p.nombre}
-                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      class="absolute inset-0 w-full h-full object-contain p-6 md:p-8 transition-transform duration-500 group-hover:scale-[1.02]"
                       loading="lazy"
                       decoding="async"
                     />
@@ -152,31 +162,125 @@ const catalogo = (products ?? []).map((p: any) => ({
   <script>
     document.addEventListener('astro:page-load', () => {
       const input = document.getElementById('search-input');
-      const cards = document.querySelectorAll('[data-product-card]');
+      const grid = document.getElementById('product-grid');
+      const cards = [...document.querySelectorAll('[data-product-card]')];
       const emptyState = document.getElementById('empty-state');
+      const clearButton = document.getElementById('search-clear');
+      const status = document.getElementById('search-status');
       if (!input) return;
 
+      const normalize = (value) => value
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, ' ')
+        .trim();
+
+      const aliases = new Map([
+        ['6t', '6 tornillos'],
+        ['centerlock', 'center lock'],
+        ['cl', 'center lock'],
+        ['rotor', 'disco'],
+        ['brake', 'freno'],
+        ['pads', 'pastillas'],
+        ['bici', 'bicicleta'],
+      ]);
+
+      const oneEditAway = (term, word) => {
+        if (term === word) return true;
+        if (Math.abs(term.length - word.length) > 1) return false;
+        let i = 0;
+        let j = 0;
+        let edits = 0;
+        while (i < term.length && j < word.length) {
+          if (term[i] === word[j]) { i++; j++; continue; }
+          if (++edits > 1) return false;
+          if (term.length > word.length) i++;
+          else if (word.length > term.length) j++;
+          else { i++; j++; }
+        }
+        return edits + (i < term.length || j < word.length ? 1 : 0) <= 1;
+      };
+
+      const searchableCards = cards.map((card, index) => {
+        const fields = {
+          name: normalize(card.dataset.name || ''),
+          category: normalize(card.dataset.category || ''),
+          subcategory: normalize(card.dataset.subcategory || ''),
+          sku: normalize(card.dataset.sku || ''),
+        };
+        return {
+          card,
+          index,
+          fields,
+          words: Object.values(fields).join(' ').split(' '),
+        };
+      });
+
+      const termScore = (term, item) => {
+        if (item.fields.sku.includes(term)) return 30;
+        if (item.fields.name.split(' ').some((word) => word.startsWith(term))) return 24;
+        if (item.fields.name.includes(term)) return 18;
+        if (item.fields.subcategory.includes(term)) return 12;
+        if (item.fields.category.includes(term)) return 8;
+        if (term.length >= 4 && item.words.some((word) => oneEditAway(term, word))) return 4;
+        return 0;
+      };
+
       const filter = () => {
-        const q = input.value.trim().toLowerCase();
+        const rawQuery = input.value.trim();
+        const normalizedQuery = normalize(rawQuery);
+        const expandedQuery = aliases.get(normalizedQuery) || normalizedQuery;
+        const terms = expandedQuery.split(' ').filter(Boolean);
+
+        const results = searchableCards.map((item) => {
+          const scores = terms.map((term) => termScore(term, item));
+          const match = terms.length === 0 || scores.every((score) => score > 0);
+          let score = scores.reduce((total, value) => total + value, 0);
+          if (expandedQuery && item.fields.name.includes(expandedQuery)) score += 50;
+          if (expandedQuery && item.fields.sku.includes(expandedQuery)) score += 60;
+          return { ...item, match, score };
+        }).sort((a, b) => b.score - a.score || a.index - b.index);
+
         let visibleCount = 0;
-        cards.forEach((card) => {
-          const haystack = card.getAttribute('data-search') || '';
-          const match = haystack.includes(q);
-          card.style.display = match ? '' : 'none';
-          if (match) visibleCount++;
+        results.forEach((result) => {
+          result.card.style.display = result.match ? '' : 'none';
+          if (result.match) visibleCount++;
+          grid?.append(result.card);
         });
+
         if (emptyState) emptyState.classList.toggle('hidden', visibleCount > 0);
+        clearButton?.classList.toggle('hidden', !rawQuery);
+        if (status) status.textContent = rawQuery
+          ? `${visibleCount} ${visibleCount === 1 ? 'resultado' : 'resultados'}`
+          : `${cards.length} productos`;
+
+        const url = new URL(window.location.href);
+        rawQuery ? url.searchParams.set('q', rawQuery) : url.searchParams.delete('q');
+        history.replaceState({}, '', url);
       };
 
       input.addEventListener('input', filter);
+      clearButton?.addEventListener('click', () => {
+        input.value = '';
+        filter();
+        input.focus();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === '/' && document.activeElement !== input) {
+          event.preventDefault();
+          input.focus();
+        }
+      });
 
       // Precarga la búsqueda si llega ?q= en la URL (ej. desde los enlaces de categoría en /t3r)
       const params = new URLSearchParams(window.location.search);
       const initialQuery = params.get('q');
       if (initialQuery) {
         input.value = initialQuery;
-        filter();
       }
+      filter();
     });
   </script>
 

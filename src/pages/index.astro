@@ -174,10 +174,10 @@ const novedades = (products ?? []).map((p: any) => ({
         <div id="novedades-carousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 mb-6" style="scrollbar-width: none;">
           {novedades.map((p, i) => (
             <a href="/t3r" data-reveal data-delay={String((i % 3) + 1)} class="group cursor-pointer snap-start shrink-0 block" style="width: clamp(220px, 68vw, 360px);">
-              <div class="relative overflow-hidden bg-[#f0e4d3] mb-5" style="aspect-ratio: 4/3;">
+              <div class="relative overflow-hidden bg-white mb-5" style="aspect-ratio: 4/3;">
                 <span class="absolute top-4 left-4 z-10 bg-white text-[#1A100C] text-xs font-bold px-3 py-1.5 tracking-[0.15em] uppercase">New</span>
                 <img src={p.imagen ?? '/logo_t3r.png'} alt={p.name}
-                  class={p.imagen ? "absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" : "absolute inset-0 m-auto h-14 opacity-20"}
+                  class={p.imagen ? "absolute inset-0 w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-[1.02]" : "absolute inset-0 m-auto h-14 opacity-20"}
                   loading="lazy"
                   onerror="this.onerror=null; this.src='/logo_t3r.png'; this.className='absolute inset-0 m-auto h-14 opacity-20';" />
               </div>
