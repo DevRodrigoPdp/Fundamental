@@ -3,6 +3,7 @@ import path from 'path';
 import { existsSync } from 'fs';
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import BackToTop from '../components/BackToTop.astro';
 import '../styles/global.css';
 import { supabase } from '../lib/supabase';
 
@@ -34,7 +35,7 @@ const imgMap: Record<string, string> = {};
   }
 });
 
-const catalogo = (products ?? []).map((p: any) => ({
+const catalogoBase = (products ?? []).map((p: any) => ({
   nombre: p.nombre,
   categoria: p.categoria,
   subcategoria: p.subcategoria,
@@ -42,11 +43,39 @@ const catalogo = (products ?? []).map((p: any) => ({
   sku: p.sku,
   imagen: imgMap[p.sku] ?? null,
 }));
+
+const diskFamilies = [
+  { prefix: 'T3R-DISCO-6T-', nombre: 'Discos de freno 6 tornillos' },
+  { prefix: 'T3R-DISCO-CL-', nombre: 'Discos de freno Center Lock' },
+];
+
+const groupedPrefixes = new Set<string>();
+const catalogo = catalogoBase.flatMap((item: any) => {
+  const family = diskFamilies.find(({ prefix }) => item.sku.startsWith(prefix));
+  if (!family) return [item];
+  if (groupedPrefixes.has(family.prefix)) return [];
+  groupedPrefixes.add(family.prefix);
+
+  const variants = catalogoBase
+    .filter((candidate: any) => candidate.sku.startsWith(family.prefix))
+    .sort((a: any, b: any) => Number(a.sku.match(/(\d+)$/)?.[1]) - Number(b.sku.match(/(\d+)$/)?.[1]));
+  const representative = variants.find((variant: any) => variant.sku.endsWith('-140')) ?? variants[0];
+  const sizes = variants.map((variant: any) => variant.sku.match(/(\d+)$/)?.[1]).filter(Boolean);
+
+  return [{
+    ...representative,
+    nombre: family.nombre,
+    descripcion: `Disponible en ${sizes.join(', ')} mm. Selecciona la medida dentro del producto.`,
+    refLabel: `${sizes.join(' · ')} mm`,
+    searchSku: variants.map((variant: any) => variant.sku).join(' '),
+  }];
+});
 ---
 
 <Layout title="Catálogo T3R — Fundamental">
 
   <Nav />
+  <BackToTop />
 
   <!-- HERO + BUSCADOR -->
   <section class="px-5 md:px-16 pt-32 md:pt-36 pb-16">
@@ -82,7 +111,7 @@ const catalogo = (products ?? []).map((p: any) => ({
   <section class="px-5 md:px-16 pb-32">
     {catalogo.length > 0 ? (
       <>
-        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-gray-200 border border-gray-200">
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white">
           {catalogo.map((p, i) => (
             <div
               data-product-card
@@ -90,9 +119,9 @@ const catalogo = (products ?? []).map((p: any) => ({
               data-name={p.nombre}
               data-category={p.categoria}
               data-subcategory={p.subcategoria ?? ''}
-              data-sku={p.sku}
+              data-sku={p.searchSku ?? p.sku}
               data-reveal data-delay={String(i % 4)}
-              class="group bg-white flex flex-col"
+              class="group bg-white border border-gray-200 flex flex-col"
             >
               <a href={`/catalogo/${p.sku}`} class="block cursor-pointer">
                 <div class="relative overflow-hidden bg-white" style="aspect-ratio: 16/10;">
@@ -105,11 +134,9 @@ const catalogo = (products ?? []).map((p: any) => ({
                       decoding="async"
                     />
                   ) : (
-                    <div class="absolute inset-0 flex items-center justify-center text-gray-300">
-                      <svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16l5-5a2 2 0 012.83 0L16 16M14 14l1.5-1.5a2 2 0 012.83 0L21 16M3 8a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
-                        <circle cx="8.5" cy="8.5" r="1.5" />
-                      </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-white text-gray-300">
+                      <img src="/logo_t3r.png" alt="T3R" class="w-24 md:w-28 opacity-25 grayscale" loading="lazy" />
+                      <p class="text-[10px] tracking-[0.25em] uppercase text-gray-300">Foto próximamente</p>
                     </div>
                   )}
                 </div>
@@ -124,7 +151,7 @@ const catalogo = (products ?? []).map((p: any) => ({
               <div class="px-7 pb-7 flex flex-col flex-1">
                 <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
                   <div>
-                    <p class="text-xs text-gray-400">{p.sku}</p>
+                    <p class="text-xs text-gray-400">{p.refLabel ?? p.sku}</p>
                     <p class="text-xs text-gray-400">Consulta disponibilidad</p>
                   </div>
                   <a

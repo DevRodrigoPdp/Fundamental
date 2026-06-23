@@ -73,6 +73,17 @@ const related = (relatedRaw ?? []).map((p: any) => ({
   imagen: relatedImgMap[p.sku],
 }));
 
+const isDiskFamily = product.sku.startsWith('T3R-DISCO-6T-') || product.sku.startsWith('T3R-DISCO-CL-');
+const diskVariants = isDiskFamily
+  ? [product, ...(relatedRaw ?? [])]
+      .map((variant: any) => ({
+        sku: variant.sku,
+        size: Number(variant.sku.match(/(\d+)$/)?.[1]),
+      }))
+      .filter((variant: any) => Number.isFinite(variant.size))
+      .sort((a: any, b: any) => a.size - b.size)
+  : [];
+
 const especificaciones: Record<string, any> = product.especificaciones ?? {};
 
 function formatValue(v: any) {
@@ -113,14 +124,11 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Solici
       <div>
         <div class="relative overflow-hidden bg-[#f5f5f5] mb-4" style="aspect-ratio: 1;">
           {images[0] ? (
-            <img id="main-image" src={images[0]} alt={product.nombre} class="absolute inset-0 w-full h-full object-cover" />
+            <img id="main-image" src={images[0]} alt={product.nombre} class="absolute inset-0 w-full h-full object-contain bg-white p-6 md:p-10" />
           ) : (
-            <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-gray-300">
-              <svg class="w-12 h-12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16l5-5a2 2 0 012.83 0L16 16M14 14l1.5-1.5a2 2 0 012.83 0L21 16M3 8a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
-                <circle cx="8.5" cy="8.5" r="1.5" />
-              </svg>
-              <p class="text-xs text-gray-300 tracking-wide uppercase">Foto próximamente</p>
+            <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-white text-gray-300">
+              <img src="/logo_t3r.png" alt="T3R" class="w-32 md:w-40 opacity-25 grayscale" />
+              <p class="text-xs text-gray-300 tracking-[0.25em] uppercase">Foto proximamente</p>
             </div>
           )}
         </div>
@@ -133,7 +141,7 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Solici
                 class="thumb-btn relative overflow-hidden bg-[#f5f5f5] border border-gray-200 hover:border-black transition-colors cursor-pointer"
                 style="width: 76px; height: 76px;"
               >
-                <img src={img} alt={`${product.nombre} ${i + 1}`} class="absolute inset-0 w-full h-full object-cover" />
+                <img src={img} alt={`${product.nombre} ${i + 1}`} class="absolute inset-0 w-full h-full object-contain bg-white p-2" />
               </button>
             ))}
           </div>
@@ -145,6 +153,28 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Solici
         <p class="text-sm text-[#6B8CAE] tracking-[0.25em] uppercase mb-4">{product.subcategoria ?? product.categoria}</p>
         <h1 class="text-[28px] md:text-[40px] font-bold leading-tight mb-3">{product.nombre}</h1>
         <p class="text-sm text-gray-400 mb-8">REF. {product.sku}</p>
+
+        {diskVariants.length > 0 && (
+          <div class="mb-8">
+            <p class="text-[11px] text-gray-400 tracking-[0.2em] uppercase mb-3">Medida disponible</p>
+            <div class="flex flex-wrap gap-2">
+              {diskVariants.map((variant: any) => (
+                <a
+                  href={`/catalogo/${variant.sku}`}
+                  aria-current={variant.sku === product.sku ? 'page' : undefined}
+                  class:list={[
+                    'min-w-20 border px-4 py-3 text-center text-sm font-semibold transition-colors',
+                    variant.sku === product.sku
+                      ? 'border-black bg-black text-white'
+                      : 'border-gray-200 bg-white text-black hover:border-black',
+                  ]}
+                >
+                  {variant.size} mm
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div class="flex items-center gap-4 mb-8">
           {product.precio ? (
@@ -184,7 +214,7 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Solici
     </div>
   </section>
 
-  {related.length > 0 && (
+  {!isDiskFamily && related.length > 0 && (
     <section class="bg-[#fafafa] px-5 md:px-16 py-20 border-t border-gray-100">
       <p class="text-sm text-[#6B8CAE] tracking-[0.25em] uppercase mb-3">También te puede interesar</p>
       <h2 class="text-2xl font-bold mb-10">{product.subcategoria}</h2>
@@ -200,11 +230,9 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Solici
                   loading="lazy"
                 />
               ) : (
-                <div class="absolute inset-0 flex items-center justify-center text-gray-300">
-                  <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16l5-5a2 2 0 012.83 0L16 16M14 14l1.5-1.5a2 2 0 012.83 0L21 16M3 8a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
-                    <circle cx="8.5" cy="8.5" r="1.5" />
-                  </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white text-gray-300">
+                  <img src="/logo_t3r.png" alt="T3R" class="w-16 opacity-25 grayscale" loading="lazy" />
+                  <span class="text-[9px] tracking-[0.2em] uppercase text-gray-300">Sin foto</span>
                 </div>
               )}
             </div>
