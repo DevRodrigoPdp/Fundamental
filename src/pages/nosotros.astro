@@ -1,0 +1,182 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import BackToTop from '../components/BackToTop.astro';
+import '../styles/global.css';
+
+const logos = [
+  { name: 'T3R', src: '/logo_t3r.png', width: '210px' },
+  { name: 'Whipp-Off', src: '/logo_whipoff.png', width: '230px' },
+  { name: 'Transfer', src: '/logo_transfer.png', width: '230px' },
+];
+---
+
+<Layout title="Nosotros — Fundamental Bike Parts">
+  <Nav active="nosotros" />
+
+  <section class="nosotros-hero">
+    <div class="nosotros-hero__inner mx-auto flex max-w-6xl items-end px-5 pb-16 md:px-8 md:pb-24">
+      <div class="relative z-10 max-w-3xl">
+        <p class="mb-6 text-[10px] font-bold uppercase tracking-[0.36em] text-white/70">Nosotros</p>
+        <h1 class="text-[44px] font-black leading-[0.9] tracking-[-0.065em] md:text-[80px]">
+          Distribuimos lo que nosotros rodariamos.
+        </h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-gray-200 bg-white px-5 py-20 md:px-8 md:py-28">
+    <div class="about-row">
+      <div class="about-left" data-reveal>
+        <p class="mb-7 text-[10px] font-bold uppercase tracking-[0.34em] text-gray-400">Distribuidora ciclista</p>
+        <h2 class="mb-8 text-[38px] font-black leading-[0.95] tracking-[-0.06em] md:text-[68px]">
+          Pocas marcas. Mucho criterio.
+        </h2>
+        <div class="space-y-5 text-base leading-relaxed text-gray-500 md:text-lg">
+          <p>
+            Somos una distribuidora pequeña, hecha por riders. Trabajamos con marcas que entendemos y con referencias que tienen sentido para tiendas, talleres y ciclistas.
+          </p>
+          <p>
+            No queremos llenar el catálogo por llenar. Queremos producto claro, fotos cuidadas y disponibilidad real.
+          </p>
+          <p>
+            Buscamos una relación directa con quien vende y quien rueda. Menos ruido, más producto que funciona.
+          </p>
+          <p>
+            T3R para componentes, Whipp-Off para equipamiento y Transfer para cuadros y bicicletas.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-right" data-reveal data-delay="1">
+        {logos.map((logo) => (
+          <div class="about-logo">
+            <img src={logo.src} alt={logo.name} class="h-auto object-contain" style={`width: ${logo.width}; max-width: 100%;`} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white px-5 py-16 md:px-8 md:py-24">
+    <div class="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1fr_auto] md:items-end">
+      <div>
+        <p data-reveal class="mb-4 text-[10px] font-bold uppercase tracking-[0.32em] text-gray-400">Quieres trabajar con nosotros?</p>
+        <h2 data-reveal data-delay="1" class="max-w-2xl text-[36px] font-black leading-[0.94] tracking-[-0.06em] md:text-[58px]">
+          Abrimos cuenta a tiendas que cuidan a sus riders.
+        </h2>
+      </div>
+      <div data-reveal data-delay="2" class="flex flex-wrap gap-3">
+        <a href="/marcas" class="inline-flex h-12 items-center justify-center bg-black px-7 text-xs font-bold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#6B8CAE]">
+          Ver marcas
+        </a>
+        <a href="/catalogo" class="inline-flex h-12 items-center justify-center border border-black px-7 text-xs font-bold uppercase tracking-[0.18em] text-black transition-colors hover:bg-black hover:text-white">
+          Catalogo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <BackToTop />
+
+  <style>
+    .nosotros-hero {
+      position: relative;
+      margin-top: 84px;
+      min-height: calc(100vh - 84px);
+      overflow: hidden;
+      color: white;
+      background-image: url('/nosotros-hero.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      isolation: isolate;
+    }
+
+    .nosotros-hero::before,
+    .nosotros-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .nosotros-hero::before {
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.84), rgba(0, 0, 0, 0.36) 52%, rgba(0, 0, 0, 0.08));
+    }
+
+    .nosotros-hero::after {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.24) 45%, rgba(0, 0, 0, 0.82));
+    }
+
+    .nosotros-hero__inner {
+      position: relative;
+      min-height: calc(100vh - 84px);
+    }
+
+    .about-row {
+      width: 100%;
+      max-width: 72rem;
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5rem;
+    }
+
+    .about-left {
+      flex: 1 1 auto;
+      max-width: 42rem;
+      text-align: left;
+    }
+
+    .about-right {
+      flex: 0 0 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    .about-logo {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .about-logo img {
+      display: block;
+    }
+
+    @media (min-width: 1024px) {
+      .nosotros-hero {
+        margin-top: 72px;
+        min-height: calc(100vh - 72px);
+      }
+
+      .nosotros-hero__inner {
+        min-height: calc(100vh - 72px);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .about-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3rem;
+      }
+
+      .about-right {
+        flex-basis: auto;
+        width: 100%;
+        align-items: flex-start;
+      }
+
+      .about-logo {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</Layout>
