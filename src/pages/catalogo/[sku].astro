@@ -5,6 +5,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import '../../styles/global.css';
 import { supabase } from '../../lib/supabase';
+import { SITE, absoluteUrl } from '../../config/site';
 
 const CONTACT_EMAIL = 'hola@fundamentalbikeparts.com'; // TODO: confirmar email real
 
@@ -97,16 +98,58 @@ function formatKey(k: string) {
 const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Solicitud T3R — ${product.nombre}`)}&body=${encodeURIComponent(
   `Hola,\n\nMe interesa el siguiente producto T3R:\n\nProducto: ${product.nombre}\nReferencia (SKU): ${product.sku}\nCategoría: ${product.categoria}${product.subcategoria ? ' / ' + product.subcategoria : ''}\n\nPor favor, indícame disponibilidad y precio.\n\nGracias.`
 )}`;
+
+const seoDescription = (
+  product.descripcion_corta
+  ?? product.descripcion
+  ?? `${product.nombre} de T3R. Consulta características, medidas y disponibilidad en Fundamental Bike Parts.`
+).replace(/\s+/g, ' ').trim().slice(0, 160);
+
+const productUrl = absoluteUrl(`/catalogo/${product.sku}/`);
+const productSchema: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  '@id': `${productUrl}#product`,
+  name: product.nombre,
+  description: seoDescription,
+  sku: product.sku,
+  category: [product.categoria, product.subcategoria].filter(Boolean).join(' > '),
+  url: productUrl,
+  image: images.map((image) => absoluteUrl(image)),
+  brand: {
+    '@type': 'Brand',
+    name: 'T3R',
+  },
+  manufacturer: {
+    '@id': `${SITE.url}/#organization`,
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Catálogo T3R', item: absoluteUrl('/catalogo') },
+    { '@type': 'ListItem', position: 3, name: product.nombre, item: productUrl },
+  ],
+};
 ---
 
-<Layout title={`${product.nombre} — Catálogo T3R · Fundamental`}>
+<Layout
+  title={`${product.nombre} | T3R Fundamental`}
+  description={seoDescription}
+  image={images[0] ?? '/logo_t3r.png'}
+  type="product"
+  structuredData={[productSchema, breadcrumbSchema]}
+>
 
   <Nav />
 
   <section class="px-5 md:px-16 pb-24" style="padding-top: 110px;">
 
     <!-- Breadcrumb -->
-    <div class="flex items-center gap-3 mb-12">
+    <div class="flex flex-wrap items-center gap-x-3 gap-y-2 mb-8 sm:mb-12">
       <a href="/catalogo" class="text-sm text-gray-400 hover:text-black transition-colors">Catálogo</a>
       <span class="text-gray-300 text-sm">/</span>
       <span class="text-sm text-gray-400">{product.categoria}</span>
@@ -218,7 +261,7 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Solici
     <section class="bg-[#fafafa] px-5 md:px-16 py-20 border-t border-gray-100">
       <p class="text-sm text-[#6B8CAE] tracking-[0.25em] uppercase mb-3">También te puede interesar</p>
       <h2 class="text-2xl font-bold mb-10">{product.subcategoria}</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-gray-200 border border-gray-200">
+      <div class="grid grid-cols-1 min-[390px]:grid-cols-2 md:grid-cols-4 gap-px bg-gray-200 border border-gray-200">
         {related.map((r) => (
           <a href={`/catalogo/${r.sku}`} class="group bg-white block cursor-pointer">
             <div class="relative overflow-hidden bg-white" style="aspect-ratio: 1;">

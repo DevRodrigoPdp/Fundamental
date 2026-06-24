@@ -6,7 +6,7 @@ const label = Astro.props.label ?? 'Volver arriba';
   id="back-to-top"
   type="button"
   aria-label={label}
-  class="fixed bottom-6 right-6 z-40 flex h-12 w-12 translate-y-4 items-center justify-center rounded-full border border-black bg-black text-white opacity-0 shadow-lg shadow-black/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#6B8CAE] hover:border-[#6B8CAE] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 pointer-events-none"
+  class="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 flex h-11 w-11 translate-y-4 items-center justify-center rounded-full border border-black bg-black text-white opacity-0 shadow-lg shadow-black/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#6B8CAE] hover:border-[#6B8CAE] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 pointer-events-none sm:bottom-6 sm:right-6 sm:h-12 sm:w-12"
 >
   <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
     <path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0-6 6m6-6 6 6" />

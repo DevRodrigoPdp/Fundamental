@@ -6,6 +6,7 @@ import Nav from '../components/Nav.astro';
 import BackToTop from '../components/BackToTop.astro';
 import '../styles/global.css';
 import { supabase } from '../lib/supabase';
+import { SITE } from '../config/site';
 
 const CONTACT_EMAIL = 'hola@fundamentalbikeparts.com'; // TODO: confirmar email real
 
@@ -72,7 +73,19 @@ const catalogo = catalogoBase.flatMap((item: any) => {
 });
 ---
 
-<Layout title="Catálogo T3R — Fundamental">
+<Layout
+  title="Catálogo T3R | Componentes para bicicleta"
+  description="Consulta el catálogo T3R de componentes para bicicleta: frenos, pedales, pedalieres, puños, válvulas, cables, bolsas y accesorios."
+  image="/catalogo_t3r/combos/combos_3.jpg"
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Catálogo T3R',
+    description: 'Catálogo de recambios y componentes T3R para bicicletas.',
+    url: `${SITE.url}/catalogo`,
+    isPartOf: { '@id': `${SITE.url}/#website` },
+  }}
+>
 
   <Nav />
   <BackToTop />
@@ -149,8 +162,8 @@ const catalogo = catalogoBase.flatMap((item: any) => {
                 </div>
               </a>
               <div class="px-7 pb-7 flex flex-col flex-1">
-                <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
-                  <div>
+                <div class="flex flex-col items-start gap-4 mt-auto pt-4 border-t border-gray-100 min-[420px]:flex-row min-[420px]:items-center min-[420px]:justify-between">
+                  <div class="min-w-0">
                     <p class="text-xs text-gray-400">{p.refLabel ?? p.sku}</p>
                     <p class="text-xs text-gray-400">Consulta disponibilidad</p>
                   </div>

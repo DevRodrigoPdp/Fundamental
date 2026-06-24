@@ -29,7 +29,7 @@ function isActive(href: string, key: NavKey) {
 ---
 
 <header
-  class={`fixed inset-x-0 top-0 z-50 border-b border-white/8 ${bgClass} px-5 py-5 text-white shadow-[0_18px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl backdrop-saturate-150 md:px-10 lg:px-14`}
+  class={`fixed inset-x-0 top-0 z-50 border-b border-white/8 ${bgClass} px-4 py-4 text-white shadow-[0_18px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl backdrop-saturate-150 sm:px-5 sm:py-5 md:px-10 lg:px-14`}
 >
   <div class="mx-auto grid max-w-7xl grid-cols-[auto_1fr] items-center gap-5 lg:flex lg:justify-between">
     <!-- Mobile trigger -->
@@ -140,8 +140,9 @@ function isActive(href: string, key: NavKey) {
 <!-- Mobile overlay -->
 <div
   id="nav-mobile-menu"
-  class="pointer-events-none fixed inset-0 z-40 translate-y-[-10px] overflow-y-auto bg-[#0b0908] px-7 pb-10 pt-28 opacity-0 transition-[opacity,transform] duration-300 ease-out lg:hidden"
+  class="pointer-events-none fixed inset-0 z-40 translate-y-[-10px] overflow-y-auto overscroll-contain bg-[#0b0908] px-5 pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-24 opacity-0 transition-[opacity,transform] duration-300 ease-out sm:px-7 sm:pt-28 lg:hidden"
   aria-hidden="true"
+  inert
 >
   <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(197,168,128,0.16),transparent_34%)]"></div>
   <nav class="relative mx-auto flex max-w-md flex-col" aria-label="Navegación móvil">
@@ -259,8 +260,12 @@ function isActive(href: string, key: NavKey) {
     if (!toggle || !mobileMenu) return;
 
     const closeMobileMenu = () => {
+      if (mobileMenu.contains(document.activeElement)) {
+        toggle.focus({ preventScroll: true });
+      }
       mobileMenu.classList.add('pointer-events-none', 'translate-y-[-10px]', 'opacity-0');
       mobileMenu.classList.remove('pointer-events-auto', 'translate-y-0', 'opacity-100', 'is-open');
+      mobileMenu.setAttribute('inert', '');
       mobileMenu.setAttribute('aria-hidden', 'true');
       iconOpen?.classList.remove('hidden');
       iconClose?.classList.add('hidden');
@@ -270,6 +275,7 @@ function isActive(href: string, key: NavKey) {
     };
 
     const openMobileMenu = () => {
+      mobileMenu.removeAttribute('inert');
       mobileMenu.classList.remove('pointer-events-none', 'translate-y-[-10px]', 'opacity-0');
       mobileMenu.classList.add('pointer-events-auto', 'translate-y-0', 'opacity-100', 'is-open');
       mobileMenu.setAttribute('aria-hidden', 'false');

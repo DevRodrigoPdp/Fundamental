@@ -2,12 +2,23 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import '../styles/global.css';
+import { SITE } from '../config/site';
 
 // TODO: sustituir por el email real de la empresa cuando esté definido
 const CONTACT_EMAIL = 'hola@fundamentalbikeparts.com';
 ---
 
-<Layout title="Contacto — Fundamental">
+<Layout
+  title="Contacto | Fundamental Bike Parts"
+  description="Contacta con Fundamental Bike Parts para consultar productos, disponibilidad, pedidos o convertirte en punto de venta."
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contacto Fundamental Bike Parts',
+    url: `${SITE.url}/contacto`,
+    mainEntity: { '@id': `${SITE.url}/#organization` },
+  }}
+>
 
   <Nav active="contacto" />
 
@@ -63,7 +74,7 @@ const CONTACT_EMAIL = 'hola@fundamentalbikeparts.com';
         </div>
 
         <button type="submit"
-          class="bg-black text-white text-base font-medium px-8 py-4 hover:bg-[#222] transition-colors w-fit cursor-pointer">
+          class="w-full bg-black px-8 py-4 text-base font-medium text-white transition-colors hover:bg-[#222] cursor-pointer sm:w-fit">
           Enviar mensaje
         </button>
 
@@ -76,7 +87,7 @@ const CONTACT_EMAIL = 'hola@fundamentalbikeparts.com';
       <div class="flex flex-col gap-10 order-1 md:order-2" data-reveal data-delay="2">
         <div>
           <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-3">Email directo</p>
-          <a href={`mailto:${CONTACT_EMAIL}`} class="text-lg font-medium hover:text-[#6B8CAE] transition-colors">
+          <a href={`mailto:${CONTACT_EMAIL}`} class="break-all text-base font-medium transition-colors hover:text-[#6B8CAE] sm:text-lg">
             {CONTACT_EMAIL}
           </a>
         </div>

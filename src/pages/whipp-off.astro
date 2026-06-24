@@ -2,12 +2,24 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import '../styles/global.css';
+import { SITE } from '../config/site';
 ---
 
-<Layout title="Whipp-Off — Fundamental" heroImage="/catalogo_whipoff/WHIP_OFF_1.jpg">
+<Layout
+  title="Whipp-Off | Ropa y equipamiento MTB"
+  description="Descubre Whipp-Off: ropa técnica y equipamiento MTB para riders, disponible a través de Fundamental Bike Parts."
+  heroImage="/catalogo_whipoff/WHIP_OFF_1.jpg"
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'Brand',
+    name: 'Whipp-Off',
+    url: `${SITE.url}/whipp-off`,
+    logo: `${SITE.url}/logo_whipoff.png`,
+    description: 'Ropa técnica y equipamiento para ciclismo MTB.',
+  }}
+>
 
   <style is:global>
-    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Epilogue:wght@300;400;500;600&display=swap');
     .font-anton { font-family: 'Anton', sans-serif; }
     .font-epilogue { font-family: 'Epilogue', sans-serif; }
   </style>
@@ -15,7 +27,7 @@ import '../styles/global.css';
   <Nav />
 
   <!-- HERO -->
-  <section class="relative h-screen bg-black flex flex-col justify-end overflow-hidden">
+  <section class="relative min-h-[100svh] bg-black flex flex-col justify-end overflow-hidden">
     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/catalogo_whipoff/WHIP_OFF_1.jpg');"></div>
     <div class="absolute inset-0" style="background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.1) 100%);"></div>
 
@@ -32,7 +44,7 @@ import '../styles/global.css';
       </svg>
     </a>
 
-    <div class="relative z-20 px-5 md:px-16 pb-16">
+    <div class="relative z-20 px-5 pb-10 sm:pb-14 md:px-16 md:pb-16">
       <img src="/logo_whipoff.png" alt="Whipp-Off" class="h-9 md:h-12 w-auto mb-8 brightness-0 invert" />
       <p class="font-epilogue text-xs text-white/50 tracking-[0.4em] uppercase mb-4">Ropa MTB · Fundamental</p>
       <h1 class="font-anton text-[64px] sm:text-[88px] md:text-[120px] leading-[0.85] text-white uppercase mb-8" style="letter-spacing: -0.02em;">
@@ -83,17 +95,17 @@ import '../styles/global.css';
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/>
           </svg>
         </a>
-        <div class="flex gap-6 md:gap-8 mt-12 pt-12 border-t border-white/10">
+        <div class="grid grid-cols-3 gap-3 sm:flex sm:gap-6 md:gap-8 mt-12 pt-12 border-t border-white/10">
           <div>
             <p class="font-anton text-4xl text-white">3</p>
             <p class="font-epilogue text-sm text-white/55 uppercase tracking-widest mt-1">Categorías</p>
           </div>
-          <div class="w-px bg-white/10"></div>
+          <div class="hidden w-px bg-white/10 sm:block"></div>
           <div>
             <p class="font-anton text-4xl text-white">100%</p>
             <p class="font-epilogue text-sm text-white/55 uppercase tracking-widest mt-1">Técnico</p>
           </div>
-          <div class="w-px bg-white/10"></div>
+          <div class="hidden w-px bg-white/10 sm:block"></div>
           <div>
             <p class="font-anton text-4xl text-white">MTB</p>
             <p class="font-epilogue text-sm text-white/55 uppercase tracking-widest mt-1">Focused</p>

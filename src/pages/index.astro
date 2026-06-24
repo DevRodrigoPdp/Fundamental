@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import '../styles/global.css';
 import { supabase } from '../lib/supabase';
+import { SITE } from '../config/site';
 
 // Sitio estático (sin adapter/output:'server' en astro.config): esta query
 // corre una sola vez en build, no en cada visita. Mantenerla aquí (SSR/build-time)
@@ -37,7 +38,21 @@ const novedades = (products ?? []).map((p: any) => ({
 }));
 ---
 
-<Layout title="Fundamental Bike Parts — Distribuidora T3R · Whipp-Off · Transfer">
+<Layout
+  title="Fundamental Bike Parts | Distribuidora de ciclismo"
+  description="Distribuidora de T3R, Whipp-Off y Transfer: componentes para bicicleta, ropa MTB, cuadros y bicicletas para tiendas y ciclistas."
+  heroImage="/catalogo_t3r/combos/combos_9.jpg"
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE.url}/#website`,
+    url: SITE.url,
+    name: SITE.name,
+    description: SITE.description,
+    publisher: { '@id': `${SITE.url}/#organization` },
+    inLanguage: 'es',
+  }}
+>
 
   <style is:global>
     html { scroll-behavior: smooth; }
@@ -115,7 +130,7 @@ const novedades = (products ?? []).map((p: any) => ({
   <Nav />
 
   <!-- ═══ HERO — T3R ═══ -->
-  <section class="relative h-screen overflow-hidden bg-[#1A100C]">
+  <section class="relative min-h-[100svh] overflow-hidden bg-[#1A100C]">
     <img
       src="/catalogo_t3r/combos/combos_9.jpg"
       alt="T3R componentes"
@@ -126,7 +141,7 @@ const novedades = (products ?? []).map((p: any) => ({
     />
     <div class="absolute inset-0" style="background: linear-gradient(to top, #1A100C 0%, rgba(26,16,12,0.75) 40%, rgba(26,16,12,0.2) 100%);"></div>
 
-    <div class="absolute inset-0 flex flex-col justify-end px-5 md:px-12 pb-16 z-10">
+    <div class="absolute inset-0 flex flex-col justify-end px-5 pb-10 sm:pb-14 md:px-12 md:pb-16 z-10">
       <div class="flex items-center gap-3 mb-5">
         <div class="w-6 h-px bg-[#C4A072]"></div>
         <p class="text-[10px] text-[#C4A072] tracking-[0.4em] uppercase">T3R · The Three Riders</p>
@@ -135,7 +150,7 @@ const novedades = (products ?? []).map((p: any) => ({
         <span class="block text-white">Componentes</span>
         <span class="block text-[#C4A072]">fundamentales.</span>
       </h1>
-      <div class="flex items-center gap-3 md:gap-4">
+      <div class="flex flex-wrap items-center gap-3 md:gap-4">
         <a href="#productos"
           class="bg-[#C4A072] text-[#1A100C] text-xs font-bold px-6 md:px-9 py-3.5 md:py-4 hover:bg-[#D4B280] transition-colors tracking-[0.12em] uppercase cursor-pointer">
           Ver productos
@@ -289,7 +304,7 @@ const novedades = (products ?? []).map((p: any) => ({
       <div>
         <p class="text-[10px] text-gray-400 tracking-[0.3em] uppercase mb-3">Newsletter</p>
         <h3 class="font-bold text-base mb-3">Mantente informado</h3>
-        <form class="flex">
+        <form class="flex flex-col gap-2 sm:flex-row sm:gap-0">
           <input type="email" placeholder="tu@email.com"
             class="border border-gray-300 bg-white px-4 py-3 text-sm flex-1 outline-none focus:border-[#1A100C] transition-colors" />
           <button type="submit" class="bg-[#1A100C] text-white text-sm px-5 py-3 hover:bg-black transition-colors">Suscribirme</button>

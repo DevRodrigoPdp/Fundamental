@@ -2,14 +2,27 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import '../styles/global.css';
+import { SITE } from '../config/site';
 ---
 
-<Layout title="Transfer Bike — Fundamental" heroImage="/catalogo_transferbike/bici_transferbike.jpeg">
+<Layout
+  title="Transfer Bikes | Bicicletas y cuadros"
+  description="Descubre Transfer Bikes y el modelo Kanaya: bicicletas y cuadros distribuidos por Fundamental Bike Parts."
+  heroImage="/catalogo_transferbike/bici_transferbike.jpeg"
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'Brand',
+    name: 'Transfer Bikes',
+    url: `${SITE.url}/transfer`,
+    logo: `${SITE.url}/logo_transfer.png`,
+    description: 'Fabricante de bicicletas y cuadros.',
+  }}
+>
 
   <Nav bgClass="bg-black/70" />
 
   <!-- HERO -->
-  <section class="relative h-screen bg-[#111] flex flex-col justify-end overflow-hidden">
+  <section class="relative min-h-[100svh] bg-[#111] flex flex-col justify-end overflow-hidden">
     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/catalogo_transferbike/bici_transferbike.jpeg');"></div>
     <div class="absolute inset-0" style="background: linear-gradient(to top, #0a0a0a 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);"></div>
 

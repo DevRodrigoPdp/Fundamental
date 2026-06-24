@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import '../styles/global.css';
+import { SITE } from '../config/site';
 
 const brands = [
   {
@@ -28,7 +29,25 @@ const brands = [
 ];
 ---
 
-<Layout title="Marcas — Fundamental">
+<Layout
+  title="Marcas de ciclismo | T3R, Whipp-Off y Transfer"
+  description="Conoce las marcas distribuidas por Fundamental: componentes T3R, ropa MTB Whipp-Off y bicicletas y cuadros Transfer."
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Marcas de Fundamental Bike Parts',
+    url: `${SITE.url}/marcas`,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: brands.map((brand, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: brand.name,
+        url: new URL(brand.href, SITE.url).toString(),
+      })),
+    },
+  }}
+>
 
   <Nav active="marcas" />
 
