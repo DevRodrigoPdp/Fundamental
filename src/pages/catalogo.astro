@@ -12,7 +12,7 @@ const CONTACT_EMAIL = 'hola@fundamentalbikeparts.com'; // TODO: confirmar email 
 
 const { data: products, error } = await supabase
   .from('productos_t3r')
-  .select('nombre, categoria, subcategoria, descripcion_corta, sku')
+  .select('*')
   .eq('activo', true)
   .order('categoria', { ascending: true });
 
@@ -43,7 +43,14 @@ const catalogoBase = (products ?? []).map((p: any) => ({
   descripcion: p.descripcion_corta,
   sku: p.sku,
   imagen: imgMap[p.sku] ?? null,
+  cantidadStock: p.stock ?? null,
 }));
+
+function stockLabel(quantity: number | null) {
+  if (quantity === 0) return 'Agotado';
+  if (quantity !== null && quantity <= 10) return 'Pocas unidades en stock';
+  return null;
+}
 
 const diskFamilies = [
   { prefix: 'T3R-DISCO-6T-', nombre: 'Discos de freno 6 tornillos' },
@@ -71,6 +78,14 @@ const catalogo = catalogoBase.flatMap((item: any) => {
     searchSku: variants.map((variant: any) => variant.sku).join(' '),
   }];
 });
+
+const sortedCatalog = [...catalogo].sort((a: any, b: any) =>
+  a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' })
+);
+
+const categories = [...new Set(
+  catalogo.map((product: any) => product.categoria || 'Otros')
+)].sort((a, b) => a.localeCompare(b, 'es'));
 ---
 
 <Layout
@@ -100,32 +115,77 @@ const catalogo = catalogoBase.flatMap((item: any) => {
       Cada referencia se sirve bajo solicitud. Filtra por nombre, categoría o referencia y te enviamos disponibilidad, plazo y precio.
     </p>
 
-    <div data-reveal data-delay="3" class="relative max-w-xl">
-      <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M19 11a8 8 0 11-16 0 8 8 0 0116 0z" />
-      </svg>
-      <input
-        id="search-input"
-        type="search"
-        placeholder="Buscar por nombre, categoría o referencia..."
-        class="w-full border border-gray-300 pl-12 pr-12 py-3.5 text-base outline-none focus:border-black transition-colors [&::-webkit-search-cancel-button]:hidden"
-        autocomplete="off"
-        aria-label="Buscar en el catálogo"
-        aria-controls="product-grid"
-      />
-      <button id="search-clear" type="button" class="hidden absolute right-3 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-black transition-colors" aria-label="Limpiar búsqueda">
-        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/></svg>
+    <div data-reveal data-delay="3" class="relative max-w-2xl">
+        <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M19 11a8 8 0 11-16 0 8 8 0 0116 0z" />
+        </svg>
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Buscar por nombre, categoría o referencia..."
+          class="w-full border border-gray-300 pl-12 pr-12 py-3.5 text-base outline-none focus:border-black transition-colors [&::-webkit-search-cancel-button]:hidden"
+          autocomplete="off"
+          aria-label="Buscar en el catálogo"
+          aria-controls="product-grid"
+        />
+        <button id="search-clear" type="button" class="hidden absolute right-3 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-black transition-colors" aria-label="Limpiar búsqueda">
+          <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+    </div>
+    <div class="mt-4 flex min-h-6 flex-wrap items-center gap-x-5 gap-y-2">
+      <p id="search-status" class="text-xs text-gray-400" role="status" aria-live="polite"></p>
+      <button id="mobile-filter-toggle" type="button" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] lg:hidden" aria-expanded="false" aria-controls="catalog-filters">
+        Filtros
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M4 7h16M7 12h10M10 17h4"/></svg>
+      </button>
+      <button id="filters-clear" type="button" class="hidden text-xs font-medium text-black underline underline-offset-4">
+        Limpiar filtros
       </button>
     </div>
-    <p id="search-status" class="mt-3 text-xs text-gray-400" role="status" aria-live="polite"></p>
   </section>
 
   <!-- GRID PRODUCTOS -->
   <section class="px-5 md:px-16 pb-32">
     {catalogo.length > 0 ? (
       <>
-        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white">
-          {catalogo.map((p, i) => (
+        <div class="grid items-start gap-8 lg:grid-cols-[260px_minmax(0,1fr)] xl:grid-cols-[290px_minmax(0,1fr)]">
+          <aside id="catalog-filters" class="hidden border border-gray-200 bg-[#faf9f7] lg:sticky lg:top-28 lg:block">
+            <div class="flex items-center justify-between border-b border-gray-200 px-5 py-4">
+              <div>
+                <p class="text-[9px] uppercase tracking-[0.26em] text-gray-400">Catálogo T3R</p>
+                <h2 class="mt-1 text-base font-bold">Filtrar productos</h2>
+              </div>
+              <button id="sidebar-clear" type="button" class="hidden text-[11px] text-gray-500 underline underline-offset-4">Limpiar</button>
+            </div>
+
+            <div class="border-b border-gray-200 p-5">
+              <p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400">Categorías</p>
+              <div class="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
+                <button type="button" data-category-filter="" class="filter-choice is-active">Todos</button>
+                {categories.map((category) => (
+                  <button type="button" data-category-filter={category} class="filter-choice">{category}</button>
+                ))}
+              </div>
+            </div>
+
+            <div class="p-5">
+              <p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400">Productos</p>
+              <div id="product-filter-list" class="max-h-[48vh] space-y-1 overflow-y-auto pr-1">
+                <button type="button" data-product-filter="" data-filter-category="" class="product-filter is-active">
+                  Todos los productos
+                </button>
+                {sortedCatalog.map((product: any) => (
+                  <button type="button" data-product-filter={product.sku} data-filter-category={product.categoria || 'Otros'} class="product-filter">
+                    <span>{product.nombre}</span>
+                    <span class="text-[9px] text-gray-400">{product.refLabel ?? product.sku}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </aside>
+
+          <div id="product-grid" class="grid grid-cols-1 min-[430px]:grid-cols-2 xl:grid-cols-3 gap-3 bg-white">
+          {sortedCatalog.map((p: any, i: number) => (
             <div
               data-product-card
               data-search={`${p.nombre} ${p.categoria} ${p.subcategoria ?? ''} ${p.sku}`.toLowerCase()}
@@ -133,43 +193,52 @@ const catalogo = catalogoBase.flatMap((item: any) => {
               data-category={p.categoria}
               data-subcategory={p.subcategoria ?? ''}
               data-sku={p.searchSku ?? p.sku}
+              data-product-id={p.sku}
               data-reveal data-delay={String(i % 4)}
-              class="group bg-white border border-gray-200 flex flex-col"
+              class="group flex flex-col border border-gray-200 bg-white transition-[border-color,box-shadow] duration-300 hover:border-gray-400 hover:shadow-[0_12px_34px_rgba(0,0,0,0.06)]"
             >
               <a href={`/catalogo/${p.sku}`} class="block cursor-pointer">
-                <div class="relative overflow-hidden bg-white" style="aspect-ratio: 16/10;">
+                <div class="relative overflow-hidden bg-white aspect-[4/3]">
                   {p.imagen ? (
                     <img
                       src={p.imagen}
                       alt={p.nombre}
-                      class="absolute inset-0 w-full h-full object-contain p-6 md:p-8 transition-transform duration-500 group-hover:scale-[1.02]"
+                      class="absolute inset-0 h-full w-full object-contain p-4 sm:p-5 transition-transform duration-500 group-hover:scale-[1.025]"
                       loading="lazy"
                       decoding="async"
                     />
                   ) : (
                     <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-white text-gray-300">
-                      <img src="/logo_t3r.png" alt="T3R" class="w-24 md:w-28 opacity-25 grayscale" loading="lazy" />
+                      <img src="/logo_t3r.png" alt="T3R" class="w-20 opacity-25 grayscale" loading="lazy" />
                       <p class="text-[10px] tracking-[0.25em] uppercase text-gray-300">Foto próximamente</p>
                     </div>
                   )}
                 </div>
-                <div class="px-7 pt-7">
-                  <p class="text-[10px] text-gray-400 tracking-[0.25em] uppercase mb-2">{p.subcategoria ?? p.categoria}</p>
-                  <h3 class="font-bold text-lg mb-2 leading-snug group-hover:text-[#6B8CAE] transition-colors">{p.nombre}</h3>
+                <div class="px-5 pt-5">
+                  <p class="mb-2 text-[9px] uppercase tracking-[0.22em] text-gray-400">{p.subcategoria ?? p.categoria}</p>
+                  <h3 class="mb-2 text-[15px] font-bold leading-snug transition-colors group-hover:text-[#6B8CAE] sm:text-base">{p.nombre}</h3>
                   {p.descripcion && (
-                    <p class="text-sm text-gray-500 leading-relaxed mb-5">{p.descripcion}</p>
+                    <p class="mb-4 line-clamp-2 text-xs leading-relaxed text-gray-500 sm:text-sm">{p.descripcion}</p>
+                  )}
+                  {stockLabel(p.cantidadStock) && (
+                    <p class:list={[
+                      'mb-5 text-xs font-semibold uppercase tracking-[0.12em]',
+                      p.cantidadStock === 0 ? 'text-red-600' : 'text-amber-700',
+                    ]}>
+                      {stockLabel(p.cantidadStock)}
+                    </p>
                   )}
                 </div>
               </a>
-              <div class="px-7 pb-7 flex flex-col flex-1">
-                <div class="flex flex-col items-start gap-4 mt-auto pt-4 border-t border-gray-100 min-[420px]:flex-row min-[420px]:items-center min-[420px]:justify-between">
+              <div class="flex flex-1 flex-col px-5 pb-5">
+                <div class="mt-auto flex flex-col items-start gap-3 border-t border-gray-100 pt-4 xl:flex-row xl:items-center xl:justify-between">
                   <div class="min-w-0">
-                    <p class="text-xs text-gray-400">{p.refLabel ?? p.sku}</p>
-                    <p class="text-xs text-gray-400">Consulta disponibilidad</p>
+                    <p class="truncate text-[11px] text-gray-400">{p.refLabel ?? p.sku}</p>
+                    <p class="text-[11px] text-gray-400">Consulta disponibilidad</p>
                   </div>
                   <a
                     href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Solicitud T3R — ' + p.nombre)}&body=${encodeURIComponent(`Hola,\n\nMe interesa el siguiente producto T3R:\n\nProducto: ${p.nombre}\nReferencia (SKU): ${p.sku}\nCategoría: ${p.categoria}${p.subcategoria ? ' / ' + p.subcategoria : ''}\n\nPor favor, indícame disponibilidad y precio.\n\nGracias.`)}`}
-                    class="text-sm font-medium inline-flex items-center gap-1 shrink-0 cursor-pointer"
+                    class="inline-flex shrink-0 cursor-pointer items-center gap-1 text-xs font-medium"
                   >
                     Solicitar
                     <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
@@ -178,6 +247,7 @@ const catalogo = catalogoBase.flatMap((item: any) => {
               </div>
             </div>
           ))}
+          </div>
         </div>
         <p id="empty-state" class="hidden text-center text-gray-400 text-base py-20">
           No hay referencias que coincidan con tu búsqueda.
@@ -188,10 +258,77 @@ const catalogo = catalogoBase.flatMap((item: any) => {
     )}
   </section>
 
+  <style>
+    .filter-choice {
+      width: 100%;
+      border: 1px solid transparent;
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      font-size: 0.78rem;
+      color: rgb(75 85 99);
+      transition: 180ms ease;
+    }
+
+    .filter-choice:hover,
+    .filter-choice.is-active {
+      border-color: rgb(17 17 17 / 0.12);
+      background: white;
+      color: #111;
+    }
+
+    .filter-choice.is-active {
+      font-weight: 650;
+      box-shadow: inset 3px 0 #111;
+    }
+
+    .product-filter {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      gap: 0.15rem;
+      border-left: 2px solid transparent;
+      padding: 0.62rem 0.7rem;
+      text-align: left;
+      font-size: 0.73rem;
+      line-height: 1.35;
+      color: rgb(107 114 128);
+      transition: 180ms ease;
+    }
+
+    .product-filter:hover,
+    .product-filter.is-active {
+      border-left-color: #111;
+      background: white;
+      color: #111;
+    }
+
+    .product-filter.is-active {
+      font-weight: 600;
+    }
+
+    @media (max-width: 1023px) {
+      #catalog-filters {
+        margin-bottom: 1.5rem;
+      }
+
+      #catalog-filters.is-open {
+        display: block;
+      }
+
+      #product-filter-list {
+        max-height: 18rem;
+      }
+
+      .filter-choice {
+        width: auto;
+      }
+    }
+  </style>
+
   <!-- FOOTER -->
   <footer class="border-t border-gray-100 px-5 md:px-16 py-10 flex flex-col md:flex-row items-center md:items-start justify-between gap-4 text-center md:text-left">
     <div>
-      <p class="text-base font-bold mb-2">T3R Fundamental</p>
+      <p class="text-base font-bold mb-2">T3R × Fundamental</p>
       <p class="text-sm text-gray-400 max-w-[240px] leading-relaxed">
         Distribuidora de componentes profesionales para ciclismo. Madrid, España.
       </p>
@@ -202,12 +339,19 @@ const catalogo = catalogoBase.flatMap((item: any) => {
   <script>
     document.addEventListener('astro:page-load', () => {
       const input = document.getElementById('search-input');
-      const grid = document.getElementById('product-grid');
       const cards = [...document.querySelectorAll('[data-product-card]')];
       const emptyState = document.getElementById('empty-state');
       const clearButton = document.getElementById('search-clear');
+      const clearFiltersButton = document.getElementById('filters-clear');
+      const sidebarClear = document.getElementById('sidebar-clear');
+      const filterPanel = document.getElementById('catalog-filters');
+      const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
+      const categoryButtons = [...document.querySelectorAll('[data-category-filter]')];
+      const productButtons = [...document.querySelectorAll('[data-product-filter]')];
       const status = document.getElementById('search-status');
       if (!input) return;
+      let selectedCategory = '';
+      let selectedProduct = '';
 
       const normalize = (value) => value
         .normalize('NFD')
@@ -252,6 +396,7 @@ const catalogo = catalogoBase.flatMap((item: any) => {
         return {
           card,
           index,
+          id: card.dataset.productId || '',
           fields,
           words: Object.values(fields).join(' ').split(' '),
         };
@@ -272,10 +417,12 @@ const catalogo = catalogoBase.flatMap((item: any) => {
         const normalizedQuery = normalize(rawQuery);
         const expandedQuery = aliases.get(normalizedQuery) || normalizedQuery;
         const terms = expandedQuery.split(' ').filter(Boolean);
-
         const results = searchableCards.map((item) => {
           const scores = terms.map((term) => termScore(term, item));
-          const match = terms.length === 0 || scores.every((score) => score > 0);
+          const matchesText = terms.length === 0 || scores.every((score) => score > 0);
+          const matchesProduct = !selectedProduct || item.id === selectedProduct;
+          const matchesCategory = !selectedCategory || item.fields.category === normalize(selectedCategory);
+          const match = matchesText && matchesProduct && matchesCategory;
           let score = scores.reduce((total, value) => total + value, 0);
           if (expandedQuery && item.fields.name.includes(expandedQuery)) score += 50;
           if (expandedQuery && item.fields.sku.includes(expandedQuery)) score += 60;
@@ -286,26 +433,70 @@ const catalogo = catalogoBase.flatMap((item: any) => {
         results.forEach((result) => {
           result.card.style.display = result.match ? '' : 'none';
           if (result.match) visibleCount++;
-          grid?.append(result.card);
         });
 
         if (emptyState) emptyState.classList.toggle('hidden', visibleCount > 0);
         clearButton?.classList.toggle('hidden', !rawQuery);
-        if (status) status.textContent = rawQuery
-          ? `${visibleCount} ${visibleCount === 1 ? 'resultado' : 'resultados'}`
-          : `${cards.length} productos`;
+        clearFiltersButton?.classList.toggle('hidden', !rawQuery && !selectedProduct && !selectedCategory);
+        sidebarClear?.classList.toggle('hidden', !selectedProduct && !selectedCategory);
+        if (status) status.textContent = `${visibleCount} ${visibleCount === 1 ? 'producto' : 'productos'}`;
 
         const url = new URL(window.location.href);
         rawQuery ? url.searchParams.set('q', rawQuery) : url.searchParams.delete('q');
+        selectedProduct ? url.searchParams.set('producto', selectedProduct) : url.searchParams.delete('producto');
+        selectedCategory ? url.searchParams.set('categoria', selectedCategory) : url.searchParams.delete('categoria');
         history.replaceState({}, '', url);
       };
 
       input.addEventListener('input', filter);
+      categoryButtons.forEach((button) => button.addEventListener('click', () => {
+        selectedCategory = button.dataset.categoryFilter || '';
+        selectedProduct = '';
+        categoryButtons.forEach((item) => item.classList.toggle('is-active', item === button));
+        productButtons.forEach((item) => {
+          const productCategory = item.dataset.filterCategory || '';
+          const visible = !selectedCategory || !productCategory || productCategory === selectedCategory;
+          item.classList.toggle('hidden', !visible);
+          item.classList.toggle('is-active', !item.dataset.productFilter);
+        });
+        filter();
+      }));
+      productButtons.forEach((button) => button.addEventListener('click', () => {
+        selectedProduct = button.dataset.productFilter || '';
+        if (selectedProduct) {
+          selectedCategory = button.dataset.filterCategory || '';
+          categoryButtons.forEach((item) => item.classList.toggle('is-active', item.dataset.categoryFilter === selectedCategory));
+        }
+        productButtons.forEach((item) => item.classList.toggle('is-active', item === button));
+        filter();
+        if (window.innerWidth < 1024) {
+          filterPanel?.classList.remove('is-open');
+          mobileFilterToggle?.setAttribute('aria-expanded', 'false');
+        }
+      }));
+      mobileFilterToggle?.addEventListener('click', () => {
+        const open = !filterPanel?.classList.contains('is-open');
+        filterPanel?.classList.toggle('is-open', open);
+        mobileFilterToggle.setAttribute('aria-expanded', String(open));
+      });
       clearButton?.addEventListener('click', () => {
         input.value = '';
         filter();
         input.focus();
       });
+      const clearAll = () => {
+        input.value = '';
+        selectedCategory = '';
+        selectedProduct = '';
+        categoryButtons.forEach((item) => item.classList.toggle('is-active', !item.dataset.categoryFilter));
+        productButtons.forEach((item) => {
+          item.classList.remove('hidden');
+          item.classList.toggle('is-active', !item.dataset.productFilter);
+        });
+        filter();
+      };
+      clearFiltersButton?.addEventListener('click', () => { clearAll(); input.focus(); });
+      sidebarClear?.addEventListener('click', clearAll);
 
       document.addEventListener('keydown', (event) => {
         if (event.key === '/' && document.activeElement !== input) {
@@ -319,6 +510,25 @@ const catalogo = catalogoBase.flatMap((item: any) => {
       const initialQuery = params.get('q');
       if (initialQuery) {
         input.value = initialQuery;
+      }
+      const initialProduct = params.get('producto');
+      const initialCategory = params.get('categoria');
+      if (initialCategory) {
+        selectedCategory = initialCategory;
+        categoryButtons.forEach((item) => item.classList.toggle('is-active', item.dataset.categoryFilter === initialCategory));
+        productButtons.forEach((item) => {
+          const category = item.dataset.filterCategory || '';
+          item.classList.toggle('hidden', Boolean(category && category !== initialCategory));
+        });
+      }
+      if (initialProduct) {
+        const productButton = productButtons.find((item) => item.dataset.productFilter === initialProduct);
+        if (productButton) {
+          selectedProduct = initialProduct;
+          selectedCategory = productButton.dataset.filterCategory || selectedCategory;
+          productButtons.forEach((item) => item.classList.toggle('is-active', item === productButton));
+          categoryButtons.forEach((item) => item.classList.toggle('is-active', item.dataset.categoryFilter === selectedCategory));
+        }
       }
       filter();
     });

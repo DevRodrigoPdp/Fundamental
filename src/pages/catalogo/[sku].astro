@@ -86,6 +86,12 @@ const diskVariants = isDiskFamily
   : [];
 
 const especificaciones: Record<string, any> = product.especificaciones ?? {};
+const cantidadStock: number | null = product.stock ?? null;
+const stockLabel = cantidadStock === 0
+  ? 'Agotado'
+  : cantidadStock !== null && cantidadStock <= 10
+    ? 'Pocas unidades en stock'
+    : null;
 
 function formatValue(v: any) {
   if (typeof v === 'boolean') return v ? 'Sí' : 'No';
@@ -196,6 +202,14 @@ const breadcrumbSchema = {
         <p class="text-sm text-[#6B8CAE] tracking-[0.25em] uppercase mb-4">{product.subcategoria ?? product.categoria}</p>
         <h1 class="text-[28px] md:text-[40px] font-bold leading-tight mb-3">{product.nombre}</h1>
         <p class="text-sm text-gray-400 mb-8">REF. {product.sku}</p>
+        {stockLabel && (
+          <p class:list={[
+            'mb-8 text-sm font-semibold uppercase tracking-[0.12em]',
+            cantidadStock === 0 ? 'text-red-600' : 'text-amber-700',
+          ]}>
+            {stockLabel}
+          </p>
+        )}
 
         {diskVariants.length > 0 && (
           <div class="mb-8">
@@ -291,7 +305,7 @@ const breadcrumbSchema = {
   <!-- FOOTER -->
   <footer class="border-t border-gray-100 px-5 md:px-16 py-10 flex flex-col md:flex-row items-center md:items-start justify-between gap-4 text-center md:text-left">
     <div>
-      <p class="text-base font-bold mb-2">T3R Fundamental</p>
+      <p class="text-base font-bold mb-2">T3R × Fundamental</p>
       <p class="text-sm text-gray-400 max-w-[240px] leading-relaxed">
         Distribuidora de componentes profesionales para ciclismo. Madrid, España.
       </p>

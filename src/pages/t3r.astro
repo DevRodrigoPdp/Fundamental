@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import { Factory, Bike, ShieldCheck, Timer, MapPin, ExternalLink, Search } from 'lucide-astro';
 import '../styles/global.css';
 import { SITE } from '../config/site';
+import { catalogFamilies } from '../data/catalog-families';
 
 const puntosVenta = [
   { nombre: 'The Bike Village SL', direccion: 'Cl Corts 5', poblacion: 'Cabrera de Mar', cp: '08349', tel: '936387251', mail: 'compras@thebikevillage.com' },
@@ -25,60 +26,7 @@ const pilares = [
   { title: 'Para durar', text: 'Productos pensados por y para durar. Que rindan a la altura durante toda su vida útil, sin concesiones.', icon: 'durability' },
 ];
 
-const categorias = [
-  {
-    cat: 'Discos de freno',
-    tag: 'Frenada',
-    text: 'Control, mordida y medidas clave para montar una gama honesta sin inflar el precio.',
-    img: '/catalogo_t3r/cutouts/disco_freno.png',
-  },
-  {
-    cat: 'Pastillas de freno',
-    tag: 'Frenada',
-    text: 'Referencias compatibles para taller: claras, directas y pensadas para rotar bien.',
-    img: '/catalogo_t3r/cutouts/pastillas_freno.png',
-  },
-  {
-    cat: 'Pedales plataforma',
-    tag: 'Contacto',
-    text: 'Agarre y resistencia para uso diario, e-bike y montaña sin pagar por ruido de marca.',
-    img: '/catalogo_t3r/cutouts/pedal_plataforma.png',
-  },
-  {
-    cat: 'Pedales automáticos',
-    tag: 'Contacto',
-    text: 'Entrada, ajuste y fiabilidad para quien quiere rendimiento sin complicarse.',
-    img: '/catalogo_t3r/cutouts/pedal_automatico.png',
-  },
-  {
-    cat: 'Pedales carretera',
-    tag: 'Road',
-    text: 'Ligereza y apoyo para carretera, con el foco puesto en lo que realmente se nota.',
-    img: '/catalogo_t3r/cutouts/pedal_carretera.png',
-  },
-  {
-    cat: 'Pedalier / BB',
-    tag: 'Transmisión',
-    text: 'Ejes y pedalieres para resolver compatibilidades de taller sin convertirlo en ciencia oscura.',
-    img: '/catalogo_t3r/cutouts/pedalier.png',
-  },
-  {
-    cat: 'Puños',
-    tag: 'Control',
-    text: 'Tacto, comodidad y durabilidad para los puntos donde la bici se siente de verdad.',
-    img: '/catalogo_t3r/cutouts/puno.png',
-  },
-  {
-    cat: 'Válvulas tubeless',
-    tag: 'Tubeless',
-    text: 'Pequeñas piezas que tienen que funcionar siempre. Simple, preciso, sin teatro.',
-    img: '/catalogo_t3r/cutouts/valvula.png',
-  },
-];
-
-function categoriaCardLayout(index: number, total: number) {
-  return 'min-h-[360px] lg:col-span-6 min-[2560px]:col-span-4';
-}
+const categorias = catalogFamilies;
 ---
 
 <Layout
@@ -160,7 +108,7 @@ function categoriaCardLayout(index: number, total: number) {
   <section id="categorias" class="order-[-20] relative overflow-hidden bg-white px-5 py-24 text-[#111111] md:px-16 md:py-28">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_75%_0%,rgba(196,160,114,0.16),transparent_34%)]"></div>
     <div class="absolute inset-x-0 top-0 h-px bg-black/10"></div>
-    <div class="relative mx-auto max-w-6xl min-[2560px]:max-w-[1800px]">
+    <div class="relative mx-auto max-w-[1500px]">
       <div class="mb-14 grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-end" data-reveal>
         <div>
           <p class="mb-6 text-xs uppercase tracking-[0.35em] text-[#C4A072]">Gama T3R</p>
@@ -174,20 +122,17 @@ function categoriaCardLayout(index: number, total: number) {
         </p>
       </div>
 
-      <div class="grid gap-4 lg:grid-cols-12">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {categorias.map((item, i) => (
           <a
-            href={'/catalogo?q=' + encodeURIComponent(item.cat)}
+            href={`/catalogo/familia/${item.slug}`}
             data-reveal
             data-delay={String(i % 4)}
-            class:list={[
-              't3r-family-card group relative overflow-hidden border border-black/10 bg-white transition-[border-color,box-shadow,background-color] duration-500 hover:border-[#C4A072]/55 hover:shadow-[0_24px_70px_rgba(17,17,17,0.10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C4A072]/60',
-              categoriaCardLayout(i, categorias.length),
-            ]}
+            class="t3r-family-card group relative min-h-[310px] overflow-hidden border border-black/10 bg-white transition-[border-color,box-shadow,background-color] duration-500 hover:border-[#C4A072]/55 hover:shadow-[0_24px_70px_rgba(17,17,17,0.10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C4A072]/60"
           >
             <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(196,160,114,0.14),transparent_42%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
 
-            <div class="relative z-10 flex min-h-[inherit] flex-col justify-between p-7 md:p-9">
+            <div class="relative z-10 flex min-h-[inherit] flex-col justify-between p-6">
               <div>
                 <div class="mb-5 flex items-center gap-3">
                   <span class="h-px w-7 bg-[#C4A072]"></span>
@@ -196,18 +141,18 @@ function categoriaCardLayout(index: number, total: number) {
                 <h3
                   class:list={[
                     'max-w-sm font-bold leading-[0.95] tracking-tight',
-                    'text-3xl md:text-4xl',
+                    'text-2xl md:text-[28px]',
                   ]}
                 >
                   {item.cat}
                 </h3>
-                <p class="mt-5 max-w-sm text-sm leading-relaxed text-black/52">
+                <p class="mt-4 max-w-sm text-[13px] leading-relaxed text-black/52">
                   {item.text}
                 </p>
               </div>
 
-              <div class="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-                <span class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-black/56 transition-colors group-hover:text-[#C4A072]">
+              <div class="mt-7 flex items-end justify-between gap-4">
+                <span class="inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/56 transition-colors group-hover:text-[#C4A072]">
                   Ver referencias
                   <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </span>
@@ -216,7 +161,7 @@ function categoriaCardLayout(index: number, total: number) {
                   alt={item.cat}
                   class:list={[
                     'object-contain drop-shadow-[0_24px_34px_rgba(0,0,0,0.16)] transition-transform duration-700 group-hover:scale-105 group-hover:-rotate-2',
-                    'h-36 w-36 self-end sm:h-52 sm:w-52 md:h-64 md:w-64 min-[2560px]:h-72 min-[2560px]:w-72',
+                    'h-24 w-24 shrink-0 self-end md:h-45 md:w-45',
                   ]}
                   loading="lazy"
                   decoding="async"
@@ -384,7 +329,7 @@ function categoriaCardLayout(index: number, total: number) {
   </section>
 
   <!-- PUNTOS DE VENTA -->
-  <section class="order-[-10] bg-[#0d0c0a] px-5 md:px-16 py-24 border-t border-white/5">
+  <section class="hidden">
     <div class="max-w-6xl mx-auto">
       <div class="mb-12" data-reveal>
         <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-3">Tiendas físicas</p>

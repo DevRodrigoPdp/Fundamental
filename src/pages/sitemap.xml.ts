@@ -1,12 +1,14 @@
 import type { APIRoute } from 'astro';
 import { SITE } from '../config/site';
 import { supabase } from '../lib/supabase';
+import { catalogFamilies } from '../data/catalog-families';
 
 const staticPaths = [
   '/',
   '/t3r',
   '/catalogo',
   '/marcas',
+  '/puntos-de-venta',
   '/nosotros',
   '/contacto',
   '/transfer',
@@ -29,7 +31,8 @@ export const GET: APIRoute = async () => {
     .eq('activo', true);
 
   const productPaths = (products ?? []).map(({ sku }) => `/catalogo/${encodeURIComponent(sku)}/`);
-  const urls = [...staticPaths, ...productPaths];
+  const familyPaths = catalogFamilies.map(({ slug }) => `/catalogo/familia/${slug}/`);
+  const urls = [...staticPaths, ...familyPaths, ...productPaths];
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((path) => {

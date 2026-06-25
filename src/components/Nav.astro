@@ -1,5 +1,5 @@
 ---
-type NavKey = 't3r' | 'catalogo' | 'marcas' | 'nosotros' | 'contacto';
+type NavKey = 't3r' | 'catalogo' | 'marcas' | 'puntosVenta' | 'nosotros' | 'contacto';
 
 interface Props {
   active?: NavKey;
@@ -19,6 +19,7 @@ const links: Array<{
   { href: '/t3r', label: 'T3R Components', eyebrow: 'Marca principal', key: 't3r', flagship: true },
   { href: '/catalogo', label: 'Catálogo', eyebrow: 'Gama completa', key: 'catalogo' },
   { href: '/marcas', label: 'Marcas asociadas', eyebrow: 'T3R · Transfer · Whipp-Off', key: 'marcas' },
+  { href: '/puntos-de-venta', label: 'Puntos de venta', eyebrow: 'Dónde encontrarnos', key: 'puntosVenta' },
   { href: '/nosotros', label: 'Nosotros', eyebrow: 'Fundamental Bike Parts', key: 'nosotros' },
   { href: '/contacto', label: 'Contacto', eyebrow: 'Consultas y pedidos', key: 'contacto' },
 ];
@@ -222,6 +223,7 @@ function isActive(href: string, key: NavKey) {
   #nav-mobile-menu.is-open .nav-menu-link:nth-child(3) { transition-delay: 0.12s; }
   #nav-mobile-menu.is-open .nav-menu-link:nth-child(4) { transition-delay: 0.16s; }
   #nav-mobile-menu.is-open .nav-menu-link:nth-child(5) { transition-delay: 0.2s; }
+  #nav-mobile-menu.is-open .nav-menu-link:nth-child(6) { transition-delay: 0.24s; }
 
   @media (prefers-reduced-motion: reduce) {
     .nav-master-menu,

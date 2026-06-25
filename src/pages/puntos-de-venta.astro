@@ -1,0 +1,210 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import BackToTop from '../components/BackToTop.astro';
+import { MapPin, ExternalLink, Search } from 'lucide-astro';
+import { puntosVentaT3R } from '../data/puntos-venta';
+import '../styles/global.css';
+---
+
+<Layout
+  title="Puntos de venta | Fundamental Bike Parts"
+  description="Encuentra tiendas físicas donde comprar productos T3R. Próximamente añadiremos puntos de venta de Whipp-Off y Transfer."
+>
+  <Nav active="puntosVenta" />
+
+  <main class="bg-[#0d0c0a] min-h-screen px-5 pb-24 pt-32 text-white md:px-16 md:pt-36">
+    <div class="mx-auto max-w-6xl">
+      <header class="mb-12 max-w-3xl">
+        <p class="mb-5 text-xs uppercase tracking-[0.35em] text-[#C4A072]">Tiendas físicas</p>
+        <h1 class="mb-6 text-[40px] font-bold leading-tight md:text-[64px]">Puntos de venta.</h1>
+        <p class="text-base leading-relaxed text-white/50 md:text-lg">
+          Selecciona una marca para consultar dónde encontrar sus productos.
+        </p>
+      </header>
+
+      <div class="mb-12 grid grid-cols-1 gap-px border border-white/10 bg-white/10 sm:grid-cols-3">
+        {[
+          { id: 't3r', label: 'T3R', logo: '/logo_blanco_t3r.png', available: true },
+          { id: 'whipp-off', label: 'Whipp-Off', logo: '/logo_whipoff.png', available: false },
+          { id: 'transfer', label: 'Transfer', logo: '/logo_transfer.png', available: false },
+        ].map((brand) => (
+          <button
+            type="button"
+            data-brand-tab={brand.id}
+            data-available={String(brand.available)}
+            class:list={[
+              'flex min-h-28 items-center justify-center bg-[#111] px-6 py-7 transition-colors',
+              brand.available ? 'is-active bg-[#C4A072]/10' : 'hover:bg-white/[0.04]',
+            ]}
+            aria-pressed={brand.available ? 'true' : 'false'}
+          >
+            <img
+              src={brand.logo}
+              alt={brand.label}
+              class:list={[
+                'h-10 w-auto max-w-[180px] object-contain',
+                brand.id !== 't3r' && 'brightness-0 invert',
+              ]}
+            />
+          </button>
+        ))}
+      </div>
+
+      <section id="stores-t3r" data-brand-panel="t3r">
+        <div class="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="mb-2 text-xs uppercase tracking-[0.3em] text-[#C4A072]">T3R Bike Components</p>
+            <h2 class="text-2xl font-bold md:text-3xl">Encuentra tu tienda más cercana</h2>
+          </div>
+          <label class="flex w-full max-w-md items-center gap-3 border-b border-white/15 pb-3 transition-colors focus-within:border-[#C4A072]">
+            <Search size={18} stroke-width={1.6} class="shrink-0 text-[#C4A072]" aria-hidden="true" />
+            <span class="sr-only">Buscar tienda por código postal</span>
+            <input
+              id="store-postcode-search"
+              type="search"
+              inputmode="numeric"
+              maxlength="5"
+              autocomplete="postal-code"
+              placeholder="Buscar por código postal"
+              class="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/30"
+            />
+          </label>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(480px,1.1fr)] lg:items-start">
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
+            {puntosVentaT3R.map((store, index) => {
+              const mapQuery = [store.nombre, store.direccion, store.cp, store.poblacion, 'España'].join(', ');
+              const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(mapQuery);
+              return (
+                <article
+                  data-store-card
+                  data-store-postcode={store.cp}
+                  class:list={[
+                    'border bg-[#0d0c0a] p-6 transition-colors',
+                    index === 0 ? 'border-[#C4A072]/45 bg-[#C4A072]/[0.045]' : 'border-white/10',
+                  ]}
+                >
+                  <h3 class="mb-3 text-base font-semibold">{store.nombre}</h3>
+                  <a
+                    href={mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-map-query={mapQuery}
+                    data-map-name={store.nombre}
+                    class="group mb-4 flex items-start gap-3 text-sm leading-relaxed text-white/50 transition-colors hover:text-[#C4A072]"
+                  >
+                    <MapPin size={17} stroke-width={1.6} class="mt-0.5 shrink-0 text-[#C4A072]" aria-hidden="true" />
+                    <span>
+                      <span class="block">{store.direccion}</span>
+                      <span class="block">{store.poblacion} · {store.cp}</span>
+                    </span>
+                    <ExternalLink size={13} class="ml-auto mt-1 shrink-0" aria-hidden="true" />
+                  </a>
+                  <div class="flex flex-wrap gap-x-5 gap-y-2 text-xs">
+                    {store.tel && <a href={`tel:${store.tel.split(' / ')[0].replace(/\s+/g, '')}`} class="text-white/40 hover:text-[#C4A072]">{store.tel}</a>}
+                    <a href={`mailto:${store.mail}`} class="break-all text-white/40 hover:text-[#C4A072]">{store.mail}</a>
+                  </div>
+                </article>
+              );
+            })}
+            <p id="store-search-message" class="hidden border border-white/10 p-6 text-sm text-white/45">
+              No encontramos una tienda en esa zona postal.
+            </p>
+          </div>
+
+          <aside class="sticky top-28 hidden overflow-hidden border border-white/10 bg-[#111] lg:block">
+            <div class="flex items-center justify-between border-b border-white/10 px-5 py-4">
+              <div>
+                <p class="mb-1 text-[10px] uppercase tracking-[0.28em] text-[#C4A072]">Ubicación seleccionada</p>
+                <p id="store-map-name" class="text-sm font-semibold">{puntosVentaT3R[0].nombre}</p>
+              </div>
+              <a id="store-map-external" href={'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent([puntosVentaT3R[0].nombre, puntosVentaT3R[0].direccion, puntosVentaT3R[0].cp, puntosVentaT3R[0].poblacion, 'España'].join(', '))} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-xs text-white/45 hover:text-[#C4A072]">
+                Abrir Maps <ExternalLink size={14} aria-hidden="true" />
+              </a>
+            </div>
+            <iframe
+              id="store-map-frame"
+              title={'Mapa de ' + puntosVentaT3R[0].nombre}
+              src={'https://www.google.com/maps?q=' + encodeURIComponent([puntosVentaT3R[0].nombre, puntosVentaT3R[0].direccion, puntosVentaT3R[0].cp, puntosVentaT3R[0].poblacion, 'España'].join(', ')) + '&output=embed'}
+              class="h-[600px] w-full border-0"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+          </aside>
+        </div>
+      </section>
+
+      <section id="stores-coming-soon" class="hidden border border-white/10 px-6 py-20 text-center">
+        <p class="text-xs uppercase tracking-[0.3em] text-[#C4A072]">Próximamente</p>
+        <h2 id="coming-soon-brand" class="mt-4 text-3xl font-bold"></h2>
+        <p class="mx-auto mt-4 max-w-md text-white/45">Añadiremos sus puntos de venta cuando recibamos las direcciones.</p>
+      </section>
+    </div>
+  </main>
+
+  <BackToTop />
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const t3rPanel = document.querySelector<HTMLElement>('[data-brand-panel="t3r"]');
+      const comingSoon = document.getElementById('stores-coming-soon');
+      const comingSoonBrand = document.getElementById('coming-soon-brand');
+      const tabs = document.querySelectorAll<HTMLButtonElement>('[data-brand-tab]');
+      const frame = document.getElementById('store-map-frame') as HTMLIFrameElement | null;
+      const mapName = document.getElementById('store-map-name');
+      const external = document.getElementById('store-map-external') as HTMLAnchorElement | null;
+      const search = document.getElementById('store-postcode-search') as HTMLInputElement | null;
+      const message = document.getElementById('store-search-message');
+
+      tabs.forEach((tab) => tab.addEventListener('click', () => {
+        tabs.forEach((item) => {
+          const active = item === tab;
+          item.setAttribute('aria-pressed', String(active));
+          item.classList.toggle('bg-[#C4A072]/10', active);
+        });
+        const isT3R = tab.dataset.brandTab === 't3r';
+        t3rPanel?.classList.toggle('hidden', !isT3R);
+        comingSoon?.classList.toggle('hidden', isT3R);
+        if (!isT3R && comingSoonBrand) {
+          comingSoonBrand.textContent = tab.dataset.brandTab === 'whipp-off' ? 'Whipp-Off' : 'Transfer';
+        }
+      }));
+
+      const selectStore = (link: HTMLAnchorElement) => {
+        if (!frame || !mapName || !external) return;
+        const query = link.dataset.mapQuery;
+        const name = link.dataset.mapName;
+        if (!query || !name) return;
+        frame.src = `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`;
+        frame.title = `Mapa de ${name}`;
+        mapName.textContent = name;
+        external.href = link.href;
+      };
+
+      document.querySelectorAll<HTMLAnchorElement>('[data-map-query]').forEach((link) => {
+        link.addEventListener('click', (event) => {
+          if (!window.matchMedia('(min-width: 1024px)').matches) return;
+          event.preventDefault();
+          selectStore(link);
+        });
+      });
+
+      search?.addEventListener('input', () => {
+        const value = search.value.replace(/\D/g, '').slice(0, 5);
+        search.value = value;
+        const cards = [...document.querySelectorAll<HTMLElement>('[data-store-card]')];
+        const matches = cards.filter((card) => {
+          const match = value === '' || (card.dataset.storePostcode ?? '').startsWith(value);
+          card.classList.toggle('hidden', !match);
+          return match;
+        });
+        message?.classList.toggle('hidden', matches.length > 0);
+        const firstLink = matches[0]?.querySelector<HTMLAnchorElement>('[data-map-query]');
+        if (firstLink && window.matchMedia('(min-width: 1024px)').matches) selectStore(firstLink);
+      });
+    });
+  </script>
+</Layout>
