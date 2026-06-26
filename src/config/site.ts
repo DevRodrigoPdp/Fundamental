@@ -6,7 +6,7 @@ export const SITE = {
   url: siteUrl,
   locale: 'es_ES',
   language: 'es',
-  email: 'hola@fundamentalbikeparts.com',
+  email: 'info@fundamentalbikeparts.com',
   location: 'Madrid, España',
   description:
     'Distribuidora especializada en componentes, bicicletas y equipamiento ciclista de T3R, Whipp-Off y Transfer.',

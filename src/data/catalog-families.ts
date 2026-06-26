@@ -97,6 +97,17 @@ export const catalogFamilies: CatalogFamily[] = [
     skuPrefixes: ['T3R-VLV-', 'T3R-OBUS-'],
     subcategories: ['Válvulas', 'Obuses'],
   },
+  {
+    slug: 'herramientas',
+    cat: 'Herramientas',
+    tag: 'Taller',
+    text: 'Herramientas y kits de mantenimiento para taller. Lo que necesitas, sin lo que no.',
+    description: 'Herramientas y kits pensados para el trabajo en taller: purgado de frenos, mantenimiento hidráulico y accesorios de servicio.',
+    details: ['Compatibilidades identificadas', 'Kits completos para taller', 'Materiales resistentes a fluidos de freno'],
+    img: '/catalogo_t3r/herramientas/kit_purga_1.jpg',
+    skuPrefixes: ['T3R-KIT-'],
+    subcategories: ['Kits de purga'],
+  },
 ];
 
 export function productBelongsToFamily(product: any, family: CatalogFamily) {
