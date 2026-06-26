@@ -50,7 +50,7 @@ const images: string[] = [];
 
 const { data: subRaw } = await supabase
   .from('productos_t3r')
-  .select('nombre, sku, subcategoria, categoria')
+  .select('nombre, sku, subcategoria, categoria, descripcion_corta')
   .eq('subcategoria', product.subcategoria)
   .eq('activo', true)
   .neq('sku', sku)
@@ -61,7 +61,7 @@ let relatedRaw = subRaw ?? [];
 if (relatedRaw.length < 4) {
   const { data: catRaw } = await supabase
     .from('productos_t3r')
-    .select('nombre, sku, subcategoria, categoria')
+    .select('nombre, sku, subcategoria, categoria, descripcion_corta')
     .eq('categoria', product.categoria)
     .eq('activo', true)
     .limit(12);
@@ -85,6 +85,8 @@ const relatedImgMap: Record<string, string | null> = {};
 const related = relatedRaw.map((p: any) => ({
   nombre: p.nombre,
   sku: p.sku,
+  subcategoria: p.subcategoria,
+  descripcion_corta: p.descripcion_corta,
   imagen: relatedImgMap[p.sku],
 }));
 
@@ -289,26 +291,34 @@ const breadcrumbSchema = {
     <section class="bg-[#fafafa] px-5 md:px-16 py-20 border-t border-gray-100">
       <p class="text-sm text-[#6B8CAE] tracking-[0.25em] uppercase mb-3">También te puede interesar</p>
       <h2 class="text-2xl font-bold mb-10">{product.categoria}</h2>
-      <div class="grid grid-cols-1 min-[390px]:grid-cols-2 md:grid-cols-4 gap-px bg-gray-200 border border-gray-200">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
         {related.map((r) => (
-          <a href={`/catalogo/${r.sku}`} class="group bg-white block cursor-pointer">
-            <div class="relative overflow-hidden bg-white" style="aspect-ratio: 1;">
+          <a href={`/catalogo/${r.sku}`} class="group flex flex-col border border-gray-200 bg-white transition-[border-color,box-shadow] duration-300 hover:border-gray-400 hover:shadow-[0_12px_34px_rgba(0,0,0,0.06)]">
+            <div class="relative overflow-hidden bg-white aspect-[4/3]">
               {r.imagen ? (
                 <img
                   src={r.imagen}
                   alt={r.nombre}
-                  class="absolute inset-0 w-full h-full object-contain p-5 transition-transform duration-500 group-hover:scale-[1.02]"
+                  class="absolute inset-0 w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-[1.025]"
                   loading="lazy"
                 />
               ) : (
                 <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white text-gray-300">
                   <img src="/logo_t3r.png" alt="T3R" class="w-16 opacity-25 grayscale" loading="lazy" />
-                  <span class="text-[9px] tracking-[0.2em] uppercase text-gray-300">Sin foto</span>
+                  <span class="text-[9px] tracking-[0.2em] uppercase text-gray-300">Foto próximamente</span>
                 </div>
               )}
             </div>
-            <div class="p-5">
-              <h3 class="text-sm font-medium group-hover:text-[#6B8CAE] transition-colors">{r.nombre}</h3>
+            <div class="flex flex-1 flex-col px-4 pt-4 pb-4">
+              <p class="mb-1 text-[9px] uppercase tracking-[0.22em] text-gray-400">{r.subcategoria}</p>
+              <h3 class="mb-2 text-[13px] font-bold leading-snug transition-colors group-hover:text-[#6B8CAE]">{r.nombre}</h3>
+              {r.descripcion_corta && (
+                <p class="text-[11px] leading-relaxed text-gray-500 line-clamp-2 mb-3">{r.descripcion_corta}</p>
+              )}
+              <div class="mt-auto flex items-center justify-between border-t border-gray-100 pt-3">
+                <p class="text-[10px] text-gray-400 truncate">{r.sku}</p>
+                <span class="text-xs font-medium text-[#6B8CAE] group-hover:translate-x-0.5 transition-transform inline-block">→</span>
+              </div>
             </div>
           </a>
         ))}
