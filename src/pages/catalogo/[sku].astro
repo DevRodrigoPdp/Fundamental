@@ -48,7 +48,7 @@ const images: string[] = [];
   if (img) images.push(img);
 });
 
-const { data: relatedRaw } = await supabase
+const { data: subRaw } = await supabase
   .from('productos_t3r')
   .select('nombre, sku, subcategoria, categoria')
   .eq('subcategoria', product.subcategoria)
@@ -56,7 +56,21 @@ const { data: relatedRaw } = await supabase
   .neq('sku', sku)
   .limit(4);
 
-const relatedSkus = (relatedRaw ?? []).map((p: any) => p.sku);
+let relatedRaw = subRaw ?? [];
+
+if (relatedRaw.length < 4) {
+  const { data: catRaw } = await supabase
+    .from('productos_t3r')
+    .select('nombre, sku, subcategoria, categoria')
+    .eq('categoria', product.categoria)
+    .eq('activo', true)
+    .limit(12);
+  const seen = new Set([sku, ...relatedRaw.map((p: any) => p.sku)]);
+  const fill = (catRaw ?? []).filter((p: any) => !seen.has(p.sku));
+  relatedRaw = [...relatedRaw, ...fill].slice(0, 4);
+}
+
+const relatedSkus = relatedRaw.map((p: any) => p.sku);
 const { data: relatedImgsRaw } = relatedSkus.length > 0
   ? await supabase
       .from('imagenes_productos')
@@ -68,7 +82,7 @@ const { data: relatedImgsRaw } = relatedSkus.length > 0
 const relatedImgMap: Record<string, string | null> = {};
 (relatedImgsRaw ?? []).forEach((i: any) => { relatedImgMap[i.producto_sku] = existingImage(i.url); });
 
-const related = (relatedRaw ?? []).map((p: any) => ({
+const related = relatedRaw.map((p: any) => ({
   nombre: p.nombre,
   sku: p.sku,
   imagen: relatedImgMap[p.sku],
@@ -274,7 +288,7 @@ const breadcrumbSchema = {
   {!isDiskFamily && related.length > 0 && (
     <section class="bg-[#fafafa] px-5 md:px-16 py-20 border-t border-gray-100">
       <p class="text-sm text-[#6B8CAE] tracking-[0.25em] uppercase mb-3">También te puede interesar</p>
-      <h2 class="text-2xl font-bold mb-10">{product.subcategoria}</h2>
+      <h2 class="text-2xl font-bold mb-10">{product.categoria}</h2>
       <div class="grid grid-cols-1 min-[390px]:grid-cols-2 md:grid-cols-4 gap-px bg-gray-200 border border-gray-200">
         {related.map((r) => (
           <a href={`/catalogo/${r.sku}`} class="group bg-white block cursor-pointer">
