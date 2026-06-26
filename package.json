@@ -12,6 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@imgly/background-removal-node": "^1.4.5",
     "@supabase/supabase-js": "^2.108.1",
     "@tailwindcss/vite": "^4.3.1",
     "astro": "^6.4.6",
@@ -21,5 +22,8 @@
     "pdfjs-dist": "^6.0.227",
     "sharp": "^0.35.1",
     "tailwindcss": "^4.3.1"
+  },
+  "devDependencies": {
+    "playwright": "^1.61.1"
   }
 }

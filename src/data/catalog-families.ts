@@ -104,7 +104,7 @@ export const catalogFamilies: CatalogFamily[] = [
     text: 'Herramientas y kits de mantenimiento para taller. Lo que necesitas, sin lo que no.',
     description: 'Herramientas y kits pensados para el trabajo en taller: purgado de frenos, mantenimiento hidráulico y accesorios de servicio.',
     details: ['Compatibilidades identificadas', 'Kits completos para taller', 'Materiales resistentes a fluidos de freno'],
-    img: '/catalogo_t3r/herramientas/kit_purga_1.jpg',
+    img: '/catalogo_t3r/herramientas/kit_purga_cutout.png',
     skuPrefixes: ['T3R-KIT-'],
     subcategories: ['Kits de purga'],
   },
