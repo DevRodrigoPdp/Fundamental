@@ -23,12 +23,14 @@ const { data: imagenes, error: imgError } = await supabase
   .from('imagenes_productos')
   .select('producto_sku, url, orden')
   .in('producto_sku', skus)
-  .eq('orden', 1);
+  .order('orden', { ascending: true });
 
 if (imgError) console.error('Supabase imagenes error:', imgError.message);
 
 const imgMap: Record<string, string> = {};
-(imagenes ?? []).forEach((i: any) => { imgMap[i.producto_sku] = i.url; });
+(imagenes ?? []).forEach((i: any) => {
+  if (!imgMap[i.producto_sku]) imgMap[i.producto_sku] = i.url;
+});
 
 const novedades = (products ?? []).map((p: any) => ({
   category: p.categoria,

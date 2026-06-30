@@ -138,7 +138,8 @@ const categories = [...new Set(
         Filtros
         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M4 7h16M7 12h10M10 17h4"/></svg>
       </button>
-      <button id="filters-clear" type="button" class="hidden text-xs font-medium text-black underline underline-offset-4">
+      <button id="filters-clear" type="button" style="display: none;" class="inline-flex items-center gap-1 rounded-full border border-gray-300 px-2.5 py-1 text-[11px] font-medium text-gray-600 transition-colors hover:border-black hover:bg-black hover:text-white">
+        <svg class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/></svg>
         Limpiar filtros
       </button>
     </div>
@@ -155,30 +156,18 @@ const categories = [...new Set(
                 <p class="text-[9px] uppercase tracking-[0.26em] text-gray-400">Catálogo T3R</p>
                 <h2 class="mt-1 text-base font-bold">Filtrar productos</h2>
               </div>
-              <button id="sidebar-clear" type="button" class="hidden text-[11px] text-gray-500 underline underline-offset-4">Limpiar</button>
+              <button id="sidebar-clear" type="button" style="display: none;" class="inline-flex items-center gap-1 rounded-full border border-gray-300 px-2 py-0.5 text-[10px] font-medium text-gray-500 transition-colors hover:border-black hover:bg-black hover:text-white">
+                <svg class="h-2 w-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/></svg>
+                Limpiar
+              </button>
             </div>
 
-            <div class="border-b border-gray-200 p-5">
+            <div class="p-5">
               <p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400">Categorías</p>
               <div class="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
                 <button type="button" data-category-filter="" class="filter-choice is-active">Todos</button>
                 {categories.map((category) => (
                   <button type="button" data-category-filter={category} class="filter-choice">{category}</button>
-                ))}
-              </div>
-            </div>
-
-            <div class="p-5">
-              <p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400">Productos</p>
-              <div id="product-filter-list" class="max-h-[48vh] space-y-1 overflow-y-auto pr-1">
-                <button type="button" data-product-filter="" data-filter-category="" class="product-filter is-active">
-                  Todos los productos
-                </button>
-                {sortedCatalog.map((product: any) => (
-                  <button type="button" data-product-filter={product.sku} data-filter-category={product.categoria || 'Otros'} class="product-filter">
-                    <span>{product.nombre}</span>
-                    <span class="text-[9px] text-gray-400">{product.refLabel ?? product.sku}</span>
-                  </button>
                 ))}
               </div>
             </div>
@@ -281,31 +270,6 @@ const categories = [...new Set(
       box-shadow: inset 3px 0 #111;
     }
 
-    .product-filter {
-      display: flex;
-      width: 100%;
-      flex-direction: column;
-      gap: 0.15rem;
-      border-left: 2px solid transparent;
-      padding: 0.62rem 0.7rem;
-      text-align: left;
-      font-size: 0.73rem;
-      line-height: 1.35;
-      color: rgb(107 114 128);
-      transition: 180ms ease;
-    }
-
-    .product-filter:hover,
-    .product-filter.is-active {
-      border-left-color: #111;
-      background: white;
-      color: #111;
-    }
-
-    .product-filter.is-active {
-      font-weight: 600;
-    }
-
     @media (max-width: 1023px) {
       #catalog-filters {
         margin-bottom: 1.5rem;
@@ -313,10 +277,6 @@ const categories = [...new Set(
 
       #catalog-filters.is-open {
         display: block;
-      }
-
-      #product-filter-list {
-        max-height: 18rem;
       }
 
       .filter-choice {
@@ -437,8 +397,8 @@ const categories = [...new Set(
 
         if (emptyState) emptyState.classList.toggle('hidden', visibleCount > 0);
         clearButton?.classList.toggle('hidden', !rawQuery);
-        clearFiltersButton?.classList.toggle('hidden', !rawQuery && !selectedProduct && !selectedCategory);
-        sidebarClear?.classList.toggle('hidden', !selectedProduct && !selectedCategory);
+        if (clearFiltersButton) clearFiltersButton.style.display = (!rawQuery && !selectedProduct && !selectedCategory) ? 'none' : '';
+        if (sidebarClear) sidebarClear.style.display = (!selectedProduct && !selectedCategory) ? 'none' : '';
         if (status) status.textContent = `${visibleCount} ${visibleCount === 1 ? 'producto' : 'productos'}`;
 
         const url = new URL(window.location.href);
