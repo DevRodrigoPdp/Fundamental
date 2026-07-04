@@ -1,6 +1,4 @@
 ---
-import path from 'path';
-import { existsSync } from 'fs';
 import Layout from '../../../layouts/Layout.astro';
 import Nav from '../../../components/Nav.astro';
 import BackToTop from '../../../components/BackToTop.astro';
@@ -23,11 +21,7 @@ type FamilyProduct = {
 };
 
 export async function getStaticPaths() {
-  const existingImage = (relUrl: string | null) => {
-    if (!relUrl) return null;
-    const rel = relUrl.replace(/^\/+/, '');
-    return existsSync(path.join(process.cwd(), 'public', rel)) ? `/${rel}` : null;
-  };
+  const existingImage = (url: string | null) => url || null;
 
   const { data: products } = await supabase
     .from('productos_t3r')

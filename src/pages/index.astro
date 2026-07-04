@@ -36,14 +36,14 @@ const novedades = (products ?? []).map((p: any) => ({
   category: p.categoria,
   name: p.nombre,
   ref: p.sku,
-  imagen: imgMap[p.sku] ? `/${imgMap[p.sku]}` : null,
+  imagen: imgMap[p.sku] ?? null,
 }));
 ---
 
 <Layout
   title="Fundamental Bike Parts | Distribuidora de ciclismo"
   description="Distribuidora de T3R, Whipp-Off y Transfer: componentes para bicicleta, ropa MTB, cuadros y bicicletas para tiendas y ciclistas."
-  heroImage="/catalogo_t3r/combos/combos_9.jpg"
+  heroImage="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166518/catalogo_t3r/combos/combos_9.jpg"
   structuredData={{
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -134,7 +134,7 @@ const novedades = (products ?? []).map((p: any) => ({
   <!-- ═══ HERO — T3R ═══ -->
   <section class="relative min-h-[100svh] overflow-hidden bg-[#1A100C]">
     <img
-      src="/catalogo_t3r/combos/combos_9.jpg"
+      src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166518/catalogo_t3r/combos/combos_9.jpg"
       alt="T3R componentes"
       class="absolute inset-0 w-full h-full object-cover object-center"
       loading="eager"
@@ -221,7 +221,7 @@ const novedades = (products ?? []).map((p: any) => ({
   <section class="relative overflow-hidden group" style="height: 460px;">
     <a href="/t3r" class="absolute inset-0 z-20"></a>
     <img
-      src="/catalogo_t3r/combos/combos_1.jpg"
+      src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166510/catalogo_t3r/combos/combos_1.jpg"
       alt="T3R The Three Riders"
       class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       style="object-position: center 30%;"
@@ -243,7 +243,7 @@ const novedades = (products ?? []).map((p: any) => ({
   <section class="relative overflow-hidden group" style="height: 520px;">
     <a href="/transfer" class="absolute inset-0 z-20"></a>
     <img
-      src="/catalogo_transferbike/bici_transferbike.jpeg"
+      src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166708/catalogo_transferbike/bici_transferbike.jpg"
       alt="Transfer Bike"
       class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       loading="lazy"
@@ -264,7 +264,7 @@ const novedades = (products ?? []).map((p: any) => ({
   <section class="relative overflow-hidden group" style="height: 520px;">
     <a href="/whipp-off" class="absolute inset-0 z-20"></a>
     <img
-      src="/catalogo_whipoff/WHIP_OFF_1.jpg"
+      src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166699/catalogo_whipoff/WHIP_OFF_1.jpg"
       alt="Whipp-Off"
       class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       loading="lazy"

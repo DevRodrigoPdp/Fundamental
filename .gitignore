@@ -21,6 +21,9 @@ pnpm-debug.log*
 .env.preview
 .env.example
 
+# cloudinary migration artifact
+scripts/cloudinary-map.json
+
 # macOS-specific files
 .DS_Store
 

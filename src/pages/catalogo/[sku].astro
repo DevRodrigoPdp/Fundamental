@@ -1,6 +1,4 @@
 ---
-import path from 'path';
-import { existsSync } from 'fs';
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import '../../styles/global.css';
@@ -30,10 +28,8 @@ if (!product) {
   return Astro.redirect('/catalogo');
 }
 
-function existingImage(relUrl: string | null) {
-  if (!relUrl) return null;
-  const rel = relUrl.replace(/^\/+/, '');
-  return existsSync(path.join(process.cwd(), 'public', rel)) ? `/${rel}` : null;
+function existingImage(url: string | null) {
+  return url || null;
 }
 
 const { data: imagenesRaw } = await supabase
