@@ -86,14 +86,14 @@ const categorias = catalogFamilies;
         <div class="w-px h-4 bg-white/20"></div>
         <p class="text-[10px] text-white/40 tracking-[0.35em] uppercase">The Three Riders</p>
       </div>
-      <h1 class="text-[42px] sm:text-[56px] md:text-[88px] font-bold leading-[0.92] md:leading-[0.88] text-white tracking-tight mb-8">
+      <h1 class="text-[38px] sm:text-[50px] md:text-[80px] font-bold leading-[1.08] text-white tracking-tight mb-10">
         Directo de fábrica.<br/>Mejor calidad.<br/>
         <span class="text-[#C4A072]">Mejor precio.</span>
       </h1>
       <div class="flex items-start gap-6 max-w-sm mb-10">
         <div class="w-6 h-px bg-[#C4A072]/50 mt-3 shrink-0"></div>
         <p class="text-white/45 text-sm leading-relaxed">
-          Componentes probados por nosotros. Sin intermediarios, al precio que debería tener desde el principio.
+          Componentes probados por nosotros. Sin intermediarios,buena calidad a un precio justo.
         </p>
       </div>
       <a href="/catalogo"
@@ -113,22 +113,22 @@ const categorias = catalogFamilies;
         <div>
           <p class="mb-6 text-xs uppercase tracking-[0.35em] text-[#C4A072]">Gama T3R</p>
           <h2 class="text-[36px] font-bold leading-[0.95] tracking-tight md:text-[64px]">
-            Componentes esenciales.<br />
-            <span class="text-black/36">Sin rodeos.</span>
+            Directo de fábrica.<br />
+            <span class="text-black/36">Mejor calidad. Mejor precio.</span>
           </h2>
         </div>
         <p class="max-w-xl text-base leading-relaxed text-black/52 md:justify-self-end">
-          Una selección pensada para tienda y taller: referencias claras, producto probado y precio donde tiene que estar. Menos escaparate, más pieza.
+          Seleccionamos buenos componentes y accesorios para ti, lo probamos y lo ofrecemos porque confiamos en ellos. Algunos de nuestros productos apenas se ven montados en la bici pero marcan la diferencia.
         </p>
       </div>
 
-      <div class="grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-4">
         {categorias.map((item, i) => (
           <a
             href={`/catalogo/familia/${item.slug}`}
             data-reveal
             data-delay={String(i % 4)}
-            class="t3r-family-card group relative min-h-[200px] md:min-h-[310px] overflow-hidden border border-black/10 bg-white transition-[border-color,box-shadow,background-color] duration-500 hover:border-[#C4A072]/55 hover:shadow-[0_24px_70px_rgba(17,17,17,0.10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C4A072]/60"
+            class="t3r-family-card group relative min-h-[180px] sm:min-h-[220px] md:min-h-[310px] overflow-hidden border border-black/10 bg-white transition-[border-color,box-shadow,background-color] duration-500 hover:border-[#C4A072]/55 hover:shadow-[0_24px_70px_rgba(17,17,17,0.10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C4A072]/60"
           >
             <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(196,160,114,0.14),transparent_42%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
 
@@ -151,9 +151,9 @@ const categorias = catalogFamilies;
                 </p>
               </div>
 
-              <div class="mt-7 flex items-end justify-between gap-4">
-                <span class="inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/56 transition-colors group-hover:text-[#C4A072]">
-                  <span class="hidden sm:inline">Ver referencias</span>
+              <div class="mt-7 flex items-end justify-between gap-2 lg:flex-col lg:items-end lg:justify-start lg:gap-3">
+                <span class="inline-flex shrink-0 items-center gap-2 whitespace-nowrap text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.1em] sm:tracking-[0.18em] text-black/56 transition-colors group-hover:text-[#C4A072] lg:self-start">
+                  <span>Ver referencias</span>
                   <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </span>
                 <img
@@ -162,7 +162,7 @@ const categorias = catalogFamilies;
                   class:list={[
                     'object-contain transition-transform duration-700 group-hover:scale-105 group-hover:-rotate-2',
                     item.slug !== 'transmision' && 'drop-shadow-[0_24px_34px_rgba(0,0,0,0.16)]',
-                    'h-16 w-16 shrink-0 self-end md:h-40 md:w-40 lg:h-44 lg:w-44',
+                    'h-12 w-12 shrink-0 self-end sm:h-16 sm:w-16 md:h-16 md:w-16 lg:h-20 lg:w-20 xl:h-28 xl:w-28 2xl:h-36 2xl:w-36',
                   ]}
                   loading="lazy"
                   decoding="async"
@@ -227,7 +227,7 @@ const categorias = catalogFamilies;
       </h2>
       <div class="space-y-5 max-w-md">
         <p class="text-white/60 text-lg leading-relaxed">
-          Cada referencia ha pasado por nuestras manos antes de llegar aquí. Los tres riders prueban y aprueban cada producto: nada entra al catálogo sin esa garantía.
+          Cada referencia ha pasado por nuestras manos antes de llegar aquí.Probamos el producto, aprobamos el producto, nada entra en el catalogo sino pasa el filtro.
         </p>
         <p class="text-white/60 text-lg leading-relaxed">
           Fabricado en las mismas plantas que marcas de prestigio internacional, pensado para durar desde el ciclista amateur hasta el más experimentado.

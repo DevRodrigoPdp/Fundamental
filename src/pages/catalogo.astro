@@ -5,6 +5,7 @@ import BackToTop from '../components/BackToTop.astro';
 import '../styles/global.css';
 import { supabase } from '../lib/supabase';
 import { SITE } from '../config/site';
+import { getCatalogFilters } from '../data/product-taxonomy';
 
 const CONTACT_EMAIL = 'info@fundamentalbikeparts.com';
 
@@ -78,18 +79,7 @@ const sortedCatalog = [...catalogo].sort((a: any, b: any) =>
   a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' })
 );
 
-const FILTERS = [
-  { label: 'Pastillas', subcategorias: ['Pastillas de freno'] },
-  { label: 'Cable', subcategorias: ['Cables'] },
-  { label: 'Fundas', subcategorias: ['Camisas'] },
-  { label: 'Terminales', subcategorias: ['Topes de cable'] },
-  { label: 'Discos', subcategorias: ['Discos 6 tornillos', 'Discos Center Lock', 'Platos'] },
-  { label: 'Cajas de pedalier', subcategorias: ['Ejes'] },
-  { label: 'Pedales', subcategorias: ['Automáticos', 'Carretera', 'Mixtos', 'Plataforma'] },
-  { label: 'Puños', subcategorias: ['Puños'] },
-  { label: 'Kit purgado', subcategorias: ['Kits de purga'] },
-  { label: 'Válvulas', subcategorias: ['Válvulas', 'Obuses'] },
-];
+const FILTERS = getCatalogFilters();
 ---
 
 <Layout
