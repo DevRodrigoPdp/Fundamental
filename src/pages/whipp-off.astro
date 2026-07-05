@@ -3,12 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import '../styles/global.css';
 import { SITE } from '../config/site';
+import { cld } from '../lib/cloudinaryUrl';
 ---
 
 <Layout
   title="Whipp-Off | Ropa y equipamiento MTB"
   description="Descubre Whipp-Off: ropa técnica y equipamiento MTB para riders, disponible a través de Fundamental Bike Parts."
-  heroImage="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166699/catalogo_whipoff/WHIP_OFF_1.jpg"
+  heroImage={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166699/catalogo_whipoff/WHIP_OFF_1.jpg', { width: 1920 })}
   structuredData={{
     '@context': 'https://schema.org',
     '@type': 'Brand',
@@ -28,7 +29,7 @@ import { SITE } from '../config/site';
 
   <!-- HERO -->
   <section class="relative min-h-[100svh] bg-black flex flex-col justify-end overflow-hidden">
-    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166699/catalogo_whipoff/WHIP_OFF_1.jpg');"></div>
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166699/catalogo_whipoff/WHIP_OFF_1.jpg', { width: 1920 })}');`}></div>
     <div class="absolute inset-0" style="background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.1) 100%);"></div>
 
     <!-- Badge web oficial top-right -->
@@ -169,7 +170,7 @@ import { SITE } from '../config/site';
           ].map((item) => (
             <a href="https://www.whip-off.com/" target="_blank" rel="noopener noreferrer"
               class="group relative bg-[#111] aspect-[3/4] overflow-hidden cursor-pointer block">
-              <img src={item.src} alt={item.label} loading="lazy" decoding="async"
+              <img src={cld(item.src, { width: 500 })} alt={item.label} loading="lazy" decoding="async"
                 class="absolute inset-0 w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black to-transparent">
                 <p class="font-epilogue text-white text-xs font-medium">{item.label}</p>
@@ -195,7 +196,7 @@ import { SITE } from '../config/site';
           ].map((item) => (
             <a href="https://www.whip-off.com/" target="_blank" rel="noopener noreferrer"
               class="group relative bg-[#111] aspect-[3/4] overflow-hidden cursor-pointer block">
-              <img src={item.src} alt={item.label} loading="lazy" decoding="async"
+              <img src={cld(item.src, { width: 500 })} alt={item.label} loading="lazy" decoding="async"
                 class="absolute inset-0 w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black to-transparent">
                 <p class="font-epilogue text-white text-xs font-medium">{item.label}</p>
@@ -221,7 +222,7 @@ import { SITE } from '../config/site';
           ].map((item) => (
             <a href="https://www.whip-off.com/" target="_blank" rel="noopener noreferrer"
               class="group relative bg-[#111] aspect-[3/4] overflow-hidden cursor-pointer block">
-              <img src={item.src} alt={item.label} loading="lazy" decoding="async"
+              <img src={cld(item.src, { width: 500 })} alt={item.label} loading="lazy" decoding="async"
                 class="absolute inset-0 w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" />
               <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black to-transparent">
                 <p class="font-epilogue text-white text-xs font-medium">{item.label}</p>

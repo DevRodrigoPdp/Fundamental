@@ -5,6 +5,7 @@ import { Factory, Bike, ShieldCheck, Timer, MapPin, ExternalLink, Search } from 
 import '../styles/global.css';
 import { SITE } from '../config/site';
 import { catalogFamilies } from '../data/catalog-families';
+import { cld } from '../lib/cloudinaryUrl';
 
 const puntosVenta = [
   { nombre: 'The Bike Village SL', direccion: 'Cl Corts 5', poblacion: 'Cabrera de Mar', cp: '08349', tel: '936387251', mail: 'compras@thebikevillage.com' },
@@ -32,7 +33,7 @@ const categorias = catalogFamilies;
 <Layout
   title="T3R Bike Components | Recambios para bicicletas"
   description="Descubre T3R Bike Components: componentes y recambios para bicicleta probados por riders, pensados para tiendas, talleres y ciclistas."
-  heroImage="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166514/catalogo_t3r/combos/combos_3.jpg"
+  heroImage={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166514/catalogo_t3r/combos/combos_3.jpg', { width: 1920 })}
   structuredData={{
     '@context': 'https://schema.org',
     '@type': 'Brand',
@@ -75,7 +76,7 @@ const categorias = catalogFamilies;
 
   <!-- HERO: split screen -->
   <section class="relative min-h-[100svh] bg-[#1A100C] overflow-hidden">
-    <img src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166514/catalogo_t3r/combos/combos_3.jpg" alt="T3R productos y packaging"
+    <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166514/catalogo_t3r/combos/combos_3.jpg', { width: 1920 })} alt="T3R productos y packaging"
       class="absolute inset-0 w-full h-full object-cover" style="object-position: center 40%;"
       loading="eager" fetchpriority="high" decoding="async" />
     <div class="absolute inset-0" style="background: linear-gradient(to top, #1A100C 0%, rgba(26,16,12,0.75) 40%, rgba(26,16,12,0.2) 100%);"></div>
@@ -157,7 +158,7 @@ const categorias = catalogFamilies;
                   <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </span>
                 <img
-                  src={item.img}
+                  src={cld(item.img, { width: 300 })}
                   alt={item.cat}
                   class:list={[
                     'object-contain transition-transform duration-700 group-hover:scale-105 group-hover:-rotate-2',
@@ -191,7 +192,7 @@ const categorias = catalogFamilies;
   <!-- HISTORIA — EL PROBLEMA -->
   <section class="bg-[#111] grid grid-cols-1 md:grid-cols-2">
     <div class="relative overflow-hidden h-64 md:h-auto md:min-h-[560px]">
-      <img src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166515/catalogo_t3r/combos/combos_5.jpg" alt="T3R origen de la marca"
+      <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166515/catalogo_t3r/combos/combos_5.jpg', { width: 1200 })} alt="T3R origen de la marca"
         class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
       <div class="absolute inset-0 bg-gradient-to-t from-[#111]/40 via-transparent to-transparent"></div>
     </div>
@@ -235,7 +236,7 @@ const categorias = catalogFamilies;
       </div>
     </div>
     <div class="relative overflow-hidden order-1 h-64 md:h-auto md:min-h-[560px]">
-      <img src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166517/catalogo_t3r/combos/combos_7.jpg" alt="T3R probado por riders"
+      <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166517/catalogo_t3r/combos/combos_7.jpg', { width: 1200 })} alt="T3R probado por riders"
         class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
       <div class="absolute inset-0 bg-gradient-to-t from-[#111]/40 via-transparent to-transparent"></div>
     </div>
@@ -243,7 +244,7 @@ const categorias = catalogFamilies;
 
   <!-- FOTO SEPARADOR -->
   <div class="relative overflow-hidden h-[360px] md:h-[480px]">
-    <img src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166551/catalogo_t3r/discos_freno/center_lock/discos_freno_center_lock_4.jpg" alt="Disco de freno T3R"
+    <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166551/catalogo_t3r/discos_freno/center_lock/discos_freno_center_lock_4.jpg', { width: 1920 })} alt="Disco de freno T3R"
       class="absolute inset-0 w-full h-full object-cover" style="object-position: center 50%;"
       loading="lazy" decoding="async" />
     <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(26,16,12,0.9) 0%, rgba(26,16,12,0.5) 55%, rgba(26,16,12,0.1) 100%);"></div>
@@ -308,7 +309,7 @@ const categorias = catalogFamilies;
   <!-- PACKAGING -->
   <section class="bg-[#111] grid grid-cols-1 md:grid-cols-2">
     <div class="relative overflow-hidden h-64 md:h-auto md:min-h-[480px]">
-      <img src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166518/catalogo_t3r/combos/combos_8.jpg" alt="Packaging T3R"
+      <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166518/catalogo_t3r/combos/combos_8.jpg', { width: 1200 })} alt="Packaging T3R"
         class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
       <div class="absolute inset-0 bg-gradient-to-t from-[#111]/30 via-transparent to-transparent"></div>
     </div>

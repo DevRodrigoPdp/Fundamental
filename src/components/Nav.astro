@@ -1,4 +1,6 @@
 ---
+import { cld } from '../lib/cloudinaryUrl';
+
 type NavKey = 't3r' | 'catalogo' | 'marcas' | 'puntosVenta' | 'nosotros' | 'contacto';
 
 interface Props {
@@ -106,7 +108,7 @@ function isActive(href: string, key: NavKey) {
 
           <a href="/t3r" class="group/feature relative overflow-hidden border-l border-white/8">
             <img
-              src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166514/catalogo_t3r/combos/combos_3.jpg"
+              src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166514/catalogo_t3r/combos/combos_3.jpg', { width: 600 })}
               alt="T3R Bike Components"
               class="absolute inset-0 h-full w-full object-cover saturate-[0.75] transition-transform duration-1000 group-hover/feature:scale-105"
             />

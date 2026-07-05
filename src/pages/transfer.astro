@@ -3,12 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import '../styles/global.css';
 import { SITE } from '../config/site';
+import { cld } from '../lib/cloudinaryUrl';
 ---
 
 <Layout
   title="Transfer Bikes | Bicicletas y cuadros"
   description="Descubre Transfer Bikes y el modelo Kanaya: bicicletas y cuadros distribuidos por Fundamental Bike Parts."
-  heroImage="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166708/catalogo_transferbike/bici_transferbike.jpg"
+  heroImage={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166708/catalogo_transferbike/bici_transferbike.jpg', { width: 1920 })}
   structuredData={{
     '@context': 'https://schema.org',
     '@type': 'Brand',
@@ -23,7 +24,7 @@ import { SITE } from '../config/site';
 
   <!-- HERO -->
   <section class="relative min-h-[100svh] bg-[#111] flex flex-col justify-end overflow-hidden">
-    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166708/catalogo_transferbike/bici_transferbike.jpg');"></div>
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166708/catalogo_transferbike/bici_transferbike.jpg', { width: 1920 })}');`}></div>
     <div class="absolute inset-0" style="background: linear-gradient(to top, #0a0a0a 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);"></div>
 
     <div class="relative z-20 px-5 md:px-16 pb-16">
@@ -89,7 +90,7 @@ import { SITE } from '../config/site';
         <a href="https://www.transferbikes.com/comprar" target="_blank" rel="noopener noreferrer"
           data-reveal class="group flex flex-col bg-[#111] overflow-hidden cursor-pointer">
           <div class="relative overflow-hidden" style="height: 360px;">
-            <img src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166708/catalogo_transferbike/bici_transferbike.jpg" alt="Bicicleta Kanaya completa"
+            <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166708/catalogo_transferbike/bici_transferbike.jpg', { width: 1000 })} alt="Bicicleta Kanaya completa"
           loading="lazy" decoding="async"
               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           </div>
@@ -110,7 +111,7 @@ import { SITE } from '../config/site';
         <a href="https://www.transferbikes.com/comprar" target="_blank" rel="noopener noreferrer"
           data-reveal data-delay="1" class="group flex flex-col bg-[#111] overflow-hidden cursor-pointer">
           <div class="relative bg-white overflow-hidden" style="height: 360px;">
-            <img src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166709/catalogo_transferbike/cuadro_kanaya.jpg" alt="Cuadro Kanaya"
+            <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166709/catalogo_transferbike/cuadro_kanaya.jpg', { width: 1000 })} alt="Cuadro Kanaya"
           loading="lazy" decoding="async"
               class="absolute inset-0 w-full h-full object-contain p-10 transition-transform duration-700 group-hover:scale-105" />
           </div>
@@ -132,7 +133,7 @@ import { SITE } from '../config/site';
       <!-- Detalles fabricación -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div data-reveal class="relative bg-[#0d0d0d] aspect-video overflow-hidden sm:col-span-2">
-          <img src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166710/catalogo_transferbike/cuadro_kanaya_2.jpg" alt="Detalle vainas traseras"
+          <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166710/catalogo_transferbike/cuadro_kanaya_2.jpg', { width: 1000 })} alt="Detalle vainas traseras"
           loading="lazy" decoding="async"
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
           <div class="absolute inset-0 bg-black/20"></div>
@@ -141,7 +142,7 @@ import { SITE } from '../config/site';
           </div>
         </div>
         <div data-reveal data-delay="1" class="relative bg-[#0d0d0d] aspect-video overflow-hidden">
-          <img src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166711/catalogo_transferbike/cuadro_kanaya_3.jpg" alt="Detalle head tube"
+          <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166711/catalogo_transferbike/cuadro_kanaya_3.jpg', { width: 1000 })} alt="Detalle head tube"
           loading="lazy" decoding="async"
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
           <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
@@ -164,7 +165,7 @@ import { SITE } from '../config/site';
 
       <!-- Diagrama -->
       <div data-reveal class="bg-white rounded-sm overflow-hidden mb-10">
-        <img src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166709/catalogo_transferbike/cuadro_bicicleta_kanaya.jpg" alt="Geometría Transfer Kanaya"
+        <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166709/catalogo_transferbike/cuadro_bicicleta_kanaya.jpg', { width: 1000 })} alt="Geometría Transfer Kanaya"
           loading="lazy" decoding="async"
           class="w-full h-auto" />
       </div>

@@ -5,6 +5,7 @@ import BackToTop from '../../../components/BackToTop.astro';
 import '../../../styles/global.css';
 import { supabase } from '../../../lib/supabase';
 import { SITE, absoluteUrl } from '../../../config/site';
+import { cld } from '../../../lib/cloudinaryUrl';
 import {
   catalogFamilies,
   productBelongsToFamily,
@@ -124,7 +125,7 @@ const schema = [
           </ul>
 
           <img
-            src={family.img}
+            src={cld(family.img, { width: 400 })}
             alt=""
             class="mx-auto mt-8 h-44 w-44 object-contain"
           />
@@ -153,7 +154,7 @@ const schema = [
                   <div class="relative aspect-[4/3] overflow-hidden bg-white">
                     {product.imagen ? (
                       <img
-                        src={product.imagen}
+                        src={cld(product.imagen, { width: 500 })}
                         alt={product.nombre}
                         class="absolute inset-0 h-full w-full object-contain p-5 transition-transform duration-500 group-hover:scale-[1.035]"
                         loading="lazy"

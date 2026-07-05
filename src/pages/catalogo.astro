@@ -6,6 +6,7 @@ import '../styles/global.css';
 import { supabase } from '../lib/supabase';
 import { SITE } from '../config/site';
 import { getCatalogFilters } from '../data/product-taxonomy';
+import { cld } from '../lib/cloudinaryUrl';
 
 const CONTACT_EMAIL = 'info@fundamentalbikeparts.com';
 
@@ -184,7 +185,7 @@ const FILTERS = getCatalogFilters();
                 <div class="relative overflow-hidden bg-white aspect-[4/3]">
                   {p.imagen ? (
                     <img
-                      src={p.imagen}
+                      src={cld(p.imagen, { width: 500 })}
                       alt={p.nombre}
                       class="absolute inset-0 h-full w-full object-contain p-4 sm:p-5 transition-transform duration-500 group-hover:scale-[1.025]"
                       loading="lazy"

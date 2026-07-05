@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import '../styles/global.css';
 import { supabase } from '../lib/supabase';
 import { SITE } from '../config/site';
+import { cld } from '../lib/cloudinaryUrl';
 
 // Sitio estático (sin adapter/output:'server' en astro.config): esta query
 // corre una sola vez en build, no en cada visita. Mantenerla aquí (SSR/build-time)
@@ -43,7 +44,7 @@ const novedades = (products ?? []).map((p: any) => ({
 <Layout
   title="Fundamental Bike Parts | Distribuidora de ciclismo"
   description="Distribuidora de T3R, Whipp-Off y Transfer: componentes para bicicleta, ropa MTB, cuadros y bicicletas para tiendas y ciclistas."
-  heroImage="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166518/catalogo_t3r/combos/combos_9.jpg"
+  heroImage={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166518/catalogo_t3r/combos/combos_9.jpg', { width: 1920 })}
   structuredData={{
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -134,7 +135,7 @@ const novedades = (products ?? []).map((p: any) => ({
   <!-- ═══ HERO — T3R ═══ -->
   <section class="relative min-h-[100svh] overflow-hidden bg-[#1A100C]">
     <img
-      src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166518/catalogo_t3r/combos/combos_9.jpg"
+      src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166518/catalogo_t3r/combos/combos_9.jpg', { width: 1920 })}
       alt="T3R componentes"
       class="absolute inset-0 w-full h-full object-cover object-center"
       loading="eager"
@@ -193,7 +194,7 @@ const novedades = (products ?? []).map((p: any) => ({
             <a href="/t3r" data-reveal data-delay={String((i % 3) + 1)} class="group cursor-pointer snap-start shrink-0 block" style="width: clamp(220px, 68vw, 360px);">
               <div class="relative overflow-hidden bg-white mb-5" style="aspect-ratio: 4/3;">
                 <span class="absolute top-4 left-4 z-10 bg-white text-[#1A100C] text-xs font-bold px-3 py-1.5 tracking-[0.15em] uppercase">New</span>
-                <img src={p.imagen ?? '/logo_t3r.png'} alt={p.name}
+                <img src={p.imagen ? cld(p.imagen, { width: 500 }) : '/logo_t3r.png'} alt={p.name}
                   class={p.imagen ? "absolute inset-0 w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-[1.02]" : "absolute inset-0 m-auto h-14 opacity-20"}
                   loading="lazy"
                   onerror="this.onerror=null; this.src='/logo_t3r.png'; this.className='absolute inset-0 m-auto h-14 opacity-20';" />
@@ -221,7 +222,7 @@ const novedades = (products ?? []).map((p: any) => ({
   <section class="relative overflow-hidden group" style="height: 460px;">
     <a href="/t3r" class="absolute inset-0 z-20"></a>
     <img
-      src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166510/catalogo_t3r/combos/combos_1.jpg"
+      src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166510/catalogo_t3r/combos/combos_1.jpg', { width: 1920 })}
       alt="T3R The Three Riders"
       class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       style="object-position: center 30%;"
@@ -243,7 +244,7 @@ const novedades = (products ?? []).map((p: any) => ({
   <section class="relative overflow-hidden group" style="height: 520px;">
     <a href="/transfer" class="absolute inset-0 z-20"></a>
     <img
-      src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166708/catalogo_transferbike/bici_transferbike.jpg"
+      src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166708/catalogo_transferbike/bici_transferbike.jpg', { width: 1920 })}
       alt="Transfer Bike"
       class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       loading="lazy"
@@ -264,7 +265,7 @@ const novedades = (products ?? []).map((p: any) => ({
   <section class="relative overflow-hidden group" style="height: 520px;">
     <a href="/whipp-off" class="absolute inset-0 z-20"></a>
     <img
-      src="https://res.cloudinary.com/dxent4dkd/image/upload/v1783166699/catalogo_whipoff/WHIP_OFF_1.jpg"
+      src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166699/catalogo_whipoff/WHIP_OFF_1.jpg', { width: 1920 })}
       alt="Whipp-Off"
       class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       loading="lazy"
