@@ -39,7 +39,7 @@ const CONTACT_EMAIL = 'info@fundamentalbikeparts.com';
     <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16 pt-4">
 
       <!-- Formulario -->
-      <form id="contact-form" class="md:col-span-2 flex flex-col gap-6 order-2 md:order-1" data-reveal>
+      <form id="contact-form" data-contact-email={CONTACT_EMAIL} class="md:col-span-2 flex flex-col gap-6 order-2 md:order-1" data-reveal>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div class="flex flex-col gap-2">
             <label for="nombre" class="text-sm font-medium">Nombre</label>
@@ -119,29 +119,6 @@ const CONTACT_EMAIL = 'info@fundamentalbikeparts.com';
     <p class="text-sm text-gray-400">© 2026 FUNDAMENTAL</p>
   </footer>
 
-  <script define:vars={{ CONTACT_EMAIL }}>
-    document.addEventListener('astro:page-load', () => {
-      const form = document.getElementById('contact-form');
-      if (!form) return;
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const nombre = form.nombre.value;
-        const email = form.email.value;
-        const motivo = form.motivo.value;
-        const mensaje = form.mensaje.value;
-
-        const subject = `${motivo} — ${nombre}`;
-        const body =
-          `Nombre: ${nombre}\n` +
-          `Email de contacto: ${email}\n` +
-          `Motivo: ${motivo}\n\n` +
-          `Mensaje:\n${mensaje}`;
-
-        const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.location.href = mailto;
-      });
-    });
-  </script>
+  <script src="../scripts/contacto.ts"></script>
 
 </Layout>

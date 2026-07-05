@@ -1,0 +1,208 @@
+---
+export const prerender = false;
+
+import '../../styles/global.css';
+import { supabaseAdmin } from '../../lib/supabaseAdmin';
+import { getCatalogFilters } from '../../data/product-taxonomy';
+import { cld } from '../../lib/cloudinaryUrl';
+import { Plus, LogOut, Pencil, Trash2, Search, X } from 'lucide-astro';
+
+const { data: products } = await supabaseAdmin
+  .from('productos_t3r')
+  .select('sku, nombre, categoria, subcategoria, stock, activo')
+  .order('categoria', { ascending: true })
+  .order('nombre', { ascending: true });
+
+const { data: coverImages } = await supabaseAdmin
+  .from('imagenes_productos')
+  .select('producto_sku, url')
+  .eq('orden', 1);
+
+const { data: allImages } = await supabaseAdmin
+  .from('imagenes_productos')
+  .select('producto_sku');
+
+const imgMap: Record<string, string> = {};
+(coverImages ?? []).forEach((row: any) => {
+  imgMap[row.producto_sku] = row.url;
+});
+
+const countMap: Record<string, number> = {};
+(allImages ?? []).forEach((row: any) => {
+  countMap[row.producto_sku] = (countMap[row.producto_sku] ?? 0) + 1;
+});
+
+const total = (products ?? []).length;
+const FILTERS = getCatalogFilters();
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Productos | Admin T3R</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      body { font-family: 'Inter', sans-serif; }
+      .chip {
+        border: 1px solid #e5e7eb;
+        background: #fff;
+        color: #6b7280;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 6px 12px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        white-space: nowrap;
+      }
+      .chip:hover { border-color: #1A100C; color: #1A100C; }
+      .chip.is-active { background: #1A100C; border-color: #1A100C; color: #fff; }
+      input:focus, button:focus-visible, a:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(196, 160, 114, 0.35);
+      }
+      .toast {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 100;
+        padding: 0.75rem 1.1rem;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        box-shadow: 0 12px 32px rgba(0,0,0,0.14);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        max-width: 320px;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-[#faf9f7] text-[#111]">
+    <header class="flex flex-wrap items-center justify-between gap-3 border-b border-gray-200 bg-white px-4 py-4 sm:px-6">
+      <div class="flex items-center gap-3">
+        <img src="/logo_t3r.png" alt="T3R" class="h-6 w-auto" />
+        <div class="h-4 w-px bg-gray-200"></div>
+        <h1 class="text-sm font-bold uppercase tracking-[0.1em] text-gray-500">Panel de productos</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="/admin/productos/nuevo" class="inline-flex items-center gap-1.5 bg-black text-white text-xs font-bold uppercase tracking-[0.1em] px-4 py-2.5 hover:bg-[#1A100C] transition-colors">
+          <Plus size={14} stroke-width={2.5} />
+          Nuevo producto
+        </a>
+        <form method="POST" action="/api/admin/logout">
+          <button type="submit" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-gray-400 hover:text-black transition-colors cursor-pointer">
+            <LogOut size={14} stroke-width={2} />
+            Salir
+          </button>
+        </form>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+      <div class="mb-5 relative max-w-md">
+        <label for="search" class="sr-only">Buscar productos por nombre o SKU</label>
+        <Search size={16} class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" aria-hidden="true" />
+        <input
+          id="search"
+          type="search"
+          placeholder="Buscar por nombre o SKU..."
+          class="w-full border border-gray-300 pl-10 pr-4 py-2.5 outline-none focus:border-black bg-white transition-colors"
+        />
+      </div>
+
+      <div class="mb-3 flex flex-wrap items-center gap-2">
+        <span class="mr-1 text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400">Tipo:</span>
+        <button type="button" data-cat-filter="" class="chip is-active">Todos</button>
+        {FILTERS.map((f) => (
+          <button type="button" data-cat-filter={f.subcategorias.join('|')} class="chip">{f.label}</button>
+        ))}
+      </div>
+      <div class="mb-6 flex flex-wrap items-center gap-2">
+        <span class="mr-1 text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400">Estado:</span>
+        <button type="button" data-status-filter="" class="chip is-active">Todos</button>
+        <button type="button" data-status-filter="activo" class="chip">Activos</button>
+        <button type="button" data-status-filter="inactivo" class="chip">Inactivos</button>
+      </div>
+
+      <div class="mb-4 flex items-center justify-between">
+        <p id="count" class="text-sm text-gray-400">{total} {total === 1 ? 'producto' : 'productos'}</p>
+        <button type="button" id="clear-filters" style="display:none;" class="inline-flex items-center gap-1 text-xs font-semibold uppercase text-gray-400 hover:text-black cursor-pointer">
+          <X size={12} stroke-width={2.5} />
+          Limpiar filtros
+        </button>
+      </div>
+      <p id="publish-status" role="status" aria-live="polite" class="mb-4 hidden border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-700"></p>
+
+      {total === 0 ? (
+        <p class="py-16 text-center text-gray-400">Todavía no hay productos. Pulsa "Nuevo producto" para crear el primero.</p>
+      ) : (
+        <>
+          <div class="overflow-x-auto border border-gray-200">
+          <table class="w-full min-w-[720px] border-collapse bg-white text-sm">
+            <thead>
+              <tr class="border-b border-gray-200 text-left text-[11px] uppercase tracking-wide text-gray-600">
+                <th class="p-3 font-semibold">Foto</th>
+                <th class="p-3 font-semibold">Nombre</th>
+                <th class="p-3 font-semibold">SKU</th>
+                <th class="p-3 font-semibold">Categoría</th>
+                <th class="p-3 font-semibold text-right">Stock</th>
+                <th class="p-3 font-semibold">Activo</th>
+                <th class="p-3 font-semibold text-right">Fotos</th>
+                <th class="p-3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {(products ?? []).map((p: any) => (
+                <tr
+                  class="border-b border-gray-100 hover:bg-gray-50/80 transition-colors"
+                  data-row
+                  data-search={`${p.nombre} ${p.sku}`.toLowerCase()}
+                  data-subcategoria={p.subcategoria ?? ''}
+                  data-status={p.activo ? 'activo' : 'inactivo'}
+                >
+                  <td class="p-3">
+                    {imgMap[p.sku] ? (
+                      <img src={cld(imgMap[p.sku], { width: 150 })} alt="" loading="lazy" class="h-12 w-12 object-contain bg-gray-50 border border-gray-100" />
+                    ) : (
+                      <div class="h-12 w-12 bg-gray-100 border border-gray-100"></div>
+                    )}
+                  </td>
+                  <td class="p-3 font-medium">
+                    <a href={`/admin/productos/${p.sku}`} class="hover:text-[#6B8CAE] transition-colors">{p.nombre}</a>
+                  </td>
+                  <td class="p-3 text-gray-500 text-xs">{p.sku}</td>
+                  <td class="p-3 text-gray-600">{p.subcategoria ?? p.categoria}</td>
+                  <td class="p-3 text-right tabular-nums">{p.stock ?? '—'}</td>
+                  <td class="p-3">
+                    <label class="inline-flex cursor-pointer items-center gap-2">
+                      <input type="checkbox" data-toggle-active={p.sku} checked={p.activo} class="h-4 w-4 accent-[#C4A072]" />
+                      <span class:list={['text-xs font-semibold', p.activo ? 'text-green-700' : 'text-gray-500']}>
+                        {p.activo ? 'Activo' : 'Inactivo'}
+                      </span>
+                    </label>
+                  </td>
+                  <td class="p-3 text-right text-gray-600 tabular-nums">{countMap[p.sku] ?? 0}</td>
+                  <td class="p-3 whitespace-nowrap">
+                    <a href={`/admin/productos/${p.sku}`} class="inline-flex items-center gap-1 rounded-sm px-2 py-1.5 -mx-2 text-xs font-semibold uppercase text-[#6B8CAE] mr-2 hover:underline hover:bg-[#6B8CAE]/5">
+                      <Pencil size={12} stroke-width={2} />
+                      Editar
+                    </a>
+                    <button type="button" data-delete={p.sku} class="inline-flex items-center gap-1 rounded-sm px-2 py-1.5 text-xs font-semibold uppercase text-red-600 hover:underline hover:bg-red-50 cursor-pointer">
+                      <Trash2 size={12} stroke-width={2} />
+                      Borrar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          </div>
+          <p id="empty-search" class="hidden py-16 text-center text-gray-400">Ningún producto coincide con los filtros.</p>
+        </>
+      )}
+    </main>
+
+    <script src="../../scripts/admin/dashboard.ts"></script>
+  </body>
+</html>
