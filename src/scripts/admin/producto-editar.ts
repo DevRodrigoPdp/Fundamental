@@ -136,16 +136,16 @@
 
     function renderGalleryItem(image: { id: number; url: string }): HTMLElement {
       const div = document.createElement('div');
-      div.className = 'relative border border-gray-200 bg-white p-2';
+      div.className = 'relative border border-gray-200 bg-white p-3';
       div.dataset.image = String(image.id);
       div.innerHTML = `
         <img src="${cldThumb(image.url)}" alt="" loading="lazy" decoding="async" class="aspect-square w-full object-contain" />
-        <div class="mt-2 flex items-center justify-between">
-          <div class="flex gap-2">
+        <div class="mt-3 flex flex-wrap items-center justify-between gap-2">
+          <div class="flex gap-3">
             <button type="button" class="text-gray-400 hover:text-black cursor-pointer" data-move="${image.id}" data-direction="up" title="Subir">${ICONS.arrowUp}</button>
             <button type="button" class="text-gray-400 hover:text-black cursor-pointer" data-move="${image.id}" data-direction="down" title="Bajar">${ICONS.arrowDown}</button>
           </div>
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-4">
             <a href="${cldDownload(image.url)}" download class="inline-flex items-center gap-1 text-xs font-semibold uppercase text-[#6B8CAE] hover:underline">${ICONS.download} Descargar</a>
             <button type="button" class="inline-flex items-center gap-1 text-xs font-semibold uppercase text-red-500 hover:underline cursor-pointer" data-delete-image="${image.id}">${ICONS.trash} Borrar</button>
           </div>
@@ -161,7 +161,7 @@
           if (!existing) {
             const badge = document.createElement('span');
             badge.setAttribute('data-portada-badge', '');
-            badge.className = 'absolute left-2 top-2 z-10 bg-[#C4A072] text-[#1A100C] text-[10px] font-bold px-1.5 py-0.5 uppercase';
+            badge.className = 'absolute left-3 top-3 z-10 bg-[#C4A072] text-[#1A100C] text-[10px] font-bold px-1.5 py-0.5 uppercase';
             badge.textContent = 'Portada';
             item.prepend(badge);
           }
