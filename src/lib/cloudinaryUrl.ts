@@ -14,3 +14,9 @@ export function cld(url: string | null | undefined, { width, quality = 'auto', f
 
   return url.replace('/upload/', `/upload/${transforms}/`);
 }
+
+export function cldDownload(url: string | null | undefined): string {
+  if (!url) return '';
+  if (!url.includes('res.cloudinary.com') || !url.includes('/upload/')) return url;
+  return url.replace('/upload/', '/upload/fl_attachment/');
+}

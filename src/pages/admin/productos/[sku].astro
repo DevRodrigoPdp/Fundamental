@@ -4,8 +4,8 @@ export const prerender = false;
 import '../../../styles/global.css';
 import { supabaseAdmin } from '../../../lib/supabaseAdmin';
 import { getSubcategoriasAgrupadas, SUBCATEGORIAS } from '../../../data/product-taxonomy';
-import { cld } from '../../../lib/cloudinaryUrl';
-import { ArrowLeft, ArrowUp, ArrowDown, Trash2, Plus, UploadCloud } from 'lucide-astro';
+import { cld, cldDownload } from '../../../lib/cloudinaryUrl';
+import { ArrowLeft, ArrowUp, ArrowDown, Trash2, Plus, UploadCloud, Download } from 'lucide-astro';
 
 const { sku } = Astro.params;
 
@@ -185,10 +185,16 @@ const currentTaxonomyValue = matchedTaxonomy ? `${matchedTaxonomy.categoria}|${m
                     <ArrowDown size={14} stroke-width={2} />
                   </button>
                 </div>
-                <button type="button" class="inline-flex items-center gap-1 text-xs font-semibold uppercase text-red-500 hover:underline cursor-pointer" data-delete-image={img.id}>
-                  <Trash2 size={12} stroke-width={2} />
-                  Borrar
-                </button>
+                <div class="flex items-center gap-3">
+                  <a href={cldDownload(img.url)} download class="inline-flex items-center gap-1 text-xs font-semibold uppercase text-[#6B8CAE] hover:underline">
+                    <Download size={12} stroke-width={2} />
+                    Descargar
+                  </a>
+                  <button type="button" class="inline-flex items-center gap-1 text-xs font-semibold uppercase text-red-500 hover:underline cursor-pointer" data-delete-image={img.id}>
+                    <Trash2 size={12} stroke-width={2} />
+                    Borrar
+                  </button>
+                </div>
               </div>
             </div>
           ))}
