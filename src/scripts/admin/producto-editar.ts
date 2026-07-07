@@ -139,7 +139,7 @@
       div.className = 'relative border border-gray-200 bg-white p-2';
       div.dataset.image = String(image.id);
       div.innerHTML = `
-        <img src="${cldThumb(image.url)}" alt="" class="aspect-square w-full object-contain" />
+        <img src="${cldThumb(image.url)}" alt="" loading="lazy" decoding="async" class="aspect-square w-full object-contain" />
         <div class="mt-2 flex items-center justify-between">
           <div class="flex gap-2">
             <button type="button" class="text-gray-400 hover:text-black cursor-pointer" data-move="${image.id}" data-direction="up" title="Subir">${ICONS.arrowUp}</button>

@@ -82,6 +82,8 @@ const brands = [
               <img
                 src={brand.logo}
                 alt={brand.name}
+                loading="lazy"
+                decoding="async"
                 class="h-32 w-auto object-contain transition-transform duration-500 group-hover:scale-[1.03] md:h-60"
               />
             ) : (

@@ -175,7 +175,7 @@ const currentTaxonomyValue = matchedTaxonomy ? `${matchedTaxonomy.categoria}|${m
           {(images ?? []).map((img: any, i: number) => (
             <div class="relative border border-gray-200 bg-white p-2" data-image={img.id}>
               {i === 0 && <span data-portada-badge class="absolute left-2 top-2 z-10 bg-[#C4A072] text-[#1A100C] text-[10px] font-bold px-1.5 py-0.5 uppercase">Portada</span>}
-              <img src={cld(img.url, { width: 400 })} alt="" class="aspect-square w-full object-contain" />
+              <img src={cld(img.url, { width: 400 })} alt="" loading="lazy" decoding="async" class="aspect-square w-full object-contain" />
               <div class="mt-2 flex items-center justify-between">
                 <div class="flex gap-2">
                   <button type="button" class="text-gray-400 hover:text-black cursor-pointer" data-move={img.id} data-direction="up" title="Subir">
