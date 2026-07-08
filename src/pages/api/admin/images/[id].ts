@@ -13,7 +13,7 @@ function extractPublicId(url: string): string | null {
 export const DELETE: APIRoute = async ({ params }) => {
   const { data: image } = await supabaseAdmin
     .from('imagenes_productos')
-    .select('url')
+    .select('url, producto_sku')
     .eq('id', params.id)
     .single();
 
@@ -26,6 +26,29 @@ export const DELETE: APIRoute = async ({ params }) => {
     const publicId = extractPublicId(image.url);
     if (publicId) {
       await cloudinary.uploader.destroy(publicId).catch(() => {});
+    }
+  }
+
+  if (image?.producto_sku) {
+    const { data: remaining } = await supabaseAdmin
+      .from('imagenes_productos')
+      .select('id, orden')
+      .eq('producto_sku', image.producto_sku)
+      .order('orden', { ascending: true });
+
+    for (let i = 0; i < (remaining?.length ?? 0); i++) {
+      const row = remaining![i];
+      const correctOrden = i + 1;
+      if (row.orden !== correctOrden) {
+        await supabaseAdmin.from('imagenes_productos').update({ orden: -(i + 1) }).eq('id', row.id);
+      }
+    }
+    for (let i = 0; i < (remaining?.length ?? 0); i++) {
+      const row = remaining![i];
+      const correctOrden = i + 1;
+      if (row.orden !== correctOrden) {
+        await supabaseAdmin.from('imagenes_productos').update({ orden: correctOrden }).eq('id', row.id);
+      }
     }
   }
 
