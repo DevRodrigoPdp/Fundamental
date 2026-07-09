@@ -99,7 +99,7 @@ const FILTERS = getCatalogFilters();
       </div>
     </header>
 
-    <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <main class="w-full px-4 py-8 sm:px-6 lg:px-10 xl:px-16">
       <div class="mb-5 relative max-w-md">
         <label for="search" class="sr-only">Buscar productos por nombre o SKU</label>
         <Search size={16} class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" aria-hidden="true" />
@@ -139,17 +139,17 @@ const FILTERS = getCatalogFilters();
       ) : (
         <>
           <div class="overflow-x-auto border border-gray-200">
-          <table class="w-full min-w-[720px] border-collapse bg-white text-sm">
+          <table class="w-full min-w-[720px] table-fixed border-collapse bg-white text-sm">
             <thead>
               <tr class="border-b border-gray-200 text-left text-[11px] uppercase tracking-wide text-gray-600">
-                <th class="p-3 font-semibold">Foto</th>
-                <th class="p-3 font-semibold">Nombre</th>
-                <th class="p-3 font-semibold">SKU</th>
-                <th class="p-3 font-semibold">Categoría</th>
-                <th class="p-3 font-semibold text-right">Stock</th>
-                <th class="p-3 font-semibold">Activo</th>
-                <th class="p-3 font-semibold text-right">Fotos</th>
-                <th class="p-3"></th>
+                <th class="p-3 font-semibold w-20">Foto</th>
+                <th class="p-3 font-semibold w-[28%]">Nombre</th>
+                <th class="p-3 font-semibold w-[14%]">SKU</th>
+                <th class="p-3 font-semibold w-[16%]">Categoría</th>
+                <th class="p-3 font-semibold text-right w-20">Stock</th>
+                <th class="p-3 font-semibold w-28">Activo</th>
+                <th class="p-3 font-semibold text-right w-20">Fotos</th>
+                <th class="p-3 w-36"></th>
               </tr>
             </thead>
             <tbody>
@@ -169,7 +169,7 @@ const FILTERS = getCatalogFilters();
                     )}
                   </td>
                   <td class="p-3 font-medium">
-                    <a href={`/admin/productos/${p.sku}`} class="hover:text-[#6B8CAE] transition-colors">{p.nombre}</a>
+                    <a href={`/admin/productos/${p.sku}`} class="break-words hover:text-[#6B8CAE] transition-colors">{p.nombre}</a>
                   </td>
                   <td class="p-3 text-gray-500 text-xs">{p.sku}</td>
                   <td class="p-3 text-gray-600">{p.subcategoria ?? p.categoria}</td>
