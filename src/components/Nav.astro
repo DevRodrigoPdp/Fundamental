@@ -65,18 +65,15 @@ function isActive(href: string, key: NavKey) {
 
             <div>
               {
-                links.map((link, index) => (
+                links.map((link) => (
                   <a
                     href={link.href}
                     class:list={[
-                      'group/menu-link grid grid-cols-[42px_1fr_auto] items-center border-b border-white/8 py-4 transition-colors duration-300 hover:border-[#C5A880]/35',
+                      'group/menu-link grid grid-cols-[1fr_auto] items-center border-b border-white/8 py-4 transition-colors duration-300 hover:border-[#C5A880]/35',
                       isActive(link.href, link.key) ? 'text-white' : 'text-white/62 hover:text-white',
                     ]}
                     aria-current={isActive(link.href, link.key) ? 'page' : undefined}
                   >
-                    <span class="font-display text-[10px] font-bold tracking-[0.2em] text-white/22">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
                     <span>
                       <span class:list={['block text-2xl font-semibold tracking-[-0.035em] xl:text-3xl', link.flagship && 'text-[#C5A880]']}>
                         {link.label}
@@ -134,17 +131,16 @@ function isActive(href: string, key: NavKey) {
   <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(197,168,128,0.16),transparent_34%)]"></div>
   <nav class="relative mx-auto flex max-w-md flex-col" aria-label="Navegación móvil">
     {
-      links.map((link, index) => (
+      links.map((link) => (
         <a
           href={link.href}
           data-menu-link
           class:list={[
-            'nav-menu-link grid grid-cols-[34px_1fr_auto] items-center border-b border-white/8 py-5 uppercase transition-colors',
+            'nav-menu-link grid grid-cols-[1fr_auto] items-center border-b border-white/8 py-5 uppercase transition-colors',
             link.flagship ? 'text-[#C5A880]' : 'text-white/68 hover:text-white',
           ]}
           aria-current={isActive(link.href, link.key) ? 'page' : undefined}
         >
-          <span class="font-display text-[9px] tracking-[0.18em] text-white/22">{String(index + 1).padStart(2, '0')}</span>
           <span class="text-xl font-medium tracking-[-0.025em]">{link.label}</span>
           <span class="text-base font-light opacity-35">↗</span>
         </a>
