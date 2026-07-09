@@ -197,7 +197,7 @@ const FILTERS = getCatalogFilters();
                 </div>
                 <div class="px-5 pt-5">
                   <p class="mb-2 text-[9px] uppercase tracking-[0.22em] text-gray-400">{p.subcategoria ?? p.categoria}</p>
-                  <h3 class="mb-2 text-[15px] font-bold leading-snug transition-colors group-hover:text-[#6B8CAE] sm:text-base">{p.nombre}</h3>
+                  <h3 class="mb-2 line-clamp-2 break-words text-[15px] font-bold leading-snug transition-colors group-hover:text-[#6B8CAE] sm:text-base">{p.nombre}</h3>
                   {p.descripcion && (
                     <p class="mb-4 line-clamp-2 text-xs leading-relaxed text-gray-500 sm:text-sm">{p.descripcion}</p>
                   )}

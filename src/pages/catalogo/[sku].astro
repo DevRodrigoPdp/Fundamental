@@ -213,7 +213,7 @@ const breadcrumbSchema = {
       <!-- INFO -->
       <div>
         <p class="text-sm text-[#6B8CAE] tracking-[0.25em] uppercase mb-4">{product.subcategoria ?? product.categoria}</p>
-        <h1 class="text-[28px] md:text-[40px] font-bold leading-tight mb-3">{product.nombre}</h1>
+        <h1 class="line-clamp-3 break-words text-[28px] md:text-[40px] font-bold leading-tight mb-3">{product.nombre}</h1>
         <p class="text-sm text-gray-400 mb-8">REF. {product.sku}</p>
         {stockLabel && (
           <p class:list={[
@@ -308,7 +308,7 @@ const breadcrumbSchema = {
             </div>
             <div class="flex flex-1 flex-col px-4 pt-4 pb-4">
               <p class="mb-1 text-[9px] uppercase tracking-[0.22em] text-gray-400">{r.subcategoria}</p>
-              <h3 class="mb-2 text-[13px] font-bold leading-snug transition-colors group-hover:text-[#6B8CAE]">{r.nombre}</h3>
+              <h3 class="mb-2 line-clamp-2 break-words text-[13px] font-bold leading-snug transition-colors group-hover:text-[#6B8CAE]">{r.nombre}</h3>
               {r.descripcion_corta && (
                 <p class="text-[11px] leading-relaxed text-gray-500 line-clamp-2 mb-3">{r.descripcion_corta}</p>
               )}
