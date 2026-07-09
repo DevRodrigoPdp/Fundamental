@@ -100,11 +100,13 @@ const diskVariants = isDiskFamily
 
 const especificaciones: Record<string, any> = product.especificaciones ?? {};
 const cantidadStock: number | null = product.stock ?? null;
-const stockLabel = cantidadStock === 0
-  ? 'Agotado'
-  : cantidadStock !== null && cantidadStock <= 10
-    ? 'Pocas unidades en stock'
-    : null;
+const stockLabel = cantidadStock === null
+  ? null
+  : cantidadStock === 0
+    ? 'Agotado'
+    : cantidadStock <= 10
+      ? 'Pocas unidades en stock'
+      : 'Disponible';
 
 function formatValue(v: any) {
   if (typeof v === 'boolean') return v ? 'Sí' : 'No';
@@ -218,7 +220,7 @@ const breadcrumbSchema = {
         {stockLabel && (
           <p class:list={[
             'mb-8 text-sm font-semibold uppercase tracking-[0.12em]',
-            cantidadStock === 0 ? 'text-red-600' : 'text-amber-700',
+            cantidadStock === 0 ? 'text-red-600' : cantidadStock !== null && cantidadStock <= 10 ? 'text-amber-700' : 'text-green-700',
           ]}>
             {stockLabel}
           </p>
