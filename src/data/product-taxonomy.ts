@@ -49,6 +49,11 @@ export function findSkuPrefix(subcategoria: string | null): string | null {
   return SUBCATEGORIAS.find((s) => s.subcategoria === subcategoria)?.skuPrefix ?? null;
 }
 
+export const DISK_FAMILIES = [
+  { prefix: 'T3R-DISCO-6T-', nombre: 'Discos de freno 6 tornillos' },
+  { prefix: 'T3R-DISCO-CL-', nombre: 'Discos de freno Center Lock' },
+];
+
 export function getSubcategoriasAgrupadas() {
   const grouped: { filtro: string; opciones: SubcategoriaInfo[] }[] = [];
   const sinFiltro: SubcategoriaInfo[] = [];

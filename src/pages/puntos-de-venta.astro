@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import BackToTop from '../components/BackToTop.astro';
 import { MapPin, ExternalLink, Search } from 'lucide-astro';
 import { puntosVentaT3R } from '../data/puntos-venta';
+import { brandTabs } from '../data/brand-tabs';
 import '../styles/global.css';
 ---
 
@@ -24,11 +25,7 @@ import '../styles/global.css';
       </header>
 
       <div class="mb-12 grid grid-cols-1 gap-px border border-white/10 bg-white/10 sm:grid-cols-3">
-        {[
-          { id: 't3r', label: 'T3R', logo: '/logo_blanco_t3r.png', available: true },
-          { id: 'whipp-off', label: 'Whipp-Off', logo: '/logo_whipoff.png', available: false },
-          { id: 'transfer', label: 'Transfer', logo: '/logo_transfer.png', available: false },
-        ].map((brand) => (
+        {brandTabs.map((brand) => (
           <button
             type="button"
             data-brand-tab={brand.id}

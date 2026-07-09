@@ -1,7 +1,6 @@
 ---
 import { cld } from '../lib/cloudinaryUrl';
-
-type NavKey = 't3r' | 'catalogo' | 'marcas' | 'puntosVenta' | 'nosotros' | 'contacto';
+import { navLinks as links, type NavKey } from '../data/nav-links';
 
 interface Props {
   active?: NavKey;
@@ -10,21 +9,6 @@ interface Props {
 
 const { active, bgClass = 'bg-[#0b0908]/95' } = Astro.props;
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
-
-const links: Array<{
-  href: string;
-  label: string;
-  eyebrow: string;
-  key: NavKey;
-  flagship?: boolean;
-}> = [
-  { href: '/t3r', label: 'T3R Components', eyebrow: 'Marca principal', key: 't3r', flagship: true },
-  { href: '/catalogo', label: 'Catálogo', eyebrow: 'Gama completa', key: 'catalogo' },
-  { href: '/marcas', label: 'Marcas asociadas', eyebrow: 'T3R · Transfer · Whipp-Off', key: 'marcas' },
-  { href: '/puntos-de-venta', label: 'Puntos de venta', eyebrow: 'Dónde encontrarnos', key: 'puntosVenta' },
-  { href: '/nosotros', label: 'Nosotros', eyebrow: 'Fundamental Bike Parts', key: 'nosotros' },
-  { href: '/contacto', label: 'Contacto', eyebrow: 'Consultas y pedidos', key: 'contacto' },
-];
 
 function isActive(href: string, key: NavKey) {
   return active === key || currentPath === href || currentPath.startsWith(href + '/');

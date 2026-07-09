@@ -5,7 +5,7 @@ import BackToTop from '../components/BackToTop.astro';
 import '../styles/global.css';
 import { supabase } from '../lib/supabase';
 import { SITE } from '../config/site';
-import { getCatalogFilters } from '../data/product-taxonomy';
+import { getCatalogFilters, DISK_FAMILIES } from '../data/product-taxonomy';
 import { cld } from '../lib/cloudinaryUrl';
 
 const CONTACT_EMAIL = 'info@fundamentalbikeparts.com';
@@ -49,10 +49,7 @@ function stockLabel(quantity: number | null) {
   return null;
 }
 
-const diskFamilies = [
-  { prefix: 'T3R-DISCO-6T-', nombre: 'Discos de freno 6 tornillos' },
-  { prefix: 'T3R-DISCO-CL-', nombre: 'Discos de freno Center Lock' },
-];
+const diskFamilies = DISK_FAMILIES;
 
 const groupedPrefixes = new Set<string>();
 const catalogo = catalogoBase.flatMap((item: any) => {

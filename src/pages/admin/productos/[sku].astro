@@ -76,7 +76,7 @@ const currentTaxonomyValue = matchedTaxonomy ? `${matchedTaxonomy.categoria}|${m
           <p id="error" class="hidden border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-600"></p>
           <p id="saved" class="hidden border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-700"></p>
 
-          <div class="space-y-4">
+          <section class="space-y-4">
             <h2 class="text-xs font-bold uppercase tracking-[0.15em] text-gray-400 border-b border-gray-200 pb-2">Identificación</h2>
             <div>
               <label class="block mb-1 text-xs font-semibold uppercase tracking-wide text-gray-500">Nombre *</label>
@@ -106,9 +106,9 @@ const currentTaxonomyValue = matchedTaxonomy ? `${matchedTaxonomy.categoria}|${m
                 <input name="subcategoria" value={product.subcategoria ?? ''} class="w-full border border-gray-300 bg-white px-3 py-2.5 outline-none focus:border-black" />
               </div>
             </div>
-          </div>
+          </section>
 
-          <div class="space-y-4">
+          <section class="space-y-4">
             <h2 class="text-xs font-bold uppercase tracking-[0.15em] text-gray-400 border-b border-gray-200 pb-2">Descripción</h2>
             <div>
               <label class="block mb-1 text-xs font-semibold uppercase tracking-wide text-gray-500">Descripción corta</label>
@@ -118,9 +118,9 @@ const currentTaxonomyValue = matchedTaxonomy ? `${matchedTaxonomy.categoria}|${m
               <label class="block mb-1 text-xs font-semibold uppercase tracking-wide text-gray-500">Descripción completa</label>
               <textarea name="descripcion" rows="4" class="w-full border border-gray-300 bg-white px-3 py-2.5 outline-none focus:border-black">{product.descripcion ?? ''}</textarea>
             </div>
-          </div>
+          </section>
 
-          <div class="space-y-4">
+          <section class="space-y-4">
             <h2 class="text-xs font-bold uppercase tracking-[0.15em] text-gray-400 border-b border-gray-200 pb-2">Especificaciones</h2>
             <p class="text-xs text-gray-400">Campos libres tipo ficha técnica (ej: "Compuesto" → "Semi-metálico").</p>
             <div id="specs-list" class="space-y-2">
@@ -136,9 +136,9 @@ const currentTaxonomyValue = matchedTaxonomy ? `${matchedTaxonomy.categoria}|${m
               <Plus size={12} stroke-width={2.5} />
               Añadir especificación
             </button>
-          </div>
+          </section>
 
-          <div class="space-y-4">
+          <section class="space-y-4">
             <h2 class="text-xs font-bold uppercase tracking-[0.15em] text-gray-400 border-b border-gray-200 pb-2">Inventario</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -154,7 +154,7 @@ const currentTaxonomyValue = matchedTaxonomy ? `${matchedTaxonomy.categoria}|${m
               <input name="activo" type="checkbox" checked={product.activo} class="h-4 w-4 accent-[#C4A072]" />
               Activo (visible en el catálogo público)
             </label>
-          </div>
+          </section>
 
           <div class="flex items-center gap-4">
             <button type="submit" id="submit-btn" class="bg-black text-white text-xs font-bold uppercase tracking-[0.1em] px-6 py-3.5 hover:bg-[#1A100C] transition-colors cursor-pointer disabled:opacity-50">
