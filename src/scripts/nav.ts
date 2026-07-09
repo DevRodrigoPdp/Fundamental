@@ -1,4 +1,4 @@
-document.addEventListener('astro:page-load', () => {
+(() => {
   const toggle = document.getElementById('nav-toggle');
   const mobileMenu = document.getElementById('nav-mobile-menu');
   const iconOpen = document.getElementById('nav-icon-open');
@@ -66,4 +66,4 @@ document.addEventListener('astro:page-load', () => {
       toggle.focus();
     }
   });
-});
+})();

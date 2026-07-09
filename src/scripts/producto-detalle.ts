@@ -1,4 +1,4 @@
-document.addEventListener('astro:page-load', () => {
+(() => {
   const mainImage = document.getElementById('main-image');
   document.querySelectorAll('.thumb-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -6,4 +6,4 @@ document.addEventListener('astro:page-load', () => {
       if (mainImage && src) mainImage.setAttribute('src', src);
     });
   });
-});
+})();

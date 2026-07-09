@@ -15,4 +15,4 @@ function initReveal() {
   });
 }
 
-document.addEventListener('astro:page-load', initReveal);
+initReveal();

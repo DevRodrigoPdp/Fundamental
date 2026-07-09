@@ -1,4 +1,4 @@
-document.addEventListener('astro:page-load', () => {
+(() => {
   const input = document.getElementById('search-input') as HTMLInputElement | null;
   const cards = [...document.querySelectorAll<HTMLElement>('[data-product-card]')];
   const emptyState = document.getElementById('empty-state');
@@ -192,4 +192,4 @@ document.addEventListener('astro:page-load', () => {
     }
   }
   filter();
-});
+})();

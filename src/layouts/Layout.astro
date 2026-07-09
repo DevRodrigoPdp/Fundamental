@@ -1,5 +1,4 @@
 ---
-import { ClientRouter } from 'astro:transitions';
 import { SITE, absoluteUrl } from '../config/site';
 
 interface Props {
@@ -88,10 +87,16 @@ const baseSchema = {
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Epilogue:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@800;900&display=swap" rel="stylesheet" />
     <script type="application/ld+json" set:html={JSON.stringify(baseSchema)} />
     {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
-    <ClientRouter />
     <style>
       * { scrollbar-width: none; }
       *::-webkit-scrollbar { display: none; }
+      @view-transition {
+        navigation: auto;
+      }
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration: 0.25s;
+      }
     </style>
   </head>
   <body class="antialiased text-[#111111]">

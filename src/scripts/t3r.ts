@@ -1,4 +1,4 @@
-document.addEventListener('astro:page-load', () => {
+(() => {
   const frame = document.getElementById('store-map-frame') as HTMLIFrameElement | null;
   const name = document.getElementById('store-map-name');
   const external = document.getElementById('store-map-external') as HTMLAnchorElement | null;
@@ -93,4 +93,4 @@ document.addEventListener('astro:page-load', () => {
       searchMessage.classList.remove('hidden');
     }
   });
-});
+})();

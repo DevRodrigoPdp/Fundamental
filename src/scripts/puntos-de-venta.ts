@@ -1,4 +1,4 @@
-document.addEventListener('astro:page-load', () => {
+(() => {
   const t3rPanel = document.querySelector<HTMLElement>('[data-brand-panel="t3r"]');
   const comingSoon = document.getElementById('stores-coming-soon');
   const comingSoonBrand = document.getElementById('coming-soon-brand');
@@ -55,4 +55,4 @@ document.addEventListener('astro:page-load', () => {
     const firstLink = matches[0]?.querySelector<HTMLAnchorElement>('[data-map-query]');
     if (firstLink && window.matchMedia('(min-width: 1024px)').matches) selectStore(firstLink);
   });
-});
+})();

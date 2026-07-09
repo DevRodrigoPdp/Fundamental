@@ -1,4 +1,4 @@
-document.addEventListener('astro:page-load', () => {
+(() => {
   const track = document.getElementById('novedades-carousel');
   const prev = document.getElementById('carousel-prev');
   const next = document.getElementById('carousel-next');
@@ -11,4 +11,4 @@ document.addEventListener('astro:page-load', () => {
   };
   prev.addEventListener('click', () => scrollByCard(-1));
   next.addEventListener('click', () => scrollByCard(1));
-});
+})();

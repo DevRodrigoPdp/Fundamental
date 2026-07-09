@@ -1,4 +1,4 @@
-document.addEventListener('astro:page-load', () => {
+(() => {
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   if (!form) return;
 
@@ -21,4 +21,4 @@ document.addEventListener('astro:page-load', () => {
     const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailto;
   });
-});
+})();

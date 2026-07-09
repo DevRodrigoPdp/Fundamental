@@ -1,4 +1,4 @@
-document.addEventListener('astro:page-load', () => {
+(() => {
   const button = document.getElementById('back-to-top');
   if (!button) return;
 
@@ -21,4 +21,4 @@ document.addEventListener('astro:page-load', () => {
 
   window.addEventListener('scroll', toggle, { passive: true });
   toggle();
-});
+})();
