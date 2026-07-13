@@ -3,7 +3,7 @@ export const prerender = false;
 
 import '../../styles/global.css';
 import { supabaseAdmin } from '../../lib/supabaseAdmin';
-import { getCatalogFilters } from '../../data/product-taxonomy';
+import { getAdminCatalogFilters } from '../../data/product-taxonomy';
 import { cld } from '../../lib/cloudinaryUrl';
 import { Plus, LogOut, Pencil, Trash2, Search, X } from 'lucide-astro';
 
@@ -33,7 +33,7 @@ const countMap: Record<string, number> = {};
 });
 
 const total = (products ?? []).length;
-const FILTERS = getCatalogFilters();
+const FILTERS = getAdminCatalogFilters();
 ---
 <!doctype html>
 <html lang="es">

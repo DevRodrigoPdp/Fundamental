@@ -45,6 +45,32 @@ export function getCatalogFilters() {
   }));
 }
 
+const ADMIN_FILTER_ORDER = [
+  'Pastillas',
+  'Cable',
+  'Fundas',
+  'Topes',
+  'Discos',
+  'Platos',
+  'Cajas de pedalier',
+  'Pedales',
+  'Puños',
+  'Kit purgado',
+  'Válvulas',
+];
+
+export function getAdminCatalogFilters() {
+  return ADMIN_FILTER_ORDER.map((label) => {
+    if (label === 'Platos') {
+      return { label, subcategorias: ['Platos'] };
+    }
+    return {
+      label,
+      subcategorias: SUBCATEGORIAS.filter((s) => s.filtro === label && s.subcategoria !== 'Platos').map((s) => s.subcategoria),
+    };
+  });
+}
+
 export function findSkuPrefix(subcategoria: string | null): string | null {
   return SUBCATEGORIAS.find((s) => s.subcategoria === subcategoria)?.skuPrefix ?? null;
 }
@@ -58,8 +84,12 @@ export function getSubcategoriasAgrupadas() {
   const grouped: { filtro: string; opciones: SubcategoriaInfo[] }[] = [];
   const sinFiltro: SubcategoriaInfo[] = [];
 
-  for (const label of FILTER_ORDER) {
-    grouped.push({ filtro: label, opciones: SUBCATEGORIAS.filter((s) => s.filtro === label) });
+  for (const label of ADMIN_FILTER_ORDER) {
+    if (label === 'Platos') {
+      grouped.push({ filtro: label, opciones: SUBCATEGORIAS.filter((s) => s.subcategoria === 'Platos') });
+      continue;
+    }
+    grouped.push({ filtro: label, opciones: SUBCATEGORIAS.filter((s) => s.filtro === label && s.subcategoria !== 'Platos') });
   }
   SUBCATEGORIAS.filter((s) => !s.filtro).forEach((s) => sinFiltro.push(s));
   if (sinFiltro.length > 0) grouped.push({ filtro: 'Otras', opciones: sinFiltro });
