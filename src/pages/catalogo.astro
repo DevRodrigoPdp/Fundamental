@@ -6,6 +6,7 @@ import '../styles/global.css';
 import { supabase } from '../lib/supabase';
 import { SITE } from '../config/site';
 import { getCatalogFilters, DISK_FAMILIES } from '../data/product-taxonomy';
+import { ESTADOS_STOCK, type EstadoStock } from '../data/estado-stock';
 import { cld } from '../lib/cloudinaryUrl';
 
 const CONTACT_EMAIL = 'info@fundamentalbikeparts.com';
@@ -40,13 +41,12 @@ const catalogoBase = (products ?? []).map((p: any) => ({
   descripcion: p.descripcion_corta,
   sku: p.sku,
   imagen: imgMap[p.sku] ?? null,
-  cantidadStock: p.stock ?? null,
+  estadoStock: (p.estado_stock ?? 'disponible') as EstadoStock,
 }));
 
-function stockLabel(quantity: number | null) {
-  if (quantity === 0) return 'Agotado';
-  if (quantity !== null && quantity <= 10) return 'Pocas unidades en stock';
-  return null;
+function stockBadge(estado: EstadoStock) {
+  if (estado === 'disponible') return null;
+  return ESTADOS_STOCK[estado];
 }
 
 const diskFamilies = DISK_FAMILIES;
@@ -201,12 +201,9 @@ const FILTERS = getCatalogFilters();
                   {p.descripcion && (
                     <p class="mb-4 line-clamp-2 text-xs leading-relaxed text-gray-500 sm:text-sm">{p.descripcion}</p>
                   )}
-                  {stockLabel(p.cantidadStock) && (
-                    <p class:list={[
-                      'mb-5 text-xs font-semibold uppercase tracking-[0.12em]',
-                      p.cantidadStock === 0 ? 'text-red-600' : 'text-amber-700',
-                    ]}>
-                      {stockLabel(p.cantidadStock)}
+                  {stockBadge(p.estadoStock) && (
+                    <p class:list={['mb-5 text-xs font-semibold uppercase tracking-[0.12em]', stockBadge(p.estadoStock)!.color]}>
+                      {stockBadge(p.estadoStock)!.label}
                     </p>
                   )}
                 </div>

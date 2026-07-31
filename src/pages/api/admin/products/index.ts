@@ -71,6 +71,7 @@ export const POST: APIRoute = async ({ request }) => {
       sku,
       especificaciones: body.especificaciones ?? null,
       stock: body.stock ?? null,
+      estado_stock: body.estado_stock ?? 'disponible',
       precio: body.precio ?? null,
       activo: body.activo ?? true,
     })

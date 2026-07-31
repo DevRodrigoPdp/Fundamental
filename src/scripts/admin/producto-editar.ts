@@ -80,6 +80,7 @@
         descripcion: fd.get('descripcion') || null,
         especificaciones: collectSpecs(),
         stock: fd.get('stock') ? Number(fd.get('stock')) : null,
+        estado_stock: fd.get('estado_stock') || 'disponible',
         precio: fd.get('precio') ? Number(fd.get('precio')) : null,
         activo: fd.get('activo') === 'on',
       };

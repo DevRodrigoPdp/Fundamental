@@ -4,6 +4,14 @@
 
   const contactEmail = form.dataset.contactEmail;
 
+  const motivoParam = new URLSearchParams(window.location.search).get('motivo');
+  if (motivoParam) {
+    const motivoSelect = form.elements.namedItem('motivo') as HTMLSelectElement | null;
+    if (motivoSelect && [...motivoSelect.options].some((o) => o.value === motivoParam)) {
+      motivoSelect.value = motivoParam;
+    }
+  }
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const nombre = (form.elements.namedItem('nombre') as HTMLInputElement).value;

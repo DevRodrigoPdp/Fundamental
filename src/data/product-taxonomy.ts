@@ -12,7 +12,7 @@ export const SUBCATEGORIAS: SubcategoriaInfo[] = [
   { subcategoria: 'Topes de cable', categoria: 'Transmisión', filtro: 'Topes', skuPrefix: 'T3R-TOPE' },
   { subcategoria: 'Discos 6 tornillos', categoria: 'Frenos', filtro: 'Discos', skuPrefix: 'T3R-DISCO-6T' },
   { subcategoria: 'Discos Center Lock', categoria: 'Frenos', filtro: 'Discos', skuPrefix: 'T3R-DISCO-CL' },
-  { subcategoria: 'Platos', categoria: 'Transmisión', filtro: 'Discos', skuPrefix: 'T3R-PLATO' },
+  { subcategoria: 'Platos', categoria: 'Transmisión', filtro: 'Platos', skuPrefix: 'T3R-PLATO' },
   { subcategoria: 'Ejes', categoria: 'Pedalier', filtro: 'Cajas de pedalier', skuPrefix: 'T3R-EJE' },
   { subcategoria: 'Automáticos', categoria: 'Pedales', filtro: 'Pedales', skuPrefix: 'T3R-PED-AUTO' },
   { subcategoria: 'Carretera', categoria: 'Pedales', filtro: 'Pedales', skuPrefix: 'T3R-PED-CARR' },
@@ -31,6 +31,7 @@ const FILTER_ORDER = [
   'Fundas',
   'Topes',
   'Discos',
+  'Platos',
   'Cajas de pedalier',
   'Pedales',
   'Puños',
@@ -60,15 +61,10 @@ const ADMIN_FILTER_ORDER = [
 ];
 
 export function getAdminCatalogFilters() {
-  return ADMIN_FILTER_ORDER.map((label) => {
-    if (label === 'Platos') {
-      return { label, subcategorias: ['Platos'] };
-    }
-    return {
-      label,
-      subcategorias: SUBCATEGORIAS.filter((s) => s.filtro === label && s.subcategoria !== 'Platos').map((s) => s.subcategoria),
-    };
-  });
+  return ADMIN_FILTER_ORDER.map((label) => ({
+    label,
+    subcategorias: SUBCATEGORIAS.filter((s) => s.filtro === label).map((s) => s.subcategoria),
+  }));
 }
 
 export function findSkuPrefix(subcategoria: string | null): string | null {
@@ -85,11 +81,7 @@ export function getSubcategoriasAgrupadas() {
   const sinFiltro: SubcategoriaInfo[] = [];
 
   for (const label of ADMIN_FILTER_ORDER) {
-    if (label === 'Platos') {
-      grouped.push({ filtro: label, opciones: SUBCATEGORIAS.filter((s) => s.subcategoria === 'Platos') });
-      continue;
-    }
-    grouped.push({ filtro: label, opciones: SUBCATEGORIAS.filter((s) => s.filtro === label && s.subcategoria !== 'Platos') });
+    grouped.push({ filtro: label, opciones: SUBCATEGORIAS.filter((s) => s.filtro === label) });
   }
   SUBCATEGORIAS.filter((s) => !s.filtro).forEach((s) => sinFiltro.push(s));
   if (sinFiltro.length > 0) grouped.push({ filtro: 'Otras', opciones: sinFiltro });

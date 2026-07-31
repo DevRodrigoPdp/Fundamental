@@ -13,6 +13,7 @@ const EDITABLE_FIELDS = [
   'descripcion_homepage',
   'especificaciones',
   'stock',
+  'estado_stock',
   'precio',
   'activo',
 ] as const;

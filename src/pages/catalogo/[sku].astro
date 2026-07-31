@@ -5,6 +5,7 @@ import '../../styles/global.css';
 import { supabase } from '../../lib/supabase';
 import { SITE, absoluteUrl } from '../../config/site';
 import { cld } from '../../lib/cloudinaryUrl';
+import { ESTADOS_STOCK, type EstadoStock } from '../../data/estado-stock';
 
 const CONTACT_EMAIL = 'info@fundamentalbikeparts.com';
 
@@ -99,14 +100,11 @@ const diskVariants = isDiskFamily
   : [];
 
 const especificaciones: Record<string, any> = product.especificaciones ?? {};
-const cantidadStock: number | null = product.stock ?? null;
-const stockLabel = cantidadStock === null
-  ? null
-  : cantidadStock === 0
-    ? 'Agotado'
-    : cantidadStock <= 10
-      ? 'Pocas unidades en stock'
-      : 'Disponible';
+const estadoStock: EstadoStock = product.estado_stock ?? 'disponible';
+const estadoInfo = ESTADOS_STOCK[estadoStock];
+const avisameHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Avísame cuando haya stock — ' + product.nombre)}&body=${encodeURIComponent(
+  `Hola,\n\nMe interesa el siguiente producto T3R y está agotado temporalmente:\n\nProducto: ${product.nombre}\nReferencia (SKU): ${product.sku}\n\nPor favor, avisadme cuando vuelva a haber stock.\n\nGracias.`
+)}`;
 
 function formatValue(v: any) {
   if (typeof v === 'boolean') return v ? 'Sí' : 'No';
@@ -217,13 +215,16 @@ const breadcrumbSchema = {
         <p class="text-sm text-[#6B8CAE] tracking-[0.25em] uppercase mb-4">{product.subcategoria ?? product.categoria}</p>
         <h1 class="line-clamp-3 break-words text-[28px] md:text-[40px] font-bold leading-tight mb-3">{product.nombre}</h1>
         <p class="text-sm text-gray-400 mb-8">REF. {product.sku}</p>
-        {stockLabel && (
-          <p class:list={[
-            'mb-8 text-sm font-semibold uppercase tracking-[0.12em]',
-            cantidadStock === 0 ? 'text-red-600' : cantidadStock !== null && cantidadStock <= 10 ? 'text-amber-700' : 'text-green-700',
-          ]}>
-            {stockLabel}
-          </p>
+        <p class:list={['mb-4 text-sm font-semibold uppercase tracking-[0.12em]', estadoInfo.color]}>
+          {estadoInfo.label}
+        </p>
+        {estadoStock === 'agotado' && (
+          <a
+            href={avisameHref}
+            class="mb-8 inline-flex items-center gap-1 text-sm font-medium text-[#6B8CAE] underline hover:text-[#4a6a8a] transition-colors"
+          >
+            Avísame cuando haya stock
+          </a>
         )}
 
         {diskVariants.length > 0 && (
