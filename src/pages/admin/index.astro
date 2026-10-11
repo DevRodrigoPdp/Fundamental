@@ -2,35 +2,12 @@
 export const prerender = false;
 
 import '@styles/global.css';
-import { supabaseAdmin } from '@lib/supabase/admin';
+import { getDashboardData } from '@lib/admin/products';
 import { getAdminCatalogFilters } from '@config/productTaxonomy';
 import { cld } from '@lib/cloudinary/url';
 import { Plus, LogOut, Pencil, Trash2, Search, X } from 'lucide-astro';
 
-const { data: products } = await supabaseAdmin
-  .from('productos_t3r')
-  .select('sku, nombre, categoria, subcategoria, stock, activo')
-  .order('categoria', { ascending: true })
-  .order('nombre', { ascending: true });
-
-const { data: coverImages } = await supabaseAdmin
-  .from('imagenes_productos')
-  .select('producto_sku, url')
-  .eq('orden', 1);
-
-const { data: allImages } = await supabaseAdmin
-  .from('imagenes_productos')
-  .select('producto_sku');
-
-const imgMap: Record<string, string> = {};
-(coverImages ?? []).forEach((row: any) => {
-  imgMap[row.producto_sku] = row.url;
-});
-
-const countMap: Record<string, number> = {};
-(allImages ?? []).forEach((row: any) => {
-  countMap[row.producto_sku] = (countMap[row.producto_sku] ?? 0) + 1;
-});
+const { products, coverBySku: imgMap, imageCountBySku: countMap } = await getDashboardData();
 
 const total = (products ?? []).length;
 const FILTERS = getAdminCatalogFilters();

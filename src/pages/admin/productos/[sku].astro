@@ -2,7 +2,7 @@
 export const prerender = false;
 
 import '@styles/global.css';
-import { supabaseAdmin } from '@lib/supabase/admin';
+import { getProductWithImages } from '@lib/admin/products';
 import { getSubcategoriasAgrupadas, SUBCATEGORIAS } from '@config/productTaxonomy';
 import { ESTADOS_STOCK } from '@config/stockStates';
 import { cld, cldDownload } from '@lib/cloudinary/url';
@@ -10,21 +10,13 @@ import { ArrowLeft, ArrowUp, ArrowDown, Trash2, Plus, UploadCloud, Download } fr
 
 const { sku } = Astro.params;
 
-const { data: product } = await supabaseAdmin
-  .from('productos_t3r')
-  .select('*')
-  .eq('sku', sku)
-  .single();
+const detail = await getProductWithImages(sku as string);
 
-if (!product) {
+if (!detail) {
   return Astro.redirect('/admin');
 }
 
-const { data: images } = await supabaseAdmin
-  .from('imagenes_productos')
-  .select('*')
-  .eq('producto_sku', sku)
-  .order('orden', { ascending: true });
+const { product, images } = detail;
 
 const specEntries = Object.entries(product.especificaciones ?? {});
 const grupos = getSubcategoriasAgrupadas();

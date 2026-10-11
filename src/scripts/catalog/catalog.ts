@@ -63,7 +63,7 @@
     };
   });
 
-  const termScore = (term: string, item: (typeof searchableCards)[number]) => {
+  const termScore = (term: string, item: (typeof searchableCards)[number]): number => {
     if (item.fields.sku.includes(term)) return 30;
     if (item.fields.name.split(' ').some((word) => word.startsWith(term))) return 24;
     if (item.fields.name.includes(term)) return 18;

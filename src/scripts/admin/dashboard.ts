@@ -1,3 +1,6 @@
+// Módulo: aísla sus variables del resto de scripts.
+export {};
+
 function toast(message: string, type: 'success' | 'error' = 'success') {
   const el = document.createElement('div');
   el.textContent = message;

@@ -1,3 +1,6 @@
+// Módulo: aísla sus variables del resto de scripts.
+export {};
+
     const specsList = document.getElementById('specs-list')!;
     const specsAdd = document.getElementById('specs-add')!;
 

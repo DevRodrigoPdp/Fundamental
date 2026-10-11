@@ -1,3 +1,6 @@
+// Módulo: aísla sus variables del resto de scripts.
+export {};
+
 const form = document.getElementById('login-form') as HTMLFormElement;
 const submitBtn = document.getElementById('login-submit') as HTMLButtonElement;
 form?.addEventListener('submit', () => {
