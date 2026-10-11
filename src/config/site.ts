@@ -7,6 +7,7 @@ export const SITE = {
   locale: 'es_ES',
   language: 'es',
   email: 'info@fundamentalbikeparts.com',
+  instagram: 'https://www.instagram.com/fundamental_bike_parts?igsh=OWtqdjN6MXdrcDdl',
   location: 'Madrid, España',
   description:
     'Distribuidora especializada en componentes, bicicletas y equipamiento ciclista de T3R, Whipp-Off y Transfer.',

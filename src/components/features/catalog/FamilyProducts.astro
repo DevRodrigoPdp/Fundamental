@@ -1,0 +1,32 @@
+---
+import FamilyProductCard from './FamilyProductCard.astro';
+import type { ProductCardData } from '@app-types/product';
+
+interface Props {
+  products: ProductCardData[];
+}
+
+const { products } = Astro.props;
+---
+
+<section>
+  <div class="mb-7 flex items-end justify-between gap-5 border-b border-gray-200 pb-5">
+    <div>
+      <p class="mb-2 text-[10px] uppercase tracking-[0.25em] text-gray-400">Referencias disponibles</p>
+      <h2 class="text-2xl font-bold">Todos los modelos</h2>
+    </div>
+    <p class="shrink-0 text-sm text-gray-400">
+      {products.length} {products.length === 1 ? 'producto' : 'productos'}
+    </p>
+  </div>
+
+  {products.length ? (
+    <div class="grid grid-cols-1 gap-3 min-[460px]:grid-cols-2 xl:grid-cols-3">
+      {products.map((product, index) => <FamilyProductCard product={product} index={index} />)}
+    </div>
+  ) : (
+    <div class="border border-gray-200 px-6 py-16 text-center text-sm text-gray-400">
+      Próximamente añadiremos referencias a esta familia.
+    </div>
+  )}
+</section>

@@ -1,0 +1,53 @@
+---
+import { cld } from '@lib/cloudinary/url';
+import type { ProductCardData } from '@app-types/product';
+
+interface Props {
+  product: ProductCardData;
+  index: number;
+}
+
+const { product, index } = Astro.props;
+---
+
+<a
+  href={`/catalogo/${product.sku}`}
+  data-reveal
+  data-delay={String(index % 3)}
+  class="group flex flex-col border border-gray-200 bg-white transition-[border-color,box-shadow] duration-300 hover:border-gray-400 hover:shadow-[0_12px_34px_rgba(0,0,0,0.06)]"
+>
+  <div class="relative aspect-[4/3] overflow-hidden bg-white">
+    {product.imagen ? (
+      <img
+        src={cld(product.imagen, { width: 500 })}
+        alt={product.nombre}
+        class="absolute inset-0 h-full w-full object-contain p-5 transition-transform duration-500 group-hover:scale-[1.035]"
+        loading="lazy"
+        decoding="async"
+      />
+    ) : (
+      <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-gray-300">
+        <img src="/logo_t3r.png" alt="T3R" class="w-16 opacity-25 grayscale" />
+        <span class="text-[9px] uppercase tracking-[0.2em]">Foto próximamente</span>
+      </div>
+    )}
+  </div>
+
+  <div class="flex flex-1 flex-col border-t border-gray-100 p-5">
+    <p class="mb-2 text-[9px] uppercase tracking-[0.2em] text-gray-400">
+      {product.subcategoria ?? product.categoria}
+    </p>
+    <h3 class="line-clamp-2 break-words text-[15px] font-bold leading-snug transition-colors group-hover:text-[#6B8CAE]">
+      {product.nombre}
+    </h3>
+    {product.descripcion_corta && (
+      <p class="mt-3 line-clamp-2 text-xs leading-relaxed text-gray-500">
+        {product.descripcion_corta}
+      </p>
+    )}
+    <div class="mt-auto flex items-center justify-between gap-4 pt-5">
+      <span class="truncate text-[10px] text-gray-400">{product.sku}</span>
+      <span class="shrink-0 text-xs font-semibold">Ver →</span>
+    </div>
+  </div>
+</a>

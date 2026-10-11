@@ -1,0 +1,39 @@
+---
+import { cld } from '@lib/cloudinary/url';
+import type { ProductCardData } from '@app-types/product';
+
+interface Props {
+  product: ProductCardData;
+}
+
+const { product: r } = Astro.props;
+---
+
+<a href={`/catalogo/${r.sku}`} class="group flex flex-col border border-gray-200 bg-white transition-[border-color,box-shadow] duration-300 hover:border-gray-400 hover:shadow-[0_12px_34px_rgba(0,0,0,0.06)]">
+  <div class="relative overflow-hidden bg-white aspect-[4/3]">
+    {r.imagen ? (
+      <img
+        src={cld(r.imagen, { width: 400 })}
+        alt={r.nombre}
+        class="absolute inset-0 w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-[1.025]"
+        loading="lazy"
+      />
+    ) : (
+      <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white text-gray-300">
+        <img src="/logo_t3r.png" alt="T3R" class="w-16 opacity-25 grayscale" loading="lazy" />
+        <span class="text-[9px] tracking-[0.2em] uppercase text-gray-300">Foto próximamente</span>
+      </div>
+    )}
+  </div>
+  <div class="flex flex-1 flex-col px-4 pt-4 pb-4">
+    <p class="mb-1 text-[9px] uppercase tracking-[0.22em] text-gray-400">{r.subcategoria}</p>
+    <h3 class="mb-2 line-clamp-2 break-words text-[13px] font-bold leading-snug transition-colors group-hover:text-[#6B8CAE]">{r.nombre}</h3>
+    {r.descripcion_corta && (
+      <p class="text-[11px] leading-relaxed text-gray-500 line-clamp-2 mb-3">{r.descripcion_corta}</p>
+    )}
+    <div class="mt-auto flex items-center justify-between border-t border-gray-100 pt-3">
+      <p class="text-[10px] text-gray-400 truncate">{r.sku}</p>
+      <span class="text-xs font-medium text-[#6B8CAE] group-hover:translate-x-0.5 transition-transform inline-block">→</span>
+    </div>
+  </div>
+</a>

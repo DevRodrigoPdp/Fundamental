@@ -1,0 +1,30 @@
+---
+import type { DiskVariant } from '@app-types/product';
+
+interface Props {
+  variants: DiskVariant[];
+  currentSku: string;
+}
+
+const { variants, currentSku } = Astro.props;
+---
+
+<div class="mb-8">
+  <p class="text-[11px] text-gray-400 tracking-[0.2em] uppercase mb-3">Medida disponible</p>
+  <div class="flex flex-wrap gap-2">
+    {variants.map((variant) => (
+      <a
+        href={`/catalogo/${variant.sku}`}
+        aria-current={variant.sku === currentSku ? 'page' : undefined}
+        class:list={[
+          'min-w-20 border px-4 py-3 text-center text-sm font-semibold transition-colors',
+          variant.sku === currentSku
+            ? 'border-black bg-black text-white'
+            : 'border-gray-200 bg-white text-black hover:border-black',
+        ]}
+      >
+        {variant.size} mm
+      </a>
+    ))}
+  </div>
+</div>

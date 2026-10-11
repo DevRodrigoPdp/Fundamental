@@ -1,0 +1,60 @@
+---
+import ProductSizeSelector from './ProductSizeSelector.astro';
+import ProductSpecs from './ProductSpecs.astro';
+import { ESTADOS_STOCK } from '@config/stockStates';
+import { formatPrice } from '@lib/utils/format';
+import { productRequestMailto, restockMailto } from '@lib/utils/mailto';
+import type { DiskVariant, Product } from '@app-types/product';
+
+interface Props {
+  product: Product;
+  diskVariants: DiskVariant[];
+}
+
+const { product, diskVariants } = Astro.props;
+const estadoStock = product.estado_stock ?? 'disponible';
+const estadoInfo = ESTADOS_STOCK[estadoStock];
+const especificaciones = product.especificaciones ?? {};
+const mailtoHref = productRequestMailto(product);
+---
+
+<div>
+  <p class="text-sm text-[#6B8CAE] tracking-[0.25em] uppercase mb-4">{product.subcategoria ?? product.categoria}</p>
+  <h1 class="line-clamp-3 break-words text-[28px] md:text-[40px] font-bold leading-tight mb-3">{product.nombre}</h1>
+  <p class="text-sm text-gray-400 mb-8">REF. {product.sku}</p>
+  <p class:list={['mb-4 text-sm font-semibold uppercase tracking-[0.12em]', estadoInfo.color]}>
+    {estadoInfo.label}
+  </p>
+  {estadoStock === 'agotado' && (
+    <a
+      href={restockMailto(product)}
+      class="mb-8 inline-flex items-center gap-1 text-sm font-medium text-[#6B8CAE] underline hover:text-[#4a6a8a] transition-colors"
+    >
+      Avísame cuando haya stock
+    </a>
+  )}
+
+  {diskVariants.length > 0 && <ProductSizeSelector variants={diskVariants} currentSku={product.sku} />}
+
+  <div class="flex items-center gap-4 mb-8">
+    {product.precio ? (
+      <span class="text-xl font-semibold">{formatPrice(product.precio)}</span>
+    ) : (
+      <a href={mailtoHref} class="text-gray-500 text-sm underline hover:text-[#6B8CAE] transition-colors cursor-pointer">Consultar precio</a>
+    )}
+  </div>
+
+  {product.descripcion && (
+    <p class="text-gray-600 text-lg leading-relaxed mb-10 max-w-lg">{product.descripcion}</p>
+  )}
+
+  {Object.keys(especificaciones).length > 0 && <ProductSpecs specs={especificaciones} />}
+
+  <a
+    href={mailtoHref}
+    class="inline-flex items-center justify-center gap-3 bg-black text-white text-sm font-medium px-10 py-4 hover:bg-[#222] transition-colors w-full cursor-pointer"
+  >
+    Solicitar este producto
+    <span>→</span>
+  </a>
+</div>

@@ -1,0 +1,35 @@
+---
+import { cld } from '@lib/cloudinary/url';
+import type { CatalogFamily } from '@app-types/catalog';
+
+interface Props {
+  family: CatalogFamily;
+}
+
+const { family } = Astro.props;
+---
+
+<aside class="lg:sticky lg:top-28">
+  <div class="mb-6 flex items-center gap-3">
+    <span class="h-px w-7 bg-[#C4A072]"></span>
+    <p class="text-[10px] uppercase tracking-[0.32em] text-[#C4A072]">{family.tag}</p>
+  </div>
+
+  <h1 class="text-[38px] font-bold leading-[0.95] tracking-tight md:text-[52px]">{family.cat}</h1>
+  <p class="mt-7 text-base leading-relaxed text-gray-600">{family.description}</p>
+
+  <ul class="mt-8 space-y-4 border-t border-gray-200 pt-7">
+    {family.details.map((detail) => (
+      <li class="flex gap-3 text-sm leading-relaxed text-gray-600">
+        <span class="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[#C4A072]"></span>
+        <span>{detail}</span>
+      </li>
+    ))}
+  </ul>
+
+  <img
+    src={cld(family.img, { width: 400 })}
+    alt=""
+    class="mx-auto mt-8 h-44 w-44 object-contain"
+  />
+</aside>

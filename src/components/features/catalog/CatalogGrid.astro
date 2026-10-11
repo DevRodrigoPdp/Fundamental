@@ -1,0 +1,32 @@
+---
+import CatalogFilters from './CatalogFilters.astro';
+import CatalogProductCard from './CatalogProductCard.astro';
+import type { CatalogItem } from '@app-types/product';
+
+interface Props {
+  products: CatalogItem[];
+}
+
+const { products } = Astro.props;
+---
+
+<section class="px-5 md:px-16 pb-32">
+  {products.length > 0 ? (
+    <>
+      <div class="grid items-start gap-8 lg:grid-cols-[260px_minmax(0,1fr)] xl:grid-cols-[290px_minmax(0,1fr)]">
+        <CatalogFilters />
+
+        <div id="product-grid" class="grid grid-cols-2 xl:grid-cols-3 gap-3 bg-white">
+        {products.map((product, index) => (
+          <CatalogProductCard product={product} index={index} />
+        ))}
+        </div>
+      </div>
+      <p id="empty-state" class="hidden text-center text-gray-400 text-base py-20">
+        No hay referencias que coincidan con tu búsqueda.
+      </p>
+    </>
+  ) : (
+    <p class="text-gray-400 text-base">Catálogo en preparación — vuelve pronto.</p>
+  )}
+</section>

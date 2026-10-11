@@ -1,15 +1,6 @@
-export type CatalogFamily = {
-  slug: string;
-  cat: string;
-  tag: string;
-  text: string;
-  description: string;
-  details: string[];
-  img: string;
-  skuPrefixes: string[];
-  subcategories?: string[];
-};
+import type { CatalogFamily } from '@app-types/catalog';
 
+// Familias de producto T3R: tarjetas en /t3r y páginas /catalogo/familia/[slug].
 export const catalogFamilies: CatalogFamily[] = [
   {
     slug: 'discos-de-freno',
@@ -114,8 +105,3 @@ export const catalogFamilies: CatalogFamily[] = [
     subcategories: ['Kits de purga'],
   },
 ];
-
-export function productBelongsToFamily(product: any, family: CatalogFamily) {
-  if (family.skuPrefixes.some((prefix) => product.sku?.startsWith(prefix))) return true;
-  return family.subcategories?.includes(product.subcategoria) ?? false;
-}

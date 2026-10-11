@@ -1,0 +1,39 @@
+---
+import { cld } from '@lib/cloudinary/url';
+
+interface Props {
+  images: string[];
+  alt: string;
+}
+
+const { images, alt } = Astro.props;
+---
+
+<div>
+  <div class="relative overflow-hidden bg-[#f5f5f5] mb-4" style="aspect-ratio: 1;">
+    {images[0] ? (
+      <img id="main-image" src={cld(images[0], { width: 1200 })} alt={alt} class="absolute inset-0 w-full h-full object-contain bg-white p-6 md:p-10" />
+    ) : (
+      <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-white text-gray-300">
+        <img src="/logo_t3r.png" alt="T3R" class="w-32 md:w-40 opacity-25 grayscale" />
+        <p class="text-xs text-gray-300 tracking-[0.25em] uppercase">Foto proximamente</p>
+      </div>
+    )}
+  </div>
+  {images.length > 1 && (
+    <div class="flex gap-3">
+      {images.map((img, i) => (
+        <button
+          type="button"
+          data-thumb={cld(img, { width: 1200 })}
+          class="thumb-btn relative overflow-hidden bg-[#f5f5f5] border border-gray-200 hover:border-black transition-colors cursor-pointer"
+          style="width: 76px; height: 76px;"
+        >
+          <img src={cld(img, { width: 200 })} alt={`${alt} ${i + 1}`} class="absolute inset-0 w-full h-full object-contain bg-white p-2" />
+        </button>
+      ))}
+    </div>
+  )}
+</div>
+
+<script>import '@scripts/product/gallery';</script>
