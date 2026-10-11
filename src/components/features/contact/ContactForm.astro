@@ -1,0 +1,42 @@
+---
+import { SITE } from '@config/site';
+---
+
+<form id="contact-form" data-contact-email={SITE.email} class="md:col-span-2 flex flex-col gap-6 order-2 md:order-1" data-reveal>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div class="flex flex-col gap-2">
+      <label for="nombre" class="text-sm font-medium">Nombre</label>
+      <input id="nombre" name="nombre" type="text" required
+        class="border border-gray-300 px-4 py-3.5 text-base outline-none focus:border-black transition-colors" />
+    </div>
+    <div class="flex flex-col gap-2">
+      <label for="email" class="text-sm font-medium">Tu email</label>
+      <input id="email" name="email" type="email" required
+        class="border border-gray-300 px-4 py-3.5 text-base outline-none focus:border-black transition-colors" />
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <label for="motivo" class="text-sm font-medium">Motivo</label>
+    <select id="motivo" name="motivo" required
+      class="border border-gray-300 px-4 py-3 text-base outline-none focus:border-black transition-colors bg-white">
+      <option value="Consulta general">Consulta general</option>
+      <option value="Hacer un pedido">Hacer un pedido</option>
+      <option value="Disponibilidad de producto">Disponibilidad de producto</option>
+      <option value="Ser punto de venta">Ser punto de venta</option>
+      <option value="Otro">Otro</option>
+    </select>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <label for="mensaje" class="text-sm font-medium">Mensaje</label>
+    <textarea id="mensaje" name="mensaje" rows="6" required
+      class="border border-gray-300 px-4 py-3 text-base outline-none focus:border-black transition-colors resize-none"
+      placeholder="Cuéntanos qué necesitas, referencias concretas si las tienes, cantidad, etc."></textarea>
+  </div>
+
+  <button type="submit"
+    class="w-full bg-black px-8 py-4 text-base font-medium text-white transition-colors hover:bg-[#222] cursor-pointer sm:w-fit">
+    Enviar mensaje
+  </button>
+</form>

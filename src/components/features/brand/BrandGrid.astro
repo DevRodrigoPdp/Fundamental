@@ -1,0 +1,43 @@
+---
+import { brands } from '@config/brands';
+---
+
+<section class="px-5 md:px-16 pb-20 md:pb-36">
+  <div class="grid grid-cols-1 md:grid-cols-3 border-t border-gray-200">
+    {brands.map((brand, i) => (
+      <div
+        data-reveal
+        data-delay={String(i + 1)}
+        class={`group pt-10 md:pt-14 pb-12 md:pb-20 flex flex-col gap-7 transition-colors duration-300 hover:bg-[#F8F7F5] border-b md:border-b-0 border-gray-200 ${i < brands.length - 1 ? 'md:border-r' : ''} px-2 md:px-10`}
+      >
+        <a
+          href={brand.href}
+          aria-label={'Ir a la página de ' + brand.name}
+          class="flex w-full justify-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6B8CAE]"
+        >
+          {brand.logo ? (
+            <img
+              src={brand.logo}
+              alt={brand.name}
+              loading="lazy"
+              decoding="async"
+              class="h-32 w-auto object-contain transition-transform duration-500 group-hover:scale-[1.03] md:h-60"
+            />
+          ) : (
+            <h2 class="text-[48px] font-bold leading-none">{brand.name}</h2>
+          )}
+        </a>
+        <p class="text-lg text-[#6B8CAE] leading-relaxed max-w-[280px]">
+          {brand.description}
+        </p>
+        <a
+          href={brand.href}
+          class="text-base font-medium mt-auto inline-flex items-center gap-1"
+        >
+          {brand.cta}
+          <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+        </a>
+      </div>
+    ))}
+  </div>
+</section>

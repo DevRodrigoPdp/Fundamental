@@ -1,0 +1,33 @@
+---
+import { ExternalLink } from 'lucide-astro';
+import { mapsEmbedUrl, mapsSearchUrl, storeMapQuery } from '@lib/utils/maps';
+import type { StoreLocation } from '@app-types/store';
+
+interface Props {
+  store: StoreLocation;
+}
+
+const { store } = Astro.props;
+const mapQuery = storeMapQuery(store);
+---
+
+<aside class="sticky top-28 hidden overflow-hidden border border-white/10 bg-[#111] lg:block">
+  <div class="flex items-center justify-between border-b border-white/10 px-5 py-4">
+    <div>
+      <p class="mb-1 text-[10px] uppercase tracking-[0.28em] text-[#C4A072]">Ubicación seleccionada</p>
+      <p id="store-map-name" class="text-sm font-semibold">{store.nombre}</p>
+    </div>
+    <a id="store-map-external" href={mapsSearchUrl(mapQuery)} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-xs text-white/45 hover:text-[#C4A072]">
+      Abrir Maps <ExternalLink size={14} aria-hidden="true" />
+    </a>
+  </div>
+  <iframe
+    id="store-map-frame"
+    title={'Mapa de ' + store.nombre}
+    src={mapsEmbedUrl(mapQuery)}
+    class="h-[600px] w-full border-0"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    allowfullscreen
+  ></iframe>
+</aside>

@@ -1,4 +1,7 @@
-export const puntosVentaT3R = [
+import type { StoreLocation } from '@app-types/store';
+
+// Tiendas físicas con productos T3R.
+export const puntosVentaT3R: StoreLocation[] = [
   { nombre: 'The Bike Village SL', direccion: 'Cl Corts 5', poblacion: 'Cabrera de Mar', cp: '08349', tel: '936387251', mail: 'compras@thebikevillage.com' },
   { nombre: 'Terrabike Terrassa, SL', direccion: 'Cl Urquinaona, 78', poblacion: 'Terrassa', cp: '08222', tel: '937838007 / 606829698', mail: 'ventas@terra-bike.com' },
   { nombre: 'Ravet Bike SL', direccion: 'Cl Joanot Martorell, 272', poblacion: 'Granollers', cp: '08403', tel: '935106108', mail: 'info@ravetbike.com' },

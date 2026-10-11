@@ -1,0 +1,32 @@
+---
+import { cld } from '@lib/cloudinary/url';
+import { kanayaGeometry } from '@config/transfer';
+---
+
+<section class="bg-[#080808] px-5 md:px-16 py-24 border-t border-white/5">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="mb-12">
+      <p data-reveal class="text-xs text-white/40 tracking-[0.35em] uppercase mb-3">Especificaciones</p>
+      <h2 data-reveal data-delay="1" class="text-4xl font-bold text-white">Geometría</h2>
+    </div>
+
+    <!-- Diagrama -->
+    <div data-reveal class="bg-white rounded-sm overflow-hidden mb-10">
+      <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166709/catalogo_transferbike/cuadro_bicicleta_kanaya.jpg', { width: 1000 })} alt="Geometría Transfer Kanaya"
+        loading="lazy" decoding="async"
+        class="w-full h-auto" />
+    </div>
+
+    <!-- Tabla de medidas -->
+    <div data-reveal data-delay="1" class="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10">
+      {kanayaGeometry.map((spec) => (
+        <div class="bg-[#0f0f0f] px-6 py-5">
+          <p class="text-xs text-white/40 uppercase tracking-widest mb-2">{spec.label}</p>
+          <p class="text-white font-semibold text-xl">{spec.value}</p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

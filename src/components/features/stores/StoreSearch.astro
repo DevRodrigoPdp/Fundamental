@@ -1,0 +1,23 @@
+---
+import { Search } from 'lucide-astro';
+---
+
+<div class="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+  <div>
+    <p class="mb-2 text-xs uppercase tracking-[0.3em] text-[#C4A072]">T3R Bike Components</p>
+    <h2 class="text-2xl font-bold md:text-3xl">Encuentra tu tienda más cercana</h2>
+  </div>
+  <label class="flex w-full max-w-md items-center gap-3 border-b border-white/15 pb-3 transition-colors focus-within:border-[#C4A072]">
+    <Search size={18} stroke-width={1.6} class="shrink-0 text-[#C4A072]" aria-hidden="true" />
+    <span class="sr-only">Buscar tienda por código postal</span>
+    <input
+      id="store-postcode-search"
+      type="search"
+      inputmode="numeric"
+      maxlength="5"
+      autocomplete="postal-code"
+      placeholder="Buscar por código postal"
+      class="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/30"
+    />
+  </label>
+</div>

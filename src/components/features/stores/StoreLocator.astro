@@ -1,0 +1,23 @@
+---
+import StoreSearch from './StoreSearch.astro';
+import StoreCard from './StoreCard.astro';
+import StoreMap from './StoreMap.astro';
+import { puntosVentaT3R } from '@config/storeLocations';
+---
+
+<section id="stores-t3r" data-brand-panel="t3r">
+  <StoreSearch />
+
+  <div class="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(480px,1.1fr)] lg:items-start">
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
+      {puntosVentaT3R.map((store, index) => <StoreCard store={store} selected={index === 0} />)}
+      <p id="store-search-message" class="hidden border border-white/10 p-6 text-sm text-white/45">
+        No encontramos una tienda en esa zona postal.
+      </p>
+    </div>
+
+    <StoreMap store={puntosVentaT3R[0]} />
+  </div>
+</section>
+
+<script>import '@scripts/stores/storeLocator';</script>

@@ -1,0 +1,70 @@
+<section class="nosotros-hero">
+  <div class="nosotros-hero__inner mx-auto flex max-w-6xl items-end px-5 pb-16 md:px-8 md:pb-24">
+    <div class="relative z-10 max-w-3xl">
+      <p class="mb-6 text-[10px] font-bold uppercase tracking-[0.36em] text-white/70">Nosotros</p>
+      <h1 class="text-[44px] font-black leading-[0.9] tracking-[-0.065em] md:text-[80px]">
+        Creemos en lo que montamos.
+      </h1>
+    </div>
+  </div>
+</section>
+
+<style>
+  .nosotros-hero {
+    position: relative;
+    margin-top: 76px;
+    min-height: calc(100svh - 76px);
+    overflow: hidden;
+    color: white;
+    background-image: url('/nosotros-hero.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    isolation: isolate;
+  }
+
+  .nosotros-hero::before,
+  .nosotros-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .nosotros-hero::before {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.84), rgba(0, 0, 0, 0.36) 52%, rgba(0, 0, 0, 0.08));
+  }
+
+  .nosotros-hero::after {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.24) 45%, rgba(0, 0, 0, 0.82));
+  }
+
+  .nosotros-hero__inner {
+    position: relative;
+    min-height: calc(100svh - 76px);
+  }
+
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .nosotros-hero {
+      margin-top: 84px;
+      min-height: calc(100svh - 84px);
+    }
+
+    .nosotros-hero__inner {
+      min-height: calc(100svh - 84px);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .nosotros-hero {
+      margin-top: 72px;
+      min-height: calc(100svh - 72px);
+    }
+
+    .nosotros-hero__inner {
+      min-height: calc(100svh - 72px);
+    }
+  }
+
+</style>

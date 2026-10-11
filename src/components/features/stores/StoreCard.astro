@@ -1,0 +1,44 @@
+---
+import { MapPin, ExternalLink } from 'lucide-astro';
+import { mapsSearchUrl, storeMapQuery, telHref } from '@lib/utils/maps';
+import type { StoreLocation } from '@app-types/store';
+
+interface Props {
+  store: StoreLocation;
+  // La primera tienda aparece seleccionada en el mapa
+  selected?: boolean;
+}
+
+const { store, selected = false } = Astro.props;
+const mapQuery = storeMapQuery(store);
+---
+
+<article
+  data-store-card
+  data-store-postcode={store.cp}
+  class:list={[
+    'border bg-[#0d0c0a] p-6 transition-colors',
+    selected ? 'border-[#C4A072]/45 bg-[#C4A072]/[0.045]' : 'border-white/10',
+  ]}
+>
+  <h3 class="mb-3 text-base font-semibold">{store.nombre}</h3>
+  <a
+    href={mapsSearchUrl(mapQuery)}
+    target="_blank"
+    rel="noopener noreferrer"
+    data-map-query={mapQuery}
+    data-map-name={store.nombre}
+    class="group mb-4 flex items-start gap-3 text-sm leading-relaxed text-white/50 transition-colors hover:text-[#C4A072]"
+  >
+    <MapPin size={17} stroke-width={1.6} class="mt-0.5 shrink-0 text-[#C4A072]" aria-hidden="true" />
+    <span>
+      <span class="block">{store.direccion}</span>
+      <span class="block">{store.poblacion} · {store.cp}</span>
+    </span>
+    <ExternalLink size={13} class="ml-auto mt-1 shrink-0" aria-hidden="true" />
+  </a>
+  <div class="flex flex-wrap gap-x-5 gap-y-2 text-xs">
+    {store.tel && <a href={telHref(store.tel)} class="text-white/40 hover:text-[#C4A072]">{store.tel}</a>}
+    <a href={`mailto:${store.mail}`} class="break-all text-white/40 hover:text-[#C4A072]">{store.mail}</a>
+  </div>
+</article>

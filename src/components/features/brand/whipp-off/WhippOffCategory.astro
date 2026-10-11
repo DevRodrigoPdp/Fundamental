@@ -1,0 +1,33 @@
+---
+import { cld } from '@lib/cloudinary/url';
+import { WHIPP_OFF_URL, type WhippOffCategory } from '@config/whippOff';
+
+interface Props {
+  category: WhippOffCategory;
+  // La última categoría no lleva margen inferior
+  last?: boolean;
+}
+
+const { category, last = false } = Astro.props;
+---
+
+<section class={last ? undefined : 'mb-16'} data-reveal aria-labelledby={category.id}>
+  <div class="flex items-center gap-4 mb-6">
+    <span class="font-epilogue text-[10px] text-white/40 tracking-[0.4em] uppercase">{category.number}</span>
+    <h3 id={category.id} class="font-epilogue text-sm font-semibold text-white tracking-[0.15em] uppercase">{category.title}</h3>
+    <div class="flex-1 h-px bg-white/10"></div>
+    <span class="font-epilogue text-[10px] text-white/30">{category.items.length} refs.</span>
+  </div>
+  <div class={category.gridClass}>
+    {category.items.map((item) => (
+      <a href={WHIPP_OFF_URL} target="_blank" rel="noopener noreferrer"
+        class="group relative bg-[#111] aspect-[3/4] overflow-hidden cursor-pointer block">
+        <img src={cld(item.src, { width: 500 })} alt={item.label} loading="lazy" decoding="async"
+          class={`absolute inset-0 w-full h-full object-contain p-6 transition-transform duration-500 ${category.hoverScale}`} />
+        <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black to-transparent">
+          <p class="font-epilogue text-white text-xs font-medium">{item.label}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

@@ -1,119 +1,16 @@
 ---
 import Layout from '@layouts/BaseLayout.astro';
 import Nav from '@components/layout/Nav/Nav.astro';
+import CompactFooter from '@components/layout/Footer/CompactFooter.astro';
+import ContactHero from '@components/features/contact/ContactHero.astro';
+import ContactSection from '@components/features/contact/ContactSection.astro';
 import '@styles/global.css';
-import { SITE } from '@config/site';
-
-const CONTACT_EMAIL = 'info@fundamentalbikeparts.com';
+import { PAGE_SEO } from '@config/seo';
 ---
 
-<Layout
-  title="Contacto | Fundamental Bike Parts"
-  description="Contacta con Fundamental Bike Parts para consultar productos, disponibilidad, pedidos o convertirte en punto de venta."
-  structuredData={{
-    '@context': 'https://schema.org',
-    '@type': 'ContactPage',
-    name: 'Contacto Fundamental Bike Parts',
-    url: `${SITE.url}/contacto`,
-    mainEntity: { '@id': `${SITE.url}/#organization` },
-  }}
->
-
+<Layout {...PAGE_SEO.contact}>
   <Nav active="contacto" />
-
-  <!-- HERO TEXTO -->
-  <section class="px-5 md:px-16 pt-32 md:pt-36 pb-16 md:pb-20">
-    <p data-reveal class="text-sm text-[#6B8CAE] tracking-[0.3em] uppercase mb-6">
-      Fundamental · Atención al cliente
-    </p>
-    <h1 data-reveal data-delay="1" class="text-[40px] md:text-[64px] font-bold leading-tight mb-8">
-      ¿Hablamos?
-    </h1>
-    <p data-reveal data-delay="2" class="text-lg text-[#6B8CAE] max-w-lg leading-relaxed">
-      Para cualquier pregunta sobre nuestras marcas o para hacer un pedido, escríbenos. Te respondemos lo antes posible.
-    </p>
-  </section>
-
-  <!-- FORMULARIO + INFO -->
-  <section class="px-5 md:px-16 pb-32">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16 pt-4">
-
-      <!-- Formulario -->
-      <form id="contact-form" data-contact-email={CONTACT_EMAIL} class="md:col-span-2 flex flex-col gap-6 order-2 md:order-1" data-reveal>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div class="flex flex-col gap-2">
-            <label for="nombre" class="text-sm font-medium">Nombre</label>
-            <input id="nombre" name="nombre" type="text" required
-              class="border border-gray-300 px-4 py-3.5 text-base outline-none focus:border-black transition-colors" />
-          </div>
-          <div class="flex flex-col gap-2">
-            <label for="email" class="text-sm font-medium">Tu email</label>
-            <input id="email" name="email" type="email" required
-              class="border border-gray-300 px-4 py-3.5 text-base outline-none focus:border-black transition-colors" />
-          </div>
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="motivo" class="text-sm font-medium">Motivo</label>
-          <select id="motivo" name="motivo" required
-            class="border border-gray-300 px-4 py-3 text-base outline-none focus:border-black transition-colors bg-white">
-            <option value="Consulta general">Consulta general</option>
-            <option value="Hacer un pedido">Hacer un pedido</option>
-            <option value="Disponibilidad de producto">Disponibilidad de producto</option>
-            <option value="Ser punto de venta">Ser punto de venta</option>
-            <option value="Otro">Otro</option>
-          </select>
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="mensaje" class="text-sm font-medium">Mensaje</label>
-          <textarea id="mensaje" name="mensaje" rows="6" required
-            class="border border-gray-300 px-4 py-3 text-base outline-none focus:border-black transition-colors resize-none"
-            placeholder="Cuéntanos qué necesitas, referencias concretas si las tienes, cantidad, etc."></textarea>
-        </div>
-
-        <button type="submit"
-          class="w-full bg-black px-8 py-4 text-base font-medium text-white transition-colors hover:bg-[#222] cursor-pointer sm:w-fit">
-          Enviar mensaje
-        </button>
-      </form>
-
-      <!-- Info directa -->
-      <div class="flex flex-col gap-10 order-1 md:order-2" data-reveal data-delay="2">
-        <div>
-          <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-3">Email directo</p>
-          <a href={`mailto:${CONTACT_EMAIL}`} class="break-all text-base font-medium transition-colors hover:text-[#6B8CAE] sm:text-lg">
-            {CONTACT_EMAIL}
-          </a>
-        </div>
-        <div>
-          <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-3">Para pedidos</p>
-          <p class="text-base text-gray-600 leading-relaxed">
-            Indícanos la referencia (SKU) o categoría que necesitas y te confirmamos disponibilidad y plazo.
-          </p>
-        </div>
-        <div>
-          <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-3">Ubicación</p>
-          <p class="text-base text-gray-600 leading-relaxed">
-            Madrid, España
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="border-t border-gray-100 px-5 py-5 md:px-16 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-    <p class="text-sm font-semibold text-gray-700">Fundamental Bike Parts</p>
-    <div class="flex items-center gap-4 text-gray-400">
-      <a href="https://www.instagram.com/fundamental_bike_parts?igsh=OWtqdjN6MXdrcDdl" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Fundamental" class="transition-colors hover:text-[#6B8CAE]">
-        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".75" fill="currentColor" stroke="none"/></svg>
-      </a>
-      <p class="text-sm">© 2026 FUNDAMENTAL</p>
-    </div>
-  </footer>
-
-  <script>import '@scripts/contact/contactForm';</script>
-
+  <ContactHero />
+  <ContactSection />
+  <CompactFooter />
 </Layout>

@@ -1,0 +1,13 @@
+---
+import ContactForm from './ContactForm.astro';
+import ContactInfo from './ContactInfo.astro';
+---
+
+<section class="px-5 md:px-16 pb-32">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16 pt-4">
+    <ContactForm />
+    <ContactInfo />
+  </div>
+</section>
+
+<script>import '@scripts/contact/contactForm';</script>

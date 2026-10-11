@@ -1,0 +1,27 @@
+---
+import { brandTabs } from '@config/brandTabs';
+---
+
+<div class="mb-12 grid grid-cols-1 gap-px border border-white/10 bg-white/10 sm:grid-cols-3">
+  {brandTabs.map((brand) => (
+    <button
+      type="button"
+      data-brand-tab={brand.id}
+      data-available={String(brand.available)}
+      class:list={[
+        'flex min-h-28 items-center justify-center bg-[#111] px-6 py-7 transition-colors',
+        brand.available ? 'is-active bg-[#C4A072]/10' : 'hover:bg-white/[0.04]',
+      ]}
+      aria-pressed={brand.available ? 'true' : 'false'}
+    >
+      <img
+        src={brand.logo}
+        alt={brand.label}
+        class:list={[
+          'h-10 w-auto max-w-[180px] object-contain',
+          brand.id !== 't3r' && 'brightness-0 invert',
+        ]}
+      />
+    </button>
+  ))}
+</div>

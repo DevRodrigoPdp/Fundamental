@@ -1,0 +1,24 @@
+---
+import InstagramLink from '@components/ui/InstagramLink.astro';
+---
+
+<footer class="bg-black border-t border-white/5 px-5 md:px-16 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+  <div>
+    <p class="font-epilogue text-sm font-semibold text-white mb-1">Whipp-Off × Fundamental</p>
+    <p class="font-epilogue text-xs text-white/55 leading-relaxed">
+      Distribuido por Fundamental Bike Parts · Madrid, España
+    </p>
+  </div>
+  <a
+    href="https://www.whip-off.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="font-epilogue text-xs text-white/55 hover:text-white transition-colors tracking-[0.2em] uppercase cursor-pointer"
+  >
+    whip-off.com ↗
+  </a>
+  <div class="flex items-center gap-4 text-white/35">
+    <InstagramLink class="transition-colors hover:text-white" />
+    <p class="font-epilogue text-xs text-white/20">© 2026 FUNDAMENTAL</p>
+  </div>
+</footer>

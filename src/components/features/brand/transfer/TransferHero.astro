@@ -1,0 +1,24 @@
+---
+import { cld } from '@lib/cloudinary/url';
+import { TRANSFER_HERO_IMAGE } from '@config/transfer';
+---
+
+<section class="relative min-h-[100svh] bg-[#111] flex flex-col justify-end overflow-hidden">
+  <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${cld(TRANSFER_HERO_IMAGE, { width: 1920 })}');`}></div>
+  <div class="absolute inset-0" style="background: linear-gradient(to top, #0a0a0a 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);"></div>
+
+  <div class="relative z-20 px-5 md:px-16 pb-16">
+    <img src="/logo_transfer.png" alt="Transfer Bike" class="h-8 w-auto mb-8 brightness-0 invert opacity-90" />
+    <p class="text-xs text-white/50 tracking-[0.4em] uppercase mb-4 font-medium">Dirt Jump · Pump Track · Fundamental</p>
+    <h1 class="text-[40px] md:text-7xl font-bold leading-none text-white mb-6 tracking-tight">
+      Cuadros y bicis<br/>
+      <span class="text-white/50">hechos para volar.</span>
+    </h1>
+    <a href="#kanaya" class="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors tracking-[0.1em] uppercase">
+      Ver modelo Kanaya
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </a>
+  </div>
+</section>

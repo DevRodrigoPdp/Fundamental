@@ -1,0 +1,24 @@
+---
+import { SITE } from '@config/site';
+---
+
+<div class="flex flex-col gap-10 order-1 md:order-2" data-reveal data-delay="2">
+  <div>
+    <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-3">Email directo</p>
+    <a href={`mailto:${SITE.email}`} class="break-all text-base font-medium transition-colors hover:text-[#6B8CAE] sm:text-lg">
+      {SITE.email}
+    </a>
+  </div>
+  <div>
+    <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-3">Para pedidos</p>
+    <p class="text-base text-gray-600 leading-relaxed">
+      Indícanos la referencia (SKU) o categoría que necesitas y te confirmamos disponibilidad y plazo.
+    </p>
+  </div>
+  <div>
+    <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mb-3">Ubicación</p>
+    <p class="text-base text-gray-600 leading-relaxed">
+      Madrid, España
+    </p>
+  </div>
+</div>
