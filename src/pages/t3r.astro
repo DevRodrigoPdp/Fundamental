@@ -1,12 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
+import Layout from '@layouts/BaseLayout.astro';
+import Nav from '@components/layout/Nav/Nav.astro';
 import { Factory, Bike, ShieldCheck, Timer, MapPin, Truck, Clock, Mail } from 'lucide-astro';
-import '../styles/global.css';
-import { SITE } from '../config/site';
-import { catalogFamilies } from '../data/catalog-families';
-import { pilares } from '../data/pilares';
-import { cld } from '../lib/cloudinaryUrl';
+import '@styles/global.css';
+import { SITE } from '@config/site';
+import { catalogFamilies } from '@config/catalogFamilies';
+import { pilares } from '@config/t3rPillars';
+import { cld } from '@lib/cloudinary/url';
 
 const categorias = catalogFamilies;
 ---

@@ -1,5 +1,5 @@
 import { defineMiddleware } from 'astro:middleware';
-import { SESSION_COOKIE, isValidSessionCookie } from './lib/adminAuth';
+import { SESSION_COOKIE, isValidSessionCookie } from '@lib/admin/auth';
 
 const PUBLIC_ADMIN_PATHS = new Set(['/admin/login', '/api/admin/login']);
 

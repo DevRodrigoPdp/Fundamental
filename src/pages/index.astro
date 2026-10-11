@@ -1,10 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import '../styles/global.css';
-import { supabase } from '../lib/supabase';
-import { SITE } from '../config/site';
-import { cld } from '../lib/cloudinaryUrl';
+import Layout from '@layouts/BaseLayout.astro';
+import Nav from '@components/layout/Nav/Nav.astro';
+import '@styles/global.css';
+import { supabase } from '@lib/supabase/client';
+import { SITE } from '@config/site';
+import { cld } from '@lib/cloudinary/url';
 
 // Sitio estático (sin adapter/output:'server' en astro.config): esta query
 // corre una sola vez en build, no en cada visita. Mantenerla aquí (SSR/build-time)
@@ -373,6 +373,6 @@ const novedades = (products ?? []).map((p: any) => ({
     </div>
   </footer>
 
-  <script src="../scripts/home-carousel.ts"></script>
+  <script>import '@scripts/home/carousel';</script>
 
 </Layout>

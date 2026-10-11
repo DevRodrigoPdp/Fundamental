@@ -1,6 +1,6 @@
 ---
-import { cld } from '../lib/cloudinaryUrl';
-import { navLinks as links, type NavKey } from '../data/nav-links';
+import { cld } from '@lib/cloudinary/url';
+import { navLinks as links, type NavKey } from '@config/navigation';
 
 interface Props {
   active?: NavKey;
@@ -236,4 +236,4 @@ function isActive(href: string, key: NavKey) {
   }
 </style>
 
-<script src="../scripts/nav.ts"></script>
+<script>import '@scripts/layout/nav';</script>

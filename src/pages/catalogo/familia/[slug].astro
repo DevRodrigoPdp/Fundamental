@@ -1,16 +1,16 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import Nav from '../../../components/Nav.astro';
-import BackToTop from '../../../components/BackToTop.astro';
-import '../../../styles/global.css';
-import { supabase } from '../../../lib/supabase';
-import { SITE, absoluteUrl } from '../../../config/site';
-import { cld } from '../../../lib/cloudinaryUrl';
+import Layout from '@layouts/BaseLayout.astro';
+import Nav from '@components/layout/Nav/Nav.astro';
+import BackToTop from '@components/ui/BackToTop.astro';
+import '@styles/global.css';
+import { supabase } from '@lib/supabase/client';
+import { SITE, absoluteUrl } from '@config/site';
+import { cld } from '@lib/cloudinary/url';
 import {
   catalogFamilies,
   productBelongsToFamily,
   type CatalogFamily,
-} from '../../../data/catalog-families';
+} from '@config/catalogFamilies';
 
 type FamilyProduct = {
   nombre: string;

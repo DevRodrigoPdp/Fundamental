@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
-import { supabaseAdmin } from '../../../../../lib/supabaseAdmin';
-import { triggerPublish } from '../../../../../lib/publish';
+import { supabaseAdmin } from '@lib/supabase/admin';
+import { triggerPublish } from '@lib/admin/publish';
 
 export const prerender = false;
 

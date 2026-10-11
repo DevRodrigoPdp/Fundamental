@@ -1,5 +1,5 @@
 ---
-import '../../styles/global.css';
+import '@styles/global.css';
 
 export const prerender = false;
 
@@ -56,6 +56,6 @@ const error = Astro.url.searchParams.get('error') === '1';
       </a>
     </form>
 
-    <script src="../../scripts/admin/login.ts"></script>
+    <script>import '@scripts/admin/login';</script>
   </body>
 </html>

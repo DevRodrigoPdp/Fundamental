@@ -1,13 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import BackToTop from '../components/BackToTop.astro';
-import '../styles/global.css';
-import { supabase } from '../lib/supabase';
-import { SITE } from '../config/site';
-import { getCatalogFilters, DISK_FAMILIES } from '../data/product-taxonomy';
-import { ESTADOS_STOCK, type EstadoStock } from '../data/estado-stock';
-import { cld } from '../lib/cloudinaryUrl';
+import Layout from '@layouts/BaseLayout.astro';
+import Nav from '@components/layout/Nav/Nav.astro';
+import BackToTop from '@components/ui/BackToTop.astro';
+import '@styles/global.css';
+import { supabase } from '@lib/supabase/client';
+import { SITE } from '@config/site';
+import { getCatalogFilters, DISK_FAMILIES } from '@config/productTaxonomy';
+import { ESTADOS_STOCK, type EstadoStock } from '@config/stockStates';
+import { cld } from '@lib/cloudinary/url';
 
 const CONTACT_EMAIL = 'info@fundamentalbikeparts.com';
 
@@ -290,6 +290,6 @@ const FILTERS = getCatalogFilters();
     </div>
   </footer>
 
-  <script src="../scripts/catalogo.ts"></script>
+  <script>import '@scripts/catalog/catalog';</script>
 
 </Layout>

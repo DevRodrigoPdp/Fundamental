@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
-import { supabaseAdmin } from '../../../../../lib/supabaseAdmin';
-import { cloudinary } from '../../../../../lib/cloudinary';
-import { triggerPublish } from '../../../../../lib/publish';
+import { supabaseAdmin } from '@lib/supabase/admin';
+import { cloudinary } from '@lib/cloudinary/client';
+import { triggerPublish } from '@lib/admin/publish';
 
 export const prerender = false;
 

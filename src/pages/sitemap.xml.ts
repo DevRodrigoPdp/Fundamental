@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
-import { SITE } from '../config/site';
-import { supabase } from '../lib/supabase';
-import { catalogFamilies } from '../data/catalog-families';
+import { SITE } from '@config/site';
+import { supabase } from '@lib/supabase/client';
+import { catalogFamilies } from '@config/catalogFamilies';
 
 const staticPaths = [
   '/',

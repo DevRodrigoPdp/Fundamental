@@ -1,8 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import '../styles/global.css';
-import { SITE } from '../config/site';
+import Layout from '@layouts/BaseLayout.astro';
+import Nav from '@components/layout/Nav/Nav.astro';
+import '@styles/global.css';
+import { SITE } from '@config/site';
 
 const CONTACT_EMAIL = 'info@fundamentalbikeparts.com';
 ---
@@ -114,6 +114,6 @@ const CONTACT_EMAIL = 'info@fundamentalbikeparts.com';
     </div>
   </footer>
 
-  <script src="../scripts/contacto.ts"></script>
+  <script>import '@scripts/contact/contactForm';</script>
 
 </Layout>

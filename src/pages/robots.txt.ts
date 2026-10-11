@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { SITE } from '../config/site';
+import { SITE } from '@config/site';
 
 export const GET: APIRoute = () => {
   const body = [

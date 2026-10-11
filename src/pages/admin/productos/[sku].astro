@@ -1,11 +1,11 @@
 ---
 export const prerender = false;
 
-import '../../../styles/global.css';
-import { supabaseAdmin } from '../../../lib/supabaseAdmin';
-import { getSubcategoriasAgrupadas, SUBCATEGORIAS } from '../../../data/product-taxonomy';
-import { ESTADOS_STOCK } from '../../../data/estado-stock';
-import { cld, cldDownload } from '../../../lib/cloudinaryUrl';
+import '@styles/global.css';
+import { supabaseAdmin } from '@lib/supabase/admin';
+import { getSubcategoriasAgrupadas, SUBCATEGORIAS } from '@config/productTaxonomy';
+import { ESTADOS_STOCK } from '@config/stockStates';
+import { cld, cldDownload } from '@lib/cloudinary/url';
 import { ArrowLeft, ArrowUp, ArrowDown, Trash2, Plus, UploadCloud, Download } from 'lucide-astro';
 
 const { sku } = Astro.params;
@@ -221,6 +221,6 @@ const currentTaxonomyValue = matchedTaxonomy ? `${matchedTaxonomy.categoria}|${m
       </section>
     </main>
 
-    <script src="../../../scripts/admin/producto-editar.ts"></script>
+    <script>import '@scripts/admin/productEdit';</script>
   </body>
 </html>

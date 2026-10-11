@@ -1,9 +1,9 @@
 ---
 export const prerender = false;
 
-import '../../../styles/global.css';
-import { getSubcategoriasAgrupadas } from '../../../data/product-taxonomy';
-import { ESTADOS_STOCK } from '../../../data/estado-stock';
+import '@styles/global.css';
+import { getSubcategoriasAgrupadas } from '@config/productTaxonomy';
+import { ESTADOS_STOCK } from '@config/stockStates';
 import { ArrowLeft, Plus, X } from 'lucide-astro';
 
 const grupos = getSubcategoriasAgrupadas();
@@ -148,6 +148,6 @@ const grupos = getSubcategoriasAgrupadas();
       </div>
     </main>
 
-    <script src="../../../scripts/admin/producto-nuevo.ts"></script>
+    <script>import '@scripts/admin/productNew';</script>
   </body>
 </html>

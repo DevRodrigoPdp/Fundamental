@@ -1,10 +1,10 @@
 ---
 export const prerender = false;
 
-import '../../styles/global.css';
-import { supabaseAdmin } from '../../lib/supabaseAdmin';
-import { getAdminCatalogFilters } from '../../data/product-taxonomy';
-import { cld } from '../../lib/cloudinaryUrl';
+import '@styles/global.css';
+import { supabaseAdmin } from '@lib/supabase/admin';
+import { getAdminCatalogFilters } from '@config/productTaxonomy';
+import { cld } from '@lib/cloudinary/url';
 import { Plus, LogOut, Pencil, Trash2, Search, X } from 'lucide-astro';
 
 const { data: products } = await supabaseAdmin
@@ -203,6 +203,6 @@ const FILTERS = getAdminCatalogFilters();
       )}
     </main>
 
-    <script src="../../scripts/admin/dashboard.ts"></script>
+    <script>import '@scripts/admin/dashboard';</script>
   </body>
 </html>

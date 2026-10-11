@@ -1,5 +1,5 @@
 ---
-import { SITE, absoluteUrl } from '../config/site';
+import { SITE, absoluteUrl } from '@config/site';
 
 interface Props {
   title?: string;
@@ -102,6 +102,6 @@ const baseSchema = {
   <body class="antialiased text-[#111111]">
     <slot />
 
-    <script src="../scripts/reveal.ts"></script>
+    <script>import '@scripts/shared/reveal';</script>
   </body>
 </html>

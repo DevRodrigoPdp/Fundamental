@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
-import { supabaseAdmin } from '../../../../lib/supabaseAdmin';
-import { triggerPublish } from '../../../../lib/publish';
-import { findSkuPrefix } from '../../../../data/product-taxonomy';
+import { supabaseAdmin } from '@lib/supabase/admin';
+import { triggerPublish } from '@lib/admin/publish';
+import { findSkuPrefix } from '@config/productTaxonomy';
 
 async function generateSku(prefix: string): Promise<string> {
   const { data } = await supabaseAdmin.from('productos_t3r').select('sku').ilike('sku', `${prefix}-%`);

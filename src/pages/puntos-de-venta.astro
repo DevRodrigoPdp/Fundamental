@@ -1,11 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import BackToTop from '../components/BackToTop.astro';
+import Layout from '@layouts/BaseLayout.astro';
+import Nav from '@components/layout/Nav/Nav.astro';
+import BackToTop from '@components/ui/BackToTop.astro';
 import { MapPin, ExternalLink, Search } from 'lucide-astro';
-import { puntosVentaT3R } from '../data/puntos-venta';
-import { brandTabs } from '../data/brand-tabs';
-import '../styles/global.css';
+import { puntosVentaT3R } from '@config/storeLocations';
+import { brandTabs } from '@config/brandTabs';
+import '@styles/global.css';
 ---
 
 <Layout
@@ -144,5 +144,5 @@ import '../styles/global.css';
 
   <BackToTop />
 
-  <script src="../scripts/puntos-de-venta.ts"></script>
+  <script>import '@scripts/stores/storeLocator';</script>
 </Layout>
