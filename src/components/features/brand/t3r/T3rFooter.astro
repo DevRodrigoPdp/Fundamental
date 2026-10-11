@@ -1,0 +1,37 @@
+---
+import InstagramLink from '@components/ui/InstagramLink.astro';
+---
+
+<footer class="bg-[#1A100C] border-t border-white/5 px-5 md:px-16 pt-14 pb-10">
+  <div class="mx-auto max-w-7xl">
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-3 mb-12 pb-12 border-b border-white/10 text-center md:text-left">
+      <div>
+        <img src="/logo_blanco_t3r.png" alt="T3R" class="h-6 w-auto opacity-85 mx-auto md:mx-0 mb-4" />
+        <p class="text-sm font-semibold text-white mb-1">T3R · The Three Riders × Fundamental</p>
+        <p class="text-xs text-white/40 leading-relaxed">Distribuido por Fundamental Bike Parts · Madrid, España</p>
+      </div>
+      <div>
+        <p class="text-xs text-white/40 tracking-[0.25em] uppercase mb-4">Explorar</p>
+        <div class="flex flex-col gap-2">
+          <a href="/catalogo" class="text-sm text-white/55 hover:text-[#C4A072] transition-colors">Catálogo</a>
+          <a href="/nosotros" class="text-sm text-white/55 hover:text-[#C4A072] transition-colors">Nosotros</a>
+          <a href="/puntos-de-venta" class="text-sm text-white/55 hover:text-[#C4A072] transition-colors">Puntos de venta</a>
+        </div>
+      </div>
+      <div>
+        <p class="text-xs text-white/40 tracking-[0.25em] uppercase mb-4">Contacto</p>
+        <div class="flex flex-col gap-2">
+          <a href="/contacto" class="text-sm text-white/55 hover:text-[#C4A072] transition-colors">Contacto comercial</a>
+          <a href="mailto:info@fundamentalbikeparts.com" class="text-sm text-white/55 hover:text-[#C4A072] transition-colors">info@fundamentalbikeparts.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+      <p class="text-xs text-white/20">© 2026 FUNDAMENTAL</p>
+      <div class="flex items-center gap-4">
+        <InstagramLink class="text-white/45 transition-colors hover:text-[#C4A072]" />
+        <p class="text-xs text-white/20">Madrid · España</p>
+      </div>
+    </div>
+  </div>
+</footer>

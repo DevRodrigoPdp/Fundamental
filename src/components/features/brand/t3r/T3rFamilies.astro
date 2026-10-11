@@ -1,0 +1,74 @@
+---
+import { cld } from '@lib/cloudinary/url';
+import { catalogFamilies as categorias } from '@config/catalogFamilies';
+---
+
+<section id="categorias" class="order-[-20] relative overflow-hidden bg-white px-5 py-24 text-[#111111] md:px-16 md:py-28">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_75%_0%,rgba(196,160,114,0.16),transparent_34%)]"></div>
+  <div class="absolute inset-x-0 top-0 h-px bg-black/10"></div>
+  <div class="relative mx-auto max-w-[1500px]">
+    <div class="mb-14 grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-end" data-reveal>
+      <div>
+        <p class="mb-6 text-xs uppercase tracking-[0.35em] text-[#C4A072]">Gama T3R</p>
+        <h2 class="text-[36px] font-bold leading-[0.95] tracking-tight md:text-[64px]">
+          Componentes y recambios<br />
+          <span class="text-black/36">para bicicleta, probados por riders.</span>
+        </h2>
+      </div>
+      <p class="max-w-xl text-base leading-relaxed text-black/52 md:justify-self-end">
+        Seleccionamos buenos componentes y accesorios para ti, lo probamos y lo ofrecemos porque confiamos en ellos. Algunos de nuestros productos apenas se ven montados en la bici pero marcan la diferencia.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-4">
+      {categorias.map((item, i) => (
+        <a
+          href={`/catalogo/familia/${item.slug}`}
+          data-reveal
+          data-delay={String(i % 4)}
+          class="t3r-family-card group relative min-h-[180px] sm:min-h-[220px] md:min-h-[310px] overflow-hidden border border-black/10 bg-white transition-[border-color,box-shadow,background-color] duration-500 hover:border-[#C4A072]/55 hover:shadow-[0_24px_70px_rgba(17,17,17,0.10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C4A072]/60"
+        >
+          <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(196,160,114,0.14),transparent_42%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+
+          <div class="relative z-10 flex min-h-[inherit] flex-col justify-between p-4 md:p-6">
+            <div>
+              <div class="mb-5 flex items-center gap-3">
+                <span class="h-px w-7 bg-[#C4A072]"></span>
+                <p class="text-[10px] uppercase tracking-[0.32em] text-[#C4A072]">{item.tag}</p>
+              </div>
+              <h3
+                class:list={[
+                  'max-w-sm font-bold leading-[0.95] tracking-tight',
+                  'text-2xl md:text-[28px]',
+                ]}
+              >
+                {item.cat}
+              </h3>
+              <p class="mt-4 max-w-sm text-[13px] leading-relaxed text-black/52">
+                {item.text}
+              </p>
+            </div>
+
+            <div class="mt-7 flex items-end justify-between gap-2 lg:flex-col lg:items-end lg:justify-start lg:gap-3">
+              <span class="inline-flex shrink-0 items-center gap-2 whitespace-nowrap text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.1em] sm:tracking-[0.18em] text-black/56 transition-colors group-hover:text-[#C4A072] lg:self-start">
+                <span>Ver referencias</span>
+                <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </span>
+              <img
+                src={cld(item.img, { width: 300 })}
+                alt={item.cat}
+                class:list={[
+                  'object-contain transition-transform duration-700 group-hover:scale-105 group-hover:-rotate-2',
+                  item.slug !== 'transmision' && 'drop-shadow-[0_24px_34px_rgba(0,0,0,0.16)]',
+                  'h-12 w-12 shrink-0 self-end sm:h-16 sm:w-16 md:h-16 md:w-16 lg:h-20 lg:w-20 xl:h-28 xl:w-28 2xl:h-36 2xl:w-36',
+                ]}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

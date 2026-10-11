@@ -1,0 +1,72 @@
+<style is:global>
+  html { scroll-behavior: smooth; }
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  [data-reveal].visible { opacity: 1; transform: translateY(0); }
+  [data-delay="1"] { transition-delay: 0.08s; }
+  [data-delay="2"] { transition-delay: 0.16s; }
+
+  .paint-fill-button {
+    --paint-fill: white;
+    --paint-text: #1A100C;
+    --paint-border: white;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    transition: border-color 0.35s ease, color 0.35s ease;
+  }
+
+  .paint-fill-button--dark {
+    --paint-fill: #1A100C;
+    --paint-text: white;
+    --paint-border: #1A100C;
+  }
+
+  .paint-fill-button::before {
+    content: '';
+    position: absolute;
+    left: -18%;
+    top: 0;
+    z-index: 0;
+    width: 136%;
+    height: 135%;
+    background: var(--paint-fill);
+    border-radius: 0 0 48% 52%;
+    transform: translateY(-112%) rotate(-3deg);
+    transition: transform 0.58s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .paint-fill-button::after {
+    content: '';
+    position: absolute;
+    left: 12%;
+    top: 0;
+    z-index: 0;
+    width: 38%;
+    height: 60%;
+    background: var(--paint-fill);
+    border-radius: 999px;
+    opacity: 0.9;
+    transform: translateY(-140%) scale(0.92);
+    transition: transform 0.64s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .paint-fill-button:hover,
+  .paint-fill-button:focus-visible {
+    color: var(--paint-text);
+    border-color: var(--paint-border);
+  }
+
+  .paint-fill-button:hover::before,
+  .paint-fill-button:focus-visible::before {
+    transform: translateY(-5%) rotate(0deg);
+  }
+
+  .paint-fill-button:hover::after,
+  .paint-fill-button:focus-visible::after {
+    transform: translateY(35%) scale(1.1);
+  }
+</style>

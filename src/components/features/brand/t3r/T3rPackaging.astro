@@ -1,0 +1,26 @@
+---
+import { cld } from '@lib/cloudinary/url';
+---
+
+<section class="bg-white grid grid-cols-1 md:grid-cols-2">
+  <div class="relative overflow-hidden h-64 md:h-auto md:min-h-[480px]">
+    <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166518/catalogo_t3r/combos/combos_8.jpg', { width: 1200 })} alt="Packaging T3R"
+      class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent"></div>
+  </div>
+  <div class="flex flex-col justify-center px-5 md:px-16 py-12 md:py-20 text-[#111111]" data-reveal>
+    <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-6">La filosofía</p>
+    <h2 class="text-[32px] md:text-[46px] font-bold leading-tight tracking-tight mb-8">
+      El packaging no es<br/>el producto.
+    </h2>
+    <p class="text-black/55 text-lg leading-relaxed max-w-md mb-10">
+      Cartón. Sin logotipos a color, sin envases llamativos. Cada euro que no gastamos en envoltorio es un euro que va al componente y al precio final.
+    </p>
+    <div class="border border-[#C4A072]/40 bg-[#C4A072]/[0.05] p-8 max-w-sm">
+      <p class="text-[#C4A072] text-xs tracking-[0.3em] uppercase mb-4">Filosofía T3R</p>
+      <p class="text-[#1A100C] text-xl font-bold leading-tight">
+        "Minimizar el coste donde no afecta a la calidad."
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+---
+import { cld } from '@lib/cloudinary/url';
+---
+
+<section class="bg-[#1A100C] grid grid-cols-1 md:grid-cols-2">
+  <div class="relative overflow-hidden h-64 md:h-auto md:min-h-[560px]">
+    <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166515/catalogo_t3r/combos/combos_5.jpg', { width: 1200 })} alt="T3R origen de la marca"
+      class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
+    <div class="absolute inset-0 bg-gradient-to-t from-[#1A100C]/40 via-transparent to-transparent"></div>
+  </div>
+  <div class="flex flex-col justify-center px-5 md:px-16 py-12 md:py-20" data-reveal>
+    <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-6">El problema</p>
+    <h2 class="text-[32px] md:text-[46px] font-bold text-white leading-[0.95] tracking-tight mb-8">
+      Una marca joven.<br/>
+      <span class="text-[#C4A072]">Las ideas muy claras.</span>
+    </h2>
+    <p class="text-white/60 text-lg leading-relaxed max-w-md">
+      Los mercados de todo el mundo sufren la competencia de precio que impone la globalización. T3R nace para cambiar esa ecuación: una cadena más corta significa precios más honestos para la tienda y para el cliente final.
+    </p>
+  </div>
+</section>

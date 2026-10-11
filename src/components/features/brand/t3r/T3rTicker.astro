@@ -1,0 +1,15 @@
+---
+import { tickerItems } from '@config/t3r';
+---
+
+<div class="bg-[#C4A072] py-3.5 overflow-hidden marquee-wrap">
+  <div class="flex whitespace-nowrap marquee-track">
+    {Array(2).fill(null).map(() => (
+      <span class="flex items-center">
+        {tickerItems.map(t => (
+          <span class="font-bold text-[#1A100C] text-xs tracking-[0.25em] uppercase mx-8">{t} <span class="opacity-25 mx-2">·</span></span>
+        ))}
+      </span>
+    ))}
+  </div>
+</div>

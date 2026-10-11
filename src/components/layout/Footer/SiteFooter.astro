@@ -1,0 +1,41 @@
+---
+import InstagramLink from '@components/ui/InstagramLink.astro';
+
+const linkClass = 'text-sm text-white/55 hover:text-[#C4A072] transition-colors';
+---
+
+<footer class="bg-[#1A100C] px-5 md:px-12 pt-14 pb-10">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12 pb-12 border-b border-white/10">
+      <div>
+        <p class="text-base font-bold text-white mb-3">Fundamental</p>
+        <p class="text-sm text-white/55 leading-relaxed">
+          Distribuidora de componentes, bicicletas y ropa MTB. Madrid, España.
+        </p>
+      </div>
+      <div>
+        <p class="text-xs text-white/40 tracking-[0.25em] uppercase mb-4">Servicio al cliente</p>
+        <div class="flex flex-col gap-2">
+          <a href="/contacto" class={linkClass}>Contacto</a>
+          <a href="/contacto" class={linkClass}>Envíos y devoluciones</a>
+          <a href="/contacto" class={linkClass}>Garantía</a>
+        </div>
+      </div>
+      <div>
+        <p class="text-xs text-white/40 tracking-[0.25em] uppercase mb-4">Marcas</p>
+        <div class="flex flex-col gap-2">
+          <a href="/t3r" class={linkClass}>T3R</a>
+          <a href="/transfer" class={linkClass}>Transfer</a>
+          <a href="/whipp-off" class={linkClass}>Whipp-Off</a>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-2 text-center sm:text-left">
+      <p class="text-xs text-white/25">© 2026 Fundamental — Todos los derechos reservados</p>
+      <div class="flex items-center gap-4">
+        <InstagramLink class="text-white/45 transition-colors hover:text-[#C4A072]" />
+        <p class="text-xs text-white/25">Madrid · España</p>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,18 @@
+---
+import { cld } from '@lib/cloudinary/url';
+---
+
+<div class="relative overflow-hidden h-[360px] md:h-[480px]">
+  <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166551/catalogo_t3r/discos_freno/center_lock/discos_freno_center_lock_4.jpg', { width: 1920 })} alt="Disco de freno T3R"
+    class="absolute inset-0 w-full h-full object-cover" style="object-position: center 50%;"
+    loading="lazy" decoding="async" />
+  <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(26,16,12,0.9) 0%, rgba(26,16,12,0.5) 55%, rgba(26,16,12,0.1) 100%);"></div>
+  <div class="absolute inset-0 flex items-center px-5 md:px-16">
+    <div data-reveal class="max-w-lg">
+      <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-4">Fabricación contrastada</p>
+      <p class="text-white text-2xl md:text-3xl font-bold leading-snug">
+        Ningún producto entra al catálogo sin pasar por nuestras manos primero.
+      </p>
+    </div>
+  </div>
+</div>

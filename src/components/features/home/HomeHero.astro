@@ -1,0 +1,42 @@
+---
+import { cld } from '@lib/cloudinary/url';
+
+interface Props {
+  image: string;
+}
+
+const { image } = Astro.props;
+---
+
+<section class="relative min-h-[100svh] overflow-hidden bg-[#1A100C]">
+  <img
+    src={cld(image, { width: 1920 })}
+    alt="T3R componentes"
+    class="absolute inset-0 w-full h-full object-cover object-center"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+  />
+  <div class="absolute inset-0" style="background: linear-gradient(to top, #1A100C 0%, rgba(26,16,12,0.75) 40%, rgba(26,16,12,0.2) 100%);"></div>
+
+  <div class="absolute inset-0 flex flex-col justify-end px-5 pb-10 sm:pb-14 md:px-12 md:pb-16 z-10">
+    <div class="flex items-center gap-3 mb-5">
+      <div class="w-6 h-px bg-[#C4A072]"></div>
+      <p class="text-[10px] text-[#C4A072] tracking-[0.4em] uppercase">T3R · The Three Riders</p>
+    </div>
+    <h1 class="text-[36px] sm:text-[48px] md:text-[68px] font-bold leading-[0.98] md:leading-[0.95] tracking-tight mb-8">
+      <span class="block text-white">De la fábrica, a tus manos,</span>
+      <span class="block text-[#C4A072]">buena calidad, mejor precio.</span>
+    </h1>
+    <div class="flex flex-wrap items-center gap-3 md:gap-4">
+      <a href="#productos"
+        class="bg-[#C4A072] text-[#1A100C] text-xs font-bold px-6 md:px-9 py-3.5 md:py-4 hover:bg-[#D4B280] transition-colors tracking-[0.12em] uppercase cursor-pointer">
+        Ver productos
+      </a>
+      <a href="/t3r"
+        class="paint-fill-button border border-white/25 text-white/70 text-xs px-5 md:px-8 py-3.5 md:py-4 tracking-[0.1em] uppercase cursor-pointer">
+        <span class="relative z-10">Conocer T3R</span>
+      </a>
+    </div>
+  </div>
+</section>

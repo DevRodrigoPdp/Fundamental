@@ -1,0 +1,45 @@
+---
+import { MapPin, Truck, Clock, Mail } from 'lucide-astro';
+---
+
+<section class="relative overflow-hidden bg-[#1A100C] border-t border-white/5 px-5 md:px-16 py-24 md:py-28">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_85%_100%,rgba(196,160,114,0.08),transparent_36%)]"></div>
+  <div class="relative mx-auto grid max-w-6xl gap-16 md:grid-cols-2">
+    <div data-reveal>
+      <h2 class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-10">Cómo trabajamos</h2>
+      <div class="space-y-5 text-base md:text-lg text-white/55 leading-relaxed">
+        <p>
+          Seleccionamos cada producto, lo probamos nosotros mismos y solo entonces lo ofrecemos a las tiendas que confían en nosotros. Trabajamos directo con fábrica para acortar la cadena y ofrecer un precio honesto, tanto a la tienda como al cliente final.
+        </p>
+        <p>
+          Nos encargamos de la gestión completa: desde la disponibilidad de producto hasta el envío y el soporte técnico si surge alguna duda sobre piezas o compatibilidad.
+        </p>
+      </div>
+    </div>
+    <div data-reveal data-delay="1">
+      <h2 class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-10">Qué ofrecemos a una tienda</h2>
+      <dl class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div class="group border border-white/8 p-5 transition-colors duration-300 hover:border-[#C4A072]/40 hover:bg-white/[0.02]">
+          <MapPin size={20} stroke-width={1.5} class="mb-5 text-[#C4A072]" aria-hidden="true" />
+          <dt class="text-[11px] uppercase tracking-widest text-white/35 mb-1.5">Cobertura geográfica</dt>
+          <dd class="text-base font-medium text-white">Toda España</dd>
+        </div>
+        <div class="group border border-white/8 p-5 transition-colors duration-300 hover:border-[#C4A072]/40 hover:bg-white/[0.02]">
+          <Truck size={20} stroke-width={1.5} class="mb-5 text-[#C4A072]" aria-hidden="true" />
+          <dt class="text-[11px] uppercase tracking-widest text-white/35 mb-1.5">Servicio a tiendas</dt>
+          <dd class="text-base font-medium text-white">Envío directo a tienda y soporte técnico sobre piezas y compatibilidad</dd>
+        </div>
+        <div class="group border border-white/8 p-5 transition-colors duration-300 hover:border-[#C4A072]/40 hover:bg-white/[0.02]">
+          <Clock size={20} stroke-width={1.5} class="mb-5 text-[#C4A072]" aria-hidden="true" />
+          <dt class="text-[11px] uppercase tracking-widest text-white/35 mb-1.5">Plazos de entrega</dt>
+          <dd class="text-base font-medium text-white">Gestionados por Correos o mensajería privada, según destino</dd>
+        </div>
+        <div class="group border border-white/8 p-5 transition-colors duration-300 hover:border-[#C4A072]/40 hover:bg-white/[0.02]">
+          <Mail size={20} stroke-width={1.5} class="mb-5 text-[#C4A072]" aria-hidden="true" />
+          <dt class="text-[11px] uppercase tracking-widest text-white/35 mb-1.5">Contacto comercial</dt>
+          <dd class="text-base font-medium text-white break-words">info@fundamentalbikeparts.com</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>

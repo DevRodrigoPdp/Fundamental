@@ -1,0 +1,33 @@
+---
+import { cld } from '@lib/cloudinary/url';
+import { T3R_HERO_IMAGE } from '@config/seo';
+---
+
+<section class="relative min-h-[100svh] bg-[#1A100C] overflow-hidden">
+  <img src={cld(T3R_HERO_IMAGE, { width: 1920 })} alt="T3R productos y packaging"
+    class="absolute inset-0 w-full h-full object-cover" style="object-position: center 40%;"
+    loading="eager" fetchpriority="high" decoding="async" />
+  <div class="absolute inset-0" style="background: linear-gradient(to top, #1A100C 0%, rgba(26,16,12,0.75) 40%, rgba(26,16,12,0.2) 100%);"></div>
+
+  <div class="absolute inset-0 flex flex-col justify-end px-5 pb-10 sm:pb-14 md:px-16 md:pb-16 z-10">
+    <div class="flex items-center gap-4 mb-6">
+      <img src="/logo_blanco_t3r.png" alt="T3R" class="h-6 w-auto opacity-85" />
+      <div class="w-px h-4 bg-white/20"></div>
+      <p class="text-[10px] text-white/40 tracking-[0.35em] uppercase">The Three Riders</p>
+    </div>
+    <h1 class="text-[38px] sm:text-[50px] md:text-[80px] font-bold leading-[1.08] text-white tracking-tight mb-10">
+      Directo de fábrica.<br/>Mejor calidad.<br/>
+      <span class="text-[#C4A072]">Mejor precio.</span>
+    </h1>
+    <div class="flex items-start gap-6 max-w-sm mb-10">
+      <div class="w-6 h-px bg-[#C4A072]/50 mt-3 shrink-0"></div>
+      <p class="text-white/45 text-sm leading-relaxed">
+        Componentes probados por nosotros. Sin intermediarios,buena calidad a un precio justo.
+      </p>
+    </div>
+    <a href="/catalogo"
+      class="bg-[#C4A072] text-[#1A100C] text-sm font-bold px-9 py-4 hover:bg-[#D4B280] transition-colors tracking-[0.1em] uppercase w-fit cursor-pointer">
+      Ver catálogo
+    </a>
+  </div>
+</section>

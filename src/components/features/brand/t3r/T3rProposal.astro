@@ -1,0 +1,25 @@
+---
+import { cld } from '@lib/cloudinary/url';
+---
+
+<section class="bg-[#1A100C] grid grid-cols-1 md:grid-cols-2">
+  <div class="flex flex-col justify-center px-5 md:px-16 py-12 md:py-20 order-2" data-reveal>
+    <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-6">La propuesta</p>
+    <h2 class="text-[32px] md:text-[46px] font-bold text-white leading-[0.95] tracking-tight mb-8">
+      Probado por nosotros<br/>antes que por nadie.
+    </h2>
+    <div class="space-y-5 max-w-md">
+      <p class="text-white/60 text-lg leading-relaxed">
+        Cada referencia ha pasado por nuestras manos antes de llegar aquí.Probamos el producto, aprobamos el producto, nada entra en el catalogo sino pasa el filtro.
+      </p>
+      <p class="text-white/60 text-lg leading-relaxed">
+        Fabricado en las mismas plantas que marcas de prestigio internacional, pensado para durar desde el ciclista amateur hasta el más experimentado.
+      </p>
+    </div>
+  </div>
+  <div class="relative overflow-hidden order-1 h-64 md:h-auto md:min-h-[560px]">
+    <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166517/catalogo_t3r/combos/combos_7.jpg', { width: 1200 })} alt="T3R probado por riders"
+      class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
+    <div class="absolute inset-0 bg-gradient-to-t from-[#1A100C]/40 via-transparent to-transparent"></div>
+  </div>
+</section>
