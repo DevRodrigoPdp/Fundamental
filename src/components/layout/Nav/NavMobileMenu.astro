@@ -1,0 +1,79 @@
+---
+import { SITE } from '@config/site';
+import { navLinks as links, type NavKey } from '@config/navigation';
+import { isNavActive } from '@lib/utils/navigation';
+
+interface Props {
+  active?: NavKey;
+  currentPath: string;
+}
+
+const { active, currentPath } = Astro.props;
+const isActive = (href: string, key: NavKey) => isNavActive(href, key, active, currentPath);
+---
+
+<div
+  id="nav-mobile-menu"
+  class="pointer-events-none fixed inset-0 z-40 translate-y-[-10px] overflow-y-auto overscroll-contain bg-[#0b0908] px-5 pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-24 opacity-0 transition-[opacity,transform] duration-300 ease-out sm:px-7 sm:pt-28 lg:hidden"
+  aria-hidden="true"
+  inert
+>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(197,168,128,0.16),transparent_34%)]"></div>
+  <nav class="relative mx-auto flex max-w-md flex-col" aria-label="Navegación móvil">
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          data-menu-link
+          class:list={[
+            'nav-menu-link grid grid-cols-[1fr_auto] items-center border-b border-white/8 py-5 uppercase transition-colors',
+            link.flagship ? 'text-[#C5A880]' : 'text-white/68 hover:text-white',
+          ]}
+          aria-current={isActive(link.href, link.key) ? 'page' : undefined}
+        >
+          <span class="text-xl font-medium tracking-[-0.025em]">{link.label}</span>
+          <span class="text-base font-light opacity-35">↗</span>
+        </a>
+      ))
+    }
+  </nav>
+  <a
+    href={SITE.instagram}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="nav-menu-link relative mx-auto mt-7 flex max-w-md items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50 transition-colors hover:text-[#C5A880]"
+  >
+    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".75" fill="currentColor" stroke="none"/></svg>
+    Instagram <span aria-hidden="true">↗</span>
+  </a>
+  <p class="nav-menu-link relative mx-auto mt-10 max-w-md text-sm leading-relaxed text-white/38">
+    Distribución especializada de componentes, bicicletas y equipamiento.
+  </p>
+</div>
+
+<style>
+  .nav-menu-link {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.28s ease-out, transform 0.28s ease-out, color 0.2s;
+  }
+
+  #nav-mobile-menu.is-open .nav-menu-link {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #nav-mobile-menu.is-open .nav-menu-link:nth-child(1) { transition-delay: 0.04s; }
+  #nav-mobile-menu.is-open .nav-menu-link:nth-child(2) { transition-delay: 0.08s; }
+  #nav-mobile-menu.is-open .nav-menu-link:nth-child(3) { transition-delay: 0.12s; }
+  #nav-mobile-menu.is-open .nav-menu-link:nth-child(4) { transition-delay: 0.16s; }
+  #nav-mobile-menu.is-open .nav-menu-link:nth-child(5) { transition-delay: 0.2s; }
+  #nav-mobile-menu.is-open .nav-menu-link:nth-child(6) { transition-delay: 0.24s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #nav-mobile-menu,
+    .nav-menu-link {
+      transition: none !important;
+    }
+  }
+</style>

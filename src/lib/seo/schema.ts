@@ -3,6 +3,35 @@ import type { Product } from '@app-types/product';
 
 type Crumb = { name: string; item: string };
 
+// Organization presente en todas las páginas.
+export function organizationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE.url}/#organization`,
+    name: SITE.name,
+    url: SITE.url,
+    logo: absoluteUrl('/apple-touch-icon.png'),
+    email: SITE.email,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      email: SITE.email,
+      availableLanguage: ['Spanish'],
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Madrid',
+      addressCountry: 'ES',
+    },
+    brand: [
+      { '@type': 'Brand', name: 'T3R' },
+      { '@type': 'Brand', name: 'Whipp-Off' },
+      { '@type': 'Brand', name: 'Transfer' },
+    ],
+  };
+}
+
 export function breadcrumbSchema(crumbs: Crumb[]) {
   return {
     '@context': 'https://schema.org',

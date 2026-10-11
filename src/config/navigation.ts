@@ -1,12 +1,9 @@
-export type NavKey = 't3r' | 'catalogo' | 'marcas' | 'puntosVenta' | 'nosotros' | 'contacto';
+import type { NavKey, NavLink } from '@app-types/navigation';
 
-export const navLinks: Array<{
-  href: string;
-  label: string;
-  eyebrow: string;
-  key: NavKey;
-  flagship?: boolean;
-}> = [
+export type { NavKey };
+
+// Enlaces del menú principal (desktop y móvil).
+export const navLinks: NavLink[] = [
   { href: '/t3r', label: 'T3R Components', eyebrow: 'Marca principal', key: 't3r', flagship: true },
   { href: '/catalogo', label: 'Catálogo', eyebrow: 'Gama completa', key: 'catalogo' },
   { href: '/marcas', label: 'Marcas asociadas', eyebrow: 'T3R · Transfer · Whipp-Off', key: 'marcas' },

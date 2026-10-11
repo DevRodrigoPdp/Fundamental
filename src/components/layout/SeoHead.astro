@@ -1,0 +1,56 @@
+---
+import { SITE, absoluteUrl } from '@config/site';
+import { organizationSchema } from '@lib/seo/schema';
+import type { PageSeo } from '@app-types/seo';
+
+type Props = PageSeo;
+
+const {
+  title = SITE.name,
+  description = SITE.description,
+  heroImage,
+  image = heroImage ?? SITE.defaultImage,
+  type = 'website',
+  noindex = false,
+  canonicalPath = Astro.url.pathname,
+  structuredData = [],
+} = Astro.props;
+
+const canonicalUrl = absoluteUrl(canonicalPath);
+const socialImage = absoluteUrl(image);
+const schemas = Array.isArray(structuredData) ? structuredData : [structuredData];
+const baseSchema = organizationSchema();
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content={description} />
+<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+<meta name="theme-color" content="#0b0908" />
+<meta name="format-detection" content="telephone=no" />
+<link rel="canonical" href={canonicalUrl} />
+<link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+<link rel="alternate" hreflang="es" href={canonicalUrl} />
+<link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
+<title>{title}</title>
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:locale" content={SITE.locale} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={socialImage} />
+<meta property="og:image:alt" content={title} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImage} />
+{heroImage && <link rel="preload" as="image" href={heroImage} fetchpriority="high" />}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Epilogue:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@800;900&display=swap" rel="stylesheet" />
+<script type="application/ld+json" set:html={JSON.stringify(baseSchema)} />
+{schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
