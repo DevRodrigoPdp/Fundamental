@@ -35,6 +35,11 @@ export const PAGE_SEO = {
       url: `${SITE.url}/catalogo`,
     }),
   },
+  cart: {
+    title: 'Cesta | Fundamental Bike Parts',
+    description: 'Tu cesta de compra en Fundamental Bike Parts.',
+    noindex: true,
+  },
   brands: {
     title: 'Marcas de ciclismo | T3R, Whipp-Off y Transfer',
     description: 'Conoce las marcas distribuidas por Fundamental: componentes T3R, ropa MTB Whipp-Off y bicicletas y cuadros Transfer.',

@@ -1,6 +1,4 @@
-export function formatPrice(precio: number | string) {
-  return `${Number(precio).toFixed(2)} €`;
-}
+export const money = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' });
 
 export function formatSpecValue(v: unknown) {
   if (typeof v === 'boolean') return v ? 'Sí' : 'No';

@@ -2,6 +2,7 @@ import { DISK_FAMILIES } from '@config/productTaxonomy';
 import { getActiveProducts } from '@lib/supabase/products';
 import { getCoverImages } from '@lib/supabase/images';
 import { diskSize } from '@lib/utils/sku';
+import { maxPurchasable } from '@lib/services/availability';
 import type { CatalogItem } from '@app-types/product';
 import type { EstadoStock } from '@config/stockStates';
 
@@ -36,6 +37,7 @@ export async function getCatalog() {
   const covers = await getCoverImages(products.map((p) => p.sku));
 
   const items: CatalogItem[] = products.map((p) => ({
+    id: p.id,
     nombre: p.nombre,
     categoria: p.categoria,
     subcategoria: p.subcategoria,
@@ -43,6 +45,8 @@ export async function getCatalog() {
     sku: p.sku,
     imagen: covers[p.sku] ?? null,
     estadoStock: (p.estado_stock ?? 'disponible') as EstadoStock,
+    precio: Number(p.precio) || null,
+    maxQty: maxPurchasable(p),
   }));
 
   return groupDiskFamilies(items).sort((a, b) =>

@@ -1,6 +1,7 @@
 ---
 import { cld } from '@lib/cloudinary/url';
-import { productRequestMailto } from '@lib/utils/mailto';
+import CatalogCardAction from './CatalogCardAction.astro';
+import { money } from '@lib/utils/format';
 import { stockBadge } from '@lib/utils/stock';
 import type { CatalogItem } from '@app-types/product';
 
@@ -55,18 +56,16 @@ const badge = stockBadge(p.estadoStock);
     </div>
   </a>
   <div class="flex flex-1 flex-col px-5 pb-5">
-    <div class="mt-auto flex flex-col items-start gap-3 border-t border-gray-100 pt-4 xl:flex-row xl:items-center xl:justify-between">
-      <div class="min-w-0">
-        <p class="truncate text-[11px] text-gray-400">{p.refLabel ?? p.sku}</p>
-        <p class="text-[11px] text-gray-400">Consulta disponibilidad</p>
+    <div class="mt-auto border-t border-gray-100 pt-4">
+      <div class="mb-4 flex items-baseline justify-between gap-3">
+        <p class="min-w-0 truncate text-[11px] text-gray-400">{p.refLabel ?? p.sku}</p>
+        {p.maxQty > 0 && !p.refLabel ? (
+          <p class="shrink-0 text-base font-bold text-black">{money.format(p.precio as number)}</p>
+        ) : (
+          <p class="shrink-0 text-[11px] text-gray-400">{p.refLabel ? 'Varias medidas' : 'Consultar precio'}</p>
+        )}
       </div>
-      <a
-        href={productRequestMailto(p)}
-        class="inline-flex shrink-0 cursor-pointer items-center gap-1 text-xs font-medium"
-      >
-        Solicitar
-        <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
-      </a>
+      <CatalogCardAction product={p} />
     </div>
   </div>
 </div>

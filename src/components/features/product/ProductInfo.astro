@@ -1,8 +1,10 @@
 ---
 import ProductSizeSelector from './ProductSizeSelector.astro';
 import ProductSpecs from './ProductSpecs.astro';
+import ProductPurchase from './ProductPurchase.astro';
+import { maxPurchasable } from '@lib/services/availability';
 import { ESTADOS_STOCK } from '@config/stockStates';
-import { formatPrice } from '@lib/utils/format';
+import { money } from '@lib/utils/format';
 import { productRequestMailto, restockMailto } from '@lib/utils/mailto';
 import type { DiskVariant, Product } from '@app-types/product';
 
@@ -16,6 +18,8 @@ const estadoStock = product.estado_stock ?? 'disponible';
 const estadoInfo = ESTADOS_STOCK[estadoStock];
 const especificaciones = product.especificaciones ?? {};
 const mailtoHref = productRequestMailto(product);
+// Con precio, stock y estado disponible se compra online; si no, se solicita por email.
+const maxQty = maxPurchasable(product);
 ---
 
 <div>
@@ -38,7 +42,7 @@ const mailtoHref = productRequestMailto(product);
 
   <div class="flex items-center gap-4 mb-8">
     {product.precio ? (
-      <span class="text-xl font-semibold">{formatPrice(product.precio)}</span>
+      <span class="text-xl font-semibold">{money.format(Number(product.precio))}</span>
     ) : (
       <a href={mailtoHref} class="text-gray-500 text-sm underline hover:text-[#6B8CAE] transition-colors cursor-pointer">Consultar precio</a>
     )}
@@ -50,11 +54,15 @@ const mailtoHref = productRequestMailto(product);
 
   {Object.keys(especificaciones).length > 0 && <ProductSpecs specs={especificaciones} />}
 
-  <a
-    href={mailtoHref}
-    class="inline-flex items-center justify-center gap-3 bg-black text-white text-sm font-medium px-10 py-4 hover:bg-[#222] transition-colors w-full cursor-pointer"
-  >
-    Solicitar este producto
-    <span>→</span>
-  </a>
+  {maxQty > 0 ? (
+    <ProductPurchase productId={product.id} maxQty={maxQty} mailtoHref={mailtoHref} />
+  ) : (
+    <a
+      href={mailtoHref}
+      class="inline-flex items-center justify-center gap-3 bg-black text-white text-sm font-medium px-10 py-4 hover:bg-[#222] transition-colors w-full cursor-pointer"
+    >
+      Solicitar este producto
+      <span>→</span>
+    </a>
+  )}
 </div>

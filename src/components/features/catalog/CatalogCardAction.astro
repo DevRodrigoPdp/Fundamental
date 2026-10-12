@@ -1,0 +1,30 @@
+---
+import { productRequestMailto } from '@lib/utils/mailto';
+import type { CatalogItem } from '@app-types/product';
+
+interface Props {
+  product: CatalogItem;
+}
+
+const { product: p } = Astro.props;
+
+// Tamaño y peso con ! porque global.css aplica font: inherit a button.
+const cardAction = 'group/action flex w-full cursor-pointer items-center justify-center gap-2 border border-black bg-black px-3 py-3 text-white hover:border-[#222] hover:bg-[#222] text-[11px]! font-semibold! uppercase tracking-[0.1em] transition-colors';
+---
+
+{p.refLabel ? (
+  <a href={`/catalogo/${p.sku}`} class={cardAction}>
+    Elegir medida
+    <span class="transition-transform duration-200 group-hover/action:translate-x-[3px]" aria-hidden="true">→</span>
+  </a>
+) : p.maxQty > 0 ? (
+  <button type="button" data-card-add data-cart-id={p.id} data-max-qty={p.maxQty} class={cardAction}>
+    <span data-card-add-label>Añadir a la cesta</span>
+    <span class="transition-transform duration-200 group-hover/action:translate-x-[3px]" aria-hidden="true">→</span>
+  </button>
+) : (
+  <a href={productRequestMailto(p)} class={cardAction}>
+    Solicitar
+    <span class="transition-transform duration-200 group-hover/action:translate-x-[3px]" aria-hidden="true">→</span>
+  </a>
+)}

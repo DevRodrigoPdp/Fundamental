@@ -1,0 +1,17 @@
+<a
+  href="/cesta"
+  class="relative inline-flex h-11 w-11 items-center justify-center text-white/80 transition-colors hover:text-white"
+  aria-label="Cesta"
+  data-cart-link
+>
+  <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.7" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12l-1 13H7L6 7Z" />
+    <path stroke-linecap="round" stroke-linejoin="round" d="M9 7a3 3 0 0 1 6 0" />
+  </svg>
+  <span
+    data-cart-count
+    class="absolute right-0.5 top-0.5 hidden min-w-[18px] rounded-full bg-[#C5A880] px-1 text-center text-[10px] font-bold leading-[18px] text-black"
+  ></span>
+</a>
+
+<script>import '@scripts/cart/cartBadge';</script>

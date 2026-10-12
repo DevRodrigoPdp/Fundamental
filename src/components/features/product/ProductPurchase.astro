@@ -1,0 +1,44 @@
+---
+interface Props {
+  productId: number;
+  maxQty: number;
+  mailtoHref: string;
+}
+
+const { productId, maxQty, mailtoHref } = Astro.props;
+// Tamaño y peso con ! porque global.css aplica font: inherit a button e input.
+const stepClass = 'w-11 cursor-pointer text-lg! text-gray-500 transition-colors hover:text-black disabled:cursor-not-allowed disabled:text-gray-200';
+---
+
+<div data-add-to-cart data-product-id={productId} data-max-qty={maxQty}>
+  <div class="flex gap-3">
+    <div class="flex shrink-0 items-stretch border border-gray-200 focus-within:border-black">
+      <button type="button" data-qty-step="-1" aria-label="Quitar una unidad" class={stepClass} disabled>−</button>
+      <label class="sr-only" for="cart-qty">Cantidad</label>
+      <input
+        id="cart-qty"
+        type="text"
+        inputmode="numeric"
+        value="1"
+        class="w-10 bg-transparent text-center font-semibold! tabular-nums focus:outline-none"
+      />
+      <button type="button" data-qty-step="1" aria-label="Añadir una unidad" class={stepClass} disabled={maxQty <= 1}>+</button>
+    </div>
+    <button
+      type="button"
+      data-add-button
+      class="inline-flex flex-1 items-center justify-center gap-3 bg-black text-white text-sm! font-medium! px-10 py-4 hover:bg-[#222] transition-colors cursor-pointer"
+    >
+      Añadir a la cesta
+      <span>→</span>
+    </button>
+  </div>
+  <p data-add-feedback class="mt-4 hidden text-sm text-gray-600" role="status">
+    Añadido a la cesta. <a href="/cesta" class="font-medium text-black underline hover:text-[#6B8CAE]">Ver cesta</a>
+  </p>
+  <a href={mailtoHref} class="mt-5 inline-block text-sm text-gray-500 underline hover:text-[#6B8CAE] transition-colors">
+    ¿Dudas? Consúltanos por email
+  </a>
+</div>
+
+<script>import '@scripts/product/addToCart';</script>

@@ -1,0 +1,13 @@
+---
+import Layout from '@layouts/BaseLayout.astro';
+import Nav from '@components/layout/Nav/Nav.astro';
+import SimpleFooter from '@components/layout/Footer/SimpleFooter.astro';
+import CartView from '@components/features/cart/CartView.astro';
+import { PAGE_SEO } from '@config/seo';
+---
+
+<Layout {...PAGE_SEO.cart}>
+  <Nav />
+  <CartView />
+  <SimpleFooter title="T3R × Fundamental" />
+</Layout>

@@ -24,6 +24,7 @@ export interface ProductCardData extends ProductSummary {
 }
 
 export interface CatalogItem {
+  id: number;
   nombre: string;
   categoria: string;
   subcategoria: string | null;
@@ -31,6 +32,9 @@ export interface CatalogItem {
   sku: string;
   imagen: string | null;
   estadoStock: EstadoStock;
+  precio: number | null;
+  // Unidades que se pueden añadir a la cesta (0 = no se vende online)
+  maxQty: number;
   // Solo en familias agrupadas (discos)
   refLabel?: string;
   searchSku?: string;
