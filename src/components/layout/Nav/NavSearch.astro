@@ -1,0 +1,123 @@
+---
+import { cld } from '@lib/cloudinary/url';
+import { catalogFamilies } from '@config/catalogFamilies';
+// Panel de búsqueda que baja bajo el header: resultados instantáneos como cards de producto.
+// Los datos vienen de /search-index.json (se descarga la primera vez que se abre).
+// Con el campo vacío muestra búsquedas rápidas y las familias del catálogo.
+const quickSearches = ['Pastillas', 'Disco 180', 'Pedales', 'Puños', 'Válvulas tubeless', 'Pedalier', 'Kit purgado'];
+---
+
+<div
+  id="nav-search-panel"
+  class="pointer-events-none fixed inset-x-0 top-[var(--nav-h,72px)] z-40 max-h-[calc(100svh-var(--nav-h,72px))] -translate-y-3 overflow-y-auto bg-white text-[#111111] opacity-0 shadow-[0_24px_60px_rgba(0,0,0,0.18)] transition-[opacity,transform] duration-300 ease-out"
+  aria-hidden="true"
+  inert
+>
+  <div class="mx-auto max-w-7xl px-5 pb-10 pt-6 md:px-12 md:pb-12 md:pt-8">
+    <form action="/catalogo" method="get" role="search" class="flex items-center gap-3 border-b-2 border-[#1A100C] pb-3">
+      <svg class="h-6 w-6 shrink-0 text-[#1A100C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path stroke-linecap="round" d="m20 20-3.5-3.5" /></svg>
+      <label for="nav-search-input" class="sr-only">Buscar productos T3R</label>
+      <input
+        id="nav-search-input"
+        name="q"
+        type="search"
+        placeholder="¿Qué buscas?"
+        autocomplete="off"
+        class="w-full bg-transparent text-xl font-medium placeholder:text-gray-400 focus:outline-none md:text-2xl"
+      />
+      <button id="nav-search-close" type="button" class="shrink-0 px-2 text-sm font-semibold text-gray-500 transition-colors hover:text-[#1A100C]">Cerrar</button>
+    </form>
+
+    <div id="nav-search-idle" class="mt-5">
+      <!-- Populares: una línea de texto, sin cajas. -->
+      <div class="search-stagger flex flex-wrap items-baseline gap-x-5 gap-y-2 text-sm" style="--i:0">
+        <span class="font-medium text-gray-500">Populares</span>
+        {quickSearches.map((term) => (
+          <button type="button" data-quick-search={term} class="font-semibold text-[#1A100C] underline decoration-[#C4A072]/0 decoration-2 underline-offset-[6px] transition-[text-decoration-color,color] duration-200 hover:text-[#8B6B3F] hover:decoration-[#C4A072]">
+            {term}
+          </button>
+        ))}
+      </div>
+
+      <!-- Categorías: lista grande a la izquierda; la foto de la derecha cambia según la que se señale. -->
+      <!-- En móvil solo se muestran las búsquedas populares. -->
+      <div class="mt-9 hidden gap-8 md:grid md:grid-cols-12 md:gap-10">
+        <div class="md:col-span-5">
+          <ul>
+            {catalogFamilies.map((f, i) => (
+              <li class="search-stagger" style={`--i:${i + 1}`}>
+                <a
+                  href={`/catalogo/familia/${f.slug}`}
+                  data-preview={i}
+                  class="search-cat group flex items-center py-1.5 text-lg font-bold tracking-tight text-[#1A100C]/60 transition-colors duration-200 hover:text-[#1A100C] md:py-1 md:text-[26px] md:leading-[1.25]"
+                >
+                  <span class="h-[2px] w-0 shrink-0 bg-[#C4A072] transition-[width,margin] duration-300 ease-out group-hover:mr-3 group-hover:w-6 group-focus-visible:mr-3 group-focus-visible:w-6 group-[.is-current]:mr-3 group-[.is-current]:w-6" aria-hidden="true"></span>
+                  {f.cat}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a href="/catalogo" class="search-stagger mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#8B6B3F] transition-colors hover:text-[#1A100C]" style="--i:9">
+            Ver todo el catálogo <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="search-stagger hidden md:col-span-7 md:block" style="--i:3">
+          <div class="relative aspect-[16/9] overflow-hidden bg-[#F2F2F2]">
+            {catalogFamilies.map((f, i) => (
+              <img
+                data-preview-img={i}
+                src={cld(f.img, { width: 600, height: 340, trim: true })}
+                alt=""
+                width="600"
+                height="340"
+                loading="lazy"
+                decoding="async"
+                class:list={['absolute inset-0 h-full w-full object-contain p-[12%] mix-blend-multiply transition-[opacity,transform] duration-500 ease-out', i === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-[0.96]']}
+              />
+            ))}
+          </div>
+          <div class="relative mt-4 min-h-[3rem]">
+            {catalogFamilies.map((f, i) => (
+              <p data-preview-text={i} class:list={['absolute inset-x-0 top-0 max-w-lg text-[15px] leading-relaxed text-[#3D3A36] transition-opacity duration-300', i === 0 ? 'opacity-100' : 'opacity-0']}>
+                <span class="font-semibold text-[#8B6B3F]">{f.tag} · </span>{f.text}
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p id="nav-search-status" class="mt-5 text-sm text-gray-500" role="status" aria-live="polite"></p>
+    <div id="nav-search-results" class="mt-5 grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-6"></div>
+    <a id="nav-search-all" href="/catalogo" class="mt-8 hidden w-fit items-center gap-2 text-sm font-semibold text-[#1A100C] transition-colors hover:text-[#8B6B3F]">
+      <span></span><span aria-hidden="true">→</span>
+    </a>
+  </div>
+</div>
+
+<div id="nav-search-backdrop" class="pointer-events-none fixed inset-0 z-30 bg-black/40 opacity-0 transition-opacity duration-300" aria-hidden="true"></div>
+
+<script>import '@scripts/layout/navSearch';</script>
+
+<style>
+  /* La X nativa del input search duplica el botón "Cerrar". */
+  #nav-search-input::-webkit-search-cancel-button { appearance: none; }
+
+  .search-cat.is-current { color: #1a100c; }
+
+  /* Entrada escalonada de los elementos al abrir el panel. */
+  .search-stagger {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease-out, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--i, 0) * 35ms + 80ms);
+  }
+  #nav-search-panel.is-open .search-stagger {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .search-stagger { opacity: 1; transform: none; transition: none; }
+  }
+</style>

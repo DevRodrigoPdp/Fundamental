@@ -1,29 +1,41 @@
 import { SITE } from './site';
 import { brands } from './brands';
-import { TRANSFER_HERO_IMAGE } from './transfer';
-import { WHIPP_OFF_HERO_IMAGE } from './whippOff';
 import { collectionPageSchema } from '@lib/seo/schema';
 import { cld } from '@lib/cloudinary/url';
 
 export const T3R_HERO_IMAGE = 'https://res.cloudinary.com/dxent4dkd/image/upload/v1783166514/catalogo_t3r/combos/combos_3.jpg';
-export const HOME_HERO_IMAGE = 'https://res.cloudinary.com/dxent4dkd/image/upload/v1783166518/catalogo_t3r/combos/combos_9.jpg';
 
 // Metadatos SEO de las páginas estáticas.
 export const PAGE_SEO = {
+  // Home = landing única de T3R (URL canónica de la marca; /t3r redirige aquí con 301).
   home: {
-    title: 'Fundamental Bike Parts | Distribuidora de ciclismo',
-    description: 'Distribuidora de T3R, Whipp-Off y Transfer: componentes para bicicleta, ropa MTB, cuadros y bicicletas para tiendas y ciclistas.',
-    heroImage: cld(HOME_HERO_IMAGE, { width: 1920 }),
-    structuredData: {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      '@id': `${SITE.url}/#website`,
-      url: SITE.url,
-      name: SITE.name,
-      description: SITE.description,
-      publisher: { '@id': `${SITE.url}/#organization` },
-      inLanguage: 'es',
-    },
+    title: 'T3R Components | Fundamental Bike Parts',
+    description: 'T3R Components: componentes y recambios para bicicleta directos de fábrica y probados por riders. Distribuidos en España por Fundamental Bike Parts.',
+    // Primer frame del hero scroll (preload LCP); la imagen social sigue siendo la foto T3R.
+    heroImage: '/hero-frames/frame_0001.webp',
+    image: cld(T3R_HERO_IMAGE, { width: 1200 }),
+    structuredData: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        '@id': `${SITE.url}/#website`,
+        url: SITE.url,
+        name: SITE.name,
+        description: SITE.description,
+        publisher: { '@id': `${SITE.url}/#organization` },
+        inLanguage: 'es',
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Brand',
+        '@id': `${SITE.url}/#brand-t3r`,
+        name: 'T3R Bike Components',
+        alternateName: 'The Three Riders',
+        url: SITE.url,
+        logo: `${SITE.url}/logo_t3r.png`,
+        description: 'Recambios y componentes para bicicletas probados por riders.',
+      },
+    ],
   },
   catalog: {
     title: 'Catálogo T3R | Componentes para bicicleta',
@@ -36,8 +48,8 @@ export const PAGE_SEO = {
     }),
   },
   brands: {
-    title: 'Marcas de ciclismo | T3R, Whipp-Off y Transfer',
-    description: 'Conoce las marcas distribuidas por Fundamental: componentes T3R, ropa MTB Whipp-Off y bicicletas y cuadros Transfer.',
+    title: 'T3R | Marca distribuida por Fundamental',
+    description: 'Conoce T3R Components, la marca distribuida por Fundamental: componentes y recambios para bicicleta probados por riders.',
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
@@ -56,8 +68,9 @@ export const PAGE_SEO = {
   },
   about: {
     title: 'Nosotros | Fundamental Bike Parts',
-    description: 'Conoce Fundamental Bike Parts, distribuidora ciclista de T3R, Whipp-Off y Transfer creada por riders para tiendas, talleres y ciclistas.',
-    heroImage: '/nosotros-hero.jpg',
+    description: 'Conoce Fundamental Bike Parts, distribuidora ciclista de T3R creada por riders para tiendas, talleres y ciclistas.',
+    // Sin preload: el hero usa WebP distinto según pantalla (AboutHero.astro); el JPG queda para redes.
+    image: '/nosotros-hero.jpg',
   },
   contact: {
     title: 'Contacto | Fundamental Bike Parts',
@@ -72,46 +85,6 @@ export const PAGE_SEO = {
   },
   stores: {
     title: 'Puntos de venta | Fundamental Bike Parts',
-    description: 'Encuentra tiendas físicas donde comprar productos T3R. Próximamente añadiremos puntos de venta de Whipp-Off y Transfer.',
-  },
-  transfer: {
-    title: 'Transfer Bikes | Bicicletas y cuadros',
-    description: 'Descubre Transfer Bikes y el modelo Kanaya: bicicletas y cuadros distribuidos por Fundamental Bike Parts.',
-    heroImage: cld(TRANSFER_HERO_IMAGE, { width: 1920 }),
-    structuredData: {
-      '@context': 'https://schema.org',
-      '@type': 'Brand',
-      name: 'Transfer Bikes',
-      url: `${SITE.url}/transfer`,
-      logo: `${SITE.url}/logo_transfer.png`,
-      description: 'Fabricante de bicicletas y cuadros.',
-    },
-  },
-  whippOff: {
-    title: 'Whipp-Off | Ropa y equipamiento MTB',
-    description: 'Descubre Whipp-Off: ropa técnica y equipamiento MTB para riders, disponible a través de Fundamental Bike Parts.',
-    heroImage: cld(WHIPP_OFF_HERO_IMAGE, { width: 1920 }),
-    structuredData: {
-      '@context': 'https://schema.org',
-      '@type': 'Brand',
-      name: 'Whipp-Off',
-      url: `${SITE.url}/whipp-off`,
-      logo: `${SITE.url}/logo_whipoff.png`,
-      description: 'Ropa técnica y equipamiento para ciclismo MTB.',
-    },
-  },
-  t3r: {
-    title: 'T3R Bike Components | Recambios para bicicletas',
-    description: 'Descubre T3R Bike Components: componentes y recambios para bicicleta probados por riders, pensados para tiendas, talleres y ciclistas.',
-    heroImage: cld(T3R_HERO_IMAGE, { width: 1920 }),
-    structuredData: {
-      '@context': 'https://schema.org',
-      '@type': 'Brand',
-      name: 'T3R Bike Components',
-      alternateName: 'The Three Riders',
-      url: `${SITE.url}/t3r`,
-      logo: `${SITE.url}/logo_t3r.png`,
-      description: 'Recambios y componentes para bicicletas probados por riders.',
-    },
+    description: 'Encuentra tiendas físicas donde comprar productos T3R distribuidos por Fundamental Bike Parts.',
   },
 };

@@ -5,24 +5,24 @@ import { brandLogos as logos } from '@config/brandLogos';
 <section class="border-b border-gray-200 bg-white px-5 py-20 md:px-8 md:py-28">
   <div class="about-row">
     <div class="about-left" data-reveal>
-      <p class="mb-7 text-[10px] font-bold uppercase tracking-[0.34em] text-gray-400">Distribuidora ciclista</p>
+      <p class="mb-7 text-[10px] font-bold uppercase tracking-[0.34em] text-gray-500">Distribuidora ciclista</p>
       <h2 class="mb-8 text-[38px] font-black leading-[0.95] tracking-[-0.06em] md:text-[68px]">
-        Tres marcas,un mismo criterio.
+        Una marca,un mismo criterio.
       </h2>
       <div class="space-y-5 text-base leading-relaxed text-gray-500 md:text-lg">
         <p>
-          T3R, Transfer y Whipp-Off comparten una misma filosofía: ofrecer productos de máxima calidad a un precio justo, porque el rendimiento y la accesibilidad pueden ir de la mano.
+          T3R Components nace de una misma filosofía: ofrecer productos de máxima calidad a un precio justo, porque el rendimiento y la accesibilidad pueden ir de la mano.
         </p>
         <ul class="list-disc space-y-1 pl-5">
-          <li>T3R: componentes y accesorios.</li>
-          <li>Transfer: bicicletas de Dirt Jump.</li>
-          <li>Whipp-Off: ropa y cascos.</li>
+          <li>Componentes y accesorios para bicicleta.</li>
+          <li>Probados por riders, día tras día.</li>
+          <li>Pensados para tiendas, talleres y ciclistas.</li>
         </ul>
         <p>
-          Tres marcas creadas para responder a las necesidades del usuario final, con un mismo compromiso: innovación, calidad y confianza.
+          Una marca creada para responder a las necesidades del usuario final, con un mismo compromiso: innovación, calidad y confianza.
         </p>
         <p>
-          Tres marcas. Un mismo criterio. A la vanguardia.
+          Una marca. Un mismo criterio. A la vanguardia.
         </p>
       </div>
     </div>
@@ -30,7 +30,7 @@ import { brandLogos as logos } from '@config/brandLogos';
     <div class="about-right" data-reveal data-delay="1">
       {logos.map((logo) => (
         <div class="about-logo">
-          <img src={logo.src} alt={logo.name} class="h-auto object-contain" style={`width: ${logo.width}; max-width: 100%;`} />
+          <img src={logo.src} alt={logo.name} width="1024" height="726" loading="lazy" class="h-auto object-contain" style={`width: ${logo.width}; max-width: 100%;`} />
         </div>
       ))}
     </div>

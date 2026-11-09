@@ -10,10 +10,11 @@ interface Props {
 const { products } = Astro.props;
 ---
 
-<section class="px-5 md:px-16 pb-32">
+<section class="mx-auto max-w-7xl px-5 pb-32 md:box-content md:px-12">
+  <h2 class="sr-only">Productos del catálogo</h2>
   {products.length > 0 ? (
     <>
-      <div class="grid items-start gap-8 lg:grid-cols-[260px_minmax(0,1fr)] xl:grid-cols-[290px_minmax(0,1fr)]">
+      <div class="grid items-start gap-8 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-12 xl:grid-cols-[260px_minmax(0,1fr)]">
         <CatalogFilters />
 
         <div id="product-grid" class="grid grid-cols-2 xl:grid-cols-3 gap-3 bg-white">
@@ -22,11 +23,11 @@ const { products } = Astro.props;
         ))}
         </div>
       </div>
-      <p id="empty-state" class="hidden text-center text-gray-400 text-base py-20">
+      <p id="empty-state" class="hidden text-center text-gray-500 text-base py-20">
         No hay referencias que coincidan con tu búsqueda.
       </p>
     </>
   ) : (
-    <p class="text-gray-400 text-base">Catálogo en preparación — vuelve pronto.</p>
+    <p class="text-gray-500 text-base">Catálogo en preparación — vuelve pronto.</p>
   )}
 </section>

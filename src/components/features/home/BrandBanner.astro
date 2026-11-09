@@ -10,7 +10,7 @@ const { banner } = Astro.props;
 ---
 
 <section class="relative overflow-hidden group" style={`height: ${banner.height};`}>
-  <a href={banner.href} class="absolute inset-0 z-20"></a>
+  <a href={banner.href} class="absolute inset-0 z-20" aria-label={`${banner.cta}: ${banner.alt}`} tabindex="-1"></a>
   <img
     src={cld(banner.image, { width: 1920 })}
     alt={banner.alt}
@@ -21,7 +21,7 @@ const { banner } = Astro.props;
   />
   <div class={`absolute inset-0 ${banner.overlayClass}`}></div>
   <div class="pointer-events-none absolute inset-0 z-30 flex flex-col items-center justify-center px-8 text-center">
-    <img data-reveal src={banner.logo} alt={banner.logoAlt} class={banner.logoClass} />
+    <img data-reveal src={banner.logo} alt={banner.logoAlt} width="800" height="314" class={banner.logoClass} />
     {banner.tagline && (
       <p data-reveal data-delay="1" class="text-xs text-white/75 tracking-[0.35em] uppercase mb-8">{banner.tagline}</p>
     )}

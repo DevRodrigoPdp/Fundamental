@@ -1,0 +1,4119 @@
+{
+ "url": "http://localhost:4391/",
+ "at": "2026-11-01T13:26:59.710Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 11,
+   "filled": [
+    1,
+    1,
+    0.81,
+    0.45,
+    0.57,
+    1,
+    0.56,
+    1,
+    0.46,
+    0.85,
+    0.99
+   ],
+   "motion": {
+    "elements": 27,
+    "css": 2,
+    "transitions": 25,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 9281,
+     "screens": 10.3,
+     "words": 778,
+     "img": 27,
+     "video": 0,
+     "canvas": 1,
+     "svg": 12,
+     "sections": 11,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 13,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "combos_3.jpg",
+      "frame_0001.webp",
+      "kit_purga_1.png",
+      "disco_6_tornillos_studio.png",
+      "disco_centerlock_180mm_angular.png",
+      "disco_6_tornillos_studio.png",
+      "disco_6_tornillos_studio.png",
+      "combos_5.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 1,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "T3R Components, distribuido por Fundamental Bike Parts. Directo de fábrica. Mejor calidad. Mejor precio.",
+     "words": 14,
+     "chars": 104,
+     "lines": 3,
+     "size": 80,
+     "vw": 5.6,
+     "font": "Inter",
+     "weight": 700,
+     "tracking": -0.025,
+     "leading": 1.08,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.91,
+     "top": 399,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "T3R Components, distribuido por Fundamental Bike Parts. Directo de fábrica. Mejor calidad. Mejor precio.",
+     "words": 14,
+     "lines": 3,
+     "size": 80,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "T3R Components, distribuido por Fundamental Bike Parts. Directo de fábrica. Mejor calidad. Mejor precio.",
+      "words": 14,
+      "chars": 104,
+      "lines": 3,
+      "size": 80,
+      "vw": 5.6,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 1.08,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.91,
+      "top": 399,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Componentes y recambios para bicicleta, probados por riders.",
+      "words": 8,
+      "chars": 60,
+      "lines": 5,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.4,
+      "top": 3229,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Discos de freno",
+      "words": 3,
+      "chars": 15,
+      "lines": 1,
+      "size": 28,
+      "vw": 1.9,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.18,
+      "top": 3649,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Pastillas de freno",
+      "words": 3,
+      "chars": 18,
+      "lines": 1,
+      "size": 28,
+      "vw": 1.9,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.18,
+      "top": 3649,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Pedales",
+      "words": 1,
+      "chars": 7,
+      "lines": 1,
+      "size": 28,
+      "vw": 1.9,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.18,
+      "top": 3649,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Pedalier / BB",
+      "words": 3,
+      "chars": 13,
+      "lines": 1,
+      "size": 28,
+      "vw": 1.9,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.18,
+      "top": 3649,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Puños",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 28,
+      "vw": 1.9,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.18,
+      "top": 4023,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Válvulas tubeless",
+      "words": 2,
+      "chars": 17,
+      "lines": 1,
+      "size": 28,
+      "vw": 1.9,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.18,
+      "top": 4023,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Transmisión",
+      "words": 1,
+      "chars": 11,
+      "lines": 1,
+      "size": 28,
+      "vw": 1.9,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.18,
+      "top": 4023,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Herramientas",
+      "words": 1,
+      "chars": 12,
+      "lines": 1,
+      "size": 28,
+      "vw": 1.9,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.18,
+      "top": 4023,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Una marca joven. Las ideas muy claras.",
+      "words": 7,
+      "chars": 38,
+      "lines": 2,
+      "size": 46,
+      "vw": 3.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.41,
+      "top": 4600,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "\"Servir un buen producto al mejor precio, para la tienda y el cliente final.\"",
+      "words": 14,
+      "chars": 77,
+      "lines": 2,
+      "size": 40,
+      "vw": 2.8,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.38,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.62,
+      "top": 5089,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Probado por nosotros antes que por nadie.",
+      "words": 7,
+      "chars": 41,
+      "lines": 2,
+      "size": 46,
+      "vw": 3.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.41,
+      "top": 5471,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Ningún producto entra al catálogo sin pasar por nuestras manos primero.",
+      "words": 11,
+      "chars": 71,
+      "lines": 3,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.38,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.36,
+      "top": 6097,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Cuatro principios. Cero atajos.",
+      "words": 4,
+      "chars": 31,
+      "lines": 2,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.39,
+      "top": 6536,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "El packaging no es el producto.",
+      "words": 6,
+      "chars": 31,
+      "lines": 2,
+      "size": 46,
+      "vw": 3.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 1.25,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.41,
+      "top": 7329,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Distribuidora oficial de T3R",
+      "words": 4,
+      "chars": 28,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.93,
+      "top": 8404,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 17,
+     "maxLines": 5,
+     "over2Lines": 2,
+     "statements": 2,
+     "centered": 2,
+     "medianWords": 4,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 1,
+       "mono": false
+      },
+      {
+       "family": "Montserrat",
+       "share": 0,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      16,
+      18,
+      20,
+      24,
+      28,
+      30,
+      40,
+      46,
+      64,
+      80
+     ],
+     "sizeCount": 16,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 14,
+      "leading": 1.63,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": null
+     },
+     "measureChars": 50,
+     "max": {
+      "size": 80,
+      "vw": 5.6,
+      "font": "Inter",
+      "text": "Directo de fábrica.Mejor calidad."
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 50,
+     "microLabelShare": 0.124,
+     "microSamples": [
+      "The Three Riders · by Fundamental",
+      "Desliza",
+      "Directo de fábrica",
+      "·",
+      "Probado por nosotros",
+      "·"
+     ],
+     "upperShare": 0.21,
+     "centerShare": 0.11,
+     "smallText": 41
+    },
+    "eyebrows": [
+     {
+      "text": "Gama T3R",
+      "above": "Componentes y recambios para bicicleta, ",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 3189
+     },
+     {
+      "text": "Frenada",
+      "above": "Discos de freno",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 3614
+     },
+     {
+      "text": "Frenada",
+      "above": "Pastillas de freno",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 3614
+     },
+     {
+      "text": "Contacto",
+      "above": "Pedales",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 3614
+     },
+     {
+      "text": "Transmisión",
+      "above": "Pedalier / BB",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 3614
+     },
+     {
+      "text": "Control",
+      "above": "Puños",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 3988
+     },
+     {
+      "text": "Tubeless",
+      "above": "Válvulas tubeless",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 3988
+     },
+     {
+      "text": "Transmisión",
+      "above": "Transmisión",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 3988
+     },
+     {
+      "text": "Taller",
+      "above": "Herramientas",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 3988
+     },
+     {
+      "text": "El problema",
+      "above": "Una marca joven. Las ideas muy claras.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 4560
+     },
+     {
+      "text": "La propuesta",
+      "above": "Probado por nosotros antes que por nadie",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 5431
+     },
+     {
+      "text": "Fabricación contrastada",
+      "above": "Ningún producto entra al catálogo sin pa",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 6065
+     },
+     {
+      "text": "Nuestros compromisos",
+      "above": "Cuatro principios. Cero atajos.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 6496
+     },
+     {
+      "text": "La filosofía",
+      "above": "El packaging no es el producto.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 7289
+     },
+     {
+      "text": "Fundamental",
+      "above": "Distribuidora oficial de T3R",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 11,
+      "top": 8371
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#1a100c",
+       "top": 0,
+       "hsl": {
+        "h": 17,
+        "s": 0.37,
+        "l": 0.07
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 2384,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#f0ede8",
+       "top": 4993,
+       "hsl": {
+        "h": 38,
+        "s": 0.21,
+        "l": 0.93
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#ffffff",
+       "share": 0.4
+      },
+      {
+       "color": "#000000",
+       "share": 0.24
+      },
+      {
+       "color": "#1a100c",
+       "share": 0.1
+      },
+      {
+       "color": "#99a1af",
+       "share": 0.06
+      },
+      {
+       "color": "#101828",
+       "share": 0.06
+      }
+     ],
+     "button": {
+      "bg": "#c4a072",
+      "hsl": {
+       "h": 34,
+       "s": 0.41,
+       "l": 0.61
+      },
+      "fg": "#1a100c"
+     },
+     "lowContrast": [
+      {
+       "text": "Herramientas",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 12,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      },
+      {
+       "text": "Consulta disponibilidad",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 16,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      },
+      {
+       "text": "Frenos",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 12,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      },
+      {
+       "text": "Consulta disponibilidad",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 16,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      },
+      {
+       "text": "Frenos",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 12,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      },
+      {
+       "text": "Consulta disponibilidad",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 16,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      }
+     ]
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 1,
+     "radius": 0,
+     "height": 50,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 3,
+     "heroLabels": [
+      "VER CATÁLOGO"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 13,
+     "scrims": 2,
+     "gradientSamples": [
+      "div.absolute.inset-0 → radial-gradient(circle at 75% 0%, rgba(196, 160, 114, 0.16), rgba(0, 0, 0, 0) 34%)",
+      "div.absolute.inset-0 → linear-gradient(135deg, rgba(196, 160, 114, 0.14), rgba(0, 0, 0, 0) 42%)",
+      "div.absolute.inset-0 → linear-gradient(135deg, rgba(196, 160, 114, 0.14), rgba(0, 0, 0, 0) 42%)",
+      "div.absolute.inset-0 → linear-gradient(135deg, rgba(196, 160, 114, 0.14), rgba(0, 0, 0, 0) 42%)"
+     ],
+     "gradientText": 0,
+     "hairlines": 6,
+     "hairlineSamples": [
+      "header.fixed.inset-x-0 1440px",
+      "section#productos.bg-white.px-5 1440px",
+      "section.relative.overflow-hidden 1440px",
+      "footer.bg-[#1A100C].border-t 1440px",
+      "div.grid.grid-cols-1 1152px"
+     ],
+     "outlinedBoxes": 15,
+     "dashed": 0,
+     "blurred": 1,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 15,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 8,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 3589
+      },
+      {
+       "count": 4,
+       "iconTopped": true,
+       "rounded": false,
+       "top": 6714
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 1
+     },
+     {
+      "type": "canvas",
+      "ratio": 1
+     }
+    ],
+    "nav": {
+     "links": 2,
+     "fixed": true,
+     "height": 73,
+     "floatingPill": false,
+     "blur": true
+    },
+    "fontsLoaded": [
+     "inter",
+     "montserrat"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 9281,
+    "margins": {
+     "left": 0,
+     "right": 89
+    },
+    "sections": [
+     {
+      "sel": "section#hero-scrub.hero-scrub.relative",
+      "tag": "section",
+      "top": 0,
+      "height": 2340,
+      "words": 28,
+      "media": 2,
+      "middle": 617,
+      "heading": {
+       "text": "Directo de fábrica.",
+       "size": 80,
+       "tag": "h1"
+      },
+      "left": 64,
+      "right": 65,
+      "textLeft": 64,
+      "textRight": 65,
+      "fullBleed": true,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": true
+     },
+     {
+      "sel": "section#productos.bg-white.px-5",
+      "tag": "section",
+      "top": 2384,
+      "height": 693,
+      "words": 34,
+      "media": 3,
+      "middle": 24,
+      "heading": {
+       "text": "Novedades T3R · Gama 2026",
+       "size": 20,
+       "tag": "h2"
+      },
+      "left": 144,
+      "right": 144,
+      "textLeft": 144,
+      "textRight": 276,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#categorias.relative.overflow-hidden",
+      "tag": "section",
+      "top": 3077,
+      "height": 1356,
+      "words": 196,
+      "media": 0,
+      "middle": 66,
+      "heading": {
+       "text": "Componentes y recambios",
+       "size": 64,
+       "tag": "h2"
+      },
+      "left": 64,
+      "right": 69,
+      "textLeft": 64,
+      "textRight": 69,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-[#1A100C].grid",
+      "tag": "section",
+      "top": 4433,
+      "height": 560,
+      "words": 46,
+      "media": 1,
+      "middle": 64,
+      "heading": {
+       "text": "Una marca joven.",
+       "size": 46,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 197,
+      "textLeft": 784,
+      "textRight": 197,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-[#F0EDE8].px-5",
+      "tag": "section",
+      "top": 4993,
+      "height": 350,
+      "words": 17,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "\"Servir un buen producto al mejor precio,",
+       "size": 40,
+       "tag": "p"
+      },
+      "left": 317,
+      "right": 317,
+      "textLeft": 317,
+      "textRight": 317,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-[#1A100C].grid",
+      "tag": "section",
+      "top": 5343,
+      "height": 560,
+      "words": 60,
+      "media": 1,
+      "middle": 64,
+      "heading": {
+       "text": "Probado por nosotros",
+       "size": 46,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 193,
+      "textLeft": 784,
+      "textRight": 193,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.relative.overflow-hidden",
+      "tag": "div",
+      "top": 5903,
+      "height": 480,
+      "words": 15,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Ningún producto entra al catálogo sin pasar por nu",
+       "size": 30,
+       "tag": "p"
+      },
+      "left": 64,
+      "right": 878,
+      "textLeft": 64,
+      "textRight": 878,
+      "fullBleed": true,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.relative.overflow-hidden",
+      "tag": "section",
+      "top": 6383,
+      "height": 826,
+      "words": 113,
+      "media": 0,
+      "middle": 82,
+      "heading": {
+       "text": "Cuatro principios.",
+       "size": 64,
+       "tag": "h2"
+      },
+      "left": 80,
+      "right": 99,
+      "textLeft": 80,
+      "textRight": 99,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-white.grid",
+      "tag": "section",
+      "top": 7209,
+      "height": 623,
+      "words": 43,
+      "media": 1,
+      "middle": 64,
+      "heading": {
+       "text": "El packaging no es",
+       "size": 46,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 210,
+      "textLeft": 784,
+      "textRight": 210,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.relative.overflow-hidden",
+      "tag": "section",
+      "top": 7831,
+      "height": 460,
+      "words": 8,
+      "media": 2,
+      "middle": 0,
+      "heading": null,
+      "left": 465,
+      "right": 465,
+      "textLeft": 465,
+      "textRight": 465,
+      "fullBleed": true,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-[#1A100C].px-5",
+      "tag": "section",
+      "top": 8291,
+      "height": 399,
+      "words": 19,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Distribuidora oficial de T3R",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 418,
+      "right": 419,
+      "textLeft": 418,
+      "textRight": 419,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-[#F0EDE8].px-5",
+      "tag": "section",
+      "top": 8690,
+      "height": 241,
+      "words": 36,
+      "media": 0,
+      "middle": 59,
+      "heading": {
+       "text": "Entrega a domicilio",
+       "size": 16,
+       "tag": "h3"
+      },
+      "left": 213,
+      "right": 138,
+      "textLeft": 213,
+      "textRight": 158,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.bg-[#1A100C].border-t",
+      "tag": "footer",
+      "top": 8931,
+      "height": 350,
+      "words": 51,
+      "media": 0,
+      "middle": 231,
+      "heading": null,
+      "left": 144,
+      "right": 144,
+      "textLeft": 144,
+      "textRight": 144,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "T3R Components, distribuido por Fundamental Bike Parts. Directo de fábrica. Mejo",
+      "size": 80,
+      "top": 399,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 784,
+      "n": 11
+     },
+     {
+      "x": 64,
+      "n": 6
+     },
+     {
+      "x": 80,
+      "n": 4
+     },
+     {
+      "x": 753,
+      "n": 4
+     },
+     {
+      "x": 1082,
+      "n": 4
+     },
+     {
+      "x": 112,
+      "n": 3
+     },
+     {
+      "x": 421,
+      "n": 2
+     },
+     {
+      "x": 436,
+      "n": 2
+     },
+     {
+      "x": 144,
+      "n": 1
+     },
+     {
+      "x": 210,
+      "n": 1
+     },
+     {
+      "x": 528,
+      "n": 1
+     },
+     {
+      "x": 800,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 41,
+    "bodySize": 14,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 12,
+   "filled": [
+    1,
+    1,
+    0.84,
+    0.59,
+    0.39,
+    1,
+    1,
+    0.66,
+    0.89,
+    0.5,
+    0.91,
+    0.98
+   ],
+   "motion": {
+    "elements": 26,
+    "css": 2,
+    "transitions": 24,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 11429,
+     "screens": 11.2,
+     "words": 802,
+     "img": 27,
+     "video": 0,
+     "canvas": 1,
+     "svg": 12,
+     "sections": 11,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 11,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "frame_0001.webp",
+      "kit_purga_1.png",
+      "disco_6_tornillos_studio.png",
+      "disco_6_tornillos_studio.png",
+      "disco_6_tornillos_studio.png",
+      "combos_5.jpg",
+      "combos_7.jpg",
+      "discos_freno_center_lock_4.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 1,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "T3R Components, distribuido por Fundamental Bike Parts. Directo de fábrica. Mejor calidad. Mejor precio.",
+     "words": 14,
+     "chars": 104,
+     "lines": 4,
+     "size": 80,
+     "vw": 10.4,
+     "font": "Inter",
+     "weight": 700,
+     "tracking": -0.025,
+     "leading": 1.08,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.83,
+     "top": 437,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "T3R Components, distribuido por Fundamental Bike Parts. Directo de fábrica. Mejor calidad. Mejor precio.",
+     "words": 14,
+     "lines": 4,
+     "size": 80,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "T3R Components, distribuido por Fundamental Bike Parts. Directo de fábrica. Mejor calidad. Mejor precio.",
+      "words": 14,
+      "chars": 104,
+      "lines": 4,
+      "size": 80,
+      "vw": 10.4,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 1.08,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.83,
+      "top": 437,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Componentes y recambios para bicicleta, probados por riders.",
+      "words": 8,
+      "chars": 60,
+      "lines": 5,
+      "size": 64,
+      "vw": 8.3,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.55,
+      "top": 3551,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Discos de freno",
+      "words": 3,
+      "chars": 15,
+      "lines": 1,
+      "size": 28,
+      "vw": 3.6,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.34,
+      "top": 3971,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Pastillas de freno",
+      "words": 3,
+      "chars": 18,
+      "lines": 1,
+      "size": 28,
+      "vw": 3.6,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.34,
+      "top": 3971,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Pedales",
+      "words": 1,
+      "chars": 7,
+      "lines": 1,
+      "size": 28,
+      "vw": 3.6,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.34,
+      "top": 4299,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Pedalier / BB",
+      "words": 3,
+      "chars": 13,
+      "lines": 1,
+      "size": 28,
+      "vw": 3.6,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.34,
+      "top": 4299,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Puños",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 28,
+      "vw": 3.6,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.34,
+      "top": 4627,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Válvulas tubeless",
+      "words": 2,
+      "chars": 17,
+      "lines": 1,
+      "size": 28,
+      "vw": 3.6,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.34,
+      "top": 4627,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Transmisión",
+      "words": 1,
+      "chars": 11,
+      "lines": 1,
+      "size": 28,
+      "vw": 3.6,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.34,
+      "top": 4955,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Herramientas",
+      "words": 1,
+      "chars": 12,
+      "lines": 1,
+      "size": 28,
+      "vw": 3.6,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.34,
+      "top": 4955,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Una marca joven. Las ideas muy claras.",
+      "words": 7,
+      "chars": 38,
+      "lines": 4,
+      "size": 46,
+      "vw": 6,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.33,
+      "top": 5439,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "\"Servir un buen producto al mejor precio, para la tienda y el cliente final.\"",
+      "words": 14,
+      "chars": 77,
+      "lines": 3,
+      "size": 40,
+      "vw": 5.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.38,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.83,
+      "top": 6056,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Probado por nosotros antes que por nadie.",
+      "words": 7,
+      "chars": 41,
+      "lines": 5,
+      "size": 46,
+      "vw": 6,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.33,
+      "top": 6485,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Ningún producto entra al catálogo sin pasar por nuestras manos primero.",
+      "words": 11,
+      "chars": 71,
+      "lines": 3,
+      "size": 30,
+      "vw": 3.9,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.38,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.67,
+      "top": 7381,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Cuatro principios. Cero atajos.",
+      "words": 4,
+      "chars": 31,
+      "lines": 4,
+      "size": 64,
+      "vw": 8.3,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 7820,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "El packaging no es el producto.",
+      "words": 6,
+      "chars": 31,
+      "lines": 5,
+      "size": 46,
+      "vw": 6,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 1.25,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.33,
+      "top": 9099,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Distribuidora oficial de T3R",
+      "words": 4,
+      "chars": 28,
+      "lines": 1,
+      "size": 30,
+      "vw": 3.9,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 10459,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 17,
+     "maxLines": 5,
+     "over2Lines": 6,
+     "statements": 2,
+     "centered": 2,
+     "medianWords": 4,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 1,
+       "mono": false
+      },
+      {
+       "family": "Montserrat",
+       "share": 0,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      16,
+      18,
+      20,
+      24,
+      28,
+      30,
+      40,
+      46,
+      64,
+      80
+     ],
+     "sizeCount": 16,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 14,
+      "leading": 1.63,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 19.9
+     },
+     "measureChars": 28,
+     "max": {
+      "size": 80,
+      "vw": 10.4,
+      "font": "Inter",
+      "text": "Directo de fábrica.Mejor calidad."
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 50,
+     "microLabelShare": 0.12,
+     "microSamples": [
+      "The Three Riders · by Fundamental",
+      "Desliza",
+      "Directo de fábrica",
+      "·",
+      "Probado por nosotros",
+      "·"
+     ],
+     "upperShare": 0.22,
+     "centerShare": 0.11,
+     "smallText": 41
+    },
+    "eyebrows": [
+     {
+      "text": "Gama T3R",
+      "above": "Componentes y recambios para bicicleta, ",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 3511
+     },
+     {
+      "text": "Frenada",
+      "above": "Discos de freno",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 3936
+     },
+     {
+      "text": "Frenada",
+      "above": "Pastillas de freno",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 3936
+     },
+     {
+      "text": "Contacto",
+      "above": "Pedales",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 4264
+     },
+     {
+      "text": "Transmisión",
+      "above": "Pedalier / BB",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 4264
+     },
+     {
+      "text": "Control",
+      "above": "Puños",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 4592
+     },
+     {
+      "text": "Tubeless",
+      "above": "Válvulas tubeless",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 4592
+     },
+     {
+      "text": "Transmisión",
+      "above": "Transmisión",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 4920
+     },
+     {
+      "text": "Taller",
+      "above": "Herramientas",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 4920
+     },
+     {
+      "text": "El problema",
+      "above": "Una marca joven. Las ideas muy claras.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 5399
+     },
+     {
+      "text": "La propuesta",
+      "above": "Probado por nosotros antes que por nadie",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 6445
+     },
+     {
+      "text": "Fabricación contrastada",
+      "above": "Ningún producto entra al catálogo sin pa",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 7349
+     },
+     {
+      "text": "Nuestros compromisos",
+      "above": "Cuatro principios. Cero atajos.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 7780
+     },
+     {
+      "text": "La filosofía",
+      "above": "El packaging no es el producto.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 9059
+     },
+     {
+      "text": "Fundamental",
+      "above": "Distribuidora oficial de T3R",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 11,
+      "top": 10427
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#0b0908",
+       "top": -10,
+       "hsl": {
+        "h": 20,
+        "s": 0.16,
+        "l": 0.04
+       }
+      },
+      {
+       "color": "#1a100c",
+       "top": 0,
+       "hsl": {
+        "h": 17,
+        "s": 0.37,
+        "l": 0.07
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 2706,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#f0ede8",
+       "top": 5960,
+       "hsl": {
+        "h": 38,
+        "s": 0.21,
+        "l": 0.93
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#ffffff",
+       "share": 0.41
+      },
+      {
+       "color": "#000000",
+       "share": 0.23
+      },
+      {
+       "color": "#1a100c",
+       "share": 0.1
+      },
+      {
+       "color": "#99a1af",
+       "share": 0.05
+      },
+      {
+       "color": "#101828",
+       "share": 0.05
+      }
+     ],
+     "button": {
+      "bg": "#c4a072",
+      "hsl": {
+       "h": 34,
+       "s": 0.41,
+       "l": 0.61
+      },
+      "fg": "#1a100c"
+     },
+     "lowContrast": [
+      {
+       "text": "Herramientas",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 12,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      },
+      {
+       "text": "Consulta disponibilidad",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 16,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      },
+      {
+       "text": "Frenos",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 12,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      },
+      {
+       "text": "Consulta disponibilidad",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 16,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      },
+      {
+       "text": "Frenos",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 12,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      },
+      {
+       "text": "Consulta disponibilidad",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 16,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      }
+     ]
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 1,
+     "radius": 0,
+     "height": 50,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 3,
+     "heroLabels": [
+      "VER CATÁLOGO"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 14,
+     "scrims": 2,
+     "gradientSamples": [
+      "div.absolute.inset-0 → radial-gradient(circle at 50% 0%, rgba(197, 168, 128, 0.16), rgba(0, 0, 0, 0) 34%)",
+      "div.absolute.inset-0 → radial-gradient(circle at 75% 0%, rgba(196, 160, 114, 0.16), rgba(0, 0, 0, 0) 34%)",
+      "div.absolute.inset-0 → linear-gradient(135deg, rgba(196, 160, 114, 0.14), rgba(0, 0, 0, 0) 42%)",
+      "div.absolute.inset-0 → linear-gradient(135deg, rgba(196, 160, 114, 0.14), rgba(0, 0, 0, 0) 42%)"
+     ],
+     "gradientText": 0,
+     "hairlines": 12,
+     "hairlineSamples": [
+      "header.fixed.inset-x-0 768px",
+      "a.nav-menu-link.grid 448px",
+      "a.nav-menu-link.grid 448px",
+      "a.nav-menu-link.grid 448px",
+      "a.nav-menu-link.grid 448px"
+     ],
+     "outlinedBoxes": 15,
+     "dashed": 0,
+     "blurred": 1,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 15,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 8,
+       "iconTopped": true,
+       "rounded": false,
+       "top": 3911
+      },
+      {
+       "count": 4,
+       "iconTopped": true,
+       "rounded": false,
+       "top": 8119
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 1
+     },
+     {
+      "type": "canvas",
+      "ratio": 1
+     }
+    ],
+    "nav": {
+     "links": 1,
+     "fixed": true,
+     "height": 85,
+     "floatingPill": false,
+     "blur": true
+    },
+    "fontsLoaded": [
+     "inter",
+     "montserrat"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 11429,
+    "margins": {
+     "left": 48,
+     "right": 50
+    },
+    "sections": [
+     {
+      "sel": "section#hero-scrub.hero-scrub.relative",
+      "tag": "section",
+      "top": 0,
+      "height": 2662,
+      "words": 28,
+      "media": 2,
+      "middle": 100,
+      "heading": {
+       "text": "Directo de fábrica.",
+       "size": 80,
+       "tag": "h1"
+      },
+      "left": 64,
+      "right": 65,
+      "textLeft": 64,
+      "textRight": 65,
+      "fullBleed": true,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": true
+     },
+     {
+      "sel": "section#productos.bg-white.px-5",
+      "tag": "section",
+      "top": 2706,
+      "height": 693,
+      "words": 26,
+      "media": 2,
+      "middle": 0,
+      "heading": {
+       "text": "Novedades T3R · Gama 2026",
+       "size": 20,
+       "tag": "h2"
+      },
+      "left": 48,
+      "right": 0,
+      "textLeft": 48,
+      "textRight": 96,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.absolute.inset-0",
+      "tag": "div",
+      "top": 3399,
+      "height": 1920,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.relative.mx-auto",
+      "tag": "div",
+      "top": 3511,
+      "height": 1696,
+      "words": 196,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Componentes y recambios",
+       "size": 64,
+       "tag": "h2"
+      },
+      "left": 64,
+      "right": 71,
+      "textLeft": 64,
+      "textRight": 71,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-[#1A100C].grid",
+      "tag": "section",
+      "top": 5319,
+      "height": 641,
+      "words": 46,
+      "media": 1,
+      "middle": 64,
+      "heading": {
+       "text": "Una marca joven.",
+       "size": 46,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 67,
+      "textLeft": 448,
+      "textRight": 67,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-[#F0EDE8].px-5",
+      "tag": "section",
+      "top": 5960,
+      "height": 405,
+      "words": 17,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "\"Servir un buen producto al mejor precio,",
+       "size": 40,
+       "tag": "p"
+      },
+      "left": 79,
+      "right": 101,
+      "textLeft": 79,
+      "textRight": 101,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-[#1A100C].grid",
+      "tag": "section",
+      "top": 6365,
+      "height": 821,
+      "words": 60,
+      "media": 1,
+      "middle": 64,
+      "heading": {
+       "text": "Probado por nosotros",
+       "size": 46,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 73,
+      "textLeft": 448,
+      "textRight": 73,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.relative.overflow-hidden",
+      "tag": "div",
+      "top": 7187,
+      "height": 480,
+      "words": 15,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Ningún producto entra al catálogo sin pasar por nu",
+       "size": 30,
+       "tag": "p"
+      },
+      "left": 64,
+      "right": 206,
+      "textLeft": 64,
+      "textRight": 206,
+      "fullBleed": true,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.relative.overflow-hidden",
+      "tag": "section",
+      "top": 7667,
+      "height": 1312,
+      "words": 113,
+      "media": 0,
+      "middle": 32,
+      "heading": {
+       "text": "Cuatro principios.",
+       "size": 64,
+       "tag": "h2"
+      },
+      "left": 64,
+      "right": 67,
+      "textLeft": 64,
+      "textRight": 67,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-white.grid",
+      "tag": "section",
+      "top": 8979,
+      "height": 908,
+      "words": 43,
+      "media": 1,
+      "middle": 64,
+      "heading": {
+       "text": "El packaging no es",
+       "size": 46,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 75,
+      "textLeft": 448,
+      "textRight": 75,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.relative.overflow-hidden",
+      "tag": "section",
+      "top": 9887,
+      "height": 460,
+      "words": 8,
+      "media": 2,
+      "middle": 0,
+      "heading": null,
+      "left": 129,
+      "right": 129,
+      "textLeft": 129,
+      "textRight": 129,
+      "fullBleed": true,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-[#1A100C].px-5",
+      "tag": "section",
+      "top": 10347,
+      "height": 399,
+      "words": 19,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Distribuidora oficial de T3R",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 82,
+      "right": 83,
+      "textLeft": 82,
+      "textRight": 83,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-[#F0EDE8].px-5",
+      "tag": "section",
+      "top": 10745,
+      "height": 278,
+      "words": 36,
+      "media": 0,
+      "middle": 65,
+      "heading": {
+       "text": "Entrega a domicilio",
+       "size": 16,
+       "tag": "h3"
+      },
+      "left": 55,
+      "right": 0,
+      "textLeft": 55,
+      "textRight": -120,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.bg-[#1A100C].border-t",
+      "tag": "footer",
+      "top": 11023,
+      "height": 406,
+      "words": 51,
+      "media": 0,
+      "middle": 73,
+      "heading": null,
+      "left": 48,
+      "right": 48,
+      "textLeft": 48,
+      "textRight": 48,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "T3R Components, distribuido por Fundamental Bike Parts. Directo de fábrica. Mejo",
+      "size": 80,
+      "top": 437,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 448,
+      "n": 10
+     },
+     {
+      "x": 64,
+      "n": 8
+     },
+     {
+      "x": 89,
+      "n": 8
+     },
+     {
+      "x": 411,
+      "n": 5
+     },
+     {
+      "x": 423,
+      "n": 5
+     },
+     {
+      "x": 112,
+      "n": 2
+     },
+     {
+      "x": 48,
+      "n": 1
+     },
+     {
+      "x": 518,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 40,
+    "bodySize": 14,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 12,
+   "filled": [
+    1,
+    1,
+    0.59,
+    0.56,
+    0.51,
+    0.68,
+    1,
+    0.93,
+    0.89,
+    1,
+    0.54,
+    0.78
+   ],
+   "motion": {
+    "elements": 25,
+    "css": 1,
+    "transitions": 24,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 11445,
+     "screens": 13.6,
+     "words": 799,
+     "img": 27,
+     "video": 0,
+     "canvas": 1,
+     "svg": 12,
+     "sections": 11,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 10,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "frame_0001.webp",
+      "kit_purga_1.png",
+      "disco_6_tornillos_studio.png",
+      "disco_6_tornillos_studio.png",
+      "disco_6_tornillos_studio.png",
+      "combos_5.jpg",
+      "combos_7.jpg",
+      "discos_freno_center_lock_4.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 1,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "T3R Components, distribuido por Fundamental Bike Parts. Directo de fábrica. Mejor calidad. Mejor precio.",
+     "words": 14,
+     "chars": 104,
+     "lines": 3,
+     "size": 38,
+     "vw": 9.7,
+     "font": "Inter",
+     "weight": 700,
+     "tracking": -0.025,
+     "leading": 1.08,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.9,
+     "top": 481,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "T3R Components, distribuido por Fundamental Bike Parts. Directo de fábrica. Mejor calidad. Mejor precio.",
+     "words": 14,
+     "lines": 3,
+     "size": 38,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "T3R Components, distribuido por Fundamental Bike Parts. Directo de fábrica. Mejor calidad. Mejor precio.",
+      "words": 14,
+      "chars": 104,
+      "lines": 3,
+      "size": 38,
+      "vw": 9.7,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 1.08,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 481,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Componentes y recambios para bicicleta, probados por riders.",
+      "words": 8,
+      "chars": 60,
+      "lines": 4,
+      "size": 36,
+      "vw": 9.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 2510,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Discos de freno",
+      "words": 3,
+      "chars": 15,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.81,
+      "top": 2943,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Pastillas de freno",
+      "words": 3,
+      "chars": 18,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.81,
+      "top": 3181,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Pedales",
+      "words": 1,
+      "chars": 7,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.81,
+      "top": 3440,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Pedalier / BB",
+      "words": 3,
+      "chars": 13,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.81,
+      "top": 3678,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Puños",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.81,
+      "top": 3916,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Válvulas tubeless",
+      "words": 2,
+      "chars": 17,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.81,
+      "top": 4154,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Transmisión",
+      "words": 1,
+      "chars": 11,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.81,
+      "top": 4392,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Herramientas",
+      "words": 1,
+      "chars": 12,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.81,
+      "top": 4630,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Una marca joven. Las ideas muy claras.",
+      "words": 7,
+      "chars": 38,
+      "lines": 2,
+      "size": 32,
+      "vw": 8.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 5244,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "\"Servir un buen producto al mejor precio, para la tienda y el cliente final.\"",
+      "words": 14,
+      "chars": 77,
+      "lines": 4,
+      "size": 26,
+      "vw": 6.7,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.38,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 5656,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Probado por nosotros antes que por nadie.",
+      "words": 7,
+      "chars": 41,
+      "lines": 2,
+      "size": 32,
+      "vw": 8.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 6287,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Ningún producto entra al catálogo sin pasar por nuestras manos primero.",
+      "words": 11,
+      "chars": 71,
+      "lines": 3,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.38,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 6829,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Cuatro principios. Cero atajos.",
+      "words": 4,
+      "chars": 31,
+      "lines": 2,
+      "size": 36,
+      "vw": 9.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 7179,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Directo de fábrica",
+      "words": 3,
+      "chars": 18,
+      "lines": 2,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.25,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.33,
+      "top": 7536,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Testado por riders",
+      "words": 3,
+      "chars": 18,
+      "lines": 2,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.25,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.33,
+      "top": 7536,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Fabricación contrastada",
+      "words": 2,
+      "chars": 23,
+      "lines": 2,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.25,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.33,
+      "top": 7963,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Para durar",
+      "words": 2,
+      "chars": 10,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.25,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.33,
+      "top": 7963,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "El packaging no es el producto.",
+      "words": 6,
+      "chars": 31,
+      "lines": 2,
+      "size": 32,
+      "vw": 8.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 1.25,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 8724,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Distribuidora oficial de T3R",
+      "words": 4,
+      "chars": 28,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.33,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 9761,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 21,
+     "maxLines": 4,
+     "over2Lines": 2,
+     "statements": 2,
+     "centered": 2,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 1,
+       "mono": false
+      },
+      {
+       "family": "Montserrat",
+       "share": 0,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      16,
+      18,
+      20,
+      24,
+      26,
+      32,
+      36,
+      38
+     ],
+     "sizeCount": 14,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 14,
+      "leading": 1.63,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 19.9
+     },
+     "measureChars": 39,
+     "max": {
+      "size": 38,
+      "vw": 9.7,
+      "font": "Inter",
+      "text": "Directo de fábrica.Mejor calidad."
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 49,
+     "microLabelShare": 0.119,
+     "microSamples": [
+      "The Three Riders · by Fundamental",
+      "Directo de fábrica",
+      "·",
+      "Probado por nosotros",
+      "·",
+      "Precio competitivo"
+     ],
+     "upperShare": 0.21,
+     "centerShare": 0.18,
+     "smallText": 41
+    },
+    "eyebrows": [
+     {
+      "text": "Gama T3R",
+      "above": "Componentes y recambios para bicicleta, ",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 2470
+     },
+     {
+      "text": "Frenada",
+      "above": "Discos de freno",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 2908
+     },
+     {
+      "text": "Frenada",
+      "above": "Pastillas de freno",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 3146
+     },
+     {
+      "text": "Contacto",
+      "above": "Pedales",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 3405
+     },
+     {
+      "text": "Transmisión",
+      "above": "Pedalier / BB",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 3643
+     },
+     {
+      "text": "Control",
+      "above": "Puños",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 3881
+     },
+     {
+      "text": "Tubeless",
+      "above": "Válvulas tubeless",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 4119
+     },
+     {
+      "text": "Transmisión",
+      "above": "Transmisión",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 4357
+     },
+     {
+      "text": "Taller",
+      "above": "Herramientas",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 10,
+      "top": 4595
+     },
+     {
+      "text": "El problema",
+      "above": "Una marca joven. Las ideas muy claras.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 5204
+     },
+     {
+      "text": "La propuesta",
+      "above": "Probado por nosotros antes que por nadie",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 6247
+     },
+     {
+      "text": "Fabricación contrastada",
+      "above": "Ningún producto entra al catálogo sin pa",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 6797
+     },
+     {
+      "text": "Nuestros compromisos",
+      "above": "Cuatro principios. Cero atajos.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 7139
+     },
+     {
+      "text": "La filosofía",
+      "above": "El packaging no es el producto.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 8684
+     },
+     {
+      "text": "Fundamental",
+      "above": "Distribuidora oficial de T3R",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 11,
+      "top": 9729
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#0b0908",
+       "top": -10,
+       "hsl": {
+        "h": 20,
+        "s": 0.16,
+        "l": 0.04
+       }
+      },
+      {
+       "color": "#1a100c",
+       "top": 0,
+       "hsl": {
+        "h": 17,
+        "s": 0.37,
+        "l": 0.07
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 1732,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#f0ede8",
+       "top": 5560,
+       "hsl": {
+        "h": 38,
+        "s": 0.21,
+        "l": 0.93
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#ffffff",
+       "share": 0.41
+      },
+      {
+       "color": "#000000",
+       "share": 0.24
+      },
+      {
+       "color": "#1a100c",
+       "share": 0.1
+      },
+      {
+       "color": "#99a1af",
+       "share": 0.05
+      },
+      {
+       "color": "#101828",
+       "share": 0.05
+      }
+     ],
+     "button": {
+      "bg": "#c4a072",
+      "hsl": {
+       "h": 34,
+       "s": 0.41,
+       "l": 0.61
+      },
+      "fg": "#1a100c"
+     },
+     "lowContrast": [
+      {
+       "text": "Herramientas",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 12,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      },
+      {
+       "text": "Consulta disponibilidad",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 16,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      },
+      {
+       "text": "Frenos",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 12,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      },
+      {
+       "text": "Consulta disponibilidad",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 16,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      },
+      {
+       "text": "Frenos",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 12,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      },
+      {
+       "text": "Consulta disponibilidad",
+       "ratio": 2.6,
+       "need": 4.5,
+       "size": 16,
+       "fg": "#99a1af",
+       "bg": "#ffffff"
+      }
+     ]
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 1,
+     "radius": 0,
+     "height": 50,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 3,
+     "heroLabels": [
+      "VER CATÁLOGO"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 14,
+     "scrims": 2,
+     "gradientSamples": [
+      "div.absolute.inset-0 → radial-gradient(circle at 50% 0%, rgba(197, 168, 128, 0.16), rgba(0, 0, 0, 0) 34%)",
+      "div.absolute.inset-0 → radial-gradient(circle at 75% 0%, rgba(196, 160, 114, 0.16), rgba(0, 0, 0, 0) 34%)",
+      "div.absolute.inset-0 → linear-gradient(135deg, rgba(196, 160, 114, 0.14), rgba(0, 0, 0, 0) 42%)",
+      "div.absolute.inset-0 → linear-gradient(135deg, rgba(196, 160, 114, 0.14), rgba(0, 0, 0, 0) 42%)"
+     ],
+     "gradientText": 0,
+     "hairlines": 12,
+     "hairlineSamples": [
+      "header.fixed.inset-x-0 390px",
+      "a.nav-menu-link.grid 350px",
+      "a.nav-menu-link.grid 350px",
+      "a.nav-menu-link.grid 350px",
+      "a.nav-menu-link.grid 350px"
+     ],
+     "outlinedBoxes": 15,
+     "dashed": 0,
+     "blurred": 1,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 15,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 8,
+       "iconTopped": true,
+       "rounded": false,
+       "top": 2891
+      },
+      {
+       "count": 4,
+       "iconTopped": true,
+       "rounded": false,
+       "top": 7414
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 1
+     },
+     {
+      "type": "canvas",
+      "ratio": 1
+     }
+    ],
+    "nav": {
+     "links": 1,
+     "fixed": true,
+     "height": 77,
+     "floatingPill": false,
+     "blur": true
+    },
+    "fontsLoaded": [
+     "inter",
+     "montserrat"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 11445,
+    "margins": {
+     "left": 20,
+     "right": 20
+    },
+    "sections": [
+     {
+      "sel": "section#hero-scrub.hero-scrub.relative",
+      "tag": "section",
+      "top": 0,
+      "height": 1688,
+      "words": 27,
+      "media": 2,
+      "middle": 0,
+      "heading": {
+       "text": "Directo de fábrica.",
+       "size": 38,
+       "tag": "h1"
+      },
+      "left": 20,
+      "right": 46,
+      "textLeft": 20,
+      "textRight": 46,
+      "fullBleed": true,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": true
+     },
+     {
+      "sel": "section#productos.bg-white.px-5",
+      "tag": "section",
+      "top": 1732,
+      "height": 642,
+      "words": 26,
+      "media": 2,
+      "middle": 0,
+      "heading": {
+       "text": "Novedades T3R · Gama 2026",
+       "size": 20,
+       "tag": "h2"
+      },
+      "left": 20,
+      "right": 0,
+      "textLeft": 20,
+      "textRight": 20,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.absolute.inset-0",
+      "tag": "div",
+      "top": 2374,
+      "height": 2526,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.relative.mx-auto",
+      "tag": "div",
+      "top": 2470,
+      "height": 2334,
+      "words": 196,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Componentes y recambios",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 20,
+      "right": 29,
+      "textLeft": 20,
+      "textRight": 29,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-[#1A100C].grid",
+      "tag": "section",
+      "top": 4900,
+      "height": 660,
+      "words": 46,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Una marca joven.",
+       "size": 32,
+       "tag": "h2"
+      },
+      "left": 20,
+      "right": 31,
+      "textLeft": 20,
+      "textRight": 31,
+      "fullBleed": true,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-[#F0EDE8].px-5",
+      "tag": "section",
+      "top": 5560,
+      "height": 383,
+      "words": 17,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "\"Servir un buen producto al mejor precio,",
+       "size": 26,
+       "tag": "p"
+      },
+      "left": 20,
+      "right": 20,
+      "textLeft": 20,
+      "textRight": 20,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-[#1A100C].grid",
+      "tag": "section",
+      "top": 5943,
+      "height": 739,
+      "words": 60,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Probado por nosotros",
+       "size": 32,
+       "tag": "h2"
+      },
+      "left": 20,
+      "right": 29,
+      "textLeft": 20,
+      "textRight": 29,
+      "fullBleed": true,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.relative.overflow-hidden",
+      "tag": "div",
+      "top": 6682,
+      "height": 360,
+      "words": 15,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Ningún producto entra al catálogo sin pasar por nu",
+       "size": 24,
+       "tag": "p"
+      },
+      "left": 20,
+      "right": 77,
+      "textLeft": 20,
+      "textRight": 77,
+      "fullBleed": true,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.relative.overflow-hidden",
+      "tag": "section",
+      "top": 7042,
+      "height": 1337,
+      "words": 113,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Cuatro principios.",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 20,
+      "right": 22,
+      "textLeft": 20,
+      "textRight": 22,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-white.grid",
+      "tag": "section",
+      "top": 8380,
+      "height": 809,
+      "words": 43,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "El packaging no es",
+       "size": 32,
+       "tag": "h2"
+      },
+      "left": 20,
+      "right": 39,
+      "textLeft": 20,
+      "textRight": 39,
+      "fullBleed": true,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.relative.overflow-hidden",
+      "tag": "section",
+      "top": 9189,
+      "height": 460,
+      "words": 8,
+      "media": 1,
+      "middle": 0,
+      "heading": null,
+      "left": 41,
+      "right": 41,
+      "textLeft": 41,
+      "textRight": 41,
+      "fullBleed": true,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-[#1A100C].px-5",
+      "tag": "section",
+      "top": 9649,
+      "height": 517,
+      "words": 19,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Distribuidora oficial de T3R",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 36,
+      "right": 36,
+      "textLeft": 36,
+      "textRight": 36,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-[#F0EDE8].px-5",
+      "tag": "section",
+      "top": 10165,
+      "height": 586,
+      "words": 36,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Entrega a domicilio",
+       "size": 16,
+       "tag": "h3"
+      },
+      "left": 20,
+      "right": 20,
+      "textLeft": 30,
+      "textRight": 30,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.bg-[#1A100C].border-t",
+      "tag": "footer",
+      "top": 10751,
+      "height": 694,
+      "words": 51,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 21,
+      "right": 21,
+      "textLeft": 21,
+      "textRight": 21,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "T3R Components, distribuido por Fundamental Bike Parts. Directo de fábrica. Mejo",
+      "size": 38,
+      "top": 481,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 20,
+      "n": 21
+     },
+     {
+      "x": 37,
+      "n": 12
+     },
+     {
+      "x": 222,
+      "n": 4
+     },
+     {
+      "x": 68,
+      "n": 1
+     },
+     {
+      "x": 86,
+      "n": 1
+     },
+     {
+      "x": 309,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 40,
+    "bodySize": 14,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "headline-lines",
+   "width": 1440,
+   "message": "2 headline(s) wrap past two lines at 1440px: \"T3R Components, distribuido por Fundamental Bike\" → 3 lines (14 words, 80px); \"Componentes y recambios para bicicleta, probados\" → 5 lines (8 words, 64px)",
+   "fix": "Cut words first (a headline is a title, not a sentence). Then give it a wider measure. Lower the size only as a last resort and never below the scale you chose. A real statement paragraph belongs in a <p> or <blockquote> at 36px or less."
+  },
+  {
+   "level": "WARN",
+   "id": "hero-words",
+   "width": 1440,
+   "message": "Hero headline is 14 words (\"T3R Components, distribuido por Fundamental Bike Parts. Dire\"). Gallery median is 5.",
+   "fix": "Say the one thing. Move the rest to the supporting line.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "eyebrow",
+   "width": 1440,
+   "message": "15 eyebrow/kicker label(s) above headings: \"Gama T3R\" above \"Componentes y recambios para bicicleta, \"; \"Frenada\" above \"Discos de freno\"; \"Frenada\" above \"Pastillas de freno\"; \"Contacto\" above \"Pedales\"; \"Transmisión\" above \"Pedalier / BB\"",
+   "fix": "Delete them. If the label carried real information, fold it into the headline or the supporting sentence.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "micro-label",
+   "width": 1440,
+   "message": "50 tiny uppercase letter-spaced labels (e.g. \"The Three Riders · by Fundamental\", \"Desliza\", \"Directo de fábrica\", \"·\").",
+   "fix": "Use sentence-case text at a readable size, or delete the label.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "gradient",
+   "width": 1440,
+   "message": "13 gradient fill(s): div.absolute.inset-0 → radial-gradient(circle at 75% 0%, rgba(196, 160, 114, 0.16), rgba(0, 0, 0, 0) 34%) | div.absolute.inset-0 → linear-gradient(135deg, rgba(196, 160, 114, 0.14), rgba(0, 0, 0, 0) 42%) | div.absolute.inset-0 → linear-gradient(135deg, rgba(196, 160, 114, 0.14), rgba(0, 0, 0, 0) 42%)",
+   "fix": "Use a flat colour or a real image. The only gradient allowed by default is a neutral scrim over a photo for legibility.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "hairline",
+   "width": 1440,
+   "message": "6 thin rule(s)/divider line(s): header.fixed.inset-x-0 1440px | section#productos.bg-white.px-5 1440px | section.relative.overflow-hidden 1440px | footer.bg-[#1A100C].border-t 1440px",
+   "fix": "Delete. Separate with space, a tone change, or scale. Lines are only for real tables and form fields.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "outlined-box",
+   "width": 1440,
+   "message": "15 boxes drawn with a 1px outline.",
+   "fix": "Define a surface by its fill (one tone step from the page) or leave the content unboxed.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "icon-cards",
+   "width": 1440,
+   "message": "1 row(s) of identical cards each topped with a small icon (4 cards).",
+   "fix": "Replace with one composed section from the direction: a narrative split, a list set in large type, or real imagery per item.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "palette-cream",
+   "width": 1440,
+   "message": "Yellow-cream background (section #f0ede8).",
+   "fix": "Use the drawn palette. If you want warmth, take a low-chroma stone or bone, not a yellow cream.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "contrast",
+   "width": 1440,
+   "message": "Low-contrast text: \"Herramientas\" 2.6:1 needs 4.5:1; \"Consulta disponibilidad\" 2.6:1 needs 4.5:1; \"Frenos\" 2.6:1 needs 4.5:1; \"Consulta disponibilidad\" 2.6:1 needs 4.5:1",
+   "fix": "Darken or lighten the text colour.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "size-count",
+   "width": 1440,
+   "message": "16 different font sizes (9, 10, 11, 12, 13, 14, 16, 18, 20, 24, 28, 30, 40, 46, 64, 80).",
+   "fix": "A page needs about five: display, heading, lead, body, small.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "body-size",
+   "width": 1440,
+   "message": "Body text is 14px (the size most of the running text is set in).",
+   "fix": "Body copy 16–20px. Map small sizes from blueprints onto your body step.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "side-scroll",
+   "width": 1440,
+   "message": "1 row(s) scroll sideways with content past their edge.",
+   "fix": "Jurors and most visitors read a row cut at the edge as clipped, not as scrollable. Wrap it onto more lines, or end it inside the grid.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "small-text",
+   "width": 1440,
+   "message": "41 text blocks under 13px.",
+   "fix": "Nothing meant to be read goes below 13px.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "dev-server",
+   "width": 1440,
+   "message": "This page is served by a development server (Vite, webpack or Next in dev mode).",
+   "fix": "Run the last gate on the production build too (vite build && vite preview, next build && next start, or the built index.html): minifiers and bundlers change the CSS a visitor receives.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "off-centre",
+   "width": 1440,
+   "message": "The margins differ: 0px on the left, 89px on the right, at 1440px.",
+   "fix": "Put the navigation and the content on one pair of margins; check for padding on one side only, a scrollbar gutter, or a header on another inset than the page."
+  },
+  {
+   "level": "WARN",
+   "id": "ragged-edges",
+   "width": 1440,
+   "message": "Left-aligned text starts at 12 different lines (784px, 64px, 80px, 753px, 1082px, 112px, 421px); the three most used hold only 51% of it.",
+   "fix": "Pick two or three anchor lines from the grid and start every heading and paragraph on one of them."
+  },
+  {
+   "level": "WARN",
+   "id": "pinned-over-picture",
+   "width": 1440,
+   "message": "Pinned large text slides across pictures while the page scrolls: \"T3R Components, distribuido por Fundamental Bike\" (screen 3, 100% over a picture); \"Mejor precio.\" (screen 3, 100% over a picture)",
+   "fix": "Jurors read a pinned title crossing drawings or photographs as a collision. Keep the pictures in the column the title does not occupy, or unpin it.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "long-pin",
+   "width": 1440,
+   "message": "The same large text stays on screen for 3 screens in a row: \"T3R Components, distribuido por Fundamental Bike Parts. Dire\"",
+   "fix": "A pinned element earns two screens, and something must change at each. Shorten the run or give every screen its own content."
+  },
+  {
+   "level": "FAIL",
+   "id": "headline-lines",
+   "width": 768,
+   "message": "7 headline(s) wrap past two lines at 768px: \"T3R Components, distribuido por Fundamental Bike\" → 4 lines (14 words, 80px); \"Componentes y recambios para bicicleta, probados\" → 5 lines (8 words, 64px); \"Una marca joven. Las ideas muy claras.\" → 4 lines (7 words, 46px); \"\"Servir un buen producto al mejor precio, para l\" → 3 lines (14 words, 40px, a paragraph set above 32px)",
+   "fix": "Cut words first (a headline is a title, not a sentence). Then give it a wider measure. Lower the size only as a last resort and never below the scale you chose. A real statement paragraph belongs in a <p> or <blockquote> at 32px or less."
+  },
+  {
+   "level": "FAIL",
+   "id": "headline-lines",
+   "width": 390,
+   "message": "3 headline(s) wrap past two lines at 390px: \"T3R Components, distribuido por Fundamental Bike\" → 3 lines (14 words, 38px); \"Componentes y recambios para bicicleta, probados\" → 4 lines (8 words, 36px); \"\"Servir un buen producto al mejor precio, para l\" → 4 lines (14 words, 26px, a paragraph set above 24px)",
+   "fix": "Cut words first (a headline is a title, not a sentence). Then give it a wider measure. Lower the size only as a last resort and never below the scale you chose. A real statement paragraph belongs in a <p> or <blockquote> at 24px or less."
+  },
+  {
+   "level": "FAIL",
+   "id": "reduced-hidden",
+   "width": 1440,
+   "message": "With reduced motion requested, 19 text block(s) on the first screen stay invisible: \"Navegación Fundamental\", \"Madrid · España\", \"T3R Components\", \"Marca principal\"",
+   "fix": "Put every hidden starting state inside @media (prefers-reduced-motion: no-preference); the reduced page is the finished page (references/motion.md §8)."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "C:\\Users\\rpuer\\workspace\\Fundamental\\.taste-skill\\before\\desktop-fold.jpg",
+   "pages": [
+    "C:\\Users\\rpuer\\workspace\\Fundamental\\.taste-skill\\before\\desktop-page-01.jpg",
+    "C:\\Users\\rpuer\\workspace\\Fundamental\\.taste-skill\\before\\desktop-page-02.jpg",
+    "C:\\Users\\rpuer\\workspace\\Fundamental\\.taste-skill\\before\\desktop-page-03.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "C:\\Users\\rpuer\\workspace\\Fundamental\\.taste-skill\\before\\tablet-fold.jpg",
+   "pages": [
+    "C:\\Users\\rpuer\\workspace\\Fundamental\\.taste-skill\\before\\tablet-page-01.jpg",
+    "C:\\Users\\rpuer\\workspace\\Fundamental\\.taste-skill\\before\\tablet-page-02.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "C:\\Users\\rpuer\\workspace\\Fundamental\\.taste-skill\\before\\mobile-fold.jpg",
+   "pages": [
+    "C:\\Users\\rpuer\\workspace\\Fundamental\\.taste-skill\\before\\mobile-page-01.jpg",
+    "C:\\Users\\rpuer\\workspace\\Fundamental\\.taste-skill\\before\\mobile-page-02.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

@@ -19,16 +19,16 @@ const mailtoHref = productRequestMailto(product);
 ---
 
 <div>
-  <p class="text-sm text-[#6B8CAE] tracking-[0.25em] uppercase mb-4">{product.subcategoria ?? product.categoria}</p>
+  <p class="text-sm text-[#55708C] tracking-[0.25em] uppercase mb-4">{product.subcategoria ?? product.categoria}</p>
   <h1 class="line-clamp-3 break-words text-[28px] md:text-[40px] font-bold leading-tight mb-3">{product.nombre}</h1>
-  <p class="text-sm text-gray-400 mb-8">REF. {product.sku}</p>
+  <p class="text-sm text-gray-500 mb-8">REF. {product.sku}</p>
   <p class:list={['mb-4 text-sm font-semibold uppercase tracking-[0.12em]', estadoInfo.color]}>
     {estadoInfo.label}
   </p>
   {estadoStock === 'agotado' && (
     <a
       href={restockMailto(product)}
-      class="mb-8 inline-flex items-center gap-1 text-sm font-medium text-[#6B8CAE] underline hover:text-[#4a6a8a] transition-colors"
+      class="mb-8 inline-flex items-center gap-1 text-sm font-medium text-[#55708C] underline hover:text-[#4a6a8a] transition-colors"
     >
       Avísame cuando haya stock
     </a>
@@ -40,7 +40,7 @@ const mailtoHref = productRequestMailto(product);
     {product.precio ? (
       <span class="text-xl font-semibold">{formatPrice(product.precio)}</span>
     ) : (
-      <a href={mailtoHref} class="text-gray-500 text-sm underline hover:text-[#6B8CAE] transition-colors cursor-pointer">Consultar precio</a>
+      <a href={mailtoHref} class="text-gray-500 text-sm underline hover:text-[#55708C] transition-colors cursor-pointer">Consultar precio</a>
     )}
   </div>
 

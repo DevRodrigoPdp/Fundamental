@@ -12,7 +12,7 @@ src/
 │   ├── layout/         Nav/, Footer/, SeoHead
 │   ├── ui/             Piezas genéricas (BackToTop, InstagramLink)
 │   └── features/       Secciones por dominio: home, catalog, product, about, contact,
-│                       stores, brand/{t3r,transfer,whipp-off}
+│                       stores, brand (marcas, t3r: secciones de la home)
 ├── config/             Datos estáticos y constantes (navegación, SEO por página,
 │                       familias, taxonomía, marcas, tiendas, banners...)
 ├── lib/

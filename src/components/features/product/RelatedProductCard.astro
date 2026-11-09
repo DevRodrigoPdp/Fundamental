@@ -26,14 +26,14 @@ const { product: r } = Astro.props;
     )}
   </div>
   <div class="flex flex-1 flex-col px-4 pt-4 pb-4">
-    <p class="mb-1 text-[9px] uppercase tracking-[0.22em] text-gray-400">{r.subcategoria}</p>
-    <h3 class="mb-2 line-clamp-2 break-words text-[13px] font-bold leading-snug transition-colors group-hover:text-[#6B8CAE]">{r.nombre}</h3>
+    <p class="mb-1 text-[9px] uppercase tracking-[0.22em] text-gray-500">{r.subcategoria}</p>
+    <h3 class="mb-2 line-clamp-2 break-words text-[13px] font-bold leading-snug transition-colors group-hover:text-[#55708C]">{r.nombre}</h3>
     {r.descripcion_corta && (
       <p class="text-[11px] leading-relaxed text-gray-500 line-clamp-2 mb-3">{r.descripcion_corta}</p>
     )}
     <div class="mt-auto flex items-center justify-between border-t border-gray-100 pt-3">
-      <p class="text-[10px] text-gray-400 truncate">{r.sku}</p>
-      <span class="text-xs font-medium text-[#6B8CAE] group-hover:translate-x-0.5 transition-transform inline-block">→</span>
+      <p class="text-[10px] text-gray-500 truncate">{r.sku}</p>
+      <span class="text-xs font-medium text-[#55708C] group-hover:translate-x-0.5 transition-transform inline-block">→</span>
     </div>
   </div>
 </a>

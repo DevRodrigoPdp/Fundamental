@@ -1,6 +1,6 @@
 import type { CatalogFamily } from '@app-types/catalog';
 
-// Familias de producto T3R: tarjetas en /t3r y páginas /catalogo/familia/[slug].
+// Familias de producto T3R: tarjetas en la home y páginas /catalogo/familia/[slug].
 export const catalogFamilies: CatalogFamily[] = [
   {
     slug: 'discos-de-freno',

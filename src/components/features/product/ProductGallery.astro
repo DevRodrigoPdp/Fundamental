@@ -12,7 +12,7 @@ const { images, alt } = Astro.props;
 <div>
   <div class="relative overflow-hidden bg-[#f5f5f5] mb-4" style="aspect-ratio: 1;">
     {images[0] ? (
-      <img id="main-image" src={cld(images[0], { width: 1200 })} alt={alt} class="absolute inset-0 w-full h-full object-contain bg-white p-6 md:p-10" />
+      <img id="main-image" src={cld(images[0], { width: 1200 })} alt={alt} width="1200" height="1200" fetchpriority="high" class="absolute inset-0 w-full h-full object-contain bg-white p-6 md:p-10" />
     ) : (
       <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-white text-gray-300">
         <img src="/logo_t3r.png" alt="T3R" class="w-32 md:w-40 opacity-25 grayscale" />

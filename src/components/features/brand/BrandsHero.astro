@@ -1,11 +1,39 @@
-<section class="px-5 md:px-16 pt-32 md:pt-36 pb-16 md:pb-24">
-  <p data-reveal class="text-sm text-[#6B8CAE] tracking-[0.3em] uppercase mb-6">
-    Distribuidora · Fundamental
-  </p>
-  <h1 data-reveal data-delay="1" class="text-[44px] md:text-[72px] font-bold leading-tight mb-8">
-    Nuestras marcas.
-  </h1>
-  <p data-reveal data-delay="2" class="text-lg text-[#6B8CAE] max-w-md leading-relaxed">
-    Tres marcas seleccionadas. Cada una con su propio universo.
-  </p>
+---
+// Cabecera de /marcas: una sola marca, así que la página la presenta directamente.
+---
+
+<section class="bg-[#1A100C] px-5 pb-16 pt-32 text-white md:px-12 md:pb-24 md:pt-40">
+  <div class="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-12 md:gap-8">
+    <div class="md:col-span-5">
+      <p class="mb-5 text-sm font-semibold text-[#C4A072]">Distribuidora · Fundamental</p>
+      <img src="/images/t3r-logo-blanco-800.webp" alt="T3R Bike Components" width="800" height="314" class="mb-8 h-16 w-auto md:h-20" />
+      <h1 class="mb-6 text-[clamp(36px,4.4vw,64px)] font-bold leading-[1.02] tracking-[-0.03em]">
+        Nuestra marca.
+      </h1>
+      <p class="mb-10 max-w-md text-lg leading-relaxed text-white/80">
+        T3R Components. Componentes probados por riders, pensados para cada día.
+      </p>
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
+        <a href="/catalogo" class="bg-[#C4A072] px-8 py-4 text-sm font-bold uppercase tracking-[0.1em] text-[#1A100C] transition-colors hover:bg-[#D4B280]">
+          Ver catálogo
+        </a>
+        <a href="/contacto?motivo=Ser+punto+de+venta" class="inline-flex items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-[#C4A072]">
+          Contáctanos para ser distribuidor <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+    <div class="md:col-span-7">
+      <img
+        src="/images/t3r-packaging-1600.webp"
+        srcset="/images/t3r-packaging-800.webp 800w, /images/t3r-packaging-1600.webp 1600w"
+        sizes="(min-width: 768px) 58vw, 100vw"
+        alt="Productos T3R en su packaging de cartón"
+        width="1600"
+        height="1068"
+        class="aspect-[3/2] w-full object-cover"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </div>
+  </div>
 </section>

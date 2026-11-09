@@ -1,27 +1,9 @@
 (() => {
-  const t3rPanel = document.querySelector<HTMLElement>('[data-brand-panel="t3r"]');
-  const comingSoon = document.getElementById('stores-coming-soon');
-  const comingSoonBrand = document.getElementById('coming-soon-brand');
-  const tabs = document.querySelectorAll<HTMLButtonElement>('[data-brand-tab]');
   const frame = document.getElementById('store-map-frame') as HTMLIFrameElement | null;
   const mapName = document.getElementById('store-map-name');
   const external = document.getElementById('store-map-external') as HTMLAnchorElement | null;
   const search = document.getElementById('store-postcode-search') as HTMLInputElement | null;
   const message = document.getElementById('store-search-message');
-
-  tabs.forEach((tab) => tab.addEventListener('click', () => {
-    tabs.forEach((item) => {
-      const active = item === tab;
-      item.setAttribute('aria-pressed', String(active));
-      item.classList.toggle('bg-[#C4A072]/10', active);
-    });
-    const isT3R = tab.dataset.brandTab === 't3r';
-    t3rPanel?.classList.toggle('hidden', !isT3R);
-    comingSoon?.classList.toggle('hidden', isT3R);
-    if (!isT3R && comingSoonBrand) {
-      comingSoonBrand.textContent = tab.dataset.brandTab === 'whipp-off' ? 'Whipp-Off' : 'Transfer';
-    }
-  }));
 
   const selectStore = (link: HTMLAnchorElement) => {
     if (!frame || !mapName || !external) return;

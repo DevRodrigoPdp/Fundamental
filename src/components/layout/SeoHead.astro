@@ -16,6 +16,7 @@ const {
   structuredData = [],
 } = Astro.props;
 
+const FONTS_URL = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700&display=swap';
 const canonicalUrl = absoluteUrl(canonicalPath);
 const socialImage = absoluteUrl(image);
 const schemas = Array.isArray(structuredData) ? structuredData : [structuredData];
@@ -51,6 +52,9 @@ const baseSchema = organizationSchema();
 {heroImage && <link rel="preload" as="image" href={heroImage} fetchpriority="high" />}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Epilogue:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@800;900&display=swap" rel="stylesheet" />
+{/* Solo las familias y pesos que se usan; se carga sin bloquear el primer pintado. */}
+<link rel="preload" as="style" href={FONTS_URL} />
+<link rel="stylesheet" href={FONTS_URL} media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href={FONTS_URL} /></noscript>
 <script type="application/ld+json" set:html={JSON.stringify(baseSchema)} />
 {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}

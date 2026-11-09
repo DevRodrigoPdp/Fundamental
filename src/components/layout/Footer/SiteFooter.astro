@@ -1,40 +1,45 @@
 ---
 import InstagramLink from '@components/ui/InstagramLink.astro';
 
+// Footer único para toda la web: la home vende T3R, Fundamental firma como distribuidora.
 const linkClass = 'text-sm text-white/55 hover:text-[#C4A072] transition-colors';
 ---
 
-<footer class="bg-[#1A100C] px-5 md:px-12 pt-14 pb-10">
+<footer class="bg-[#1A100C] border-t border-white/5 px-5 md:px-12 pt-14 pb-10">
   <div class="max-w-6xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12 pb-12 border-b border-white/10">
-      <div>
-        <p class="text-base font-bold text-white mb-3">Fundamental</p>
-        <p class="text-sm text-white/55 leading-relaxed">
-          Distribuidora de componentes, bicicletas y ropa MTB. Madrid, España.
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-4 md:gap-12 mb-12 pb-12 border-b border-white/10 text-center md:text-left">
+      <div class="md:col-span-2">
+        <a href="/" aria-label="T3R Components, inicio" class="inline-block mb-4">
+          <img src="/images/t3r-logo-blanco.webp" alt="T3R" width="400" height="157" class="h-7 w-auto opacity-90 mx-auto md:mx-0" />
+        </a>
+        <p class="text-sm font-semibold text-white mb-1">T3R · The Three Riders × Fundamental</p>
+        <p class="text-sm text-white/45 leading-relaxed max-w-sm mx-auto md:mx-0">
+          Distribuido por Fundamental Bike Parts, distribuidora de componentes para bicicleta. Madrid, España.
         </p>
       </div>
       <div>
-        <p class="text-xs text-white/40 tracking-[0.25em] uppercase mb-4">Servicio al cliente</p>
+        <p class="text-xs text-white/65 tracking-[0.25em] uppercase mb-4">Explorar</p>
         <div class="flex flex-col gap-2">
-          <a href="/contacto" class={linkClass}>Contacto</a>
-          <a href="/contacto" class={linkClass}>Envíos y devoluciones</a>
-          <a href="/contacto" class={linkClass}>Garantía</a>
+          <a href="/catalogo" class={linkClass}>Catálogo</a>
+          <a href="/puntos-de-venta" class={linkClass}>Puntos de venta</a>
+          <a href="/nosotros" class={linkClass}>Nosotros</a>
         </div>
       </div>
       <div>
-        <p class="text-xs text-white/40 tracking-[0.25em] uppercase mb-4">Marcas</p>
+        <p class="text-xs text-white/65 tracking-[0.25em] uppercase mb-4">Servicio al cliente</p>
         <div class="flex flex-col gap-2">
-          <a href="/t3r" class={linkClass}>T3R</a>
-          <a href="/transfer" class={linkClass}>Transfer</a>
-          <a href="/whipp-off" class={linkClass}>Whipp-Off</a>
+          <a href="/contacto" class={linkClass}>Contacto comercial</a>
+          <a href="/contacto" class={linkClass}>Envíos y devoluciones</a>
+          <a href="/contacto" class={linkClass}>Garantía</a>
+          <a href="mailto:info@fundamentalbikeparts.com" class={`${linkClass} break-words`}>info@fundamentalbikeparts.com</a>
         </div>
       </div>
     </div>
-    <div class="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-2 text-center sm:text-left">
-      <p class="text-xs text-white/25">© 2026 Fundamental — Todos los derechos reservados</p>
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+      <p class="text-xs text-white/55">© 2026 Fundamental Bike Parts · Todos los derechos reservados</p>
       <div class="flex items-center gap-4">
         <InstagramLink class="text-white/45 transition-colors hover:text-[#C4A072]" />
-        <p class="text-xs text-white/25">Madrid · España</p>
+        <p class="text-xs text-white/55">Madrid · España</p>
       </div>
     </div>
   </div>

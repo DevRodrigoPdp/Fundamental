@@ -9,6 +9,7 @@ type Props = PageSeo;
 <html lang="es">
   <head>
     <SeoHead {...Astro.props} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <style>
       * { scrollbar-width: none; }
       *::-webkit-scrollbar { display: none; }

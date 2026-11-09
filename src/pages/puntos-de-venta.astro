@@ -3,9 +3,7 @@ import Layout from '@layouts/BaseLayout.astro';
 import Nav from '@components/layout/Nav/Nav.astro';
 import BackToTop from '@components/ui/BackToTop.astro';
 import StoresHeader from '@components/features/stores/StoresHeader.astro';
-import StoreBrandTabs from '@components/features/stores/StoreBrandTabs.astro';
 import StoreLocator from '@components/features/stores/StoreLocator.astro';
-import StoresComingSoon from '@components/features/stores/StoresComingSoon.astro';
 import { PAGE_SEO } from '@config/seo';
 ---
 
@@ -15,9 +13,7 @@ import { PAGE_SEO } from '@config/seo';
   <main class="bg-[#0d0c0a] min-h-screen px-5 pb-24 pt-32 text-white md:px-16 md:pt-36">
     <div class="mx-auto max-w-6xl">
       <StoresHeader />
-      <StoreBrandTabs />
       <StoreLocator />
-      <StoresComingSoon />
     </div>
   </main>
 

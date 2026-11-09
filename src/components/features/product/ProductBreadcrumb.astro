@@ -9,9 +9,9 @@ const { product } = Astro.props;
 ---
 
 <div class="flex flex-wrap items-center gap-x-3 gap-y-2 mb-8 sm:mb-12">
-  <a href="/catalogo" class="text-sm text-gray-400 hover:text-black transition-colors">Catálogo</a>
+  <a href="/catalogo" class="text-sm text-gray-500 hover:text-black transition-colors">Catálogo</a>
   <span class="text-gray-300 text-sm">/</span>
-  <span class="text-sm text-gray-400">{product.categoria}</span>
+  <span class="text-sm text-gray-500">{product.categoria}</span>
   {product.subcategoria && (
     <span class="flex items-center gap-3">
       <span class="text-gray-300 text-sm">/</span>

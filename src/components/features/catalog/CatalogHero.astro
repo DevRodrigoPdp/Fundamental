@@ -1,38 +1,40 @@
-<section class="px-5 md:px-16 pt-32 md:pt-36 pb-16">
-  <p data-reveal class="text-sm text-[#6B8CAE] tracking-[0.3em] uppercase mb-6">Marca · T3R</p>
-  <h1 data-reveal data-delay="1" class="text-[40px] md:text-[64px] font-bold leading-tight mb-6">
-    Catálogo T3R.
-  </h1>
-  <p data-reveal data-delay="2" class="text-lg text-[#6B8CAE] max-w-lg leading-relaxed mb-10">
-    Servimos a tiendas y clientes finales.
-  </p>
+<section class="px-5 pb-12 pt-32 md:px-12 md:pt-40">
+  <div class="mx-auto max-w-7xl">
+    <p class="mb-4 text-sm font-semibold text-[#8B6B3F]">Marca · T3R</p>
+    <h1 class="mb-5 text-[clamp(36px,4.4vw,64px)] font-bold leading-[1.02] tracking-[-0.03em]">
+      Catálogo T3R.
+    </h1>
+    <p class="mb-10 max-w-lg text-lg leading-relaxed text-[#3D3A36]">
+      Servimos a tiendas y clientes finales.
+    </p>
 
-  <div data-reveal data-delay="3" class="relative max-w-2xl">
-      <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="relative max-w-2xl">
+      <svg class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M19 11a8 8 0 11-16 0 8 8 0 0116 0z" />
       </svg>
       <input
         id="search-input"
         type="search"
         placeholder="Buscar por nombre, categoría o referencia..."
-        class="w-full border border-gray-300 pl-12 pr-12 py-3.5 text-base outline-none focus:border-black transition-colors [&::-webkit-search-cancel-button]:hidden"
+        class="w-full bg-[#F2F2F2] py-4 pl-12 pr-12 text-base outline-none transition-colors placeholder:text-gray-500 focus:bg-white focus:ring-2 focus:ring-[#1A100C] [&::-webkit-search-cancel-button]:hidden"
         autocomplete="off"
         aria-label="Buscar en el catálogo"
         aria-controls="product-grid"
       />
-      <button id="search-clear" type="button" class="hidden absolute right-3 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-black transition-colors" aria-label="Limpiar búsqueda">
+      <button id="search-clear" type="button" class="absolute right-3 top-1/2 hidden -translate-y-1/2 p-2 text-gray-500 transition-colors hover:text-black" aria-label="Limpiar búsqueda">
         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/></svg>
       </button>
-  </div>
-  <div class="mt-4 flex min-h-6 flex-wrap items-center gap-x-5 gap-y-2">
-    <p id="search-status" class="text-xs text-gray-400" role="status" aria-live="polite"></p>
-    <button id="mobile-filter-toggle" type="button" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] lg:hidden" aria-expanded="false" aria-controls="catalog-filters">
-      Filtros
-      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M4 7h16M7 12h10M10 17h4"/></svg>
-    </button>
-    <button id="filters-clear" type="button" style="display: none;" class="inline-flex items-center gap-1 rounded-full border border-gray-300 px-2.5 py-1 text-[11px] font-medium text-gray-600 transition-colors hover:border-black hover:bg-black hover:text-white">
-      <svg class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/></svg>
-      Limpiar filtros
-    </button>
+    </div>
+    <div class="mt-5 flex min-h-6 flex-wrap items-center gap-x-6 gap-y-3">
+      <p id="search-status" class="text-sm text-gray-600" role="status" aria-live="polite"></p>
+      <button id="mobile-filter-toggle" type="button" class="inline-flex items-center gap-2 bg-[#1A100C] px-4 py-2.5 text-sm font-semibold text-white lg:hidden" aria-expanded="false" aria-controls="catalog-filters">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" d="M4 7h16M7 12h10M10 17h4"/></svg>
+        Filtros
+      </button>
+      <button id="filters-clear" type="button" style="display: none;" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#8B6B3F] underline-offset-4 transition-colors hover:text-[#1A100C] hover:underline">
+        <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/></svg>
+        Limpiar filtros
+      </button>
+    </div>
   </div>
 </section>

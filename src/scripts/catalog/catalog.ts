@@ -166,7 +166,7 @@
     }
   });
 
-  // Precarga la búsqueda si llega ?q= en la URL (ej. desde los enlaces de categoría en /t3r)
+  // Precarga la búsqueda si llega ?q= en la URL (ej. desde los enlaces de categoría en la home)
   const params = new URLSearchParams(window.location.search);
   const initialQuery = params.get('q');
   if (initialQuery) {

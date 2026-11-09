@@ -3,27 +3,42 @@ import Layout from '@layouts/BaseLayout.astro';
 import Nav from '@components/layout/Nav/Nav.astro';
 import SiteFooter from '@components/layout/Footer/SiteFooter.astro';
 import HomeEffects from '@components/features/home/HomeEffects.astro';
-import HomeHero from '@components/features/home/HomeHero.astro';
+import T3rEffects from '@components/features/brand/t3r/T3rEffects.astro';
+import T3rHero from '@components/features/brand/t3r/T3rHero.astro';
 import NewProductsCarousel from '@components/features/home/NewProductsCarousel.astro';
+import T3rFamilies from '@components/features/brand/t3r/T3rFamilies.astro';
+import T3rPillars from '@components/features/brand/t3r/T3rPillars.astro';
+import T3rPackaging from '@components/features/brand/t3r/T3rPackaging.astro';
 import BrandBanner from '@components/features/home/BrandBanner.astro';
-import DistributedBrands from '@components/features/home/DistributedBrands.astro';
 import AudienceChoice from '@components/features/home/AudienceChoice.astro';
 import ServicesRow from '@components/features/home/ServicesRow.astro';
-import { HOME_HERO_IMAGE, PAGE_SEO } from '@config/seo';
+import { PAGE_SEO } from '@config/seo';
 import { homeBanners } from '@config/homeBanners';
 import { getNewProducts } from '@lib/services/home';
 
 const newProducts = await getNewProducts();
 ---
 
+<!--
+  Landing única de T3R (canónica). Objetivo: llevar a /catalogo.
+  Flujo: hero → productos → historia de marca → CTA final → bifurcación tienda/ciclista → servicios.
+  AudienceChoice es el punto de enganche para las futuras secciones B2B / B2C.
+-->
 <Layout {...PAGE_SEO.home}>
   <HomeEffects />
-  <Nav />
-  <HomeHero image={HOME_HERO_IMAGE} />
-  <NewProductsCarousel products={newProducts} />
-  {homeBanners.map((banner) => <BrandBanner banner={banner} />)}
-  <DistributedBrands />
-  <AudienceChoice />
-  <ServicesRow />
+  <T3rEffects />
+  <Nav active="t3r" />
+  <T3rHero />
+
+  <main>
+    <NewProductsCarousel products={newProducts} />
+    <T3rFamilies />
+    <T3rPillars />
+    <T3rPackaging />
+    {homeBanners.map((banner) => <BrandBanner banner={banner} />)}
+    <AudienceChoice />
+    <ServicesRow />
+  </main>
+
   <SiteFooter />
 </Layout>

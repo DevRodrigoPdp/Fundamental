@@ -3,8 +3,6 @@
   const mobileMenu = document.getElementById('nav-mobile-menu');
   const iconOpen = document.getElementById('nav-icon-open');
   const iconClose = document.getElementById('nav-icon-close');
-  const desktopTrigger = document.querySelector('.nav-master-trigger');
-  const desktopToggle = document.getElementById('nav-desktop-toggle');
 
   // Menú móvil (overlay a pantalla completa): usa el truco de position:fixed
   // porque en iOS/Safari touch, overflow:hidden solo no basta para frenar el scroll.
@@ -30,40 +28,6 @@
     document.body.style.right = '';
     window.scrollTo(0, lockedScrollY);
   };
-
-  // Menú desktop (dropdown por hover con mouse): con position:fixed el
-  // reposicionamiento al entrar/salir rápido del área provoca saltos visibles.
-  // Basta con overflow:hidden simple, sin tocar el scroll ni la posición.
-  const lockScrollSimple = () => {
-    document.documentElement.style.overflow = 'hidden';
-  };
-  const unlockScrollSimple = () => {
-    document.documentElement.style.overflow = '';
-  };
-
-  const closeDesktopMenu = () => {
-    desktopTrigger?.classList.remove('is-open');
-    desktopToggle?.setAttribute('aria-expanded', 'false');
-    unlockScrollSimple();
-  };
-
-  desktopToggle?.addEventListener('click', (event) => {
-    event.stopPropagation();
-    const willOpen = !desktopTrigger?.classList.contains('is-open');
-    desktopTrigger?.classList.toggle('is-open', willOpen);
-    desktopToggle.setAttribute('aria-expanded', String(willOpen));
-    if (willOpen) lockScrollSimple();
-    else unlockScrollSimple();
-  });
-
-  desktopTrigger?.addEventListener('mouseenter', lockScrollSimple);
-  desktopTrigger?.addEventListener('mouseleave', () => {
-    if (!desktopTrigger.classList.contains('is-open')) unlockScrollSimple();
-  });
-
-  document.addEventListener('click', (event) => {
-    if (desktopTrigger && !desktopTrigger.contains(event.target as Node)) closeDesktopMenu();
-  });
 
   if (!toggle || !mobileMenu) return;
 
@@ -103,7 +67,6 @@
 
   document.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
-    closeDesktopMenu();
     if (mobileMenu.classList.contains('is-open')) {
       closeMobileMenu();
       toggle.focus();

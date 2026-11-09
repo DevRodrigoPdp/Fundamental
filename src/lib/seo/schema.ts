@@ -26,8 +26,6 @@ export function organizationSchema() {
     },
     brand: [
       { '@type': 'Brand', name: 'T3R' },
-      { '@type': 'Brand', name: 'Whipp-Off' },
-      { '@type': 'Brand', name: 'Transfer' },
     ],
   };
 }

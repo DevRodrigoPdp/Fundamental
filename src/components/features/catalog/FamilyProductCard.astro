@@ -34,10 +34,10 @@ const { product, index } = Astro.props;
   </div>
 
   <div class="flex flex-1 flex-col border-t border-gray-100 p-5">
-    <p class="mb-2 text-[9px] uppercase tracking-[0.2em] text-gray-400">
+    <p class="mb-2 text-[9px] uppercase tracking-[0.2em] text-gray-500">
       {product.subcategoria ?? product.categoria}
     </p>
-    <h3 class="line-clamp-2 break-words text-[15px] font-bold leading-snug transition-colors group-hover:text-[#6B8CAE]">
+    <h3 class="line-clamp-2 break-words text-[15px] font-bold leading-snug transition-colors group-hover:text-[#55708C]">
       {product.nombre}
     </h3>
     {product.descripcion_corta && (
@@ -46,7 +46,7 @@ const { product, index } = Astro.props;
       </p>
     )}
     <div class="mt-auto flex items-center justify-between gap-4 pt-5">
-      <span class="truncate text-[10px] text-gray-400">{product.sku}</span>
+      <span class="truncate text-[10px] text-gray-500">{product.sku}</span>
       <span class="shrink-0 text-xs font-semibold">Ver →</span>
     </div>
   </div>

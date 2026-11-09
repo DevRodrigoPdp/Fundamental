@@ -1,6 +1,7 @@
 ---
 import NavDesktopMenu from './NavDesktopMenu.astro';
 import NavMobileMenu from './NavMobileMenu.astro';
+import NavSearch from './NavSearch.astro';
 import type { NavKey } from '@config/navigation';
 
 interface Props {
@@ -8,45 +9,52 @@ interface Props {
   bgClass?: string;
 }
 
-const { active, bgClass = 'bg-[#0b0908]/95' } = Astro.props;
+const { active, bgClass = 'bg-[#0b0908]' } = Astro.props;
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const iconBtn = 'relative z-50 inline-flex h-11 w-11 items-center justify-center text-white/85 transition-colors hover:text-white';
 ---
 
-<header
-  class={`fixed inset-x-0 top-0 z-50 border-b border-white/8 ${bgClass} px-4 py-4 text-white shadow-[0_18px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl backdrop-saturate-150 sm:px-5 sm:py-5 md:px-10 lg:px-14`}
->
-  <div class="mx-auto grid max-w-7xl grid-cols-[auto_1fr] items-center gap-5 lg:flex lg:justify-between">
-    <!-- Mobile trigger -->
-    <button
-      id="nav-toggle"
-      type="button"
-      class="relative z-50 inline-flex h-11 w-11 items-center justify-center text-white/80 transition-colors hover:text-white lg:hidden"
-      aria-label="Abrir menú"
-      aria-controls="nav-mobile-menu"
-      aria-expanded="false"
-    >
-      <svg id="nav-icon-open" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.7" aria-hidden="true">
-        <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
-      </svg>
-      <svg id="nav-icon-close" class="hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.7" aria-hidden="true">
-        <path stroke-linecap="round" d="M6 18 18 6M6 6l12 12" />
-      </svg>
-    </button>
-
-    <NavDesktopMenu active={active} currentPath={currentPath} />
-
-    <!-- Brand / home -->
+<!-- Barra: "T3R by Fundamental" a la izquierda; enlaces y buscador a la derecha. -->
+<header class={`fixed inset-x-0 top-0 z-50 ${bgClass} px-5 py-3.5 text-white md:px-12`}>
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-8">
     <a
       href="/"
-      class="relative z-50 inline-flex h-8 w-fit max-w-full items-center gap-1.5 justify-self-end font-display text-[0.78rem] font-semibold uppercase leading-none tracking-[-0.045em] text-white transition-opacity duration-300 hover:opacity-75 sm:gap-2 sm:text-sm lg:text-xl lg:font-bold"
-      aria-label="Fundamental Bike Parts - Inicio"
+      class="relative z-50 inline-flex shrink-0 items-center gap-3 text-white transition-opacity duration-300 hover:opacity-80 sm:gap-4"
+      aria-label="T3R Bike Components, by Fundamental Bike Parts - Inicio"
     >
-      <span>Fundamental</span><span class="hidden sm:inline">Bike Parts</span>
+      <img src="/images/t3r-logo-blanco.webp" alt="T3R Bike Components" width="400" height="157" class="h-8 w-auto sm:h-9" />
+      <span class="h-6 w-px bg-white/25" aria-hidden="true"></span>
+      <span class="whitespace-nowrap font-display text-[11px] font-bold uppercase leading-tight tracking-[-0.02em] text-white/75 sm:text-[13px]">
+        by Fundamental<span class="hidden sm:inline"> Bike Parts</span>
+      </span>
     </a>
 
+    <div class="flex items-center gap-2 lg:gap-6">
+      <NavDesktopMenu active={active} currentPath={currentPath} />
+      <span class="hidden h-5 w-px bg-white/15 lg:block" aria-hidden="true"></span>
+      <button type="button" data-search-open class={iconBtn} aria-label="Buscar productos" aria-controls="nav-search-panel" aria-expanded="false">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path stroke-linecap="round" d="m20 20-3.5-3.5" /></svg>
+      </button>
+      <button
+        id="nav-toggle"
+        type="button"
+        class={`${iconBtn} -mr-2 lg:hidden`}
+        aria-label="Abrir menú"
+        aria-controls="nav-mobile-menu"
+        aria-expanded="false"
+      >
+        <svg id="nav-icon-open" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.7" aria-hidden="true">
+          <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+        <svg id="nav-icon-close" class="hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.7" aria-hidden="true">
+          <path stroke-linecap="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
   </div>
 </header>
 
+<NavSearch />
 <NavMobileMenu active={active} currentPath={currentPath} />
 
 <script>import '@scripts/layout/nav';</script>

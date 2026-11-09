@@ -1,26 +1,38 @@
 ---
-import { cld } from '@lib/cloudinary/url';
+// Packaging: foto real del packaging T3R a su proporción (sin recortar) y el texto al lado.
+// Mismo contenedor y escala de texto que Categorías; la cita va en un bloque sólido, sin bordes.
 ---
 
-<section class="bg-white grid grid-cols-1 md:grid-cols-2">
-  <div class="relative overflow-hidden h-64 md:h-auto md:min-h-[480px]">
-    <img src={cld('https://res.cloudinary.com/dxent4dkd/image/upload/v1783166518/catalogo_t3r/combos/combos_8.jpg', { width: 1200 })} alt="Packaging T3R"
-      class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
-    <div class="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent"></div>
-  </div>
-  <div class="flex flex-col justify-center px-5 md:px-16 py-12 md:py-20 text-[#111111]" data-reveal>
-    <p class="text-xs text-[#C4A072] tracking-[0.35em] uppercase mb-6">La filosofía</p>
-    <h2 class="text-[32px] md:text-[46px] font-bold leading-tight tracking-tight mb-8">
-      El packaging no es<br/>el producto.
-    </h2>
-    <p class="text-black/55 text-lg leading-relaxed max-w-md mb-10">
-      Cartón. Sin logotipos a color, sin envases llamativos. Cada euro que no gastamos en envoltorio es un euro que va al componente y al precio final.
-    </p>
-    <div class="border border-[#C4A072]/40 bg-[#C4A072]/[0.05] p-8 max-w-sm">
-      <p class="text-[#C4A072] text-xs tracking-[0.3em] uppercase mb-4">Filosofía T3R</p>
-      <p class="text-[#1A100C] text-xl font-bold leading-tight">
-        "Minimizar el coste donde no afecta a la calidad."
+<section class="bg-white px-5 py-20 text-[#111111] md:px-12 md:py-28">
+  <div class="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-12 md:gap-8">
+    <div class="md:col-span-7" data-reveal>
+      <img
+        src="/images/t3r-packaging-1600.webp"
+        srcset="/images/t3r-packaging-800.webp 800w, /images/t3r-packaging-1600.webp 1600w"
+        sizes="(min-width: 768px) 58vw, 100vw"
+        alt="Productos T3R en su packaging de cartón: pedales, eje de pedalier, pastillas, discos y válvulas"
+        width="1600"
+        height="1068"
+        class="aspect-[3/2] w-full object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <div class="md:col-span-5 md:pl-6" data-reveal data-delay="1">
+      <p class="mb-4 text-sm font-semibold text-[#8B6B3F]">La filosofía</p>
+      <h2 class="mb-6 text-[clamp(30px,3.6vw,52px)] font-bold leading-[1.05] tracking-[-0.025em]">
+        El packaging no es<br />el producto.
+      </h2>
+      <p class="mb-10 max-w-md text-[17px] leading-[1.6] text-[#3D3A36]">
+        Cartón. Sin logotipos a color, sin envases llamativos. Cada euro que no gastamos en envoltorio es un euro que va al componente y al precio final.
       </p>
+      <figure class="max-w-md bg-[#1A100C] px-7 py-8 md:px-9 md:py-9">
+        <blockquote class="text-xl font-semibold leading-snug text-white md:text-2xl">
+          <p>"Minimizar el coste donde no afecta a la calidad."</p>
+        </blockquote>
+        <figcaption class="mt-4 text-sm font-medium text-[#C4A072]">Filosofía T3R</figcaption>
+      </figure>
     </div>
   </div>
 </section>
