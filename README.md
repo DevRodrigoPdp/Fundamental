@@ -1,43 +1,48 @@
-# Astro Starter Kit: Minimal
+# Fundamental
+
+Web de Fundamental, distribuidora de componentes de bicicleta y distribuidor de la marca T3R. Se publica en [fundamentalbikeparts.com](https://fundamentalbikeparts.com).
+
+La web muestra el catálogo de productos con disponibilidad, la ficha de cada producto, las marcas distribuidas, los puntos de venta y la información de contacto. Incluye un panel privado (`/admin`) para gestionar productos e imágenes sin tocar código.
+
+## Stack
+
+- Astro 6 + Tailwind 4, desplegado en Vercel
+- Supabase como base de datos de productos
+- Cloudinary para las imágenes
+
+Las páginas públicas se generan en build. El panel `/admin` y `/api/admin` se renderizan en servidor.
+
+## Desarrollo
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev      # http://localhost:4321
+npm run build
+npm run preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Variables de entorno necesarias en `.env`:
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```
+PUBLIC_SUPABASE_URL=
+PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SECRET_KEY=
+PUBLIC_SITE_URL=
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+ADMIN_PASSWORD=
+ADMIN_SESSION_SECRET=
+VERCEL_DEPLOY_HOOK_URL=
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Despliegue
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Cada push a `main` despliega producción en Vercel. Las demás ramas generan una URL de preview.
 
-Any static assets, like images, can be placed in the `public/` directory.
+Un GitHub Action (`.github/workflows/supabase-keepalive.yml`) consulta Supabase cada 3 días para que el proyecto no se pause por inactividad. Necesita los secrets `SUPABASE_URL` y `SUPABASE_ANON_KEY` en el repositorio.
 
-## 🧞 Commands
+## Más información
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- [docs/estructura.md](docs/estructura.md): organización de carpetas y responsabilidades de cada parte.
+- `scripts/`: scripts puntuales de migración de imágenes a Cloudinary y actualización de URLs en Supabase.
